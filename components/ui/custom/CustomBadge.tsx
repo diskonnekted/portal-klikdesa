@@ -44,7 +44,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 // Color mappings for custom variants
 const variantColors = {
-    success: "bg-[#c2c9df] text-gray-900 border-[#9ba8c7] hover:bg-green-200/80",
+    success: "bg-secondary-200 text-gray-900 border-secondary-300 hover:bg-green-200/80",
     warning: "bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200/80",
     info: "bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200/80",
     pending: "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200/80",

@@ -49,7 +49,7 @@ export default function ImageFallback({
     if (hasError || !imgSrc) {
         return (
             <div
-                className={`flex items-center justify-center bg-[#1f2b44] text-green-100 ${className}`}
+                className={`flex items-center justify-center bg-secondary-900 text-green-100 ${className}`}
                 style={props.style}
             >
                 <ImageOff size={iconSize} />

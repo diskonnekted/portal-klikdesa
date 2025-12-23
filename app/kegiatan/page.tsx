@@ -49,7 +49,7 @@ export default function KegiatanPage() {
                                         <p className="text-sm text-gray-600">Gotong royong dan rukun warga</p>
                                     </div>
                                     <div className="text-center">
-                                        <div className="w-16 h-16 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <div className="w-16 h-16 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-3">
                                             <Heart className="h-8 w-8 text-gray-900" />
                                         </div>
                                         <h4 className="font-semibold text-gray-900 mb-2">Sosial</h4>
@@ -94,7 +94,7 @@ export default function KegiatanPage() {
                                     <Badge variant="secondary">Akan Hadir</Badge>
                                     <p className="text-sm text-gray-600 mt-2">Jadwal lengkap dengan reminder</p>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg text-center">
+                                <div className="bg-secondary-100 p-4 rounded-lg text-center">
                                     <Users className="h-8 w-8 text-gray-900 mx-auto mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Pendaftaran Online</h4>
                                     <Badge variant="secondary">Akan Hadir</Badge>
@@ -129,7 +129,7 @@ export default function KegiatanPage() {
                                     </div>
                                     <div className="flex items-center justify-between bg-white/70 p-3 rounded-lg">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-[#c2c9df] rounded-full flex items-center justify-center">
+                                            <div className="w-10 h-10 bg-secondary-200 rounded-full flex items-center justify-center">
                                                 <Heart className="h-5 w-5 text-gray-900" />
                                             </div>
                                             <div>
@@ -206,7 +206,7 @@ export default function KegiatanPage() {
                             <p className="text-sm text-gray-600">Kegiatan Tahun Ini</p>
                         </div>
                         <div className="text-center">
-                            <div className="w-12 h-12 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-2">
+                            <div className="w-12 h-12 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-2">
                                 <Users className="h-6 w-6 text-gray-900" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900">1,250</h3>

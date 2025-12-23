@@ -153,8 +153,8 @@ export default function WilayahAdministratifPage() {
             <div className="min-h-screen bg-linear-to-b from-gray-50 to-white py-8">
                 <div className="container mx-auto px-4 space-y-8">
                     <div className="text-center space-y-6">
-                        <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
-                            <Map className="h-10 w-10 text-blue-600" />
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
+                            <Map className="h-10 w-10 text-secondary-600" />
                         </div>
                         <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -173,8 +173,8 @@ export default function WilayahAdministratifPage() {
             <div className="min-h-screen bg-linear-to-b from-gray-50 to-white py-8">
                 <div className="container mx-auto px-4 space-y-8">
                     <div className="text-center space-y-6">
-                        <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
-                            <Map className="h-10 w-10 text-blue-600" />
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
+                            <Map className="h-10 w-10 text-secondary-600" />
                         </div>
                         <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -192,8 +192,8 @@ export default function WilayahAdministratifPage() {
         <div className="min-h-screen bg-linear-to-b from-gray-50 to-white py-8">
             <div className="container mx-auto px-4 space-y-8">
                 <div className="text-center space-y-6">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
-                        <Map className="h-10 w-10 text-blue-600" />
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
+                        <Map className="h-10 w-10 text-secondary-600" />
                     </div>
                     <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
@@ -205,41 +205,41 @@ export default function WilayahAdministratifPage() {
                 {/* Statistics Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     {/* Total Dusun */}
-                    <Card className="relative overflow-hidden bg-linear-to-br from-blue-100 to-blue-200 border-0">
-                        <div className="absolute -top-4 -right-4 opacity-10 text-blue-600">
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-secondary-100 to-secondary-200 border-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-secondary-600">
                             <MapPin className="h-32 w-32" />
                         </div>
                         <CardHeader className="pb-2 relative z-10">
-                            <CardTitle className="text-sm font-medium text-blue-800 flex items-center gap-2">
+                            <CardTitle className="text-sm font-medium text-secondary-800 flex items-center gap-2">
                                 <MapPin className="h-4 w-4" />
                                 Dusun
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="relative z-10">
-                            <div className="text-3xl font-bold text-blue-900 mb-2">{totalDusun}</div>
-                            <p className="text-xs text-blue-700">Total dusun</p>
+                            <div className="text-3xl font-bold text-secondary-900 mb-2">{totalDusun}</div>
+                            <p className="text-xs text-secondary-700">Total dusun</p>
                         </CardContent>
                     </Card>
 
                     {/* Total RW */}
-                    <Card className="relative overflow-hidden bg-linear-to-br from-green-100 to-green-200 border-0">
-                        <div className="absolute -top-4 -right-4 opacity-10 text-green-600">
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-tertiary-100 to-tertiary-200 border-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-tertiary-600">
                             <Building2 className="h-32 w-32" />
                         </div>
                         <CardHeader className="pb-2 relative z-10">
-                            <CardTitle className="text-sm font-medium text-green-800 flex items-center gap-2">
+                            <CardTitle className="text-sm font-medium text-tertiary-800 flex items-center gap-2">
                                 <Building2 className="h-4 w-4" />
                                 RW
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="relative z-10">
-                            <div className="text-3xl font-bold text-green-900 mb-2">{totalRW}</div>
-                            <p className="text-xs text-green-700">Rukun Warga</p>
+                            <div className="text-3xl font-bold text-tertiary-900 mb-2">{totalRW}</div>
+                            <p className="text-xs text-tertiary-700">Rukun Warga</p>
                         </CardContent>
                     </Card>
 
                     {/* Total RT */}
-                    <Card className="relative overflow-hidden bg-linear-to-br from-yellow-100 to-yellow-200 border-0">
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-yellow-100 to-yellow-200 border-0">
                         <div className="absolute -top-4 -right-4 opacity-10 text-yellow-600">
                             <Home className="h-32 w-32" />
                         </div>
@@ -256,36 +256,36 @@ export default function WilayahAdministratifPage() {
                     </Card>
 
                     {/* Total Keluarga */}
-                    <Card className="relative overflow-hidden bg-linear-to-br from-purple-100 to-purple-200 border-0">
-                        <div className="absolute -top-4 -right-4 opacity-10 text-purple-600">
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-tertiary-100 to-tertiary-200 border-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-tertiary-600">
                             <Users className="h-32 w-32" />
                         </div>
                         <CardHeader className="pb-2 relative z-10">
-                            <CardTitle className="text-sm font-medium text-purple-800 flex items-center gap-2">
+                            <CardTitle className="text-sm font-medium text-tertiary-800 flex items-center gap-2">
                                 <Users className="h-4 w-4" />
                                 Keluarga
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="relative z-10">
-                            <div className="text-3xl font-bold text-purple-900 mb-2">{formatNumber(totalKeluarga)}</div>
-                            <p className="text-xs text-purple-700">Keluarga aktif</p>
+                            <div className="text-3xl font-bold text-tertiary-900 mb-2">{formatNumber(totalKeluarga)}</div>
+                            <p className="text-xs text-tertiary-700">Keluarga aktif</p>
                         </CardContent>
                     </Card>
 
                     {/* Total Penduduk */}
-                    <Card className="relative overflow-hidden bg-linear-to-br from-orange-100 to-orange-200 border-0">
-                        <div className="absolute -top-4 -right-4 opacity-10 text-orange-600">
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200 border-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-primary-600">
                             <Users2 className="h-32 w-32" />
                         </div>
                         <CardHeader className="pb-2 relative z-10">
-                            <CardTitle className="text-sm font-medium text-orange-800 flex items-center gap-2">
+                            <CardTitle className="text-sm font-medium text-primary-800 flex items-center gap-2">
                                 <Users2 className="h-4 w-4" />
                                 Penduduk
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="relative z-10">
-                            <div className="text-3xl font-bold text-orange-900 mb-2">{formatNumber(totalPenduduk)}</div>
-                            <p className="text-xs text-orange-700">Total penduduk</p>
+                            <div className="text-3xl font-bold text-primary-900 mb-2">{formatNumber(totalPenduduk)}</div>
+                            <p className="text-xs text-primary-700">Total penduduk</p>
                         </CardContent>
                     </Card>
                 </div>

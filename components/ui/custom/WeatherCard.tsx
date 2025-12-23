@@ -254,7 +254,7 @@ export function WeatherCard() {
                         </div>
                         <div className="outline bg-white rounded-lg p-2">
                             <div className="flex items-center gap-1 font-medium">
-                                <Wind className="h-4 w-4 text-[#4a5f8c]" />
+                                <Wind className="h-4 w-4 text-secondary-600" />
                                 Kecepatan Angin
                             </div>
                             <div className="text-muted-foreground text-2xl">{weatherData.current.windSpeed} km/h</div>

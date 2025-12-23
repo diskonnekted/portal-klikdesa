@@ -56,7 +56,7 @@ export default function InformasiPage() {
                                         <p className="text-sm text-gray-600">Aktivitas dan kegiatan terkini</p>
                                     </div>
                                     <div className="text-center">
-                                        <div className="w-16 h-16 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <div className="w-16 h-16 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-3">
                                             <Calendar className="h-8 w-8 text-gray-900" />
                                         </div>
                                         <h4 className="font-semibold text-gray-900 mb-2">Agenda Kegiatan</h4>
@@ -81,7 +81,7 @@ export default function InformasiPage() {
                                         <Badge variant="secondary">Lainnya</Badge>
                                     </div>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg">
+                                <div className="bg-secondary-50 p-4 rounded-lg">
                                     <Download className="h-8 w-8 text-gray-900 mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Dokumen Unduh</h4>
                                     <p className="text-sm text-gray-600 mb-3">Akses ke dokumen penting:</p>

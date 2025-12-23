@@ -23,7 +23,6 @@ export const Logo: React.FC<LogoProps> = ({ size = 48, className, variant = "def
                 width={typeof size === "number" ? size : 48}
                 height={typeof size === "number" ? size : 48}
                 className="w-full h-full object-contain"
-                style={{ width: "auto", height: "auto" }}
                 priority
             />
         </div>

@@ -101,7 +101,7 @@ export default function LogoDemo() {
                     </div>
 
                     {/* Hero Section */}
-                    <div className="text-center space-y-4 p-8 bg-gradient-to-br from-[#e6eaf3] to-emerald-100 rounded-lg">
+                    <div className="text-center space-y-4 p-8 bg-gradient-to-br from-secondary-50 to-emerald-100 rounded-lg">
                         <Logo {...LogoVariant.hero} />
                         <h3 className="text-2xl font-bold">Hero Section</h3>
                         <p className="text-muted-foreground">Large logo for landing pages</p>

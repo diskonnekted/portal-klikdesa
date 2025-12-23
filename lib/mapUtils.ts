@@ -204,12 +204,14 @@ export const LOCATION_CATEGORIES = {
  */
 export function calculateDistance(coord1: { lat: number; lng: number }, coord2: { lat: number; lng: number }): number {
     const R = 6371e3; // Earth's radius in meters
-    const Ï†1 = (coord1.lat * Math.PI) / 180;
-    const Ï†2 = (coord2.lat * Math.PI) / 180;
-    const Î”Ï† = ((coord2.lat - coord1.lat) * Math.PI) / 180;
-    const Î”Î» = ((coord2.lng - coord1.lng) * Math.PI) / 180;
+    const phi1 = (coord1.lat * Math.PI) / 180;
+    const phi2 = (coord2.lat * Math.PI) / 180;
+    const deltaPhi = ((coord2.lat - coord1.lat) * Math.PI) / 180;
+    const deltaLambda = ((coord2.lng - coord1.lng) * Math.PI) / 180;
 
-    const a = Math.sin(Î”Ï† / 2) * Math.sin(Î”Ï† / 2) + Math.cos(Ï†1) * Math.cos(Ï†2) * Math.sin(Î”Î» / 2) * Math.sin(Î”Î» / 2);
+    const a =
+        Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+        Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 

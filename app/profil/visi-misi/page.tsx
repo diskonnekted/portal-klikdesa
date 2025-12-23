@@ -116,7 +116,7 @@ export default function VisiMisiPage() {
                                     <h4 className="font-semibold text-gray-900 mb-2">Program Unggulan</h4>
                                     <p className="text-sm text-gray-600">Prioritas pembangunan 5 tahun ke depan</p>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg">
+                                <div className="bg-secondary-100 p-4 rounded-lg">
                                     <Users className="h-8 w-8 text-gray-900 mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Partisipasi Masyarakat</h4>
                                     <p className="text-sm text-gray-600">Cara warga dapat berkontribusi</p>

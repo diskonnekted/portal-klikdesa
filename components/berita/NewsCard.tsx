@@ -121,7 +121,7 @@ export default function NewsCard({
                                     className="h-5 w-5 rounded-full object-cover"
                                     iconSize={12}
                                 />
-                                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-[#e6eaf3]0 rounded-full border-2 border-white" />
+                                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-secondary-100 rounded-full border-2 border-white" />
                             </div>
                             <span>{post.author.name}</span>
                         </div>

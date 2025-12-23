@@ -8,7 +8,7 @@ export default function BumdesPage() {
         <div className="container mx-auto px-4 py-4">
             {/* Page Title */}
             <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#c2c9df] rounded-full mb-4">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-200 rounded-full mb-4">
                     <Briefcase className="h-10 w-10 text-gray-900" />
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">BUMDes Sijenggung</h1>
@@ -49,7 +49,7 @@ export default function BumdesPage() {
                                         <p className="text-sm text-gray-600">Pelayanan umum dan jasa Desa</p>
                                     </div>
                                     <div className="text-center">
-                                        <div className="w-16 h-16 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <div className="w-16 h-16 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-3">
                                             <DollarSign className="h-8 w-8 text-gray-900" />
                                         </div>
                                         <h4 className="font-semibold text-gray-900 mb-2">Retail & Toko</h4>
@@ -78,7 +78,7 @@ export default function BumdesPage() {
                                         <li>â€¢ Pembagian SHU Desa</li>
                                     </ul>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg">
+                                <div className="bg-secondary-50 p-4 rounded-lg">
                                     <Target className="h-8 w-8 text-gray-900 mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Peluang Investasi</h4>
                                     <p className="text-sm text-gray-600 mb-3">Kerjasama dan investasi:</p>
@@ -92,7 +92,7 @@ export default function BumdesPage() {
                             </div>
 
                             {/* Performance Metrics */}
-                            <div className="bg-gradient-to-r from-[#e6eaf3] to-blue-50 p-4 rounded-lg">
+                            <div className="bg-gradient-to-r from-secondary-50 to-blue-50 p-4 rounded-lg">
                                 <h3 className="font-semibold text-gray-900 mb-4">Kinerja BUMDes</h3>
                                 <div className="grid md:grid-cols-4 gap-4">
                                     <div className="text-center">
@@ -103,7 +103,7 @@ export default function BumdesPage() {
                                         <Badge className="mt-1">+15%</Badge>
                                     </div>
                                     <div className="text-center">
-                                        <div className="w-12 h-12 bg-[#3a4d74] text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                                        <div className="w-12 h-12 bg-secondary-600 text-white rounded-full flex items-center justify-center mx-auto mb-2">
                                             <Users className="h-6 w-6" />
                                         </div>
                                         <h4 className="font-medium text-gray-900">Tenaga Kerja</h4>
@@ -142,7 +142,7 @@ export default function BumdesPage() {
                         <CardHeader className="pb-3">
                             <div className="flex items-center justify-between">
                                 <Badge variant="outline">Unit Usaha</Badge>
-                                <Badge className="bg-[#c2c9df] text-gray-900">Aktif</Badge>
+                                <Badge className="bg-secondary-200 text-gray-900">Aktif</Badge>
                             </div>
                             <CardTitle className="text-lg">Unit Bisnis {i}</CardTitle>
                         </CardHeader>
@@ -187,7 +187,7 @@ export default function BumdesPage() {
                             <p className="text-sm text-gray-600">Lapangan Kerja</p>
                         </div>
                         <div className="text-center">
-                            <div className="w-12 h-12 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-2">
+                            <div className="w-12 h-12 bg-secondary-200 rounded-full flex items-center justify-center mx-auto mb-2">
                                 <DollarSign className="h-6 w-6 text-gray-900" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900">Rp 500M</h3>

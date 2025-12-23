@@ -8,8 +8,8 @@ export default function PemerintahanPage() {
         <div className="container mx-auto px-4 py-4">
             {/* Page Title */}
             <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-4">
-                    <Building className="h-10 w-10 text-blue-600" />
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full mb-4">
+                    <Building className="h-10 w-10 text-secondary-600" />
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">Pemerintahan Desa Sijenggung</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -42,7 +42,7 @@ export default function PemerintahanPage() {
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="space-y-4">
                                         <div className="flex items-start gap-3">
-                                            <Users className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+                                            <Users className="h-5 w-5 text-secondary-600 mt-1 flex-shrink-0" />
                                             <div>
                                                 <h4 className="font-medium text-gray-900">Struktur Organisasi</h4>
                                                 <p className="text-sm text-gray-600">
@@ -95,13 +95,13 @@ export default function PemerintahanPage() {
 
                             {/* Status Indicators */}
                             <div className="grid md:grid-cols-3 gap-4">
-                                <div className="bg-blue-50 p-4 rounded-lg text-center">
-                                    <Users className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+                                <div className="bg-secondary-50 p-4 rounded-lg text-center">
+                                    <Users className="h-8 w-8 text-secondary-600 mx-auto mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Perangkat Desa</h4>
                                     <Badge variant="secondary">Dalam Proses</Badge>
                                     <p className="text-sm text-gray-600 mt-2">Data kepegawaian sedang diverifikasi</p>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg text-center">
+                                <div className="bg-secondary-100 p-4 rounded-lg text-center">
                                     <FileText className="h-8 w-8 text-gray-900 mx-auto mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Dokumen</h4>
                                     <Badge variant="secondary">Dalam Proses</Badge>
@@ -136,7 +136,7 @@ export default function PemerintahanPage() {
                                 <h4 className="font-semibold">Kepala Desa</h4>
                                 <p className="text-sm text-gray-600">Pimpinan eksekutif Desa</p>
                             </div>
-                            <div className="border-l-4 border-[#3a4d74] pl-4">
+                            <div className="border-l-4 border-secondary-800 pl-4">
                                 <h4 className="font-semibold">Sekretaris Desa</h4>
                                 <p className="text-sm text-gray-600">Administrasi dan keuangan</p>
                             </div>
@@ -164,7 +164,7 @@ export default function PemerintahanPage() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-[#c2c9df] rounded-full flex items-center justify-center">
+                                <div className="w-8 h-8 bg-secondary-200 rounded-full flex items-center justify-center">
                                     <Users className="h-4 w-4 text-gray-900" />
                                 </div>
                                 <div>

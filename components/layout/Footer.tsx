@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { Mail, Phone, MapPin, Clock, Heart, ExternalLink } from "lucide-react";
@@ -60,7 +60,7 @@ export function Footer() {
     ];
 
     return (
-        <footer className="bg-[#0a4661] text-white">
+        <footer className="bg-[#00363A] text-white">
             {/* Main Footer Content */}
             <div className="container mx-auto px-4 py-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -70,10 +70,10 @@ export function Footer() {
                             <Logo {...LogoVariant.footer} />
                             <div>
                                 <h3 className="text-lg font-bold text-white">Desa Sijenggung</h3>
-                                <p className="text-xs text-[#ddf0ff]">Kabupaten Banjarnegara, Jateng</p>
+                                <p className="text-xs text-white">Kabupaten Banjarnegara, Jateng</p>
                             </div>
                         </div>
-                        <p className="text-sm text-[#ddf0ff] leading-relaxed">
+                        <p className="text-sm text-white leading-relaxed">
                             Portal resmi Pemerintah Desa Sijenggung yang menyediakan informasi dan layanan publik
                             digital untuk warga desa.
                         </p>
@@ -82,7 +82,7 @@ export function Footer() {
                                 <Link
                                     key={social.label}
                                     href={social.href}
-                                    className="w-10 h-10 bg-[#fffeff] rounded-lg flex items-center justify-center text-white hover:bg-[#caefff] hover:text-[#ddf0ff] transition-colors"
+                                    className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-secondary-950 hover:bg-secondary-200 hover:text-secondary-900 transition-colors"
                                     aria-label={social.label}
                                 >
                                     <SimpleIcon icon={social.icon} className="h-5 w-5" color={social.color} />
@@ -102,7 +102,7 @@ export function Footer() {
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors flex items-center"
+                                            className="text-sm text-white hover:text-primary transition-colors flex items-center"
                                         >
                                             <ExternalLink className="h-3 w-3 mr-2" />
                                             {link.label}
@@ -110,7 +110,7 @@ export function Footer() {
                                     ) : (
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors flex items-center"
+                                            className="text-sm text-white hover:text-primary transition-colors flex items-center"
                                         >
                                             <ExternalLink className="h-3 w-3 mr-2" />
                                             {link.label}
@@ -132,7 +132,7 @@ export function Footer() {
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors flex items-center"
+                                            className="text-sm text-white hover:text-primary transition-colors flex items-center"
                                         >
                                             <ExternalLink className="h-3 w-3 mr-2" />
                                             {link.label}
@@ -140,7 +140,7 @@ export function Footer() {
                                     ) : (
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors"
+                                            className="text-sm text-white hover:text-primary transition-colors"
                                         >
                                             {link.label}
                                         </Link>
@@ -155,32 +155,32 @@ export function Footer() {
                         <h4 className="text-lg font-semibold text-white">Hubungi Kami</h4>
                         <div className="space-y-3">
                             <div className="flex items-start space-x-3">
-                                <MapPin className="h-5 w-5 text-[#3eafdf] mt-0.5 shrink-0" />
-                                <div className="text-sm text-[#ddf0ff]">
+                                <MapPin className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                                <div className="text-sm text-white">
                                     <p>{t("footer.alamat")}</p>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <Phone className="h-5 w-5 text-[#3eafdf] shrink-0" />
+                                <Phone className="h-5 w-5 text-primary shrink-0" />
                                 <a
                                     href={`tel:${t("footer.telepon").replace(/[^\d+]/g, "")}`}
-                                    className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors"
+                                    className="text-sm text-white hover:text-primary transition-colors"
                                 >
                                     {t("footer.telepon")}
                                 </a>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <Mail className="h-5 w-5 text-[#3eafdf] shrink-0" />
+                                <Mail className="h-5 w-5 text-primary shrink-0" />
                                 <a
                                     href={`mailto:${t("footer.email")}`}
-                                    className="text-sm text-[#ddf0ff] hover:text-[#3eafdf] transition-colors"
+                                    className="text-sm text-white hover:text-primary transition-colors"
                                 >
                                     {t("footer.email")}
                                 </a>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <Clock className="h-5 w-5 text-[#3eafdf] shrink-0" />
-                                <span className="text-sm text-[#ddf0ff]">{t("footer.jamOperasional")}</span>
+                                <Clock className="h-5 w-5 text-primary shrink-0" />
+                                <span className="text-sm text-white">{t("footer.jamOperasional")}</span>
                             </div>
                         </div>
                     </div>
@@ -188,15 +188,15 @@ export function Footer() {
             </div>
 
             {/* Bottom Footer */}
-            <div className="border-t border-[#39a2cf]">
+            <div className="border-t border-white/10">
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <div className="text-sm text-[#7487af] text-center md:text-left">
+                        <div className="text-sm text-white text-center md:text-left">
                             <p>{t("footer.copyright")}</p>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4">
-                            <div className="flex items-center space-x-2 text-xs sm:text-sm text-[#7487af]">
+                            <div className="flex items-center space-x-2 text-xs sm:text-sm text-white">
                                 <span>Made with</span>
                                 <Heart className="h-4 w-4 text-[#f87171]" />
                                 <span>by</span>

@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { Users, TrendingUp, TrendingDown, Activity, GraduationCap } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -267,7 +267,7 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
                         <Card
                             key={stat.id}
                             className={cn(
-                                "relative overflow-hidden transition-all duration-200 hover:shadow-md",
+                                "relative overflow-hidden",
                                 compact ? "p-3" : "p-4"
                             )}
                         >

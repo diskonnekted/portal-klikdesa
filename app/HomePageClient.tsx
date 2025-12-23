@@ -171,37 +171,37 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
     return (
         <div className="beranda-container bg-background">
             {/* Hero Section with Layanan Cepat */}
-            <section className="hero-area bg-[#3eafdf] py-16 relative">
+            <section className="hero-area bg-gradient-to-b from-[#E65100] to-[#EF6C00] py-16 relative">
                 <WeatherAnimation weatherData={weatherData} className="z-10" />
                 <div className="container mx-auto px-4 relative z-20">
                     {/* Hero Text */}
                     <div className="text-center text-white mb-16">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-4">Selamat Datang</h1>
-                        <p className="text-lg md:text-xl mb-6 text-white/90">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">Selamat Datang</h1>
+                        <p className="text-lg md:text-xl mb-6 text-white/95 drop-shadow">
                             Portal Resmi Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <Badge
                                 variant="default"
-                                className="bg-white/20 text-white border-white/30 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
                             >
                                 <Eye /> Transparan
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/20 text-white border-white/30 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
                             >
                                 <NotebookPen /> Akuntabel
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/20 text-white border-white/30 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
                             >
                                 <BriefcaseBusiness /> Profesional
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/20 text-white border-white/30 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
                             >
                                 <Lightbulb /> Inovatif
                             </Badge>
@@ -217,7 +217,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             >
                                 <Link
                                     href={link.href ?? "#"}
-                                    className="block bg-purple-900/40 text-white hover:bg-white hover:text-primary"
+                                    className="block bg-tertiary-900/40 text-white hover:bg-white hover:text-primary"
                                 >
                                     {/* Image section - full height minus text section */}
                                     <div
@@ -246,10 +246,10 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-500 hover:scale-105 overflow-hidden border"
+                            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 rounded-2xl shadow-2xl hover:shadow-primary-500/50 transition-all duration-500 hover:scale-105 overflow-hidden border border-primary-600"
                         >
                             {/* Animated background shimmer */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-100/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
 
                             {/* Custom SVG Icon */}
                             <div className="relative z-10 flex-shrink-0">
@@ -347,7 +347,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             </div>
 
                             {/* Pulse effect on hover */}
-                            <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 rounded-2xl bg-primary-100 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                         </a>
                     </div>
                 </div>
@@ -357,7 +357,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             <section className="content-area container mx-auto px-4 py-8 space-y-4">
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Berita & Informasi Terbaru</h2>
+                    <h2 className="text-3xl font-bold text-secondary mb-2">Berita & Informasi Terbaru</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Ada kegiatan apa saja di Desa Sijenggung hari ini?
                     </p>
@@ -368,15 +368,15 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                         {/* Pengumuman */}
                         <Card className="bg-card border-border">
                             <CardHeader className="gap-0">
-                                <CardTitle className="flex items-center gap-2 text-lg text-primary">
-                                    <Bell className="h-5 w-5 text-primary" />
+                                <CardTitle className="flex items-center gap-2 text-lg text-secondary">
+                                    <Bell className="h-5 w-5 text-secondary" />
                                     {t("pengumuman.pengumuman")}
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-3">
                                 {serverData.pengumuman.slice(0, 5).map((item) => (
                                     <Link href="#" key={item.id} className="flex items-start pb-0 last:pb-4">
-                                        <div className="border-l-4 border-primary pl-3 bg-white p-2 hover:scale-102 shadow-sm hover:shadow-md rounded-md">
+                                        <div className="border-l-4 border-secondary pl-3 bg-white p-2 hover:scale-102 shadow-sm hover:shadow-md rounded-md">
                                             <div className="flex items-center gap-2 mb-1">
                                                 <Badge
                                                     variant={
@@ -413,8 +413,8 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                         {/* Laporan Keuangan - Current Year Only */}
                         <Card className="bg-card border-border">
                             <CardHeader className="gap-0">
-                                <CardTitle className="flex items-center gap-2 text-lg text-primary">
-                                    <DollarSign className="h-5 w-5 text-primary" />
+                                <CardTitle className="flex items-center gap-2 text-lg text-secondary">
+                                    <DollarSign className="h-5 w-5 text-secondary" />
                                     Laporan Keuangan
                                 </CardTitle>
                             </CardHeader>
@@ -439,7 +439,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         priority
                                     />
                                     <div className="absolute top-4 left-4 z-10">
-                                        <Badge variant="secondary" className="bg-primary/90 backdrop-blur-sm text-xs">
+                                        <Badge variant="secondary" className="bg-secondary/90 backdrop-blur-sm text-xs">
                                             {newsData.beritaUtama.kategori}
                                         </Badge>
                                     </div>
@@ -471,7 +471,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         {/* Desktop */}
                                         <Link
                                             href={`/berita/${newsData.beritaUtama.slug}`}
-                                            className="hidden md:inline-flex w-full sm:w-auto items-center justify-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                                            className="hidden md:inline-flex w-full sm:w-auto items-center justify-center gap-1 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors"
                                         >
                                             {t("berita.bacaSelengkapnya")}
                                             <ChevronRight className="h-4 w-4" />

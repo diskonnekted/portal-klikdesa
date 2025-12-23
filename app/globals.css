@@ -24,6 +24,8 @@
     --color-input: var(--input);
     --color-border: var(--border);
     --color-destructive: var(--destructive);
+    --color-tertiary-foreground: var(--tertiary-foreground);
+    --color-tertiary: var(--tertiary);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
     --color-muted-foreground: var(--muted-foreground);
@@ -57,65 +59,69 @@
     /* Sijenggung Village Theme - Light Mode Only */
     --radius: 0.625rem;
 
-    /* Base colors - Sijenggung Village Official */
-    --background: #f2f6ff; /* Dasar halaman bersih - light blue background */
-    --foreground: #000000; /* Teks utama */
-    --card: #ffffff; /* Latar kartu/komponen - white background */
-    --card-foreground: #000000;
-    --popover: #ffffff;
-    --popover-foreground: #000000;
+    /* Base colors - Sijenggung Village Official (Updated to Modern Energetic) */
+    --background: #F9F9F9; /* Off-White Netral */
+    --foreground: #2D3436; /* Charcoal Gelap */
+    --card: #FFFFFF; /* Putih Murni */
+    --card-foreground: #2D3436;
+    --popover: #FFFFFF;
+    --popover-foreground: #2D3436;
 
-    /* Primary colors - Header biru */
-    --primary: #39a2cf; /* Header BG */
-    --primary-foreground: #ffffff;
+    /* Primary colors - Turquoise Segar */
+    --primary: #4ECDC4; /* Main Brand */
+    --primary-foreground: #FFFFFF;
 
-    /* Secondary colors - Hero biru */
-    --secondary: #3eafdf; /* Hero BG */
-    --secondary-foreground: #ffffff;
+    /* Secondary colors - Orange Energetik (even darker for contrast) */
+    --secondary: #E65100; /* Supportive */
+    --secondary-foreground: #FFFFFF;
 
-    /* Accent colors - Footer biru */
-    --accent: #0a4661; /* Footer BG */
-    --accent-foreground: #ffffff;
+    /* Accent colors - Coral Hangat */
+    --accent: #FF6B6B; /* Notifications, Status */
+    --accent-foreground: #FFFFFF;
 
-    /* Muted colors - Light variations for subtle elements */
-    --muted: #f3f4f6;
-    --muted-foreground: #6b7280;
+    /* Tertiary colors - Purple Modern */
+    --tertiary: #6C5CE7; /* Unique Elements */
+    --tertiary-foreground: #FFFFFF;
+
+    /* Muted colors - Light variations */
+    --muted: #F3F4F6;
+    --muted-foreground: #6B7280;
 
     /* Status colors */
-    --destructive: #f87171; /* Kesalahan */
-    --destructive-foreground: #ffffff;
+    --destructive: #E74C3C; /* Crimson Merah */
+    --destructive-foreground: #FFFFFF;
 
     /* UI elements - Adjusted for new color scheme */
-    --border: #b8d4e3; /* Light blue-gray */
-    --input: #e6f2f8; /* Very light blue */
-    --ring: #39a2cf;
+    --border: #B2EBF2; /* Primary 100 (Turquoise light) */
+    --input: #E0F7FA; /* Primary 50 (Turquoise very light) */
+    --ring: #4ECDC4;
 
     /* Chart colors - Updated color scheme */
-    --chart-1: #39a2cf; /* Primary - Header blue */
-    --chart-2: #3eafdf; /* Secondary - Hero blue */
-    --chart-3: #0a4661; /* Accent - Footer blue */
-    --chart-4: #fbbf24; /* Warning yellow */
-    --chart-5: #7bc4e0; /* Light blue variant */
+    --chart-1: #4ECDC4; /* Primary */
+    --chart-2: #FF8A00; /* Secondary */
+    --chart-3: #6C5CE7; /* Accent */
+    --chart-4: #FDBB30; /* Warning */
+    --chart-5: #2ECC71; /* Success */
 
     /* Sidebar colors - Updated */
-    --sidebar: #ffffff;
-    --sidebar-foreground: #000000;
-    --sidebar-primary: #39a2cf;
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #e6f2f8;
-    --sidebar-accent-foreground: #39a2cf;
-    --sidebar-border: #b8d4e3;
-    --sidebar-ring: #39a2cf;
+    --sidebar: #FFFFFF;
+    --sidebar-foreground: #2D3436;
+    --sidebar-primary: #4ECDC4;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #E0F7FA;
+    --sidebar-accent-foreground: #4ECDC4;
+    --sidebar-border: #B2EBF2;
+    --sidebar-ring: #4ECDC4;
 
     /* Village specific colors */
-    --village-success: #22c55e;
-    --village-warning: #fbbf24;
-    --village-danger: #f87171;
-    --village-info: #39a2cf;
+    --village-success: #2ECC71;
+    --village-warning: #FDBB30;
+    --village-danger: #E74C3C;
+    --village-info: #3498DB;
 
-    /* Text colors for dark/light contrast - Adjusted for new blues */
-    --text-normal: #ffffff; /* Normal text on dark backgrounds */
-    --text-hover: #b8e0f0; /* Lighter blue for hover */
+    /* Text colors for dark/light contrast */
+    --text-normal: #FFFFFF;
+    --text-hover: #FFE0B2;
 }
 
 @layer base {

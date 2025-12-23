@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 // Import translations
 import translations from "./translation.json";
@@ -21,7 +21,7 @@ export function useTranslation() {
      * @param fallback - Fallback text if translation is not found
      * @returns Translated string
      */
-    const t = (key: TranslationKey, params?: TranslationParams, fallback?: string): string => {
+    const t = useCallback((key: TranslationKey, params?: TranslationParams, fallback?: string): string => {
         // Split key into parts for nested access
         const keys = key.split(".");
         let value: unknown = translations;
@@ -48,14 +48,14 @@ export function useTranslation() {
 
         // Return the value if it's a string, otherwise return fallback or key
         return typeof value === "string" ? value : (fallback ?? key);
-    };
+    }, []);
 
     /**
      * Check if a translation key exists
      * @param key - Translation key to check
      * @returns Boolean indicating if translation exists
      */
-    const has = (key: TranslationKey): boolean => {
+    const has = useCallback((key: TranslationKey): boolean => {
         const keys = key.split(".");
         let value: unknown = translations;
 
@@ -68,14 +68,14 @@ export function useTranslation() {
         }
 
         return typeof value === "string";
-    };
+    }, []);
 
     /**
      * Get all translation keys for a specific namespace
      * @param namespace - Namespace to get keys from
      * @returns Object with all translations in the namespace
      */
-    const getNamespace = (namespace: string): Record<string, string> => {
+    const getNamespace = useCallback((namespace: string): Record<string, string> => {
         if (
             (translations as Record<string, unknown>)[namespace] &&
             typeof (translations as Record<string, unknown>)[namespace] === "object"
@@ -83,7 +83,7 @@ export function useTranslation() {
             return flattenObject((translations as Record<string, unknown>)[namespace] as Record<string, unknown>);
         }
         return {};
-    };
+    }, []);
 
     /**
      * Change current language

@@ -162,7 +162,7 @@ function transformArticle(article: OpenSIDArticle) {
 
     // Featured image with fallback - OpenSID uses /desa/upload/artikel/sedang_ prefix
     let featuredImage =
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%231f2b44'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23ffffff' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23006064'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23ffffff' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
     if (attributes.gambar) {
         // OpenSID image pattern: /desa/upload/artikel/sedang_<filename>
         let imageUrl = attributes.gambar;

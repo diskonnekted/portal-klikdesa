@@ -72,7 +72,7 @@ const fetchSDGsData = async (locationCode: string = "3404140004"): Promise<SDGGo
             const colors = [
                 "bg-red-600",
                 "bg-yellow-600",
-                "bg-[#3a4d74]",
+                "bg-emerald-600", // SDG 3: Good Health (Green)
                 "bg-red-700",
                 "bg-orange-600",
                 "bg-blue-500",
@@ -82,9 +82,9 @@ const fetchSDGsData = async (locationCode: string = "3404140004"): Promise<SDGGo
                 "bg-red-800",
                 "bg-yellow-700",
                 "bg-amber-600",
-                "bg-[#2f3f62]",
+                "bg-emerald-800", // SDG 13: Climate Action (Dark Green)
                 "bg-blue-700",
-                "bg-[#283755]",
+                "bg-green-700",   // SDG 15: Life on Land (Green)
                 "bg-blue-800",
                 "bg-indigo-700",
                 "bg-indigo-700",
@@ -269,7 +269,7 @@ const DetailedScoreDisplay: React.FC<DetailedScoreDisplayProps> = ({ goal, onClo
     const getStatusColor = (status: SDGGoal["status"]) => {
         switch (status) {
             case "ahead":
-                return "text-gray-900 bg-[#c2c9df]";
+                return "text-gray-900 bg-secondary-200";
             case "on-track":
                 return "text-blue-600 bg-blue-100";
             case "behind":
@@ -285,7 +285,7 @@ const DetailedScoreDisplay: React.FC<DetailedScoreDisplayProps> = ({ goal, onClo
         const numericScore = typeof score === "string" ? parseFloat(score.replace(",", ".")) : score;
         if (numericScore === 0) return "text-gray-500";
         if (numericScore < 50) return "text-orange-500";
-        if (numericScore >= 80) return "text-[#4a5f8c]";
+        if (numericScore >= 80) return "text-secondary-600";
         return "text-blue-500";
     };
 
@@ -431,7 +431,7 @@ const DetailedScoreDisplay: React.FC<DetailedScoreDisplayProps> = ({ goal, onClo
                                                         {numericScore === 0 ? (
                                                             <Clock className="h-3 w-3 text-gray-400" />
                                                         ) : numericScore >= 80 ? (
-                                                            <CheckCircle className="h-3 w-3 text-[#4a5f8c]" />
+                                                            <CheckCircle className="h-3 w-3 text-secondary-600" />
                                                         ) : (
                                                             <AlertCircle className="h-3 w-3 text-orange-500" />
                                                         )}
@@ -634,7 +634,7 @@ export const SDGsDashboard = React.forwardRef<HTMLDivElement, SDGsDashboardProps
         const getStatusColor = (status: SDGGoal["status"]) => {
             switch (status) {
                 case "ahead":
-                    return "text-gray-900 bg-[#c2c9df]";
+                return "text-gray-900 bg-secondary-200";
                 case "on-track":
                     return "text-blue-600 bg-blue-100";
                 case "behind":

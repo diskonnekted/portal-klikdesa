@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         description: "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah",
     },
     other: {
-        "msapplication-TileColor": "#39a2cf",
+        "msapplication-TileColor": "#FF8A00",
         "msapplication-TileImage": "/favicon-144x144.png",
     },
     icons: {

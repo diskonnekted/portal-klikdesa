@@ -26,8 +26,8 @@ export default function StrukturPage() {
 
             {/* Page Title */}
             <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-purple-100 rounded-full mb-4">
-                    <Users className="h-10 w-10 text-purple-600" />
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-tertiary-100 rounded-full mb-4">
+                    <Users className="h-10 w-10 text-tertiary" />
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">Struktur Organisasi Desa Sijenggung</h1>
                 <p className="text-xl text-gray-600">
@@ -42,7 +42,7 @@ export default function StrukturPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="max-w-2xl mx-auto">
-                        <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg">
+                        <div className="bg-gradient-to-r from-tertiary-50 to-secondary-50 p-6 rounded-lg">
                             <div className="flex flex-col md:flex-row items-center gap-6">
                                 <div className="relative w-48 h-48 flex-shrink-0">
                                     <Image
@@ -57,7 +57,7 @@ export default function StrukturPage() {
                                     <h2 className="text-3xl font-bold text-gray-900 mb-2">{lurah.nama}</h2>
                                     <p className="text-lg text-gray-700 mb-3">{lurah.jabatan}</p>
                                     <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full">
-                                        <Calendar className="h-4 w-4 text-purple-600" />
+                                        <Calendar className="h-4 w-4 text-tertiary" />
                                         <span className="text-sm font-medium">Periode {lurah.periode}</span>
                                     </div>
                                 </div>
@@ -85,25 +85,25 @@ export default function StrukturPage() {
             <div className="grid md:grid-cols-3 gap-4 mb-4">
                 <Card>
                     <CardContent className="p-4 text-center">
-                        <Users className="h-10 w-10 text-purple-600 mx-auto mb-3" />
+                        <Users className="h-10 w-10 text-tertiary mx-auto mb-3" />
                         <h3 className="font-semibold mb-1">Total Perangkat</h3>
-                        <p className="text-2xl font-bold text-purple-600">20+</p>
+                        <p className="text-2xl font-bold text-tertiary">20+</p>
                         <p className="text-xs text-gray-600">orang</p>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardContent className="p-4 text-center">
-                        <Building className="h-10 w-10 text-blue-600 mx-auto mb-3" />
+                        <Building className="h-10 w-10 text-secondary-600 mx-auto mb-3" />
                         <h3 className="font-semibold mb-1">Dusun</h3>
-                        <p className="text-2xl font-bold text-blue-600">9</p>
+                        <p className="text-2xl font-bold text-secondary-600">9</p>
                         <p className="text-xs text-gray-600">dusun</p>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardContent className="p-4 text-center">
-                        <User className="h-10 w-10 text-[#3a4d74] mx-auto mb-3" />
+                        <User className="h-10 w-10 text-secondary-800 mx-auto mb-3" />
                         <h3 className="font-semibold mb-1">RW/RT</h3>
-                        <p className="text-2xl font-bold text-[#3a4d74]">20/47</p>
+                        <p className="text-2xl font-bold text-secondary-800">20/47</p>
                         <p className="text-xs text-gray-600">RW/RT</p>
                     </CardContent>
                 </Card>
@@ -142,7 +142,7 @@ export default function StrukturPage() {
                                         <h4 className="font-semibold text-gray-900">Sekretaris Desa</h4>
                                         <p className="text-sm text-gray-600">Koordinator administrasi dan keuangan</p>
                                     </div>
-                                    <div className="bg-white p-4 rounded-lg border-l-4 border-[#3a4d74]">
+                                    <div className="bg-white p-4 rounded-lg border-l-4 border-secondary-800">
                                         <h4 className="font-semibold text-gray-900">Kepala Seksi (Kasi)</h4>
                                         <div className="text-sm text-gray-600 space-y-1">
                                             <p>â€¢ Kasi Pemerintahan</p>
@@ -173,7 +173,7 @@ export default function StrukturPage() {
                                     <h4 className="font-semibold text-gray-900 mb-2">Profil Lengkap</h4>
                                     <p className="text-sm text-gray-600">Foto dan biodata perangkat Desa</p>
                                 </div>
-                                <div className="bg-[#e6eaf3] p-4 rounded-lg text-center">
+                                <div className="bg-secondary-100 p-4 rounded-lg text-center">
                                     <Phone className="h-8 w-8 text-gray-900 mx-auto mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Kontak</h4>
                                     <p className="text-sm text-gray-600">Informasi telepon dan email</p>

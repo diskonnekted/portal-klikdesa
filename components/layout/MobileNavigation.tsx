@@ -188,7 +188,7 @@ export function MobileNavigation() {
     return (
         <>
             {/* Bottom Navigation - Fixed at bottom */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#1279a7] border-t border-[#2a77a7] z-50 shadow-lg">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-primary border-t border-primary-600 z-50 shadow-lg">
                 <div className="grid grid-cols-5 h-16">
                     {mainNavItems.map((item) => {
                         const active = !item.external && isActive(item.href);
@@ -201,7 +201,7 @@ export function MobileNavigation() {
                                 href={item.href}
                                 {...linkProps}
                                 className={`flex flex-col items-center justify-center gap-1 text-xs transition-all duration-200 relative cursor-pointer ${
-                                    active ? "text-white animate-wiggle" : "text-[#ffffff] hover:text-white"
+                                    active ? "text-white animate-wiggle" : "text-primary-50 hover:text-white"
                                 }`}
                             >
                                 <item.icon
@@ -215,7 +215,7 @@ export function MobileNavigation() {
                     {/* "Lainnya" menu item that triggers sidebar */}
                     <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
                         <SheetTrigger asChild>
-                            <button className="flex flex-col items-center justify-center gap-1 text-xs text-[#ffffff] hover:text-white transition-colors w-full h-full cursor-pointer">
+                            <button className="flex flex-col items-center justify-center gap-1 text-xs text-primary-50 hover:text-white transition-colors w-full h-full cursor-pointer">
                                 <Menu className="h-5 w-5" />
                                 <span className="font-medium">{translations.lainnya}</span>
                             </button>

@@ -11,64 +11,79 @@ const config: Config = {
     extend: {
       colors: {
         // Sijenggung Village Official Colors
+        // Swap roles: Primary -> Turquoise, Secondary -> Orange
         primary: {
-          DEFAULT: "#39a2cf", // Header BG
-          50: "#e6f0fa",
-          100: "#cce0f5",
-          200: "#99c2eb",
-          300: "#66a3e0",
-          400: "#3385d6",
-          500: "#3eafdf", // Hero BG
-          600: "#39a2cf", // Main primary color (Header)
-          700: "#0a4766",
-          800: "#08374c",
-          900: "#052632",
-          950: "#03161d",
+          DEFAULT: "#4ECDC4", // Turquoise Segar (Main Brand, CTA)
+          50: "#E0F7FA",
+          100: "#B2EBF2",
+          200: "#80DEEA",
+          300: "#4DD0E1",
+          400: "#26C6DA",
+          500: "#4ECDC4",
+          600: "#00ACC1",
+          700: "#0097A7",
+          800: "#00838F",
+          900: "#006064",
+          950: "#00363A",
         },
         secondary: {
-          DEFAULT: "#3eafdf", // Hero BG
-          50: "#e6f2fa",
-          100: "#cce5f5",
-          200: "#99cceb",
-          300: "#66b2e0",
-          400: "#3399d6",
-          500: "#3eafdf", // Main secondary color (Hero)
-          600: "#39a2cf",
-          700: "#0a4766",
-          800: "#08374c",
-          900: "#052632",
-          950: "#03161d",
+          DEFAULT: "#E65100", // Even darker Orange for better contrast
+          50: "#FFF3E0",
+          100: "#FFE0B2",
+          200: "#FFCC80",
+          300: "#FFB74D",
+          400: "#FFA726",
+          500: "#FF8A00",
+          600: "#FB8C00",
+          700: "#F57C00",
+          800: "#EF6C00",
+          900: "#E65100",
+          950: "#BF360C",
+        },
+        tertiary: {
+          DEFAULT: "#6C5CE7", // Purple Modern (Lifestyle, Unique Elements)
+          50: "#EDE7F6",
+          100: "#D1C4E9",
+          200: "#B39DDB",
+          300: "#9575CD",
+          400: "#7E57C2",
+          500: "#6C5CE7",
+          600: "#5E35B1",
+          700: "#512DA8",
+          800: "#4527A0",
+          900: "#311B92",
+          950: "#200E65",
         },
         accent: {
-          DEFAULT: "#0a4661", // Footer BG
-          50: "#e6f0f5",
-          100: "#cce0eb",
-          200: "#99c2d7",
-          300: "#66a3c2",
-          400: "#3385ae",
-          500: "#0a4661", // Main accent color (Footer)
-          600: "#062942",
-          700: "#041d2f",
-          800: "#03121c",
-          900: "#010609",
-          950: "#000000",
+          DEFAULT: "#FF6B6B", // Coral Hangat (Notifications, Status, Attention)
+          50: "#FFF5F5",
+          100: "#FFE6E6",
+          200: "#FFC9C9",
+          300: "#FFABAB",
+          400: "#FF8D8D",
+          500: "#FF6B6B",
+          600: "#E66060",
+          700: "#CC5656",
+          800: "#B34B4B",
+          900: "#994040",
+          950: "#803636",
         },
-        background: "#f8f9fc", // Dasar halaman bersih - Wordpress background
-        surface: "#e6eaf3", // Latar kartu/komponen - Wordpress surface
-        "text-dark": "#000000", // Teks utama
-        "text-light": "#ffffff", // Teks di atas latar gelap
-        "text-light-hover": "#ddf0ff", // Teks hover di atas latar gelap
-        success: "#22c55e", // Status sukses
-        warning: "#fbbf24", // Peringatan
-        danger: "#f87171", // Kesalahan
-        info: "#60a5fa", // Informasi
+        background: "#F9F9F9", // Off-White Netral
+        surface: "#FFFFFF", // Putih Murni
+        "text-dark": "#2D3436", // Charcoal Gelap
+        "text-light": "#FFFFFF", // Putih Murni
+        "text-light-hover": "#FFE0B2", // Orange light for hover on dark bg
+        success: "#2ECC71", // Emerald Hijau
+        warning: "#FDBB30", // Sunshine Kuning
+        danger: "#E74C3C", // Crimson Merah
+        info: "#3498DB", // Sky Biru
         // Additional village theme colors
         "village-green": {
-          DEFAULT: "#39a2cf",
-          dark: "#3eafdf",
-          darker: "#0a4661",
+          DEFAULT: "#4ECDC4", // Mapped to primary for compatibility
+          dark: "#006064",
+          darker: "#00363A",
         },
-        "village-blue": "#3eafdf", // Untuk dekorasi (Hero blue)
+        "village-blue": "#FF8A00", // Mapped to secondary for compatibility
         // Override default colors for consistency
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
