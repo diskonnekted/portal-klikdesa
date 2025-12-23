@@ -50,12 +50,31 @@ const loadLeaflet = async () => {
     return L;
 };
 
-// Dynamically import Leaflet components
-const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLayer), { ssr: false });
-const GeoJSON = dynamic(() => import("react-leaflet").then((mod) => mod.GeoJSON), { ssr: false });
-const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false });
+// Dynamically import Leaflet components with explicit types
+const MapContainer = dynamic(
+    () => import("react-leaflet").then((mod) => mod.MapContainer),
+    { ssr: false }
+) as React.ComponentType<any>;
+
+const TileLayer = dynamic(
+    () => import("react-leaflet").then((mod) => mod.TileLayer),
+    { ssr: false }
+) as React.ComponentType<any>;
+
+const GeoJSON = dynamic(
+    () => import("react-leaflet").then((mod) => mod.GeoJSON),
+    { ssr: false }
+) as React.ComponentType<any>;
+
+const Marker = dynamic(
+    () => import("react-leaflet").then((mod) => mod.Marker),
+    { ssr: false }
+) as React.ComponentType<any>;
+
+const Popup = dynamic(
+    () => import("react-leaflet").then((mod) => mod.Popup),
+    { ssr: false }
+) as React.ComponentType<any>;
 
 export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
