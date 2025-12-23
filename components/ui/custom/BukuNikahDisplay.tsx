@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Heart, TrendingUp, Users, FileText } from "lucide-react";
@@ -174,7 +174,7 @@ export function BukuNikahDisplay({ className }: BukuNikahDisplayProps) {
                         Data Kepemilikan Buku Nikah
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik kepemilikan buku nikah penduduk Kalurahan
+                        Data statistik kepemilikan buku nikah penduduk Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -380,3 +380,4 @@ export function BukuNikahDisplay({ className }: BukuNikahDisplayProps) {
         </div>
     );
 }
+

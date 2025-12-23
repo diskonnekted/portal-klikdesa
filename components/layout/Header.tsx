@@ -185,12 +185,12 @@ export function Header() {
                             >
                                 <Logo {...LogoVariant.light} size={40} />
                                 <div className="hidden sm:block">
-                                    <h1 className="text-lg font-bold text-white">Kalurahan Pondokrejo</h1>
-                                    <p className="text-xs text-[#ddf0ff]">Kabupaten Sleman, DIY</p>
+                                    <h1 className="text-lg font-bold text-white">Desa Sijenggung</h1>
+                                    <p className="text-xs text-[#ddf0ff]">Kabupaten Banjarnegara, Jateng</p>
                                 </div>
                                 <div className="block sm:hidden">
-                                    <h1 className="text-lg font-bold text-white">Pondokrejo</h1>
-                                    <p className="text-xs text-[#ddf0ff]">Kabupaten Sleman</p>
+                                    <h1 className="text-lg font-bold text-white">Sijenggung</h1>
+                                    <p className="text-xs text-[#ddf0ff]">Banjarnegara</p>
                                 </div>
                             </Link>
                         </div>
@@ -229,7 +229,7 @@ export function Header() {
 
                             {/* Notifications */}
                             <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
+                                <DropdownMenuTrigger asChild id="header-notifications-trigger">
                                     <Button
                                         variant="ghost"
                                         size="icon"
@@ -367,7 +367,7 @@ export function Header() {
                                 // Render as dropdown for informasi sub-items
                                 return (
                                     <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild>
+                                        <DropdownMenuTrigger asChild id={`header-nav-trigger-${item.href.substring(1)}`}>
                                             <Button
                                                 variant="ghost"
                                                 className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-[#2a77a7]! hover:text-white! data-[state=open]:bg-[#2a77a7]! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"

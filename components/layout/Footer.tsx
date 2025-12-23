@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { Mail, Phone, MapPin, Clock, Heart, ExternalLink } from "lucide-react";
@@ -12,15 +12,15 @@ export function Footer() {
 
     const quickLinks = [
         { href: "/berita", label: t("navigation.berita") },
-        { href: "https://pondokrejo.sleman-desa.id/layanan-mandiri", label: t("navigation.layanan"), external: true },
-        { href: "/profil/sejarah", label: "Sejarah Kalurahan" },
+        { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri", label: t("navigation.layanan"), external: true },
+        { href: "/profil/sejarah", label: "Sejarah Desa" },
         { href: "/pemerintahan", label: t("navigation.pemerintahan") },
         { href: "/keuangan", label: t("navigation.keuangan") },
-        { href: "/pengaduan", label: t("navigation.kontak") },
+        { href: "/pengaduan", label: t("navigation.pengaduan") },
     ];
 
     const layananLinks = [
-        { href: "https://pondokrejo.sleman-desa.id/layanan-mandiri", label: "Layanan Mandiri", external: true },
+        { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri", label: "Layanan Mandiri", external: true },
         { href: "/pengaduan", label: "Pengaduan Masyarakat" },
         { href: "/iot", label: "IoT Monitoring" },
         { href: "/statistik", label: "Data Statistik" },
@@ -39,7 +39,7 @@ export function Footer() {
 
     const socialLinks = [
         {
-            href: "https://www.facebook.com/kalurahanpondokrejo.sid",
+            href: "https://www.facebook.com/Desapondokrejo.sid",
             icon: siFacebook,
             label: "Facebook",
             color: "#0866FF",
@@ -51,7 +51,7 @@ export function Footer() {
             color: "#2bb517",
         },
         {
-            href: "https://www.instagram.com/kalurahanpondokrejo.sid",
+            href: "https://www.instagram.com/Desapondokrejo.sid",
             icon: siInstagram,
             label: "Instagram",
             color: "#FF0069",
@@ -69,13 +69,13 @@ export function Footer() {
                         <div className="flex items-center space-x-3">
                             <Logo {...LogoVariant.footer} />
                             <div>
-                                <h3 className="text-lg font-bold text-white">Kalurahan Pondokrejo</h3>
-                                <p className="text-xs text-[#ddf0ff]">Kabupaten Sleman, DIY</p>
+                                <h3 className="text-lg font-bold text-white">Desa Sijenggung</h3>
+                                <p className="text-xs text-[#ddf0ff]">Kabupaten Banjarnegara, Jateng</p>
                             </div>
                         </div>
                         <p className="text-sm text-[#ddf0ff] leading-relaxed">
-                            Portal resmi Pemerintah Kalurahan Pondokrejo yang menyediakan informasi dan layanan publik
-                            digital untuk warga kalurahan.
+                            Portal resmi Pemerintah Desa Sijenggung yang menyediakan informasi dan layanan publik
+                            digital untuk warga desa.
                         </p>
                         <div className="flex space-x-3">
                             {socialLinks.map((social) => (
@@ -211,3 +211,4 @@ export function Footer() {
         </footer>
     );
 }
+

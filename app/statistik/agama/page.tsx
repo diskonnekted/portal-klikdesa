@@ -16,7 +16,7 @@ export default function AgamaPage() {
                     </div>
                     <h1 className="text-4xl font-bold text-primary">Data Agama</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Data statistik agama penduduk Kalurahan Pondokrejo
+                        Data statistik agama penduduk Desa Sijenggung
                     </p>
                 </div>
 
@@ -123,13 +123,13 @@ export default function AgamaPage() {
                         </CardHeader>
                         <CardContent>
                             <p className="text-sm text-muted-foreground mb-3">
-                                Fasilitas ibadah untuk berbagai agama di Kalurahan
+                                Fasilitas ibadah untuk berbagai agama di Desa
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Masjid & Mushola</li>
-                                <li>• Gereja Kristen</li>
-                                <li>• Gereja Katolik</li>
-                                <li>• Pura, Vihara, Klenteng</li>
+                                <li>â€¢ Masjid & Mushola</li>
+                                <li>â€¢ Gereja Kristen</li>
+                                <li>â€¢ Gereja Katolik</li>
+                                <li>â€¢ Pura, Vihara, Klenteng</li>
                             </ul>
                         </CardContent>
                     </Card>
@@ -143,10 +143,10 @@ export default function AgamaPage() {
                                 Program peningkatan toleransi dan kerukunan antar umat bergama
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Dialog antar agama</li>
-                                <li>• Hari besar keagamaan</li>
-                                <li>• Peringatan hari Toleransi</li>
-                                <li>• Kegiatan sosial keagamaan</li>
+                                <li>â€¢ Dialog antar agama</li>
+                                <li>â€¢ Hari besar keagamaan</li>
+                                <li>â€¢ Peringatan hari Toleransi</li>
+                                <li>â€¢ Kegiatan sosial keagamaan</li>
                             </ul>
                         </CardContent>
                     </Card>
@@ -160,10 +160,10 @@ export default function AgamaPage() {
                                 Pengelolaan data kependudukan yang akurat dan terpercaya
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Pencatatan sipil</li>
-                                <li>• Update data rutin</li>
-                                <li>• Verifikasi data</li>
-                                <li>• Layanan kependudukan</li>
+                                <li>â€¢ Pencatatan sipil</li>
+                                <li>â€¢ Update data rutin</li>
+                                <li>â€¢ Verifikasi data</li>
+                                <li>â€¢ Layanan kependudukan</li>
                             </ul>
                         </CardContent>
                     </Card>

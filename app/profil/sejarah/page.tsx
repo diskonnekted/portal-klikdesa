@@ -10,15 +10,15 @@ export default function SejarahPage() {
         tahunMaklumat: "1948",
         nomorMaklumat: "05",
         deskripsi:
-            "Sesuai dengan Maklumat Gubernur DIY Sri Sultan Hamengkubuwono ke IX pada Nomor : 05 Tahun 1948, Kalurahan Pondokrejo dulunya terbagi menjadi 2 (dua) Kalurahan yaitu:",
-        kalurahanLama: [
+            "Sesuai dengan Maklumat Gubernur DIY Sri Sultan Hamengkubuwono ke IX pada Nomor : 05 Tahun 1948, Desa Sijenggung dulunya terbagi menjadi 2 (dua) Desa yaitu:",
+        DesaLama: [
             {
-                nama: "Kalurahan Ngentak",
+                nama: "Desa Ngentak",
                 dusun: ["Ngentak", "Plotengan", "Badalan", "Jlopo", "Karanglo", "Dukuh"],
                 pusatPemerintahan: "Plotengan",
             },
             {
-                nama: "Kalurahan Glagahombo",
+                nama: "Desa Glagahombo",
                 dusun: ["Jlapan", "Babadan (Banjarharjo)", "Glagahombo", "Jenengan", "Watupecah", "Balan/Mlesen"],
                 pusatPemerintahan: "Babadan (Banjarharjo)",
             },
@@ -31,7 +31,7 @@ export default function SejarahPage() {
             <Link href="/profil">
                 <Button variant="ghost" className="mb-4">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Kembali ke Profil Kalurahan
+                    Kembali ke Profil Desa
                 </Button>
             </Link>
 
@@ -40,16 +40,16 @@ export default function SejarahPage() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-4">
                     <History className="h-10 w-10 text-blue-600" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Sejarah Kalurahan Pondokrejo</h1>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Sejarah Desa Sijenggung</h1>
                 <p className="text-xl text-gray-600">
-                    Menelusuri perjalanan panjang Kalurahan Pondokrejo dari masa ke masa
+                    Menelusuri perjalanan panjang Desa Sijenggung dari masa ke masa
                 </p>
             </div>
 
             {/* Main Content */}
             <Card className="mb-4">
                 <CardHeader>
-                    <CardTitle className="text-2xl text-center">Asal-usul Pembentukan Kalurahan</CardTitle>
+                    <CardTitle className="text-2xl text-center">Asal-usul Pembentukan Desa</CardTitle>
                 </CardHeader>
                 <CardContent>
                     {/* Historical Reference */}
@@ -72,29 +72,29 @@ export default function SejarahPage() {
                     {/* Description */}
                     <p className="text-gray-700 mb-6 text-center max-w-4xl mx-auto">{sejarahData.deskripsi}</p>
 
-                    {/* The Two Former Kalurahans */}
+                    {/* The Two Former Desas */}
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
-                        {sejarahData.kalurahanLama.map((kalurahan, index) => (
+                        {sejarahData.DesaLama.map((Desa, index) => (
                             <div
                                 key={index}
                                 className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-lg border"
                             >
                                 <div className="flex items-center gap-2 mb-4">
                                     <MapPin className="h-5 w-5 text-blue-600" />
-                                    <h3 className="text-xl font-bold text-gray-900">{kalurahan.nama}</h3>
+                                    <h3 className="text-xl font-bold text-gray-900">{Desa.nama}</h3>
                                 </div>
 
                                 {/* Pusat Pemerintahan */}
                                 <div className="mb-4 p-3 bg-white/70 rounded-lg">
                                     <h4 className="text-sm font-semibold text-gray-700 mb-1">Pusat Pemerintahan:</h4>
-                                    <p className="text-gray-900 font-medium">{kalurahan.pusatPemerintahan}</p>
+                                    <p className="text-gray-900 font-medium">{Desa.pusatPemerintahan}</p>
                                 </div>
 
                                 {/* Daftar Dusun */}
                                 <div>
                                     <h4 className="text-sm font-semibold text-gray-700 mb-2">Dusun yang Termasuk:</h4>
                                     <div className="space-y-1">
-                                        {kalurahan.dusun.map((dusun, idx) => (
+                                        {Desa.dusun.map((dusun, idx) => (
                                             <div key={idx} className="flex items-center gap-2">
                                                 <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
                                                 <span className="text-sm text-gray-700">{dusun}</span>
@@ -111,11 +111,11 @@ export default function SejarahPage() {
                         <div className="flex items-start gap-2">
                             <Users className="h-5 w-5 text-green-600 mt-0.5" />
                             <div>
-                                <h3 className="font-semibold text-green-900 mb-1">Kalurahan Terkini</h3>
+                                <h3 className="font-semibold text-green-900 mb-1">Desa Terkini</h3>
                                 <p className="text-sm text-green-800">
-                                    Kedua kalurahan tersebut kemudian bergabung menjadi{" "}
-                                    <strong>Kalurahan Pondokrejo</strong> seperti yang kita kenal today, dengan 9
-                                    padukuhan yang membawahi 20 RW dan 47 RT.
+                                    Kedua Desa tersebut kemudian bergabung menjadi{" "}
+                                    <strong>Desa Sijenggung</strong> seperti yang kita kenal today, dengan 9
+                                    dusun yang membawahi 20 RW dan 47 RT.
                                 </p>
                             </div>
                         </div>
@@ -135,15 +135,15 @@ export default function SejarahPage() {
                             <p className="text-sm text-gray-700">
                                 Tahun 1948 merupakan periode penting dalam sejarah Jawa, terutama setelah masa
                                 kemerdekaan Indonesia. Maklumat ini menjadi dasar legal pembentukan struktur
-                                pemerintahan kalurahan di wilayah Daerah Istimewa Yogyakarta.
+                                pemerintahan Desa di wilayah Daerah Istimewa Yogyakarta.
                             </p>
                         </div>
                         <div className="p-4 bg-gray-50 rounded-lg">
                             <h3 className="font-semibold mb-2">Warisan Administratif</h3>
                             <p className="text-sm text-gray-700">
-                                Jejak historis dari kedua kalurahan lama masih terlihat dalam penamaan dusun-dusun dan
+                                Jejak historis dari kedua Desa lama masih terlihat dalam penamaan dusun-dusun dan
                                 struktur sosial masyarakat hingga saat ini. Hal ini menjadi bagian dari kekayaan budaya
-                                dan identitas Kalurahan Pondokrejo.
+                                dan identitas Desa Sijenggung.
                             </p>
                         </div>
                     </div>
@@ -152,3 +152,4 @@ export default function SejarahPage() {
         </div>
     );
 }
+

@@ -1,9 +1,9 @@
 /**
- * Pondokrejo Village Official Color Palette
- * Based on docs/pondokrejo.md theme specification
+ * Sijenggung Village Official Color Palette
+ * Based on docs/sijenggung.md theme specification
  */
 
-export const pondokrejoColors = {
+export const sijenggungColors = {
     // Primary colors - Biru utama resmi
     primary: {
         DEFAULT: "#39a2cf",
@@ -73,9 +73,9 @@ export const pondokrejoColors = {
 } as const;
 
 /**
- * Utility function to get Tailwind class names for Pondokrejo colors
+ * Utility function to get Tailwind class names for Sijenggung colors
  */
-export const getPondokrejoClass = {
+export const getSijenggungClass = {
     // Background classes
     bg: {
         primary: "bg-[#39a2cf]",

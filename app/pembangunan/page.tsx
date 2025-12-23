@@ -168,6 +168,41 @@ export default function PembangunanPage() {
         return sorted[0].persentase;
     };
 
+    const normalizeImageUrl = (url: string | null | undefined) => {
+        if (!url) return null;
+
+        if (!url.startsWith("http")) {
+            const cleanPath = url.startsWith("/") ? url.slice(1) : url;
+            return `https://sijenggung-banjarnegara.desa.id/${cleanPath}`;
+        }
+
+        if (url.includes("pondokrejo")) {
+            return url.replace(/pondokrejo\.[a-z.-]+/, "sijenggung-banjarnegara.desa.id");
+        }
+
+        return url;
+    };
+
+    const getProjectImage = (project: PembangunanProject) => {
+        const attrs = project.attributes;
+        let imageUrl = attrs.foto;
+
+        // If main photo is missing, try to find in documentation
+        if (!imageUrl || imageUrl === "") {
+            if (attrs.pembangunan_dokumentasi && attrs.pembangunan_dokumentasi.length > 0) {
+                // Use the latest documentation image
+                const sortedDocs = [...attrs.pembangunan_dokumentasi].sort(
+                    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                );
+                if (sortedDocs.length > 0 && sortedDocs[0].gambar) {
+                    imageUrl = sortedDocs[0].gambar;
+                }
+            }
+        }
+
+        return normalizeImageUrl(imageUrl);
+    };
+
     const totalAnggaran = projects.reduce((sum, p) => sum + p.attributes.anggaran, 0);
     const completedProjects = projects.filter((p) => p.attributes.status === 1).length;
     const ongoingProjects = projects.filter((p) => p.attributes.status !== 1).length;
@@ -180,10 +215,10 @@ export default function PembangunanPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                             <Hammer className="h-10 w-10 text-orange-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Pembangunan Kalurahan</h1>
+                        <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Kalurahan
-                            Pondokrejo
+                            Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa
+                            Sijenggung
                         </p>
                     </div>
                     <PembangunanDataLoading />
@@ -200,10 +235,10 @@ export default function PembangunanPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                             <Hammer className="h-10 w-10 text-orange-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Pembangunan Kalurahan</h1>
+                        <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Kalurahan
-                            Pondokrejo
+                            Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa
+                            Sijenggung
                         </p>
                     </div>
                     <PembangunanDataNotAvailable onRetry={fetchProjects} />
@@ -219,9 +254,9 @@ export default function PembangunanPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                         <Hammer className="h-10 w-10 text-orange-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Pembangunan Kalurahan</h1>
+                    <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Kalurahan Pondokrejo
+                        Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa Sijenggung
                     </p>
                 </div>
 
@@ -362,7 +397,7 @@ export default function PembangunanPage() {
                         {filteredProjects.map((project) => {
                             const attrs = project.attributes;
                             const progress = getLatestProgress(attrs.pembangunan_dokumentasi);
-                            const progressValue = parseInt(progress);
+                            const imageUrl = getProjectImage(project);
 
                             return (
                                 <Card
@@ -371,9 +406,9 @@ export default function PembangunanPage() {
                                     onClick={() => setSelectedProject(project)}
                                 >
                                     <div className="relative h-48 bg-linear-to-br from-gray-100 to-gray-200">
-                                        {attrs.foto && !attrs.foto.includes("404-image-not-found") ? (
+                                        {imageUrl ? (
                                             <Image
-                                                src={attrs.foto}
+                                                src={imageUrl}
                                                 alt={attrs.judul}
                                                 fill
                                                 className="object-cover"
@@ -429,7 +464,7 @@ export default function PembangunanPage() {
                                                     </span>
                                                 </div>
                                                 <Progress
-                                                    value={progressValue}
+                                                    value={parseInt(progress)}
                                                     className={cn(
                                                         "h-2",
                                                         attrs.status === 1
@@ -457,7 +492,7 @@ export default function PembangunanPage() {
                                     onClick={() => setSelectedProject(null)}
                                     className="rounded-full"
                                 >
-                                    ✕
+                                    âœ•
                                 </Button>
                             </div>
 
@@ -607,6 +642,10 @@ export default function PembangunanPage() {
                                                     .sort((a, b) => parseInt(b.persentase) - parseInt(a.persentase))
                                                     .map((doc) => {
                                                         const docProgress = parseInt(doc.persentase);
+                                                        const docImage = normalizeImageUrl(doc.gambar);
+                                                        
+                                                        if (!docImage) return null;
+
                                                         return (
                                                             <div
                                                                 key={doc.id}
@@ -614,7 +653,7 @@ export default function PembangunanPage() {
                                                             >
                                                                 <div className="relative h-48 bg-gray-100">
                                                                     <Image
-                                                                        src={doc.gambar}
+                                                                        src={docImage}
                                                                         alt={`Progress ${doc.persentase}`}
                                                                         fill
                                                                         className="object-cover"
@@ -658,3 +697,4 @@ export default function PembangunanPage() {
         </div>
     );
 }
+

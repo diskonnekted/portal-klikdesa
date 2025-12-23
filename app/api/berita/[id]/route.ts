@@ -8,10 +8,10 @@ import { createSuccessResponse, createNotFoundResponse, createErrorResponse } fr
 const mockBerita = [
     {
         id: 1,
-        judul: "Peluncuran Portal Web Kalurahan Pondokrejo",
-        slug: "peluncuran-portal-web-kalurahan-pondokrejo",
-        ringkasan: "Portal web resmi Kalurahan Pondokrejo telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
-        konten: "Portal web resmi Kalurahan Pondokrejo telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
+        judul: "Peluncuran Portal Web Kalurahan Sijenggung",
+        slug: "peluncuran-portal-web-kalurahan-sijenggung",
+        ringkasan: "Portal web resmi Kalurahan Sijenggung telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
+        konten: "Portal web resmi Kalurahan Sijenggung telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
         gambar: "/images/berita/portal-launch.jpg",
         kategori: "Teknologi",
         status: "PUBLISHED",
@@ -26,8 +26,8 @@ const mockBerita = [
         judul: "Program Pembangunan Infrastruktur Tahun 2025",
         slug: "program-pembangunan-infrastruktur-tahun-2025",
         ringkasan:
-            "Pemerintah Kalurahan Pondokrejo mengalokasikan dana untuk pembangunan infrastruktur jalan dan drainase.",
-        konten: "Pemerintah Kalurahan Pondokrejo dalam tahun anggaran 2025 mengalokasikan dana pembangunan sebesar Rp 2.5 Miliar...",
+            "Pemerintah Desa Sijenggung mengalokasikan dana untuk pembangunan infrastruktur jalan dan drainase.",
+        konten: "Pemerintah Desa Sijenggung dalam tahun anggaran 2025 mengalokasikan dana pembangunan sebesar Rp 2.5 Miliar...",
         gambar: "/images/berita/infrastruktur.jpg",
         kategori: "Pembangunan",
         status: "PUBLISHED",

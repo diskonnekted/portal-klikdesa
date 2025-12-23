@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Globe } from "lucide-react";
 import Image from "next/image";
@@ -50,11 +50,11 @@ export default function SDGSPage() {
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 border rounded-lg p-6">
                         <h3 className="font-semibold text-blue-800 mb-3 flex items-center gap-2">
                             <Globe className="h-5 w-5" />
-                            Implementasi di Kalurahan
+                            Implementasi di Desa
                         </h3>
                         <p className="text-sm text-gray-700">
-                            Kalurahan Pembangunan Berkelanjutan adalah konsep yang mengintegrasikan prinsip SDGs ke
-                            dalam perencanaan dan pembangunan tingkat kalurahan.
+                            Desa Pembangunan Berkelanjutan adalah konsep yang mengintegrasikan prinsip SDGs ke
+                            dalam perencanaan dan pembangunan tingkat Desa.
                         </p>
                     </div>
 
@@ -73,3 +73,4 @@ export default function SDGSPage() {
         </div>
     );
 }
+

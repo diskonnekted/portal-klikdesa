@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { RefreshCw } from "lucide-react";
@@ -131,7 +131,7 @@ export function WilayahDataNotAvailable({ onRetry, className }: WilayahDataNotAv
                         Data wilayah administratif belum tersedia atau sedang dalam proses pengumpulan.
                     </p>
                     <p className="text-sm text-gray-500 text-center mb-6 max-w-sm">
-                        Silakan coba lagi nanti atau hubungi pihak kalurahan.
+                        Silakan coba lagi nanti atau hubungi pihak Desa.
                     </p>
 
                     {/* Action buttons */}
@@ -148,3 +148,4 @@ export function WilayahDataNotAvailable({ onRetry, className }: WilayahDataNotAv
         </div>
     );
 }
+

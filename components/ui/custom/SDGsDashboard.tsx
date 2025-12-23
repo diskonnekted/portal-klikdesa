@@ -115,7 +115,7 @@ const fetchSDGsData = async (locationCode: string = "3404140004"): Promise<SDGGo
             return {
                 id: item.goals,
                 title: item.title,
-                description: `Implementasi ${item.title} di Kalurahan Pondokrejo`,
+                description: `Implementasi ${item.title} di Desa Sijenggung`,
                 imageUrl: localImages[item.goals - 1] || "/images/sdgs/satu.png",
                 color: colors[item.goals - 1] || "bg-gray-600",
                 progress: Math.round(score),
@@ -154,7 +154,7 @@ const fetchOverallScore = async (locationCode: string = "3404140004"): Promise<n
 // Function to fetch detailed scores for a specific goal
 const fetchDetailedScores = async (
     goalId: number,
-    locationCode: string = "3404140004"
+    locationCode: string = "33.04.09.2014"
 ): Promise<DetailedScoresResponse | null> => {
     try {
         const response = await fetch(`/api/sdgs/detail/${goalId}?location_code=${locationCode}`);
@@ -894,7 +894,7 @@ export const SDGsDashboard = React.forwardRef<HTMLDivElement, SDGsDashboardProps
                     ) : sdgsData.length === 0 ? (
                         <div className="flex justify-center items-center py-12">
                             <div className="text-center">
-                                <div className="text-red-500 text-4xl mb-4">⚠️</div>
+                                <div className="text-red-500 text-4xl mb-4">âš ï¸</div>
                                 <p className="text-gray-600">Gagal memuat data SDGs</p>
                                 <p className="text-sm text-gray-500 mt-2">
                                     Silakan coba lagi nanti atau hubungi administrator
@@ -1093,3 +1093,4 @@ export const SDGsDashboard = React.forwardRef<HTMLDivElement, SDGsDashboardProps
 );
 
 SDGsDashboard.displayName = "SDGsDashboard";
+

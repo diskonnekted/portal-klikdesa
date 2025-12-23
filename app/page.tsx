@@ -17,7 +17,7 @@ function getServerSideData() {
             {
                 id: "2",
                 title: "Pembangunan Infrastruktur",
-                description: "Meningkatkan Kualitas Sarana dan Prasarana Kalurahan",
+                description: "Meningkatkan kualitas sarana dan prasarana desa",
                 image: "/uploads/sliders/sawah-1.avif",
                 ctaText: getServerTranslation("hero.ctaPantauPembangunan"),
                 ctaLink: "/pembangunan",
@@ -33,7 +33,7 @@ function getServerSideData() {
             {
                 id: "4",
                 title: "Pelestarian Budaya",
-                description: "Melestarikan Seni dan Budaya Lokal Pondokrejo",
+                description: "Melestarikan seni dan budaya lokal Sijenggung",
                 image: "/uploads/sliders/taman.avif",
                 ctaText: getServerTranslation("hero.ctaDownloadAplikasi"),
                 ctaLink: "/aplikasi",
@@ -41,7 +41,7 @@ function getServerSideData() {
             {
                 id: "5",
                 title: "Inovasi Pelayanan",
-                description: "Teknologi untuk Kemajuan Kalurahan yang Lebih Baik",
+                description: "Teknologi untuk kemajuan desa yang lebih baik",
                 image: "/uploads/sliders/sawah-2.avif",
                 ctaText: getServerTranslation("hero.ctaLihatBerita"),
                 ctaLink: "/berita",
@@ -133,19 +133,19 @@ function getServerSideData() {
                 id: 2,
                 judul: "Jadwal Imunisasi Balita",
                 prioritas: "normal",
-                konten: "Posyandu akan menyelenggarakan imunisasi balita pada hari Senin, 17 November 2025 di Balai Kalurahan.",
+                konten: "Posyandu akan menyelenggarakan imunisasi balita pada hari Senin, 17 November 2025 di Balai Desa.",
             },
             {
                 id: 3,
                 judul: "Pembagian Bantuan Beras",
                 prioritas: "penting",
-                konten: "Akan diadakan pembagian bantuan beras untuk warga yang kurang mampu di balai kalurahan.",
+                konten: "Akan diadakan pembagian bantuan beras untuk warga yang kurang mampu di balai Desa.",
             },
             {
                 id: 4,
-                judul: "Pengumuman Pemenang Lomba Kalurahan",
+                judul: "Pengumuman Pemenang Lomba Desa",
                 prioritas: "normal",
-                konten: "Pengumuman pemenang lomba kalurahan dalam rangka HUT Kalurahan Pondokrejo ke-125.",
+                konten: "Pengumuman pemenang lomba Desa dalam rangka HUT Desa Sijenggung ke-125.",
             },
             {
                 id: 5,
@@ -189,10 +189,10 @@ function getServerSideData() {
         events: [
             {
                 id: 1,
-                nama: "Rapat PKK Kalurahan",
+                nama: "Rapat PKK Desa",
                 tanggal: "2025-01-08T09:00:00.000Z",
                 waktu: "09:00",
-                lokasi: "Balai Kalurahan",
+                lokasi: "Balai Desa",
                 kategori: "Pemerintahan",
             },
             {
@@ -208,7 +208,7 @@ function getServerSideData() {
                 nama: "Lomba Senam Pagi",
                 tanggal: "2025-01-11T06:30:00.000Z",
                 waktu: "06:30",
-                lokasi: "Lapangan Kalurahan",
+                lokasi: "Lapangan Desa",
                 kategori: "Olahraga",
             },
             {
@@ -216,7 +216,7 @@ function getServerSideData() {
                 nama: "Lomba Senam Pagi",
                 tanggal: "2025-01-11T06:30:00.000Z",
                 waktu: "06:30",
-                lokasi: "Lapangan Kalurahan",
+                lokasi: "Lapangan Desa",
                 kategori: "Olahraga",
             },
         ],
@@ -241,3 +241,4 @@ export default function Home() {
         </Suspense>
     );
 }
+

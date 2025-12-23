@@ -11,9 +11,9 @@ export default function PemerintahanPage() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-4">
                     <Building className="h-10 w-10 text-blue-600" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Pemerintahan Kalurahan Pondokrejo</h1>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Pemerintahan Desa Sijenggung</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Struktur organisasi, program kerja, dan layanan pemerintahan kalurahan untuk masyarakat
+                    Struktur organisasi, program kerja, dan layanan pemerintahan Desa untuk masyarakat
                 </p>
             </div>
 
@@ -31,7 +31,7 @@ export default function PemerintahanPage() {
                             Informasi Pemerintahan Sedang Disusun
                         </h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
-                            Kami sedang mempersiapkan informasi lengkap mengenai pemerintahan Kalurahan Pondokrejo untuk
+                            Kami sedang mempersiapkan informasi lengkap mengenai pemerintahan Desa Sijenggung untuk
                             memberikan transparansi dan akses informasi kepada masyarakat.
                         </p>
 
@@ -46,7 +46,7 @@ export default function PemerintahanPage() {
                                             <div>
                                                 <h4 className="font-medium text-gray-900">Struktur Organisasi</h4>
                                                 <p className="text-sm text-gray-600">
-                                                    Hierarki dan tugas perangkat kalurahan
+                                                    Hierarki dan tugas perangkat Desa
                                                 </p>
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@ export default function PemerintahanPage() {
                                             <Award className="h-5 w-5 text-gray-900 mt-1 flex-shrink-0" />
                                             <div>
                                                 <h4 className="font-medium text-gray-900">Program Kerja</h4>
-                                                <p className="text-sm text-gray-600">Prioritas pembangunan kalurahan</p>
+                                                <p className="text-sm text-gray-600">Prioritas pembangunan Desa</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start gap-3">
@@ -62,7 +62,7 @@ export default function PemerintahanPage() {
                                             <div>
                                                 <h4 className="font-medium text-gray-900">Produk Hukum</h4>
                                                 <p className="text-sm text-gray-600">
-                                                    Peraturan dan keputusan kalurahan
+                                                    Peraturan dan keputusan Desa
                                                 </p>
                                             </div>
                                         </div>
@@ -97,7 +97,7 @@ export default function PemerintahanPage() {
                             <div className="grid md:grid-cols-3 gap-4">
                                 <div className="bg-blue-50 p-4 rounded-lg text-center">
                                     <Users className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                                    <h4 className="font-semibold text-gray-900 mb-2">Perangkat Kalurahan</h4>
+                                    <h4 className="font-semibold text-gray-900 mb-2">Perangkat Desa</h4>
                                     <Badge variant="secondary">Dalam Proses</Badge>
                                     <p className="text-sm text-gray-600 mt-2">Data kepegawaian sedang diverifikasi</p>
                                 </div>
@@ -133,11 +133,11 @@ export default function PemerintahanPage() {
                     <CardContent>
                         <div className="space-y-4">
                             <div className="border-l-4 border-blue-600 pl-4">
-                                <h4 className="font-semibold">Kepala Kalurahan</h4>
-                                <p className="text-sm text-gray-600">Pimpinan eksekutif kalurahan</p>
+                                <h4 className="font-semibold">Kepala Desa</h4>
+                                <p className="text-sm text-gray-600">Pimpinan eksekutif Desa</p>
                             </div>
                             <div className="border-l-4 border-[#3a4d74] pl-4">
-                                <h4 className="font-semibold">Sekretaris Kalurahan</h4>
+                                <h4 className="font-semibold">Sekretaris Desa</h4>
                                 <p className="text-sm text-gray-600">Administrasi dan keuangan</p>
                             </div>
                             <div className="border-l-4 border-purple-600 pl-4">
@@ -177,7 +177,7 @@ export default function PemerintahanPage() {
                                     <Calendar className="h-4 w-4 text-purple-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-sm">Musyawarah Kalurahan</h4>
+                                    <h4 className="font-semibold text-sm">Musyawarah Desa</h4>
                                     <p className="text-xs text-gray-600">Forum pengambilan keputusan</p>
                                 </div>
                             </div>
@@ -188,3 +188,4 @@ export default function PemerintahanPage() {
         </div>
     );
 }
+

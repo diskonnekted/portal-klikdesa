@@ -178,7 +178,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                     <div className="text-center text-white mb-16">
                         <h1 className="text-4xl md:text-6xl font-bold mb-4">Selamat Datang</h1>
                         <p className="text-lg md:text-xl mb-6 text-white/90">
-                            Portal Resmi Kalurahan Pondokrejo, Kabupaten Sleman, D.I Yogyakarta
+                            Portal Resmi Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <Badge
@@ -243,7 +243,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                     {/* Layanan Mandiri CTA Button */}
                     <div className="mt-16 flex justify-center">
                         <a
-                            href="https://pondokrejo.sleman-desa.id/layanan-mandiri"
+                            href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-500 hover:scale-105 overflow-hidden border"
@@ -343,7 +343,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             {/* Text Content */}
                             <div className="relative z-10 text-left">
                                 <div className="text-2xl font-bold text-white drop-shadow-md">Layanan Mandiri</div>
-                                <div className="text-white/80 text-sm mt-1">Ajukan permohonan secara online →</div>
+                                <div className="text-white/80 text-sm mt-1">Ajukan permohonan secara online â†’</div>
                             </div>
 
                             {/* Pulse effect on hover */}
@@ -359,7 +359,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-primary mb-2">Berita & Informasi Terbaru</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Ada kegiatan apa saja di Kalurahan Pondokrejo hari ini?
+                        Ada kegiatan apa saja di Desa Sijenggung hari ini?
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -625,7 +625,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
 
             <DecorativeSeparator />
 
-            {/* Statistik Kalurahan */}
+            {/* Statistik Desa */}
             <section className="statistics-area container mx-auto px-4 py-8">
                 <StatisticsDisplay />
             </section>
@@ -638,7 +638,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-primary mb-2">Tujuan Pembangunan Berkelanjutan (SDGs)</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Pantau kemajuan implementasi 18 Tujuan Pembangunan Berkelanjutan di Kalurahan Pondokrejo
+                        Pantau kemajuan implementasi 18 Tujuan Pembangunan Berkelanjutan di Desa Sijenggung
                     </p>
                 </div>
                 <SDGsDashboard />
@@ -672,3 +672,4 @@ function formatDate(dateString: string) {
     };
     return date.toLocaleDateString("id-ID", options);
 }
+

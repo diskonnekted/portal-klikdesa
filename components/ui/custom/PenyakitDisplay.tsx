@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Heart, Users, UserCheck, Activity, TrendingUp, BarChart3 } from "lucide-react";
@@ -71,7 +71,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Sakit/Penyakit Kalurahan
+                            Data Sakit/Penyakit Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -91,7 +91,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Sakit/Penyakit Kalurahan
+                            Data Sakit/Penyakit Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -194,9 +194,9 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Heart className="h-5 w-5 text-primary" />
-                        Data Sakit/Penyakit Kalurahan
+                        Data Sakit/Penyakit Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik sakit/penyakit penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik sakit/penyakit penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -334,3 +334,4 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
         </div>
     );
 }
+

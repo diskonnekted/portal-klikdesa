@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Users, UserCheck, UsersRound, TrendingUp } from "lucide-react";
@@ -230,7 +230,7 @@ export function HubunganDalamKKDisplay({ className }: HubunganDalamKKDisplayProp
                         Data Hubungan Dalam KK
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik hubungan dalam Kartu Keluarga (KK) Kalurahan
+                        Data statistik hubungan dalam Kartu Keluarga (KK) Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -369,3 +369,4 @@ export function HubunganDalamKKDisplay({ className }: HubunganDalamKKDisplayProp
         </div>
     );
 }
+

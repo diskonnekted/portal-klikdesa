@@ -1,6 +1,6 @@
 /**
  * Notification Utilities for Smart Notification Bar
- * Handles notifications, alerts, and system messages for Pondokrejo Village Portal
+ * Handles notifications, alerts, and system messages for Sijenggung Village Portal
  */
 
 // Notification types

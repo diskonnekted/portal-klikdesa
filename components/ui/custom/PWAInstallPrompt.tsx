@@ -120,7 +120,7 @@ export function PWAInstallPrompt() {
                             <Smartphone className="w-5 h-5 text-primary" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-sm text-foreground">Install Portal Pondokrejo</h3>
+                            <h3 className="font-semibold text-sm text-foreground">Install Portal Sijenggung</h3>
                             <p className="text-xs text-muted-foreground mt-1">
                                 {isIOS ? (
                                     <>
@@ -157,7 +157,7 @@ export function PWAInstallPrompt() {
                     <div className="mt-3 pt-3 border-t border-border">
                         <Button size="sm" onClick={handleInstallClick} className="w-full md:hidden">
                             <Download className="w-3 h-3 mr-1" />
-                            Install Portal Pondokrejo
+                            Install Portal Sijenggung
                         </Button>
                     </div>
                 )}

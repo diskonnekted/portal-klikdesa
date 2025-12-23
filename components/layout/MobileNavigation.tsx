@@ -48,7 +48,7 @@ export function MobileNavigation() {
             berita: "Berita",
             layanan: "Layanan",
             pengaduan: "Pengaduan",
-            profilDesa: "Profil Kalurahan",
+            profilDesa: "Profil Desa",
             pemerintahan: "Pemerintahan",
             informasi: "Informasi",
             keuangan: "Laporan Keuangan",
@@ -65,7 +65,7 @@ export function MobileNavigation() {
         { href: "/", label: translations.navigation.beranda, icon: Home },
         { href: "/berita", label: translations.navigation.berita, icon: Newspaper },
         {
-            href: "https://pondokrejo.sleman-desa.id/layanan-mandiri",
+            href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri",
             label: translations.navigation.layanan,
             icon: FileText,
             external: true,
@@ -280,7 +280,7 @@ export function MobileNavigation() {
 
                                     <a
                                         key="/layanan"
-                                        href="https://pondokrejo.sleman-desa.id/layanan-mandiri"
+                                        href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={() => setIsSidebarOpen(false)}
@@ -572,8 +572,8 @@ export function MobileNavigation() {
                                 {/* Additional info section */}
                                 <div className="p-4 border-t mt-2">
                                     <div className="text-xs text-muted-foreground space-y-2">
-                                        <p>Portal Resmi Kalurahan Pondokrejo</p>
-                                        <p>Kabupaten Sleman, DIY</p>
+                                        <p>Portal Resmi Desa Sijenggung</p>
+                                    <p>Kabupaten Banjarnegara, Jawa Tengah</p>
                                         <div className="pt-2">
                                             <p className="font-medium text-foreground mb-1">Butuh Bantuan?</p>
                                             <p>Hubungi kami melalui halaman pengaduan</p>
@@ -591,3 +591,4 @@ export function MobileNavigation() {
         </>
     );
 }
+

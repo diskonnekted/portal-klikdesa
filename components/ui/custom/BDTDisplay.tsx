@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Database, TrendingUp, Users, BarChart } from "lucide-react";
@@ -161,7 +161,7 @@ export function BDTDisplay({ className }: BDTDisplayProps) {
                         <BarChart3 className="h-5 w-5 text-primary" />
                         Data BDT Penduduk
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik Basis Data Terpadu (BDT) Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik Basis Data Terpadu (BDT) Desa</p>
                 </CardHeader>
             </Card>
 
@@ -370,3 +370,4 @@ export function BDTDisplay({ className }: BDTDisplayProps) {
         </div>
     );
 }
+

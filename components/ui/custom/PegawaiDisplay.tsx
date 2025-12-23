@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Users, Mail, Phone, MapPin, Calendar, UserCheck, Briefcase } from "lucide-react";
@@ -140,7 +140,7 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <UserCheck className="h-5 w-5 text-primary" />
-                            Pegawai & Perangkat Kalurahan
+                            Pegawai & Perangkat Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -160,7 +160,7 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <UserCheck className="h-5 w-5 text-primary" />
-                            Pegawai & Perangkat Kalurahan
+                            Pegawai & Perangkat Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -184,7 +184,7 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Users className="h-5 w-5 text-primary" />
-                        Pegawai & Perangkat Kalurahan
+                        Pegawai & Perangkat Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">Total: {pegawaiList.length} orang</p>
                 </CardHeader>
@@ -234,7 +234,7 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                                             <div className="flex items-center gap-2 text-muted-foreground">
                                                 <UserCheck className="h-4 w-4" />
                                                 <span>
-                                                    {pegawai.penduduk.jenis_kelamin?.nama} • {pegawai.penduduk.usia}
+                                                    {pegawai.penduduk.jenis_kelamin?.nama} â€¢ {pegawai.penduduk.usia}
                                                 </span>
                                             </div>
 
@@ -281,3 +281,4 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
         </div>
     );
 }
+

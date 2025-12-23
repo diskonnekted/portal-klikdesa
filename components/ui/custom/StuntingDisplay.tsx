@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import {
@@ -135,7 +135,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Baby className="h-5 w-5 text-primary" />
-                            Data Stunting Kalurahan
+                            Data Stunting Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -155,7 +155,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Baby className="h-5 w-5 text-primary" />
-                            Data Stunting Kalurahan
+                            Data Stunting Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -191,10 +191,10 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Baby className="h-5 w-5 text-primary" />
-                        Data Stunting Kalurahan
+                        Data Stunting Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Tahun {scorecard._tahun} • Kuartal {scorecard.kuartal}
+                        Tahun {scorecard._tahun} â€¢ Kuartal {scorecard.kuartal}
                     </p>
                 </CardHeader>
             </Card>
@@ -346,7 +346,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <MapPin className="h-5 w-5 text-primary" />
-                        Posyandu di Kalurahan
+                        Posyandu di Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">Total: {scorecard.posyandu.length} posyandu</p>
                 </CardHeader>
@@ -397,3 +397,4 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
         </div>
     );
 }
+

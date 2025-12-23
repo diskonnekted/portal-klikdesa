@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import {
@@ -92,7 +92,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Users className="h-5 w-5 text-primary" />
-                            Statistik Penduduk Kalurahan
+                            Statistik Penduduk Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -112,7 +112,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Users className="h-5 w-5 text-primary" />
-                            Statistik Penduduk Kalurahan
+                            Statistik Penduduk Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -173,7 +173,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Users className="h-5 w-5 text-primary" />
-                        Statistik Penduduk Kalurahan
+                        Statistik Penduduk Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">Data berdasarkan tingkat pendidikan</p>
                 </CardHeader>
@@ -347,3 +347,4 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
         </div>
     );
 }
+

@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { Users, TrendingUp, TrendingDown, Activity, GraduationCap } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -223,7 +223,7 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
                     {/* Header */}
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-primary mb-2">
-                            {title || t("statistik.judul") || "Statistik Kalurahan"}
+                            {title || t("statistik.judul") || "Statistik Desa"}
                         </h2>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             {description ||
@@ -343,3 +343,4 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
 );
 
 StatisticsDisplay.displayName = "StatisticsDisplay";
+

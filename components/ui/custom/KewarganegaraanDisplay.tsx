@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { CreditCard, UserCheck, BarChart3, TrendingUp, Users } from "lucide-react";
@@ -80,7 +80,7 @@ export function KewarganegaraanDisplay({ className }: KewarganegaraanDisplayProp
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <CreditCard className="h-5 w-5 text-primary" />
-                            Data Kewarganegaraan Kalurahan
+                            Data Kewarganegaraan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function KewarganegaraanDisplay({ className }: KewarganegaraanDisplayProp
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <CreditCard className="h-5 w-5 text-primary" />
-                            Data Kewarganegaraan Kalurahan
+                            Data Kewarganegaraan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -234,9 +234,9 @@ export function KewarganegaraanDisplay({ className }: KewarganegaraanDisplayProp
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <CreditCard className="h-5 w-5 text-primary" />
-                        Data Kewarganegaraan Kalurahan
+                        Data Kewarganegaraan Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik kewarganegaraan penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik kewarganegaraan penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -386,3 +386,4 @@ export function KewarganegaraanDisplay({ className }: KewarganegaraanDisplayProp
         </div>
     );
 }
+

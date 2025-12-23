@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { CalendarDays, Users, UserCheck, Clock, TrendingUp, BarChart3 } from "lucide-react";
@@ -69,7 +69,7 @@ export function UmurDisplay({ className }: UmurDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <CalendarDays className="h-5 w-5 text-primary" />
-                            Data Umur Kalurahan
+                            Data Umur Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -89,7 +89,7 @@ export function UmurDisplay({ className }: UmurDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <CalendarDays className="h-5 w-5 text-primary" />
-                            Data Umur Kalurahan
+                            Data Umur Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -192,9 +192,9 @@ export function UmurDisplay({ className }: UmurDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <CalendarDays className="h-5 w-5 text-primary" />
-                        Data Umur Kalurahan
+                        Data Umur Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik umur penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik umur penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -332,3 +332,4 @@ export function UmurDisplay({ className }: UmurDisplayProps) {
         </div>
     );
 }
+

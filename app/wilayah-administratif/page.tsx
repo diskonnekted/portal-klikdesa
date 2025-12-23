@@ -158,7 +158,8 @@ export default function WilayahAdministratifPage() {
                         </div>
                         <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Informasi lengkap mengenai wilayah administratif Kalurahan Pondokrejo
+                            Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
+                            termasuk data demografi dan statistik penduduk.
                         </p>
                     </div>
                     <WilayahDataLoading />
@@ -177,7 +178,8 @@ export default function WilayahAdministratifPage() {
                         </div>
                         <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Informasi lengkap mengenai wilayah administratif Kalurahan Pondokrejo
+                            Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
+                            termasuk data demografi dan statistik penduduk.
                         </p>
                     </div>
                     <WilayahDataNotAvailable onRetry={fetchWilayahData} />
@@ -195,7 +197,8 @@ export default function WilayahAdministratifPage() {
                     </div>
                     <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Informasi lengkap mengenai wilayah administratif Kalurahan Pondokrejo
+                        Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
+                        termasuk data demografi dan statistik penduduk.
                     </p>
                 </div>
 
@@ -214,7 +217,7 @@ export default function WilayahAdministratifPage() {
                         </CardHeader>
                         <CardContent className="relative z-10">
                             <div className="text-3xl font-bold text-blue-900 mb-2">{totalDusun}</div>
-                            <p className="text-xs text-blue-700">Total padukuhan</p>
+                            <p className="text-xs text-blue-700">Total dusun</p>
                         </CardContent>
                     </Card>
 
@@ -401,7 +404,7 @@ export default function WilayahAdministratifPage() {
                             <div className="sticky top-0 bg-white border-b p-4 flex items-center justify-between">
                                 <h2 className="text-2xl font-bold">Detail Wilayah</h2>
                                 <Button variant="ghost" onClick={() => setSelectedDusun(null)} className="rounded-full">
-                                    ✕
+                                    âœ•
                                 </Button>
                             </div>
 
@@ -560,3 +563,4 @@ export default function WilayahAdministratifPage() {
         </div>
     );
 }
+

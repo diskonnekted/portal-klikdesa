@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { DollarSign, TrendingUp, BarChart3 } from "lucide-react";
 
@@ -17,9 +17,9 @@ export default function KeuanganPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
                         <DollarSign className="h-10 w-10 text-green-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Laporan Keuangan Kalurahan</h1>
+                    <h1 className="text-4xl font-bold text-primary">Laporan Keuangan Desa</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Transparansi pengelolaan keuangan kalurahan untuk memastikan akuntabilitas dan keterbukaan
+                        Transparansi pengelolaan keuangan Desa untuk memastikan akuntabilitas dan keterbukaan
                         kepada masyarakat
                     </p>
                 </div>
@@ -135,10 +135,10 @@ export default function KeuanganPage() {
                                 desa
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Rencana pendapatan desa</li>
-                                <li>• Alokasi belanja per bidang</li>
-                                <li>• Kebijakan pembiayaan</li>
-                                <li>• Jadwal pencairan</li>
+                                <li>â€¢ Rencana pendapatan desa</li>
+                                <li>â€¢ Alokasi belanja per bidang</li>
+                                <li>â€¢ Kebijakan pembiayaan</li>
+                                <li>â€¢ Jadwal pencairan</li>
                             </ul>
                         </CardContent>
                     </Card>
@@ -153,10 +153,10 @@ export default function KeuanganPage() {
                                 realisasi belanja
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Realisasi pendapatan</li>
-                                <li>• Realisasi belanja per bidang</li>
-                                <li>• Tingkat penyerapan anggaran</li>
-                                <li>• Laporan triwulan</li>
+                                <li>â€¢ Realisasi pendapatan</li>
+                                <li>â€¢ Realisasi belanja per bidang</li>
+                                <li>â€¢ Tingkat penyerapan anggaran</li>
+                                <li>â€¢ Laporan triwulan</li>
                             </ul>
                         </CardContent>
                     </Card>
@@ -171,10 +171,10 @@ export default function KeuanganPage() {
                                 pelaksanaan APBDes
                             </p>
                             <ul className="space-y-1 text-sm">
-                                <li>• Laporan operasional</li>
-                                <li>• Laporan Keuangan</li>
-                                <li>• Neraca desa</li>
-                                <li>• Catatan atas laporan keuangan</li>
+                                <li>â€¢ Laporan operasional</li>
+                                <li>â€¢ Laporan Keuangan</li>
+                                <li>â€¢ Neraca desa</li>
+                                <li>â€¢ Catatan atas laporan keuangan</li>
                             </ul>
                         </CardContent>
                     </Card>
@@ -183,3 +183,4 @@ export default function KeuanganPage() {
         </div>
     );
 }
+

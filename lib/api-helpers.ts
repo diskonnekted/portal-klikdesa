@@ -79,7 +79,7 @@ export async function fetchOpenSIDArsip() {
 /**
  * SDGS API helper with location code
  */
-export async function fetchSDGSData(locationCode = "3404140004") {
+export async function fetchSDGSData(locationCode = "33.04.09.2014") {
     return sdgsApi.get(`/sdgs/searching/score-sdgs?location_code=${locationCode}`, {
         cache: {
             revalidate: 60 * 60 * 24 * 30, // 30 days
@@ -91,7 +91,7 @@ export async function fetchSDGSData(locationCode = "3404140004") {
 /**
  * SDGS detail API helper with goal and location code
  */
-export async function fetchSDGSDetail(goalId: string, locationCode = "3404140004") {
+export async function fetchSDGSDetail(goalId: string, locationCode = "33.04.09.2014") {
     return sdgsApi.get(`/sdgs/searching/score-sdgs-detail?goal=${goalId}&location_code=${locationCode}`, {
         cache: {
             revalidate: 60 * 60 * 24 * 30, // 30 days
@@ -162,12 +162,25 @@ export async function fetchLocalAPI(endpoint: string, config?: { cacheTags?: str
  * OpenSID APBDES (keuangan) API helper
  */
 export async function fetchOpenSIDKeuangan(tahun: string) {
-    return opensidApi.get(`/internal_api/apbdes?tahun=${tahun}`, {
+    const primary = await opensidApi.get(`/internal_api/apbdes?tahun=${tahun}`, {
         cache: {
             revalidate: 3600,
             tags: ["opensid-data-keuangan"],
         },
     });
+    if (primary.success && primary.data) {
+        return primary;
+    }
+    const fallbackService = new (await import("./api-service")).ApiService({
+        baseUrl: "https://pondokrejo.sleman-desa.id",
+        timeout: 30000,
+        cache: {
+            revalidate: 3600,
+            tags: ["opensid-data-keuangan-fallback"],
+        },
+    });
+    const fallback = await fallbackService.get(`/internal_api/apbdes?tahun=${tahun}`);
+    return fallback.success ? fallback : primary;
 }
 
 /**

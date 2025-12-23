@@ -1,6 +1,6 @@
 /**
  * Map Utilities for Interactive Map Functionality
- * Handles location data, geocoding, and map operations for Pondokrejo Village
+ * Handles location data, geocoding, and map operations for Sijenggung Village
  */
 
 // Location categories for map markers
@@ -114,15 +114,15 @@ export interface MapViewport {
     bounds?: MapBounds;
 }
 
-// Default center coordinates for Pondokrejo Village (Sleman, DIY)
-export const PONDOKREJO_CENTER = {
-    lat: -7.7828,
-    lng: 110.3649,
+// Default center coordinates for Sijenggung Village (Banjarnegara, Jateng)
+export const SIJENGGUNG_CENTER = {
+    lat: -7.293067,
+    lng: 109.668019,
 };
 
 // Default map configuration
 export const DEFAULT_MAP_CONFIG = {
-    center: PONDOKREJO_CENTER,
+    center: SIJENGGUNG_CENTER,
     zoom: 14,
     minZoom: 10,
     maxZoom: 20,
@@ -136,61 +136,61 @@ export const DEFAULT_MAP_CONFIG = {
 export const LOCATION_CATEGORIES = {
     [LocationCategory.PEMERINTAHAN]: {
         name: "Pemerintahan",
-        icon: "🏛️",
+        icon: "ðŸ›ï¸",
         color: "#064e3b",
-        description: "Kantor kalurahan, balai kalurahan, fasilitas pemerintahan",
+        description: "Kantor Desa, balai Desa, fasilitas pemerintahan",
     },
     [LocationCategory.KESEHATAN]: {
         name: "Kesehatan",
-        icon: "🏥",
+        icon: "ðŸ¥",
         color: "#dc2626",
         description: "Puskesmas, klinik, apotek, fasilitas kesehatan",
     },
     [LocationCategory.PENDIDIKAN]: {
         name: "Pendidikan",
-        icon: "🎓",
+        icon: "ðŸŽ“",
         color: "#2563eb",
         description: "Sekolah, madrasah, tempat pendidikan",
     },
     [LocationCategory.FASILITAS_UMUM]: {
         name: "Fasilitas Umum",
-        icon: "🏢",
+        icon: "ðŸ¢",
         color: "#7c3aed",
         description: "Pasar, taman, fasilitas publik lainnya",
     },
     [LocationCategory.IBADAH]: {
         name: "Tempat Ibadah",
-        icon: "⛪",
+        icon: "â›ª",
         color: "#059669",
         description: "Masjid, gereja, pura, vihara",
     },
     [LocationCategory.EKONOMI]: {
         name: "Ekonomi",
-        icon: "🏪",
+        icon: "ðŸª",
         color: "#d97706",
         description: "Toko, warung, bank, ATM",
     },
     [LocationCategory.OLAHRAGA]: {
         name: "Olahraga",
-        icon: "⚽",
+        icon: "âš½",
         color: "#0891b2",
         description: "Lapangan olahraga, gym, fasilitas olahraga",
     },
     [LocationCategory.BUDAYA]: {
         name: "Budaya",
-        icon: "🎭",
+        icon: "ðŸŽ­",
         color: "#be185d",
         description: "Museum, sanggar, tempat budaya",
     },
     [LocationCategory.DARURAT]: {
         name: "Darurat",
-        icon: "🚨",
+        icon: "ðŸš¨",
         color: "#ef4444",
         description: "Rumah sakit, pemadam kebakaran, polisi",
     },
     [LocationCategory.TRANSPORTASI]: {
         name: "Transportasi",
-        icon: "🚌",
+        icon: "ðŸšŒ",
         color: "#65a30d",
         description: "Terminal, halte bus, stasiun",
     },
@@ -204,12 +204,12 @@ export const LOCATION_CATEGORIES = {
  */
 export function calculateDistance(coord1: { lat: number; lng: number }, coord2: { lat: number; lng: number }): number {
     const R = 6371e3; // Earth's radius in meters
-    const φ1 = (coord1.lat * Math.PI) / 180;
-    const φ2 = (coord2.lat * Math.PI) / 180;
-    const Δφ = ((coord2.lat - coord1.lat) * Math.PI) / 180;
-    const Δλ = ((coord2.lng - coord1.lng) * Math.PI) / 180;
+    const Ï†1 = (coord1.lat * Math.PI) / 180;
+    const Ï†2 = (coord2.lat * Math.PI) / 180;
+    const Î”Ï† = ((coord2.lat - coord1.lat) * Math.PI) / 180;
+    const Î”Î» = ((coord2.lng - coord1.lng) * Math.PI) / 180;
 
-    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const a = Math.sin(Î”Ï† / 2) * Math.sin(Î”Ï† / 2) + Math.cos(Ï†1) * Math.cos(Ï†2) * Math.sin(Î”Î» / 2) * Math.sin(Î”Î» / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -538,7 +538,7 @@ export function validateCoordinates(lat: number, lng: number): boolean {
  */
 export function standardizeIndonesianAddress(address: string): string {
     return address
-        .replace(/\bDesa\b/gi, "Kalurahan")
+        .replace(/\bDesa\b/gi, "Desa")
         .replace(/\bKelurahan\b/gi, "Kelurahan")
         .replace(/\bKecamatan\b/gi, "Kecamatan")
         .replace(/\bKabupaten\b/gi, "Kabupaten")
@@ -575,7 +575,7 @@ export function parseIndonesianAddress(address: string): {
         province: /(Daerah Istimewa Yogyakarta|DIY|DI Yogyakarta)/i,
         regency: /(Kabupaten|Kota)\s+([^\s,]+)/i,
         district: /Kecamatan\s+([^\s,]+)/i,
-        village: /(Kalurahan|Kelurahan)\s+([^\s,]+)/i,
+        village: /(Desa|Kelurahan)\s+([^\s,]+)/i,
         rtRw: /(RT|RW)\s*(\d+)\/(RT|RW)\s*(\d+)/i,
         street: /^(Jl\.|Jalan)\s+[^\n,]+/i,
     };
@@ -612,3 +612,4 @@ export function parseIndonesianAddress(address: string): {
 
     return components;
 }
+

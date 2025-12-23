@@ -54,10 +54,10 @@
 }
 
 :root {
-    /* Pondokrejo Village Theme - Light Mode Only */
+    /* Sijenggung Village Theme - Light Mode Only */
     --radius: 0.625rem;
 
-    /* Base colors - Pondokrejo Village Official */
+    /* Base colors - Sijenggung Village Official */
     --background: #f2f6ff; /* Dasar halaman bersih - light blue background */
     --foreground: #000000; /* Teks utama */
     --card: #ffffff; /* Latar kartu/komponen - white background */

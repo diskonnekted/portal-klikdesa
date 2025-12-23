@@ -11,7 +11,7 @@ export default function LogoDemo() {
         <div className="container mx-auto px-4 py-8 space-y-8">
             <div className="text-center space-y-4">
                 <h1 className="text-3xl font-bold">Logo Component Demo</h1>
-                <p className="text-muted-foreground">Various sizes and variants of the Pondokrejo logo</p>
+                <p className="text-muted-foreground">Various sizes and variants of the Sijenggung logo</p>
             </div>
 
             {/* Size Variants */}

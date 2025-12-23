@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, CreditCard, TrendingUp, Users, FileCheck } from "lucide-react";
@@ -212,7 +212,7 @@ export function KepemilikanKIADisplay({ className }: KepemilikanKIADisplayProps)
                         Data Kepemilikan KIA
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik kepemilikan Kartu Identitas Anak (KIA) Kalurahan
+                        Data statistik kepemilikan Kartu Identitas Anak (KIA) Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -423,3 +423,4 @@ export function KepemilikanKIADisplay({ className }: KepemilikanKIADisplayProps)
         </div>
     );
 }
+

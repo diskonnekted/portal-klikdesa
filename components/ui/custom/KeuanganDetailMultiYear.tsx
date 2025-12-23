@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import {
@@ -455,7 +455,7 @@ export function KeuanganDetailMultiYear() {
             {/* Analysis Summary */}
             <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 border-purple-200">
                 <CardHeader>
-                    <CardTitle className="text-purple-900">💡 Analisis Mendalam</CardTitle>
+                    <CardTitle className="text-purple-900">ðŸ’¡ Analisis Mendalam</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-3 text-sm">
@@ -463,7 +463,7 @@ export function KeuanganDetailMultiYear() {
                             <div className="w-2 h-2 rounded-full bg-purple-600 mt-2 flex-shrink-0" />
                             <p>
                                 <strong>Top Pendapatan:</strong> Item dengan nilai terbesar dianalisis untuk melihat
-                                sumber pendapatan utama Kalurahan dari tahun ke tahun.
+                                sumber pendapatan utama Desa dari tahun ke tahun.
                             </p>
                         </div>
                         <div className="flex items-start gap-2">
@@ -493,3 +493,4 @@ export function KeuanganDetailMultiYear() {
         </div>
     );
 }
+

@@ -11,10 +11,10 @@ export default function BumdesPage() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-[#c2c9df] rounded-full mb-4">
                     <Briefcase className="h-10 w-10 text-gray-900" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">BUMDes Pondokrejo</h1>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">BUMDes Sijenggung</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Badan Usaha Milik Kalurahan sebagai motor penggerak perekonomian masyarakat dan sumber pendapatan
-                    kalurahan
+                    Badan Usaha Milik Desa sebagai motor penggerak perekonomian masyarakat dan sumber pendapatan
+                    Desa
                 </p>
             </div>
 
@@ -30,7 +30,7 @@ export default function BumdesPage() {
                         </div>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Informasi BUMDes Sedang Disusun</h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
-                            Kami sedang mempersiapkan informasi lengkap mengenai BUMDes Pondokrejo untuk memberikan
+                            Kami sedang mempersiapkan informasi lengkap mengenai BUMDes Sijenggung untuk memberikan
                             transparansi dan peluang partisipasi masyarakat.
                         </p>
 
@@ -46,7 +46,7 @@ export default function BumdesPage() {
                                             <Briefcase className="h-8 w-8 text-blue-600" />
                                         </div>
                                         <h4 className="font-semibold text-gray-900 mb-2">Jasa & Layanan</h4>
-                                        <p className="text-sm text-gray-600">Pelayanan umum dan jasa kalurahan</p>
+                                        <p className="text-sm text-gray-600">Pelayanan umum dan jasa Desa</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="w-16 h-16 bg-[#c2c9df] rounded-full flex items-center justify-center mx-auto mb-3">
@@ -72,10 +72,10 @@ export default function BumdesPage() {
                                     <h4 className="font-semibold text-gray-900 mb-2">Laporan Keuangan</h4>
                                     <p className="text-sm text-gray-600 mb-3">Transparansi laporan:</p>
                                     <ul className="text-sm text-gray-600 space-y-1">
-                                        <li>• Laporan laba rugi bulanan</li>
-                                        <li>• Neraca keuangan triwulan</li>
-                                        <li>• Cash flow dan arus kas</li>
-                                        <li>• Pembagian SHU kalurahan</li>
+                                        <li>â€¢ Laporan laba rugi bulanan</li>
+                                        <li>â€¢ Neraca keuangan triwulan</li>
+                                        <li>â€¢ Cash flow dan arus kas</li>
+                                        <li>â€¢ Pembagian SHU Desa</li>
                                     </ul>
                                 </div>
                                 <div className="bg-[#e6eaf3] p-4 rounded-lg">
@@ -83,10 +83,10 @@ export default function BumdesPage() {
                                     <h4 className="font-semibold text-gray-900 mb-2">Peluang Investasi</h4>
                                     <p className="text-sm text-gray-600 mb-3">Kerjasama dan investasi:</p>
                                     <ul className="text-sm text-gray-600 space-y-1">
-                                        <li>• Program kemitraan</li>
-                                        <li>• Peluang usaha bersama</li>
-                                        <li>• CSR dan sponsorship</li>
-                                        <li>• Inkubasi bisnis lokal</li>
+                                        <li>â€¢ Program kemitraan</li>
+                                        <li>â€¢ Peluang usaha bersama</li>
+                                        <li>â€¢ CSR dan sponsorship</li>
+                                        <li>â€¢ Inkubasi bisnis lokal</li>
                                     </ul>
                                 </div>
                             </div>
@@ -213,3 +213,4 @@ export default function BumdesPage() {
         </div>
     );
 }
+

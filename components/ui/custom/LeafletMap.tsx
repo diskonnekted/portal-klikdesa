@@ -59,8 +59,7 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { 
 
 export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [leaflet, setLeaflet] = React.useState<any>(null);
+    const [leaflet, setLeaflet] = React.useState<unknown>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
     const [mapKey, setMapKey] = React.useState(0);
     const [componentsReady, setComponentsReady] = React.useState(false);
@@ -70,8 +69,8 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
         if (typeof window !== "undefined") {
             loadLeaflet().then((L) => {
                 // Fix for default markers in Leaflet with Next.js
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                delete (L.Icon.Default.prototype as any)._getIconUrl;
+                // @ts-expect-error - Leaflet runtime prototype includes _getIconUrl not declared in types
+                delete L.Icon.Default.prototype._getIconUrl;
                 L.Icon.Default.mergeOptions({
                     iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
                     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -280,8 +279,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                             onError={(error) => console.error("Error rendering GeoJSON:", error)}
                         >
                             <GeoJSON
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                data={geoJsonData as any}
+                                data={geoJsonData as import("geojson").GeoJsonObject}
                                 style={{
                                     color: "#0ea5e9",
                                     weight: 2,

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { GraduationCap, BookOpen, Users, TrendingUp, User, Calendar, Award, Building } from "lucide-react";
@@ -79,7 +79,7 @@ export function PendidikanDisplay({ className }: PendidikanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <GraduationCap className="h-5 w-5 text-primary" />
-                            Data Pendidikan Kalurahan
+                            Data Pendidikan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -99,7 +99,7 @@ export function PendidikanDisplay({ className }: PendidikanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <GraduationCap className="h-5 w-5 text-primary" />
-                            Data Pendidikan Kalurahan
+                            Data Pendidikan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -155,10 +155,10 @@ export function PendidikanDisplay({ className }: PendidikanDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <GraduationCap className="h-5 w-5 text-primary" />
-                        Data Pendidikan Kalurahan
+                        Data Pendidikan Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Distribusi tingkat pendidikan masyarakat • Total Populasi: {totalPopulation.toLocaleString()}{" "}
+                        Distribusi tingkat pendidikan masyarakat â€¢ Total Populasi: {totalPopulation.toLocaleString()}{" "}
                         jiwa
                     </p>
                 </CardHeader>
@@ -369,3 +369,4 @@ export function PendidikanDisplay({ className }: PendidikanDisplayProps) {
         </div>
     );
 }
+

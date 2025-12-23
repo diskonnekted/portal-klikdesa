@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pondokrejo Village Official Colors
+        // Sijenggung Village Official Colors
         primary: {
           DEFAULT: "#39a2cf", // Header BG
           50: "#e6f0fa",

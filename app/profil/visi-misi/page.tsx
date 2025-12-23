@@ -11,18 +11,18 @@ export default function VisiMisiPage() {
             <Link href="/profil">
                 <Button variant="ghost" className="mb-4">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Kembali ke Profil Kalurahan
+                    Kembali ke Profil Desa
                 </Button>
             </Link>
 
             {/* Page Title */}
-            <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-[#c2c9df] rounded-full mb-4">
-                    <Target className="h-10 w-10 text-gray-900" />
-                </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Visi dan Misi Kalurahan Pondokrejo</h1>
-                <p className="text-xl text-gray-600">
-                    Arah pembangunan dan tujuan bersama untuk masa depan Kalurahan Pondokrejo yang lebih baik
+            <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                    Visi dan Misi Desa Sijenggung
+                </h1>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Arah dan tujuan pembangunan Desa Sijenggung untuk mewujudkan
+                    masyarakat yang sejahtera dan berdaya saing.
                 </p>
             </div>
 
@@ -39,7 +39,7 @@ export default function VisiMisiPage() {
                         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Visi dan Misi Sedang Disusun</h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
                             Kami sedang merumuskan visi dan misi yang komprehensif berdasarkan aspirasi masyarakat dan
-                            arah pembangunan kalurahan.
+                            arah pembangunan Desa.
                         </p>
 
                         <div className="space-y-4 max-w-3xl mx-auto">
@@ -47,11 +47,11 @@ export default function VisiMisiPage() {
                             <div className="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg">
                                 <div className="flex items-center gap-3 mb-4">
                                     <Eye className="h-8 w-8 text-blue-600" />
-                                    <h3 className="font-semibold text-gray-900 text-lg">Visi Kalurahan</h3>
+                                    <h3 className="font-semibold text-gray-900 text-lg">Visi Desa</h3>
                                 </div>
                                 <div className="bg-white/70 p-4 rounded-lg">
                                     <p className="text-gray-600 italic text-center">
-                                        &quot;Visi Kalurahan Pondokrejo akan disusun berdasarkan musyawarah masyarakat
+                                        &quot;Visi Desa Sijenggung akan disusun berdasarkan musyawarah masyarakat
                                         dan analisis kebutuhan pembangunan...&quot;
                                     </p>
                                 </div>
@@ -142,7 +142,7 @@ export default function VisiMisiPage() {
                         <div>
                             <h3 className="font-semibold text-gray-900 mb-2">Visi 2025-2030</h3>
                             <p className="text-gray-600 text-sm">
-                                Pernyataan visi yang menggambarkan keadaan ideal kalurahan di masa depan
+                                Pernyataan visi yang menggambarkan keadaan ideal Desa di masa depan
                             </p>
                         </div>
                         <div>
@@ -169,3 +169,4 @@ export default function VisiMisiPage() {
         </div>
     );
 }
+

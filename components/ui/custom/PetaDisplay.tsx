@@ -171,7 +171,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                 {/* Basic Info */}
                 <Card>
                     <CardHeader>
-                        <CardTitle className="text-lg">Identitas Kalurahan</CardTitle>
+                        <CardTitle className="text-lg">Identitas Desa</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div>
@@ -180,7 +180,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                                 <div className="flex items-start gap-2">
                                     <Building className="h-4 w-4 mt-1 text-muted-foreground" />
                                     <div>
-                                        <p className="font-medium">Kode Kalurahan</p>
+                                        <p className="font-medium">Kode Desa</p>
                                         <p className="text-muted-foreground">{petaInfo.desa.kode_desa}</p>
                                     </div>
                                 </div>
@@ -272,7 +272,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                         <div>
                             <h3 className="font-semibold mb-3 flex items-center gap-2">
                                 <div className="w-4 h-4 bg-primary/40 rounded" />
-                                Padukuhan/Dusun
+                                Dusun
                             </h3>
                             <div className="space-y-2">
                                 {uniqueDusun.map((dusun) => (
@@ -387,3 +387,4 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
         </div>
     );
 }
+

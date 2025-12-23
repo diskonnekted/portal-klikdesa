@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Accessibility, Users, UserCheck, Heart, TrendingUp, BarChart3 } from "lucide-react";
@@ -80,7 +80,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Accessibility className="h-5 w-5 text-primary" />
-                            Data Disabilitas Kalurahan
+                            Data Disabilitas Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Accessibility className="h-5 w-5 text-primary" />
-                            Data Disabilitas Kalurahan
+                            Data Disabilitas Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -220,9 +220,9 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Accessibility className="h-5 w-5 text-primary" />
-                        Data Disabilitas Kalurahan
+                        Data Disabilitas Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik disabilitas penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik disabilitas penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -372,3 +372,4 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
         </div>
     );
 }
+

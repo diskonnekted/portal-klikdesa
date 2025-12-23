@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Briefcase, Users, UserCheck, Wrench, TrendingUp, BarChart3 } from "lucide-react";
@@ -80,7 +80,7 @@ export function PekerjaanDisplay({ className }: PekerjaanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Briefcase className="h-5 w-5 text-primary" />
-                            Data Pekerjaan Kalurahan
+                            Data Pekerjaan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function PekerjaanDisplay({ className }: PekerjaanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Briefcase className="h-5 w-5 text-primary" />
-                            Data Pekerjaan Kalurahan
+                            Data Pekerjaan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -247,9 +247,9 @@ export function PekerjaanDisplay({ className }: PekerjaanDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Briefcase className="h-5 w-5 text-primary" />
-                        Data Pekerjaan Kalurahan
+                        Data Pekerjaan Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik pekerjaan penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik pekerjaan penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -399,3 +399,4 @@ export function PekerjaanDisplay({ className }: PekerjaanDisplayProps) {
         </div>
     );
 }
+

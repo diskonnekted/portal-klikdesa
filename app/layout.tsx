@@ -21,33 +21,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL || "https://pondokrejo.clasnet.co.id"),
-    title: "Portal Resmi Kalurahan Pondokrejo - Sleman, DIY",
+    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL || "https://sijenggung-banjarnegara.desa.id"),
+    title: "Portal Resmi Desa Sijenggung - Banjarnegara, Jawa Tengah",
     description:
-        "Portal resmi Pemerintah Kalurahan Pondokrejo, Kabupaten Sleman, DIY. Informasi lengkap layanan publik, berita terkini, dan transparansi pemerintahan kalurahan.",
+        "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah. Informasi lengkap layanan publik, berita terkini, dan transparansi pemerintahan desa.",
     keywords:
-        "Kalurahan Pondokrejo, Sleman, DIY, pemerintahan kalurahan, layanan publik, berita kalurahan, transparansi, APBDes",
-    authors: [{ name: "Pemerintah Kalurahan Pondokrejo" }],
+        "Desa Sijenggung, Banjarnegara, Jawa Tengah, pemerintahan desa, layanan publik, berita desa, transparansi, APBDes",
+    authors: [{ name: "Pemerintah Desa Sijenggung" }],
     openGraph: {
-        title: "Portal Resmi Kalurahan Pondokrejo",
-        description: "Portal resmi Pemerintah Kalurahan Pondokrejo, Kabupaten Sleman, DIY",
+        title: "Portal Resmi Desa Sijenggung",
+        description: "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah",
         type: "website",
         locale: "id_ID",
-        url: "https://pondokrejo.clasnet.co.id",
-        siteName: env.APP_NAME || "Portal Kalurahan Pondokrejo",
+        url: "https://sijenggung-banjarnegara.desa.id",
+        siteName: env.APP_NAME || "Portal Desa Sijenggung",
         images: [
             {
                 url: "/favicon-512x512.png",
                 width: 512,
                 height: 512,
-                alt: "Kalurahan Pondokrejo Logo",
+                alt: "Desa Sijenggung Logo",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Portal Resmi Kalurahan Pondokrejo",
-        description: "Portal resmi Pemerintah Kalurahan Pondokrejo, Kabupaten Sleman, DIY",
+        title: "Portal Resmi Desa Sijenggung",
+        description: "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah",
     },
     other: {
         "msapplication-TileColor": "#39a2cf",

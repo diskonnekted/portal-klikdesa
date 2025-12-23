@@ -8,10 +8,10 @@ import Image from "next/image";
 export default function StrukturPage() {
     // Real Lurah data
     const lurah = {
-        nama: "R. Widayatma, SE",
-        jabatan: "Lurah/Kepala Kalurahan",
-        periode: "2021-2026",
-        foto: "/uploads/perangkat-desa/lurah.jpg",
+        nama: "Suyono",
+        jabatan: "Kepala Desa",
+        periode: "2020-2026",
+        foto: "https://ui-avatars.com/api/?name=Suyono&background=0D8ABC&color=fff&size=256",
     };
 
     return (
@@ -20,7 +20,7 @@ export default function StrukturPage() {
             <Link href="/profil">
                 <Button variant="ghost" className="mb-4">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Kembali ke Profil Kalurahan
+                    Kembali ke Profil Desa
                 </Button>
             </Link>
 
@@ -29,16 +29,16 @@ export default function StrukturPage() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-purple-100 rounded-full mb-4">
                     <Users className="h-10 w-10 text-purple-600" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Struktur Organisasi Kalurahan Pondokrejo</h1>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Struktur Organisasi Desa Sijenggung</h1>
                 <p className="text-xl text-gray-600">
-                    Susunan perangkat pemerintahan kalurahan yang bertugas melayani masyarakat
+                    Susunan perangkat pemerintahan Desa yang bertugas melayani masyarakat
                 </p>
             </div>
 
             {/* Lurah Card - Main Leadership */}
             <Card className="mb-4">
                 <CardHeader>
-                    <CardTitle className="text-2xl text-center">Pimpinan Kalurahan</CardTitle>
+                    <CardTitle className="text-2xl text-center">Pimpinan Desa</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="max-w-2xl mx-auto">
@@ -71,7 +71,7 @@ export default function StrukturPage() {
                                 <div>
                                     <h3 className="font-semibold text-amber-900 mb-1">Struktur Organisasi Lengkap</h3>
                                     <p className="text-sm text-amber-800">
-                                        Data lengkap struktur organisasi Kalurahan Pondokrejo (Sekretaris, Kasi, Kaur,
+                                        Data lengkap struktur organisasi Desa Sijenggung (Sekretaris, Kasi, Kaur,
                                         dan Kepala Dusun) sedang dalam proses penyusunan dan akan segera tersedia.
                                     </p>
                                 </div>
@@ -94,7 +94,7 @@ export default function StrukturPage() {
                 <Card>
                     <CardContent className="p-4 text-center">
                         <Building className="h-10 w-10 text-blue-600 mx-auto mb-3" />
-                        <h3 className="font-semibold mb-1">Padukuhan</h3>
+                        <h3 className="font-semibold mb-1">Dusun</h3>
                         <p className="text-2xl font-bold text-blue-600">9</p>
                         <p className="text-xs text-gray-600">dusun</p>
                     </CardContent>
@@ -112,7 +112,7 @@ export default function StrukturPage() {
             {/* Main Content Placeholder */}
             <Card className="mb-4">
                 <CardHeader>
-                    <CardTitle className="text-xl">Jenjang Struktural Pemerintahan Kalurahan</CardTitle>
+                    <CardTitle className="text-xl">Jenjang Struktural Pemerintahan Desa</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="text-center py-4">
@@ -123,7 +123,7 @@ export default function StrukturPage() {
                             Struktur Organisasi Sedang Disusun
                         </h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
-                            Kami sedang mempersiapkan data lengkap mengenai struktur organisasi Kalurahan Pondokrejo
+                            Kami sedang mempersiapkan data lengkap mengenai struktur organisasi Desa Sijenggung
                             untuk memberikan informasi yang akurat.
                         </p>
 
@@ -133,30 +133,30 @@ export default function StrukturPage() {
                                 <h3 className="font-semibold text-gray-900 mb-4">Struktur yang Akan Ditampilkan:</h3>
                                 <div className="space-y-4">
                                     <div className="bg-white p-4 rounded-lg border-l-4 border-purple-600">
-                                        <h4 className="font-semibold text-gray-900">Kepala Kalurahan (Lurah)</h4>
+                                        <h4 className="font-semibold text-gray-900">Kepala Desa (Lurah)</h4>
                                         <p className="text-sm text-gray-600">
-                                            Pimpinan tertinggi pemerintahan kalurahan
+                                            Pimpinan tertinggi pemerintahan Desa
                                         </p>
                                     </div>
                                     <div className="bg-white p-4 rounded-lg border-l-4 border-blue-600">
-                                        <h4 className="font-semibold text-gray-900">Sekretaris Kalurahan</h4>
+                                        <h4 className="font-semibold text-gray-900">Sekretaris Desa</h4>
                                         <p className="text-sm text-gray-600">Koordinator administrasi dan keuangan</p>
                                     </div>
                                     <div className="bg-white p-4 rounded-lg border-l-4 border-[#3a4d74]">
                                         <h4 className="font-semibold text-gray-900">Kepala Seksi (Kasi)</h4>
                                         <div className="text-sm text-gray-600 space-y-1">
-                                            <p>• Kasi Pemerintahan</p>
-                                            <p>• Kasi Kesejahteraan</p>
-                                            <p>• Kasi Pelayanan</p>
-                                            <p>• Kasi Keuangan</p>
+                                            <p>â€¢ Kasi Pemerintahan</p>
+                                            <p>â€¢ Kasi Kesejahteraan</p>
+                                            <p>â€¢ Kasi Pelayanan</p>
+                                            <p>â€¢ Kasi Keuangan</p>
                                         </div>
                                     </div>
                                     <div className="bg-white p-4 rounded-lg border-l-4 border-orange-600">
                                         <h4 className="font-semibold text-gray-900">Kepala Urusan (Kaur)</h4>
                                         <div className="text-sm text-gray-600 space-y-1">
-                                            <p>• Kaur Tata Usaha dan Umum</p>
-                                            <p>• Kaur Perencanaan</p>
-                                            <p>• Kaur Keuangan</p>
+                                            <p>â€¢ Kaur Tata Usaha dan Umum</p>
+                                            <p>â€¢ Kaur Perencanaan</p>
+                                            <p>â€¢ Kaur Keuangan</p>
                                         </div>
                                     </div>
                                     <div className="bg-white p-4 rounded-lg border-l-4 border-teal-600">
@@ -171,7 +171,7 @@ export default function StrukturPage() {
                                 <div className="bg-blue-50 p-4 rounded-lg text-center">
                                     <User className="h-8 w-8 text-blue-600 mx-auto mb-3" />
                                     <h4 className="font-semibold text-gray-900 mb-2">Profil Lengkap</h4>
-                                    <p className="text-sm text-gray-600">Foto dan biodata perangkat kalurahan</p>
+                                    <p className="text-sm text-gray-600">Foto dan biodata perangkat Desa</p>
                                 </div>
                                 <div className="bg-[#e6eaf3] p-4 rounded-lg text-center">
                                     <Phone className="h-8 w-8 text-gray-900 mx-auto mb-3" />
@@ -232,3 +232,4 @@ export default function StrukturPage() {
         </div>
     );
 }
+

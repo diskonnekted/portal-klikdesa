@@ -14,7 +14,7 @@ export default function InformasiPage() {
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">Informasi & Pengumuman</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Pusat informasi resmi dan pengumuman penting dari Pemerintah Kalurahan Pondokrejo
+                    Pusat informasi resmi dan pengumuman penting dari Pemerintah Desa Sijenggung
                 </p>
             </div>
 
@@ -31,7 +31,7 @@ export default function InformasiPage() {
                         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Portal Informasi Sedang Disiapkan</h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
                             Kami sedang mengembangkan portal informasi yang komprehensif untuk memberikan akses mudah ke
-                            berita, pengumuman, dan informasi penting kalurahan.
+                            berita, pengumuman, dan informasi penting Desa.
                         </p>
 
                         <div className="space-y-4 max-w-4xl mx-auto">
@@ -52,7 +52,7 @@ export default function InformasiPage() {
                                         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                             <Newspaper className="h-8 w-8 text-blue-600" />
                                         </div>
-                                        <h4 className="font-semibold text-gray-900 mb-2">Berita Kalurahan</h4>
+                                        <h4 className="font-semibold text-gray-900 mb-2">Berita Desa</h4>
                                         <p className="text-sm text-gray-600">Aktivitas dan kegiatan terkini</p>
                                     </div>
                                     <div className="text-center">
@@ -86,10 +86,10 @@ export default function InformasiPage() {
                                     <h4 className="font-semibold text-gray-900 mb-2">Dokumen Unduh</h4>
                                     <p className="text-sm text-gray-600 mb-3">Akses ke dokumen penting:</p>
                                     <div className="space-y-1 text-sm text-gray-600">
-                                        <p>• APBDes dan laporan keuangan</p>
-                                        <p>• Peraturan kalurahan</p>
-                                        <p>• Formulir dan template</p>
-                                        <p>• Dokumen publikasi</p>
+                                        <p>â€¢ APBDes dan laporan keuangan</p>
+                                        <p>â€¢ Peraturan Desa</p>
+                                        <p>â€¢ Formulir dan template</p>
+                                        <p>â€¢ Dokumen publikasi</p>
                                     </div>
                                 </div>
                             </div>
@@ -132,10 +132,10 @@ export default function InformasiPage() {
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm text-gray-600 mb-3">
-                            Ini adalah contoh pengumuman penting yang akan ditampilkan di portal informasi kalurahan...
+                            Ini adalah contoh pengumuman penting yang akan ditampilkan di portal informasi Desa...
                         </p>
                         <div className="flex items-center justify-between text-xs text-gray-500">
-                            <span>Admin Kalurahan</span>
+                            <span>Admin Desa</span>
                             <span>1 Jan 2025</span>
                         </div>
                     </CardContent>
@@ -152,10 +152,10 @@ export default function InformasiPage() {
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm text-gray-600 mb-3">
-                            Pelaksanaan gotong royong membersihkan lingkungan kalurahan dalam rangka...
+                            Pelaksanaan gotong royong membersihkan lingkungan Desa dalam rangka...
                         </p>
                         <div className="flex items-center justify-between text-xs text-gray-500">
-                            <span>Humas Kalurahan</span>
+                            <span>Humas Desa</span>
                             <span>1 Jan 2025</span>
                         </div>
                     </CardContent>
@@ -168,11 +168,11 @@ export default function InformasiPage() {
                             <Badge variant="outline">Agenda</Badge>
                             <span className="text-xs text-gray-500">Besok</span>
                         </div>
-                        <CardTitle className="text-lg">Rapat Kalurahan</CardTitle>
+                        <CardTitle className="text-lg">Rapat Desa</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm text-gray-600 mb-3">
-                            Rapat koordinasi pembahasan program kerja kalurahan tahun 2025...
+                            Rapat koordinasi pembahasan program kerja Desa tahun 2025...
                         </p>
                         <div className="flex items-center justify-between text-xs text-gray-500">
                             <span>09:00 - 12:00</span>
@@ -184,3 +184,4 @@ export default function InformasiPage() {
         </div>
     );
 }
+

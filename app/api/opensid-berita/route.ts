@@ -21,32 +21,59 @@ function transformToHTTPS(html: string): string {
     return html.replace(/http:\/\//gi, "https://");
 }
 
+// Normalize image URL to use configured OpenSID host and remove illegal characters
+function normalizeImageUrl(raw: string): string {
+    if (!raw) return raw;
+    let urlStr = raw.trim();
+    // Remove trailing/leading parentheses or stray characters
+    urlStr = urlStr.replace(/^[)\s]+|[)\s]+$/g, "");
+    // Ensure https
+    urlStr = urlStr.replace(/^http:\/\//, "https://");
+
+    const base = (env.OPENSID_API_URL ?? "https://sijenggung-banjarnegara.desa.id").replace(/^http:\/\//, "https://");
+    try {
+        // If relative path
+        if (urlStr.startsWith("/")) {
+            return `${base}${urlStr}`;
+        }
+        // If filename only
+        if (!urlStr.includes("/")) {
+            return `${base}/desa/upload/artikel/sedang_${urlStr}`;
+        }
+        // If absolute URL with different host, rewrite to base host
+        const u = new URL(urlStr);
+        const b = new URL(base);
+        if (u.hostname !== b.hostname) {
+            return `${b.origin}${u.pathname}`;
+        }
+        return u.toString();
+    } catch {
+        // Fallback to base host with artikel path
+        return `${base}/desa/upload/artikel/${urlStr.replace(/[^a-zA-Z0-9._-]/g, "")}`;
+    }
+}
+
 export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
         const kategori = searchParams.get("kategori");
 
         // Fetch news data from external API
-        const response = await fetch(
-            `${env.OPENSID_API_URL ?? "http://pondokrejo.sleman-desa.id"}/internal_api/arsip`,
-            {
-                method: "GET",
-                headers: {
-                    "User-Agent":
-                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                    Accept: "application/json",
-                    "Accept-Language": "id-ID,id;q=0.9,en;q=0.8",
-                },
-                next: {
-                    // Cache the result for 1 hour
-                    revalidate: 60 * 60,
-                    // Optionally, assign a tag for on-demand revalidation
-                    tags: ["opensid-data-proxy"],
-                },
-                // Add timeout to prevent hanging
-                signal: AbortSignal.timeout(30000),
-            }
-        );
+        const response = await fetch(`${env.OPENSID_API_URL ?? "https://sijenggung-banjarnegara.desa.id"}/internal_api/arsip`, {
+            method: "GET",
+            headers: {
+                "User-Agent":
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                Accept: "application/json",
+                "Accept-Language": "id-ID,id;q=0.9,en;q=0.8",
+            },
+            cache: "no-store",
+            next: {
+                revalidate: 0,
+                tags: ["opensid-data-berita"],
+            },
+            signal: AbortSignal.timeout(30000),
+        });
 
         if (!response.ok) {
             return NextResponse.json(
@@ -69,7 +96,8 @@ export async function GET(request: NextRequest) {
         // Filter by category if specified
         if (kategori) {
             articles = articles.filter((article: OpenSIDArticle) => {
-                return (article.attributes.category as { id: string })?.id === kategori;
+                // @ts-expect-error - OpenSID response may include 'category' without strict typing
+                return article.attributes.category?.id === kategori;
             });
         }
 
@@ -85,18 +113,7 @@ export async function GET(request: NextRequest) {
             }
             // Transform image URLs to OpenSID pattern
             if (article.attributes.gambar) {
-                let imageUrl = article.attributes.gambar as string;
-                // If it's just a filename, add OpenSID path
-                if (!imageUrl.includes("/")) {
-                    imageUrl = `https://pondokrejo.sleman-desa.id/desa/upload/artikel/sedang_${imageUrl}`;
-                } else {
-                    // If it's a relative path, add base URL
-                    if (imageUrl.startsWith("/")) {
-                        imageUrl = `https://pondokrejo.sleman-desa.id${imageUrl}`;
-                    }
-                    // Force HTTPS
-                    imageUrl = imageUrl.replace(/^http:\/\//, "https://");
-                }
+                const imageUrl = normalizeImageUrl(article.attributes.gambar as string);
                 article.attributes.gambar = imageUrl;
             }
             return article;

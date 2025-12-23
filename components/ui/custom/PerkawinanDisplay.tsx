@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Heart, Users, UserCheck, UserX, AlertCircle, TrendingUp, BarChart3 } from "lucide-react";
@@ -80,7 +80,7 @@ export function PerkawinanDisplay({ className }: PerkawinanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Perkawinan Kalurahan
+                            Data Perkawinan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function PerkawinanDisplay({ className }: PerkawinanDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Perkawinan Kalurahan
+                            Data Perkawinan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -130,9 +130,9 @@ export function PerkawinanDisplay({ className }: PerkawinanDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Heart className="h-5 w-5 text-primary" />
-                        Data Perkawinan Kalurahan
+                        Data Perkawinan Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik status perkawinan penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik status perkawinan penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -313,3 +313,4 @@ export function PerkawinanDisplay({ className }: PerkawinanDisplayProps) {
         </div>
     );
 }
+

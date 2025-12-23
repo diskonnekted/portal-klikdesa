@@ -255,17 +255,44 @@ export async function GET() {
             cacheTags: ["opensid-data-berita"],
         });
 
+        // Add explicit logging for debugging
         if (!response.success || !response.data) {
-            throw new Error("Invalid response format");
+            console.error("External News API Error: Failed to fetch from opensid-berita", response);
+            throw new Error("Invalid response format: No data received");
         }
 
-        const data = response.data as { data: OpenSIDArticle[] };
+        // Safely read data from unknown structure
+        const responseData: unknown = response.data;
 
-        if (!data?.data) {
-            throw new Error("Invalid response format");
+        function isArticleArray(value: unknown): value is OpenSIDArticle[] {
+            return (
+                Array.isArray(value) &&
+                value.every(
+                    (item) =>
+                        typeof item === "object" &&
+                        item !== null &&
+                        "attributes" in (item as Record<string, unknown>)
+                )
+            );
         }
 
-        const articles = data.data;
+        function hasDataArray(value: unknown): value is { data: OpenSIDArticle[] } {
+            if (typeof value !== "object" || value === null) return false;
+            const v = value as Record<string, unknown>;
+            return Array.isArray(v.data);
+        }
+
+        // Handle case where data might be nested differently or is the array directly
+        const articles = isArticleArray(responseData)
+            ? responseData
+            : hasDataArray(responseData)
+              ? responseData.data
+              : [];
+
+        if (!Array.isArray(articles)) {
+            console.error("External News API Error: Data is not an array", responseData);
+            throw new Error("Invalid response format: Data is not an array");
+        }
 
         // Transform OpenSID data to match expected format for homepage
         const transformedPosts = articles.slice(0, 10).map((article: OpenSIDArticle) => {
@@ -280,7 +307,7 @@ export async function GET() {
                 featuredImage: attributes.gambar || null,
                 readingTime: calculateReadingTime(attributes.isi),
                 author: {
-                    name: attributes.author?.nama ?? "Admin Kalurahan",
+                    name: attributes.author?.nama ?? "Admin Desa",
                     avatar: "/images/default-avatar.png",
                 },
                 category: attributes.category?.kategori ?? "Umum",

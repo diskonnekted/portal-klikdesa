@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import {
@@ -386,14 +386,14 @@ export function KeuanganMultiYear() {
             {/* Key Insights */}
             <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
                 <CardHeader>
-                    <CardTitle className="text-blue-900">📊 Analisis & Insights</CardTitle>
+                    <CardTitle className="text-blue-900">ðŸ“Š Analisis & Insights</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-3 text-sm">
                         <div className="flex items-start gap-2">
                             <div className="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
                             <p>
-                                <strong>Analisis 5 Tahun:</strong> Data menunjukkan perkembangan keuangan Kalurahan dari
+                                <strong>Analisis 5 Tahun:</strong> Data menunjukkan perkembangan keuangan Desa dari
                                 tahun 2021 hingga {currentYear}, memberikan gambaran lengkap tentang tren pendapatan,
                                 belanja, dan surplus/defisit.
                             </p>
@@ -416,7 +416,7 @@ export function KeuanganMultiYear() {
                             <div className="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
                             <p>
                                 <strong>Transparansi:</strong> data ini dipublikasikan untuk meningkatkan transparansi
-                                dan akuntabilitas pengelolaan keuangan Kalurahan kepada masyarakat.
+                                dan akuntabilitas pengelolaan keuangan Desa kepada masyarakat.
                             </p>
                         </div>
                     </div>
@@ -425,3 +425,4 @@ export function KeuanganMultiYear() {
         </div>
     );
 }
+

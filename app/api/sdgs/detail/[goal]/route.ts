@@ -4,7 +4,7 @@ import { fetchSDGSDetail } from "@/lib/api-helpers";
 export async function GET(request: NextRequest, { params }: { params: Promise<{ goal: string }> }) {
     const { goal: goalId } = await params;
     const { searchParams } = new URL(request.url);
-    const locationCode = searchParams.get("location_code") || "3404140004";
+    const locationCode = searchParams.get("location_code") || "33.04.09.2014";
 
     // Validate goal ID
     if (!goalId || isNaN(parseInt(goalId)) || parseInt(goalId) < 1 || parseInt(goalId) > 18) {

@@ -7,13 +7,13 @@ export async function GET(request: Request) {
 
     const mockFallbackData = [
         {
-            type: "abpdes",
+            type: "apbdes",
             id: "1",
             attributes: {
                 tahun: tahun,
-                pendapatan: [],
-                belanja: [],
-                pelaksanaan: [],
+                pendapatan: {},
+                belanja: {},
+                pelaksanaan: {},
                 laporan: `APBDes ${tahun} (Mock Data)`,
             },
         },

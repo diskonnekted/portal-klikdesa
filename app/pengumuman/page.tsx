@@ -22,9 +22,9 @@ export default function PengumumanPage() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-4">
                     <Megaphone className="h-10 w-10 text-blue-600" />
                 </div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Pengumuman Kalurahan</h1>
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Pengumuman Desa</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Informasi resmi dan pengumuman penting dari pemerintah Kalurahan Pondokrejo untuk seluruh warga
+                    Informasi resmi dan pengumuman penting dari pemerintah Desa Sijenggung untuk seluruh warga
                 </p>
             </div>
 
@@ -43,7 +43,7 @@ export default function PengumumanPage() {
                         </h2>
                         <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
                             Kami sedang mengembangkan portal pengumuman yang terintegrasi untuk memberikan informasi
-                            resmi dan penting kepada seluruh warga Kalurahan Pondokrejo.
+                            resmi dan penting kepada seluruh warga Desa Sijenggung.
                         </p>
 
                         <div className="space-y-4 max-w-4xl mx-auto">
@@ -65,7 +65,7 @@ export default function PengumumanPage() {
                                             <Building className="h-8 w-8 text-blue-600" />
                                         </div>
                                         <h4 className="font-semibold text-gray-900 mb-2">Pemerintahan</h4>
-                                        <p className="text-sm text-gray-600">Kebijakan & program kalurahan</p>
+                                        <p className="text-sm text-gray-600">Kebijakan & program Desa</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -133,7 +133,7 @@ export default function PengumumanPage() {
                                                 <h4 className="font-medium text-gray-900">
                                                     Libur Nasional & Cuti Bersama
                                                 </h4>
-                                                <p className="text-sm text-gray-600">Penyesuaian jam kerja kalurahan</p>
+                                                <p className="text-sm text-gray-600">Penyesuaian jam kerja Desa</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -171,7 +171,7 @@ export default function PengumumanPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-medium text-gray-900">Rapat Rutin Bulanan</h4>
-                                                <p className="text-sm text-gray-600">Undangan rapat LPMKalurahan</p>
+                                                <p className="text-sm text-gray-600">Undangan rapat LPMDesa</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
@@ -269,3 +269,4 @@ export default function PengumumanPage() {
         </div>
     );
 }
+

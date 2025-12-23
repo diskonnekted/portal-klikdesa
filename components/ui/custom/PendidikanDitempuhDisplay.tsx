@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { GraduationCap, Users, UserCheck, BookOpen, TrendingUp, BarChart3 } from "lucide-react";
@@ -69,7 +69,7 @@ export function PendidikanDitempuhDisplay({ className }: PendidikanDitempuhDispl
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <GraduationCap className="h-5 w-5 text-primary" />
-                            Data Pendidikan Ditempuh Kalurahan
+                            Data Pendidikan Ditempuh Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -89,7 +89,7 @@ export function PendidikanDitempuhDisplay({ className }: PendidikanDitempuhDispl
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <GraduationCap className="h-5 w-5 text-primary" />
-                            Data Pendidikan Ditempuh Kalurahan
+                            Data Pendidikan Ditempuh Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -192,10 +192,10 @@ export function PendidikanDitempuhDisplay({ className }: PendidikanDitempuhDispl
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <GraduationCap className="h-5 w-5 text-primary" />
-                        Data Pendidikan Ditempuh Kalurahan
+                        Data Pendidikan Ditempuh Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik pendidikan ditempuh penduduk Kalurahan
+                        Data statistik pendidikan ditempuh penduduk Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -334,3 +334,4 @@ export function PendidikanDitempuhDisplay({ className }: PendidikanDitempuhDispl
         </div>
     );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, FileCheck, TrendingUp, Users, Calendar } from "lucide-react";
@@ -166,7 +166,7 @@ export function KepemilikanAktaKematianDisplay({ className }: KepemilikanAktaKem
                         Data Kepemilikan Akta Kematian
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik kepemilikan akta kematian penduduk Kalurahan
+                        Data statistik kepemilikan akta kematian penduduk Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -383,3 +383,4 @@ export function KepemilikanAktaKematianDisplay({ className }: KepemilikanAktaKem
         </div>
     );
 }
+

@@ -216,7 +216,7 @@ export default function IoTPage() {
 
     React.useEffect(() => {
         // Load GeoJSON data
-        fetch("/uploads/peta/PONDOKREJO.geojson")
+        fetch("/uploads/peta/SIJENGGUNG.geojson")
             .then((res) => res.json())
             .then((data) => {
                 setGeoJsonData(data);
@@ -662,7 +662,7 @@ export default function IoTPage() {
                     </div>
                     <h1 className="text-4xl font-bold text-primary">Smart Monitoring System</h1>
                     <p className="text-gray-600 max-w-3xl mx-auto">
-                        Sistem Monitoring cerdas untuk Smart Office dan Environment Monitoring di Kalurahan Pondokrejo
+                        Sistem Monitoring cerdas untuk Smart Office dan Environment Monitoring di Desa Sijenggung
                     </p>
                 </div>
 
@@ -707,7 +707,7 @@ export default function IoTPage() {
                                 <ul className="text-xs text-amber-700 space-y-1">
                                     {channelErrors.map((err, idx) => (
                                         <li key={idx} className="font-mono">
-                                            • Channel {err.channel}: {err.error?.message || "Connection failed"}
+                                            â€¢ Channel {err.channel}: {err.error?.message || "Connection failed"}
                                         </li>
                                     ))}
                                 </ul>
@@ -823,13 +823,13 @@ export default function IoTPage() {
                                                         <div className="flex items-center gap-2 mt-1 w-full">
                                                             <span className="text-xs text-gray-500">
                                                                 {device.status === "inactive"
-                                                                    ? "⚠️ Offline"
+                                                                    ? "âš ï¸ Offline"
                                                                     : device.status === "critical"
-                                                                      ? "🔴 Critical"
+                                                                      ? "ðŸ”´ Critical"
                                                                       : device.status === "warning"
-                                                                        ? "🟡 Warning"
-                                                                        : "✅ Online"}{" "}
-                                                                • {formatLastSeen(device.lastUpdate)}
+                                                                        ? "ðŸŸ¡ Warning"
+                                                                        : "âœ… Online"}{" "}
+                                                                â€¢ {formatLastSeen(device.lastUpdate)}
                                                             </span>
                                                         </div>
                                                     </DropdownMenuItem>
@@ -894,7 +894,7 @@ export default function IoTPage() {
                                 {selectedDevice && (
                                     <div>
                                         <p className="text-sm text-gray-600">
-                                            {selectedDevice.location} • {selectedDevice.sensors.length} sensor
+                                            {selectedDevice.location} â€¢ {selectedDevice.sensors.length} sensor
                                         </p>
                                         <div className="flex items-center gap-2 mt-2">
                                             <Badge
@@ -910,12 +910,12 @@ export default function IoTPage() {
                                                 )}
                                             >
                                                 {selectedDevice.status === "inactive"
-                                                    ? "⚠️ Offline"
+                                                    ? "âš ï¸ Offline"
                                                     : selectedDevice.status === "critical"
-                                                      ? "🔴 Critical"
+                                                      ? "ðŸ”´ Critical"
                                                       : selectedDevice.status === "warning"
-                                                        ? "🟡 Warning"
-                                                        : "✅ Online"}
+                                                        ? "ðŸŸ¡ Warning"
+                                                        : "âœ… Online"}
                                             </Badge>
                                             <span className="text-xs text-gray-500">
                                                 Last seen: {formatLastSeen(selectedDevice.lastUpdate)}
@@ -923,7 +923,7 @@ export default function IoTPage() {
                                         </div>
                                         {selectedDevice.status !== "active" && (
                                             <p className="text-xs text-amber-600 mt-2 bg-amber-50 border border-amber-200 rounded px-2 py-1">
-                                                ⚠️ Perangkat tidak mengirim data{" "}
+                                                âš ï¸ Perangkat tidak mengirim data{" "}
                                                 {formatLastSeen(selectedDevice.lastUpdate)}
                                             </p>
                                         )}
@@ -1041,7 +1041,7 @@ export default function IoTPage() {
                                         onClick={() => setSelectedSensor(null)}
                                         className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
                                     >
-                                        ×
+                                        Ã—
                                     </button>
                                 </div>
                             </CardHeader>
@@ -1127,7 +1127,7 @@ export default function IoTPage() {
                                     </CardTitle>
                                     {!devicesLoading && selectedDevice && (
                                         <p className="text-sm text-gray-600">
-                                            Total {totalItems} data • Menampilkan {currentData.length} data per halaman
+                                            Total {totalItems} data â€¢ Menampilkan {currentData.length} data per halaman
                                         </p>
                                     )}
                                 </CardHeader>
@@ -1357,11 +1357,11 @@ export default function IoTPage() {
                                 </div>
                                 {showCharts && (
                                     <p className="text-sm text-gray-600 mt-2">
-                                        Menampilkan {filteredChartsData.length} dari {chartsData.length} data •{" "}
-                                        {selectedDevice.name} • Rentang: {timeRange.toUpperCase()}
+                                        Menampilkan {filteredChartsData.length} dari {chartsData.length} data â€¢{" "}
+                                        {selectedDevice.name} â€¢ Rentang: {timeRange.toUpperCase()}
                                         {filteredChartsData.length < 10 && timeRange === "1h" && (
                                             <span className="text-amber-600 ml-2">
-                                                • Data tersedia terbatas ({filteredChartsData.length} titik dalam 1 jam)
+                                                â€¢ Data tersedia terbatas ({filteredChartsData.length} titik dalam 1 jam)
                                             </span>
                                         )}
                                     </p>
@@ -1549,3 +1549,4 @@ export default function IoTPage() {
         </div>
     );
 }
+

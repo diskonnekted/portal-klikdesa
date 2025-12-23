@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Shield, TrendingUp, Users, Briefcase } from "lucide-react";
@@ -174,7 +174,7 @@ export function BPJSKetenagakerjaanDisplay({ className }: BPJSKetenagakerjaanDis
                         Data BPJS Ketenagakerjaan
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                        Data statistik kepesertaan BPJS Ketenagakerjaan Kalurahan
+                        Data statistik kepesertaan BPJS Ketenagakerjaan Desa
                     </p>
                 </CardHeader>
             </Card>
@@ -380,3 +380,4 @@ export function BPJSKetenagakerjaanDisplay({ className }: BPJSKetenagakerjaanDis
         </div>
     );
 }
+

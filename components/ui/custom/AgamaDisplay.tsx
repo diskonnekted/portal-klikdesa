@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Church, Users, UserCheck, Star, TrendingUp, BarChart3 } from "lucide-react";
@@ -80,7 +80,7 @@ export function AgamaDisplay({ className }: AgamaDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Church className="h-5 w-5 text-primary" />
-                            Data Agama Kalurahan
+                            Data Agama Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function AgamaDisplay({ className }: AgamaDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Church className="h-5 w-5 text-primary" />
-                            Data Agama Kalurahan
+                            Data Agama Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -234,9 +234,9 @@ export function AgamaDisplay({ className }: AgamaDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Church className="h-5 w-5 text-primary" />
-                        Data Agama Kalurahan
+                        Data Agama Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik agama penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik agama penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -382,3 +382,4 @@ export function AgamaDisplay({ className }: AgamaDisplayProps) {
         </div>
     );
 }
+

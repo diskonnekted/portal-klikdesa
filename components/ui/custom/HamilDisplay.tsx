@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Heart, Users, UserCheck, Baby, AlertCircle, TrendingUp, BarChart3 } from "lucide-react";
@@ -80,7 +80,7 @@ export function HamilDisplay({ className }: HamilDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Ibu Hamil Kalurahan
+                            Data Ibu Hamil Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -100,7 +100,7 @@ export function HamilDisplay({ className }: HamilDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Ibu Hamil Kalurahan
+                            Data Ibu Hamil Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -130,7 +130,7 @@ export function HamilDisplay({ className }: HamilDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Heart className="h-5 w-5 text-primary" />
-                        Data Ibu Hamil Kalurahan
+                        Data Ibu Hamil Desa
                     </CardTitle>
                     <p className="text-sm text-muted-foreground">Data statistic ibu hamil dan wanita usia subur</p>
                 </CardHeader>
@@ -315,3 +315,4 @@ export function HamilDisplay({ className }: HamilDisplayProps) {
         </div>
     );
 }
+

@@ -20,11 +20,19 @@ export default function ImageFallback({
     // Validate and normalize the source URL
     const normalizeSrc = (url: string | null | undefined) => {
         if (!url || typeof url !== "string") return null;
-        // If it's a relative path, return null to show fallback
-        if (url.startsWith("/") && !url.startsWith("//")) return null;
-        // If it doesn't start with http, return null
-        if (!url.startsWith("http://") && !url.startsWith("https://")) return null;
-        return url;
+        const trimmed = url.trim().replace(/^[)\s]+|[)\s]+$/g, "");
+        if (trimmed.startsWith("/") && !trimmed.startsWith("//")) return null;
+        if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) return null;
+        try {
+            const parsed = new URL(trimmed);
+            const host = parsed.hostname.toLowerCase();
+            if (host !== "sijenggung-banjarnegara.desa.id" && host !== "localhost") {
+                return null;
+            }
+            return parsed.toString();
+        } catch {
+            return null;
+        }
     };
 
     const [imgSrc, setImgSrc] = useState(normalizeSrc(src));

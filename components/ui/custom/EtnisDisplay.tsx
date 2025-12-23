@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Globe2, TrendingUp, Users, MapPin } from "lucide-react";
@@ -154,7 +154,7 @@ export function EtnisDisplay({ className }: EtnisDisplayProps) {
                         <BarChart3 className="h-5 w-5 text-primary" />
                         Data Etnis Penduduk
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik etnis/suku penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik etnis/suku penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -337,3 +337,4 @@ export function EtnisDisplay({ className }: EtnisDisplayProps) {
         </div>
     );
 }
+

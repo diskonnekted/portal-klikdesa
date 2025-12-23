@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { DollarSign, TrendingUp, TrendingDown, PieChart } from "lucide-react";
@@ -133,7 +133,7 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <DollarSign className="h-5 w-5 text-primary" />
-                            Laporan Keuangan Kalurahan
+                            Laporan Keuangan Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -481,3 +481,4 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
         </div>
     );
 }
+

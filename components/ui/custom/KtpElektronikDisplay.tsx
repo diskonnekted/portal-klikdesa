@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { FileCheck, Users, UserCheck, CreditCard, TrendingUp, BarChart3 } from "lucide-react";
@@ -69,7 +69,7 @@ export function KtpElektronikDisplay({ className }: KtpElektronikDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <FileCheck className="h-5 w-5 text-primary" />
-                            Data KTP Elektronik Kalurahan
+                            Data KTP Elektronik Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -89,7 +89,7 @@ export function KtpElektronikDisplay({ className }: KtpElektronikDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <FileCheck className="h-5 w-5 text-primary" />
-                            Data KTP Elektronik Kalurahan
+                            Data KTP Elektronik Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -192,9 +192,9 @@ export function KtpElektronikDisplay({ className }: KtpElektronikDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <FileCheck className="h-5 w-5 text-primary" />
-                        Data KTP Elektronik Kalurahan
+                        Data KTP Elektronik Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik KTP elektronik penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik KTP elektronik penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -332,3 +332,4 @@ export function KtpElektronikDisplay({ className }: KtpElektronikDisplayProps) {
         </div>
     );
 }
+

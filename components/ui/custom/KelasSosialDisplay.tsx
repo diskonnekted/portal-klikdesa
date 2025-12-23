@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Users, UserCheck, UsersRound, TrendingUp } from "lucide-react";
@@ -69,7 +69,7 @@ export function KelasSosialDisplay({ className }: KelasSosialDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <BarChart3 className="h-5 w-5 text-primary" />
-                            Data Kelas Sosial Kalurahan
+                            Data Kelas Sosial Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -89,7 +89,7 @@ export function KelasSosialDisplay({ className }: KelasSosialDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <BarChart3 className="h-5 w-5 text-primary" />
-                            Data Kelas Sosial Kalurahan
+                            Data Kelas Sosial Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -199,9 +199,9 @@ export function KelasSosialDisplay({ className }: KelasSosialDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <BarChart3 className="h-5 w-5 text-primary" />
-                        Data Kelas Sosial Kalurahan
+                        Data Kelas Sosial Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik kelas sosial keluarga di Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik kelas sosial keluarga di Desa</p>
                 </CardHeader>
             </Card>
 
@@ -332,3 +332,4 @@ export function KelasSosialDisplay({ className }: KelasSosialDisplayProps) {
         </div>
     );
 }
+

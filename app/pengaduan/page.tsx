@@ -16,9 +16,9 @@ export default function PengaduanPage() {
                     </div>
                     <h1 className="text-4xl font-bold text-primary">Pengaduan Masyarakat</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Salurkan aspirasi, keluhan, dan saran Anda untuk kemajuan Kalurahan Pondokrejo. Setiap masukan
-                        Anda penting bagi kami.
-                    </p>
+        Salurkan aspirasi, keluhan, dan saran Anda untuk kemajuan Desa Sijenggung. Setiap masukan
+        Anda penting bagi kami.
+      </p>
                 </div>
 
                 {/* Info Cards */}
@@ -90,7 +90,7 @@ export default function PengaduanPage() {
                                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <Phone className="h-8 w-8 text-blue-600" />
                                 </div>
-                                <h4 className="font-semibold text-gray-900 mb-2">Kantor Kalurahan</h4>
+                                <h4 className="font-semibold text-gray-900 mb-2">Kantor Desa</h4>
                                 <p className="text-lg font-bold text-blue-600 mb-1">0274-xxxxxx</p>
                                 <p className="text-sm text-gray-600">Senin - Jumat, 08:00-15:00</p>
                             </div>
@@ -132,7 +132,7 @@ export default function PengaduanPage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 bg-blue-600 rounded-full" />
-                                    <span className="text-sm text-gray-700">Administrasi Kalurahan</span>
+                                    <span className="text-sm text-gray-700">Administrasi Desa</span>
                                 </div>
                             </div>
                         </CardContent>
@@ -168,3 +168,4 @@ export default function PengaduanPage() {
         </div>
     );
 }
+

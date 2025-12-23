@@ -13,8 +13,8 @@ export default function KegiatanPage() {
                 </div>
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">Kegiatan Masyarakat</h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Informasi lengkap mengenai agenda kegiatan, program kemasyarakatan, dan partisipasi warga Kalurahan
-                    Pondokrejo
+                    Informasi lengkap mengenai agenda kegiatan, program kemasyarakatan, dan partisipasi warga Desa
+                    Sijenggung
                 </p>
             </div>
 
@@ -118,7 +118,7 @@ export default function KegiatanPage() {
                                                 <Users className="h-5 w-5 text-blue-600" />
                                             </div>
                                             <div>
-                                                <h4 className="font-medium text-gray-900">Rapat Kalurahan Bulanan</h4>
+                                                <h4 className="font-medium text-gray-900">Rapat Desa Bulanan</h4>
                                                 <p className="text-sm text-gray-600">Pembahasan program kerja</p>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@ export default function KegiatanPage() {
                                 </div>
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                     <MapPin className="h-4 w-4" />
-                                    <span>Balai Kalurahan Pondokrejo</span>
+                                    <span>Balai Desa Sijenggung</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                     <Users className="h-4 w-4" />
@@ -232,3 +232,4 @@ export default function KegiatanPage() {
         </div>
     );
 }
+

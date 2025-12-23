@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Heart, Users, UserCheck, Shield, TrendingUp, BarChart3 } from "lucide-react";
@@ -69,7 +69,7 @@ export function KontrasepsiKbDisplay({ className }: KontrasepsiKbDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Kontrasepsi/KB Kalurahan
+                            Data Kontrasepsi/KB Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -89,7 +89,7 @@ export function KontrasepsiKbDisplay({ className }: KontrasepsiKbDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Heart className="h-5 w-5 text-primary" />
-                            Data Kontrasepsi/KB Kalurahan
+                            Data Kontrasepsi/KB Desa
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -192,9 +192,9 @@ export function KontrasepsiKbDisplay({ className }: KontrasepsiKbDisplayProps) {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Heart className="h-5 w-5 text-primary" />
-                        Data Kontrasepsi/KB Kalurahan
+                        Data Kontrasepsi/KB Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik kontrasepsi/KB penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik kontrasepsi/KB penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -332,3 +332,4 @@ export function KontrasepsiKbDisplay({ className }: KontrasepsiKbDisplayProps) {
         </div>
     );
 }
+

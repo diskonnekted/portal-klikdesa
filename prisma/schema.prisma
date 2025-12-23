@@ -1,4 +1,4 @@
-// Schema Prisma untuk Portal Web Kalurahan Pondokrejo
+// Schema Prisma untuk Portal Web Desa Sijenggung
 // Enhanced dengan semua fitur modern: SDGs, Live Statistics, Interactive Map, Community Engagement
 
 generator client {
@@ -231,7 +231,7 @@ enum StatusAPBDes {
   SELESAI
 }
 
-// Pembangunan Kalurahan - Proyek
+// Pembangunan Desa - Proyek
 model Proyek {
   id          Int         @id @default(autoincrement())
   nama        String      @db.VarChar(255)
@@ -593,3 +593,4 @@ model Konfigurasi {
 
   @@map("konfigurasi")
 }
+

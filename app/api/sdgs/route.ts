@@ -3,7 +3,7 @@ import { fetchSDGSData, createApiRouteHandler } from "@/lib/api-helpers";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
-    const locationCode = searchParams.get("location_code") || "3404140004";
+    const locationCode = searchParams.get("location_code") || "33.04.09.2014";
 
     const response = await fetchSDGSData(locationCode);
 

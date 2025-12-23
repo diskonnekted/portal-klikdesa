@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { BarChart3, Heart, TrendingUp, Users, DollarSign } from "lucide-react";
@@ -159,7 +159,7 @@ export function PenerimaBantuanPendudukDisplay({ className }: PenerimaBantuanPen
                         <BarChart3 className="h-5 w-5 text-primary" />
                         Data Penerima Bantuan Penduduk
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data statistik penerima bantuan penduduk Kalurahan</p>
+                    <p className="text-sm text-muted-foreground">Data statistik penerima bantuan penduduk Desa</p>
                 </CardHeader>
             </Card>
 
@@ -289,3 +289,4 @@ export function PenerimaBantuanPendudukDisplay({ className }: PenerimaBantuanPen
         </div>
     );
 }
+

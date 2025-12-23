@@ -3,10 +3,10 @@ import { env } from "process";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: env.APP_NAME || "Portal Pondokrejo",
-        short_name: "Pondokrejo",
+        name: env.APP_NAME || "Portal Desa Sijenggung",
+        short_name: "Sijenggung",
         description:
-            "Portal resmi Pemerintah Kalurahan Pondokrejo, Kabupaten Sleman, DIY. Informasi lengkap layanan publik, berita terkini, dan transparansi pemerintahan kalurahan.",
+            "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah. Informasi lengkap layanan publik, berita terkini, dan transparansi pemerintahan desa.",
         start_url: "/",
         display: "standalone",
         background_color: "#f8f9fc",
@@ -58,21 +58,21 @@ export default function manifest(): MetadataRoute.Manifest {
             {
                 name: "Berita",
                 short_name: "Berita",
-                description: "Baca berita terkini kalurahan",
+                description: "Baca berita terkini desa",
                 url: "/berita",
                 icons: [{ src: "/favicon-96x96.png", sizes: "96x96" }],
             },
             {
                 name: "Pengumuman",
                 short_name: "Pengumuman",
-                description: "Baca pengumuman terkini kalurahan",
+                description: "Baca pengumuman terkini desa",
                 url: "/pengumuman",
                 icons: [{ src: "/favicon-96x96.png", sizes: "96x96" }],
             },
             {
                 name: "Pengaduan",
                 short_name: "Pengaduan",
-                description: "Hubungi pemerintah kalurahan",
+                description: "Hubungi pemerintah desa",
                 url: "/pengaduan",
                 icons: [{ src: "/favicon-96x96.png", sizes: "96x96" }],
             },
@@ -83,14 +83,14 @@ export default function manifest(): MetadataRoute.Manifest {
                 sizes: "1280x720",
                 type: "image/png",
                 form_factor: "wide",
-                label: "Homepage " + env.APP_NAME || "Portal Kalurahan Pondokrejo",
+                label: "Homepage " + (env.APP_NAME || "Portal Desa Sijenggung"),
             },
             {
                 src: "/images/home-mobile.png",
                 sizes: "390x844",
                 type: "image/png",
                 form_factor: "narrow",
-                label: "Tampilan Mobile " + env.APP_NAME || "Portal Kalurahan Pondokrejo",
+                label: "Tampilan Mobile " + (env.APP_NAME || "Portal Desa Sijenggung"),
             },
         ],
         related_applications: [],

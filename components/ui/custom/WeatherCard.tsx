@@ -7,7 +7,7 @@ import { fetchWeatherApi } from "openmeteo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-// Pondokrejo coordinates
+// Sijenggung coordinates
 const LATITUDE = -7.6654545;
 const LONGITUDE = 110.3073412;
 
