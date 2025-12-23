@@ -1,7 +1,7 @@
 "use client";
 
 import { Activity } from "lucide-react";
-import { PenyakitDisplay } from "@/components/ui/custom/PenyakitDisplay";
+import { DiseaseDisplay } from "@/components/ui/custom/PenyakitDisplay";
 
 export default function PenyakitPage() {
     return (
@@ -16,7 +16,7 @@ export default function PenyakitPage() {
                         Data statistik penyakit yang diderita penduduk Desa Sijenggung
                     </p>
                 </div>
-                <PenyakitDisplay />
+                <DiseaseDisplay />
             </div>
         </div>
     );
