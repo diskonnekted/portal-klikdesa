@@ -215,6 +215,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
     const createCustomIcon = (color: string) => {
         if (!leaflet) return null;
 
+        // @ts-expect-error - Leaflet runtime types mismatch
         return leaflet.divIcon({
             className: "custom-marker",
             html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transform: rotate(-45deg); display: flex; align-items: center; justify-content: center;">
