@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { GraduationCap, BookOpen, Users, TrendingUp, User, Calendar, Award, Building } from "lucide-react";
@@ -329,12 +329,12 @@ export function PendidikanDisplay({ className }: PendidikanDisplayProps) {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-6">
-                        {educationData.map((item, index) => (
+                        {educationData.map((item) => (
                             <div key={item.id} className="p-4 bg-muted/30 rounded-lg space-y-3">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="font-semibold text-primary">{item.attributes.nama}</h3>
+                                    <h3 className="font-semibold text-foreground">{item.attributes.nama}</h3>
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold text-primary">{item.attributes.jumlah}</div>
+                                        <div className="text-2xl font-bold text-foreground">{item.attributes.jumlah}</div>
                                         <div className="text-sm text-muted-foreground">{item.attributes.persen}</div>
                                     </div>
                                 </div>

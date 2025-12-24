@@ -1,6 +1,6 @@
 "use client";
 
-import { Accessibility, Users, Star } from "lucide-react";
+import { Accessibility, Users } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DisabilitasDisplay } from "@/components/ui/custom/DisabilitasDisplay";
@@ -14,7 +14,7 @@ export default function DisabilitasPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                         <Accessibility className="h-10 w-10 text-blue-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Data Disabilitas</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Data Disabilitas</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik penyandang disabilitas Desa Sijenggung
                     </p>

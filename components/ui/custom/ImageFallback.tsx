@@ -5,13 +5,11 @@ import { ImageOff } from "lucide-react";
 
 interface ImageFallbackProps extends Omit<ImageProps, "src"> {
     src?: string | null;
-    _fallbackSrc?: string;
     iconSize?: number;
 }
 
 export default function ImageFallback({
     src,
-    _fallbackSrc,
     iconSize = 48,
     alt = "",
     className = "",

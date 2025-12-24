@@ -11,7 +11,7 @@ export default function EtnisPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-tertiary-100 rounded-full">
                         <Globe className="h-10 w-10 text-tertiary-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Data Etnis</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Data Etnis</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik etnis penduduk Desa Sijenggung
                     </p>

@@ -50,7 +50,7 @@ export function HolidayCard({ holidays, loading = false, error = null }: Holiday
         return (
             <Card>
                 <CardHeader className="gap-0">
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sparkles className="h-5 w-5 text-primary" />
                         Hari Libur
                     </CardTitle>
@@ -79,7 +79,7 @@ export function HolidayCard({ holidays, loading = false, error = null }: Holiday
         return (
             <Card>
                 <CardHeader className="gap-0">
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sparkles className="h-5 w-5 text-primary" />
                         Hari Libur
                     </CardTitle>
@@ -97,7 +97,7 @@ export function HolidayCard({ holidays, loading = false, error = null }: Holiday
         return (
             <Card>
                 <CardHeader className="gap-0">
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sparkles className="h-5 w-5 text-primary" />
                         Hari Libur
                     </CardTitle>
@@ -115,7 +115,7 @@ export function HolidayCard({ holidays, loading = false, error = null }: Holiday
     return (
         <Card>
             <CardHeader className="gap-0">
-                <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                     <Sparkles className="h-5 w-5 text-primary" />
                     Hari Libur
                 </CardTitle>
@@ -132,7 +132,7 @@ export function HolidayCard({ holidays, loading = false, error = null }: Holiday
                                 <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
                                     <Calendar className="h-3 w-3" />
                                     <span>{formatDate(holiday.tanggal)}</span>
-                                    <span className="text-primary font-medium">• {getDaysUntil(holiday.tanggal)}</span>
+                                    <span className="text-foreground font-medium">• {getDaysUntil(holiday.tanggal)}</span>
                                 </div>
                                 <div className="flex items-center gap-2 mb-1">
                                     <Badge variant={getBadgeVariant(holiday.jenis)} className="text-xs">

@@ -60,11 +60,11 @@ export function HolidayCards({ holidays, loading = false, error = null }: Holida
         return (
             <div className="space-y-6">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Hari Libur Mendatang</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        Informasi hari libur nasional dan peringatan penting
-                    </p>
-                </div>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Hari Libur Mendatang</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Informasi hari libur nasional dan peringatan penting
+        </p>
+      </div>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {[...Array(10)].map((_, i) => (
                         <Card key={i} className="overflow-hidden animate-pulse">
@@ -85,7 +85,7 @@ export function HolidayCards({ holidays, loading = false, error = null }: Holida
         return (
             <div className="space-y-6">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Hari Libur Mendatang</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">Hari Libur Mendatang</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Informasi hari libur nasional dan peringatan penting
                     </p>
@@ -102,7 +102,7 @@ export function HolidayCards({ holidays, loading = false, error = null }: Holida
         return (
             <div className="space-y-6">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Hari Libur Mendatang</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">Hari Libur Mendatang</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Informasi hari libur nasional dan peringatan penting
                     </p>
@@ -121,7 +121,7 @@ export function HolidayCards({ holidays, loading = false, error = null }: Holida
     return (
         <div className="space-y-6">
             <div className="text-center">
-                <h2 className="text-3xl font-bold text-primary mb-2">Hari Libur Mendatang</h2>
+                <h2 className="text-3xl font-bold text-foreground mb-2">Hari Libur Mendatang</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">Informasi hari libur nasional dan peringatan penting</p>
             </div>
 
@@ -155,7 +155,7 @@ export function HolidayCards({ holidays, loading = false, error = null }: Holida
                             {/* Days Until */}
                             <div className="flex items-center gap-1 text-xs">
                                 <Clock className="h-3 w-3 text-primary" />
-                                <span className="font-medium text-primary">{getDaysUntil(holiday.tanggal)}</span>
+                                <span className="font-medium text-foreground">{getDaysUntil(holiday.tanggal)}</span>
                             </div>
 
                             {/* Badge */}

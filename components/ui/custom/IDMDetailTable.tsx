@@ -197,7 +197,7 @@ export function IDMDetailTable({ data, className }: IDMDetailTableProps) {
         <div className={cn("w-full space-y-6", className)}>
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-bold text-primary mb-2">Detail Indikator IDM</h1>
+                <h1 className="text-4xl font-bold text-foreground mb-2">Detail Indikator IDM</h1>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                     Tabel lengkap semua indikator Indeks Desa Mandiri Tahun {data.SUMMARIES.TAHUN} -{" "}
                     {data.IDENTITAS[0]?.nama_desa}

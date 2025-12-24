@@ -132,7 +132,7 @@ export default function ProfilPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                         <Building className="h-10 w-10 text-blue-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Profil Desa</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Profil Desa</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Profil lengkap Desa {DesaData.nama}, {DesaData.kecamatan},{" "}
                         {DesaData.kabupaten} - Data komprehensif mengenai geografi, pemerintahan, dan administrasi
@@ -228,7 +228,7 @@ export default function ProfilPage() {
                                     <span className="text-sm font-semibold">Ketinggian</span>
                                     <Mountain className="h-4 w-4 text-primary" />
                                 </div>
-                                <p className="text-xl font-bold text-primary">{DesaData.tinggiDaerah}</p>
+                                <p className="text-xl font-bold text-foreground">{DesaData.tinggiDaerah}</p>
                                 <p className="text-xs text-muted-foreground">dari permukaan air laut</p>
                             </div>
 
@@ -237,7 +237,7 @@ export default function ProfilPage() {
                                     <span className="text-sm font-semibold">Suhu Udara</span>
                                     <Thermometer className="h-4 w-4 text-primary" />
                                 </div>
-                                <p className="text-xl font-bold text-primary">
+                                <p className="text-xl font-bold text-foreground">
                                     {DesaData.suhuMin} - {DesaData.suhuMax}
                                 </p>
                             </div>
@@ -247,7 +247,7 @@ export default function ProfilPage() {
                                     <span className="text-sm font-semibold">Curah Hujan</span>
                                     <CloudRain className="h-4 w-4 text-primary" />
                                 </div>
-                                <p className="text-xl font-bold text-primary">{DesaData.jumlahCurahHujan}</p>
+                                <p className="text-xl font-bold text-foreground">{DesaData.jumlahCurahHujan}</p>
                                 <p className="text-xs text-muted-foreground">
                                     Jumlah hari hujan: {DesaData.hariCurahHujan}
                                 </p>
@@ -338,7 +338,7 @@ export default function ProfilPage() {
                                     </div>
                                     <div className="flex justify-between p-2 bg-muted/50 rounded-lg border border-primary/20">
                                         <span className="text-xs font-semibold">Total Sawah</span>
-                                        <span className="font-bold text-sm text-primary">52.5 Ha</span>
+                                        <span className="font-bold text-sm text-foreground">52.5 Ha</span>
                                     </div>
                                 </div>
                             </div>
@@ -387,19 +387,19 @@ export default function ProfilPage() {
                                     </div>
                                     <div className="text-center p-2 bg-muted/30 rounded-lg">
                                         <h4 className="text-xs font-semibold mb-0.5">Ke Kecamatan</h4>
-                                        <p className="text-lg font-bold text-primary">
+                                        <p className="text-lg font-bold text-foreground">
                                             {DesaData.jarak.keKecamatan}
                                         </p>
                                     </div>
                                     <div className="text-center p-2 bg-muted/30 rounded-lg">
                                         <h4 className="text-xs font-semibold mb-0.5">Ke Kabupaten</h4>
-                                        <p className="text-lg font-bold text-primary">
+                                        <p className="text-lg font-bold text-foreground">
                                             {DesaData.jarak.keKabupaten}
                                         </p>
                                     </div>
                                     <div className="text-center p-2 bg-muted/30 rounded-lg">
                                         <h4 className="text-xs font-semibold mb-0.5">Ke Provinsi</h4>
-                                        <p className="text-lg font-bold text-primary">
+                                        <p className="text-lg font-bold text-foreground">
                                             {DesaData.jarak.keProvinsi}
                                         </p>
                                     </div>
@@ -422,17 +422,17 @@ export default function ProfilPage() {
                         <CardContent className="space-y-2">
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Padukuhan/Dusun</span>
-                                <span className="text-xl font-bold text-primary">
+                                <span className="text-xl font-bold text-foreground">
                                     {DesaData.government.dusun}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Rukun Warga (RW)</span>
-                                <span className="text-xl font-bold text-primary">{DesaData.government.rw}</span>
+                                <span className="text-xl font-bold text-foreground">{DesaData.government.rw}</span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Rukun Tetangga (RT)</span>
-                                <span className="text-xl font-bold text-primary">{DesaData.government.rt}</span>
+                                <span className="text-xl font-bold text-foreground">{DesaData.government.rt}</span>
                             </div>
                         </CardContent>
                     </Card>
@@ -448,11 +448,11 @@ export default function ProfilPage() {
                         <CardContent className="space-y-2">
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Kategori I</span>
-                                <span className="text-xl font-bold text-primary">{DesaData.lpmk.kategoriI}</span>
+                                <span className="text-xl font-bold text-foreground">{DesaData.lpmk.kategoriI}</span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Kategori II</span>
-                                <span className="text-xl font-bold text-primary">{DesaData.lpmk.kategoriII}</span>
+                                <span className="text-xl font-bold text-foreground">{DesaData.lpmk.kategoriII}</span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Kategori III</span>
@@ -547,7 +547,7 @@ export default function ProfilPage() {
                             <div className="pt-2 border-t">
                                 <div className="text-center p-2 bg-muted/30 rounded-lg">
                                     <p className="text-xs mb-0.5">Desa IDT</p>
-                                    <p className="text-xl font-bold text-primary">
+                                    <p className="text-xl font-bold text-foreground">
                                         {DesaData.DesaStatus.idt}
                                     </p>
                                 </div>

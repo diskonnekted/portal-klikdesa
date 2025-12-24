@@ -11,7 +11,7 @@ export default function KepemilikanKIAPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-pink-100 rounded-full">
                         <CreditCard className="h-10 w-10 text-pink-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Kepemilikan KIA</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Kepemilikan KIA</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik kepemilikan KIA (Kartu Identitas Anak) penduduk Desa Sijenggung
                     </p>

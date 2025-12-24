@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { DollarSign, TrendingUp, BarChart3 } from "lucide-react";
 
@@ -17,7 +17,7 @@ export default function KeuanganPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
                         <DollarSign className="h-10 w-10 text-green-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Laporan Keuangan Desa</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Laporan Keuangan Desa</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Transparansi pengelolaan keuangan Desa untuk memastikan akuntabilitas dan keterbukaan
                         kepada masyarakat

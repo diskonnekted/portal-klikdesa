@@ -154,7 +154,7 @@ export function WeatherCard() {
         return (
             <Card className="bg-blue-50 border-blue-200">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sun className="h-5 w-5 text-primary" />
                         Cuaca Hari Ini
                     </CardTitle>
@@ -172,7 +172,7 @@ export function WeatherCard() {
         return (
             <Card className="bg-blue-50 border-blue-200">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sun className="h-5 w-5 text-primary" />
                         Cuaca Hari Ini
                     </CardTitle>
@@ -208,7 +208,7 @@ export function WeatherCard() {
         <Card className="bg-blue-50 border-blue-200">
             <CardHeader>
                 <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                         <Sun className="h-5 w-5 text-primary" />
                         Cuaca Hari Ini
                     </CardTitle>
@@ -280,7 +280,7 @@ export function WeatherCard() {
                                 <div className="text-xs text-muted-foreground mb-2">
                                     {weatherCodeToDescription(day.weatherCode)}
                                 </div>
-                                <div className="text-sm font-semibold text-primary">
+                                <div className="text-sm font-semibold text-foreground">
                                     {day.maxTemp}°/{day.minTemp}°
                                 </div>
                                 {day.precipitationProbability > 30 && (

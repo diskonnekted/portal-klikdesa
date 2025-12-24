@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import {
@@ -317,7 +317,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                         {educationData.map((item, index) => (
                             <div key={index} className="p-4 bg-muted/30 rounded-lg">
                                 <div className="flex items-center justify-between mb-2">
-                                    <h4 className="font-semibold text-primary">{item.name}</h4>
+                                    <h4 className="font-semibold text-foreground">{item.name}</h4>
                                     <Badge variant="secondary">{item.jumlah.toLocaleString("id-ID")} jiwa</Badge>
                                 </div>
                                 <div className="space-y-2">

@@ -114,9 +114,9 @@ export function IDMDataNotAvailable({ year, onRetry, className }: IDMDataNotAvai
                         Data IDM Tahun {year} Belum Tersedia
                     </h3>
                     <p className="text-sm text-gray-500 text-center mb-6 max-w-sm">
-                        Data tahun <span className="text-primary font-bold">{year}</span> belum tersedia atau masih
+                        Data tahun <span className="text-foreground font-bold">{year}</span> belum tersedia atau masih
                         dalam proses pengumpulan oleh{" "}
-                        <span className="text-primary font-bold">
+                        <span className="text-foreground font-bold">
                             Kementerian Desa, Pembangunan Daerah Tertinggal, dan Transmigrasi
                         </span>
                         .

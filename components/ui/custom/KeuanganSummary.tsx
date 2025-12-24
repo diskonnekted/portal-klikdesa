@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { DollarSign, TrendingUp, TrendingDown, PieChart, ChevronRight } from "lucide-react";
+import { TrendingUp, TrendingDown, PieChart, ChevronRight } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CustomButton } from "@/components/ui/custom/CustomButton";
-import { cn } from "@/lib/utils";
 
 interface KeuanganItem {
     anggaran: string | null;

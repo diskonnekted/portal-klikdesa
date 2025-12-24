@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import {
@@ -65,20 +65,6 @@ const formatCurrency = (value: number | string | null): string => {
     }).format(num);
 };
 
-const formatCompactCurrency = (value: number | string | null): string => {
-    if (value === null || value === undefined) return "Rp 0";
-    const num = typeof value === "string" ? parseFloat(value) : value;
-    if (isNaN(num) || num === 0) return "Rp 0";
-    return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        notation: "compact",
-        compactDisplay: "short",
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-    }).format(num);
-};
-
 const formatPercentage = (value: number | null | undefined): string => {
     if (value === null || value === undefined || isNaN(value)) return "0,00%";
     return `${new Intl.NumberFormat("id-ID", {
@@ -103,7 +89,6 @@ export function KeuanganMultiYear() {
         };
     }>({});
     const [loading, setLoading] = React.useState(true);
-    const [selectedYear, setSelectedYear] = React.useState<number | null>(null);
 
     const currentYear = 2025;
     const years = React.useMemo(() => {
@@ -184,12 +169,6 @@ export function KeuanganMultiYear() {
         })
         .filter(Boolean);
 
-    // Calculate year-over-year changes
-    const calculateYoYChange = (current: number, previous: number) => {
-        if (previous === 0) return 0;
-        return ((current - previous) / previous) * 100;
-    };
-
     if (loading) {
         return (
             <div className="space-y-4">
@@ -227,7 +206,7 @@ export function KeuanganMultiYear() {
         <div className="space-y-6">
             {/* Header */}
             <div className="text-center">
-                <h2 className="text-2xl font-bold text-primary mb-2">Analisis Keuangan Multi-Tahun</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-2">Analisis Keuangan Multi-Tahun</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                     Perbandingan data keuangan dari tahun 2021 hingga {currentYear}
                 </p>

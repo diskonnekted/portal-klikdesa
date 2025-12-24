@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
@@ -10,100 +11,109 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Sijenggung Village Official Colors
-        // Swap roles: Primary -> Turquoise, Secondary -> Orange
+        // Sijenggung Village Official Colors - Pastel Theme
+        "powder-blush": "#ffadad",
+        "apricot-cream": "#ffd6a5",
+        "cream": "#fdffb6",
+        "tea-green": "#caffbf",
+        "electric-aqua": "#9bf6ff",
+        "baby-blue-ice": "#a0c4ff",
+        "periwinkle": "#bdb2ff",
+        "mauve": "#ffc6ff",
+        "porcelain": "#fffffc",
+        
         primary: {
-          DEFAULT: "#4ECDC4", // Turquoise Segar (Main Brand, CTA)
-          50: "#E0F7FA",
-          100: "#B2EBF2",
-          200: "#80DEEA",
-          300: "#4DD0E1",
-          400: "#26C6DA",
-          500: "#4ECDC4",
-          600: "#00ACC1",
-          700: "#0097A7",
-          800: "#00838F",
-          900: "#006064",
-          950: "#00363A",
+          DEFAULT: "#A0C4FF", // Baby Blue Ice
+          50: "#F5F9FF",
+          100: "#E6F0FF",
+          200: "#CCE0FF",
+          300: "#B3D1FF",
+          400: "#A0C4FF", // Base Color
+          500: "#80ABFF",
+          600: "#6092FF",
+          700: "#4079FF",
+          800: "#205FFF",
+          900: "#0046E6",
+          950: "#0030B3",
         },
         secondary: {
-          DEFAULT: "#E65100", // Even darker Orange for better contrast
-          50: "#FFF3E0",
-          100: "#FFE0B2",
-          200: "#FFCC80",
-          300: "#FFB74D",
-          400: "#FFA726",
-          500: "#FF8A00",
-          600: "#FB8C00",
-          700: "#F57C00",
-          800: "#EF6C00",
-          900: "#E65100",
-          950: "#BF360C",
+          DEFAULT: "#CAFFBF", // Tea Green
+          50: "#F9FFF7",
+          100: "#F0FFEB",
+          200: "#E0FFD6",
+          300: "#D6FFC9",
+          400: "#CAFFBF", // Base Color
+          500: "#A8F598",
+          600: "#86EB71",
+          700: "#64E04A",
+          800: "#42D623",
+          900: "#2B9E15",
+          950: "#1A660D",
         },
         tertiary: {
-          DEFAULT: "#6C5CE7", // Purple Modern (Lifestyle, Unique Elements)
-          50: "#EDE7F6",
-          100: "#D1C4E9",
-          200: "#B39DDB",
-          300: "#9575CD",
-          400: "#7E57C2",
-          500: "#6C5CE7",
-          600: "#5E35B1",
-          700: "#512DA8",
-          800: "#4527A0",
-          900: "#311B92",
-          950: "#200E65",
+          DEFAULT: "#BDB2FF", // Periwinkle
+          50: "#F7F5FF",
+          100: "#EBE6FF",
+          200: "#DCD4FF",
+          300: "#CDC2FF",
+          400: "#BDB2FF", // Base Color
+          500: "#9F8FFF",
+          600: "#816BFF",
+          700: "#6347FF",
+          800: "#4524FF",
+          900: "#2700FF",
+          950: "#1A00AB",
         },
         accent: {
-          DEFAULT: "#FF6B6B", // Coral Hangat (Notifications, Status, Attention)
+          DEFAULT: "#FFADAD", // Powder Blush
           50: "#FFF5F5",
           100: "#FFE6E6",
-          200: "#FFC9C9",
-          300: "#FFABAB",
-          400: "#FF8D8D",
-          500: "#FF6B6B",
-          600: "#E66060",
-          700: "#CC5656",
-          800: "#B34B4B",
-          900: "#994040",
-          950: "#803636",
+          200: "#FFD1D1",
+          300: "#FFBCBC",
+          400: "#FFADAD", // Base Color
+          500: "#FF8585",
+          600: "#FF5C5C",
+          700: "#FF3333",
+          800: "#D60000",
+          900: "#AD0000",
+          950: "#850000",
         },
-        background: "#F9F9F9", // Off-White Netral
-        surface: "#FFFFFF", // Putih Murni
-        "text-dark": "#2D3436", // Charcoal Gelap
-        "text-light": "#FFFFFF", // Putih Murni
-        "text-light-hover": "#FFE0B2", // Orange light for hover on dark bg
-        success: "#2ECC71", // Emerald Hijau
-        warning: "#FDBB30", // Sunshine Kuning
-        danger: "#E74C3C", // Crimson Merah
-        info: "#3498DB", // Sky Biru
+        background: "#FFFFFC", // Porcelain
+        surface: "#FFFFFF", // White
+        "text-dark": "#1F2933", // Charcoal (Keep for readability)
+        "text-light": "#1F2933", // Dark text on light pastel backgrounds!
+        "text-light-hover": "#000000",
+        success: "#CAFFBF", // Tea Green (Mapped)
+        warning: "#FFD6A5", // Apricot Cream (Mapped)
+        danger: "#FFADAD", // Powder Blush (Mapped)
+        info: "#9BF6FF", // Electric Aqua (Mapped)
         // Additional village theme colors
         "village-green": {
-          DEFAULT: "#4ECDC4", // Mapped to primary for compatibility
+          DEFAULT: "#CAFFBF", // Tea Green
           dark: "#006064",
           darker: "#00363A",
         },
-        "village-blue": "#FF8A00", // Mapped to secondary for compatibility
+        "village-blue": "#A0C4FF", // Baby Blue Ice
         // Override default colors for consistency
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        foreground: "hsl(var(--foreground))",
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+        foreground: "var(--foreground)",
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
         },
       },
       borderRadius: {
@@ -111,37 +121,33 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+        progress: {
+          "0%": { transform: " translateX(0) scaleX(0)" },
+          "40%": { transform: "translateX(0) scaleX(0.4)" },
+          "100%": { transform: "translateX(100%) scaleX(0.5)" },
+        },
       },
       animation: {
-        "fade-in": "fadeIn 0.5s ease-in-out",
-        "slide-up": "slideUp 0.3s ease-out",
-        "slide-down": "slideDown 0.3s ease-out",
-        "bounce-gentle": "bounceGentle 1s ease-in-out infinite",
-      },
-      keyframes: {
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        slideUp: {
-          "0%": { transform: "translateY(10px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
-        slideDown: {
-          "0%": { transform: "translateY(-10px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
-        bounceGentle: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-5px)" },
-        },
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        wiggle: "wiggle 1s ease-in-out infinite",
+        progress: "progress 2s infinite linear",
       },
     },
   },
-  plugins: [],
-} satisfies Config;
-
+  plugins: [tailwindcssAnimate],
+};
 export default config;

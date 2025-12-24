@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Target, ArrowLeft, Eye, Lightbulb, CheckCircle, TrendingUp, Users } from "lucide-react";
+import { ArrowLeft, Eye, Lightbulb, CheckCircle, TrendingUp, Users } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

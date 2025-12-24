@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Globe } from "lucide-react";
 import Image from "next/image";
@@ -19,7 +19,7 @@ export default function SDGSPage() {
                             className="object-contain"
                         />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Sustainable Development Goals (SDGs)</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Sustainable Development Goals (SDGs)</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Tujuan Pembangunan Berkelanjutan (TPB) - 18 Goals untuk masa depan yang lebih baik
                     </p>

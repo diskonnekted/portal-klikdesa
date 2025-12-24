@@ -36,7 +36,7 @@ const InformasiPublikDataNotAvailable = ({ onRetry }: { onRetry: () => void }) =
         <div className="text-center space-y-4">
             <Shield className="h-16 w-16 text-gray-400 mx-auto" />
             <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Data Tidak Tersedia</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Data Tidak Tersedia</h3>
                 <p className="text-gray-600">Informasi publik sedang tidak dapat dimuat. Silakan coba lagi nanti.</p>
             </div>
             <Button onClick={onRetry} className="bg-blue-600 hover:bg-blue-700">
@@ -118,14 +118,10 @@ export default function InformasiPublikPage() {
             if (!response.ok) {
                 throw new Error("Failed to fetch data");
             }
-            const data = await response.json();
+            const data: ApiResponse | InformasiPublikItem[] = await response.json();
 
             // Handle different response structures
-            const itemsArray = Array.isArray(data)
-                ? data
-                : Array.isArray(data.data)
-                    ? data.data
-                    : [];
+            const itemsArray = Array.isArray(data) ? data : Array.isArray(data.data) ? data.data : [];
 
             setItems(itemsArray);
             setError(null);
@@ -186,7 +182,7 @@ export default function InformasiPublikPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                             <Shield className="h-10 w-10 text-blue-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Informasi Publik</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Informasi Publik</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Pejabat Pengelola Informasi dan Dokumentasi (PPID) - Informasi publik yang dapat diakses
                             oleh masyarakat
@@ -206,7 +202,7 @@ export default function InformasiPublikPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                             <Shield className="h-10 w-10 text-blue-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Informasi Publik</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Informasi Publik</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Pejabat Pengelola Informasi dan Dokumentasi (PPID) - Informasi publik yang dapat diakses
                             oleh masyarakat
@@ -226,7 +222,7 @@ export default function InformasiPublikPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                         <Shield className="h-10 w-10 text-blue-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Informasi Publik</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Informasi Publik</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Pejabat Pengelola Informasi dan Dokumentasi (PPID) - Informasi publik yang dapat diakses oleh
                         masyarakat sesuai dengan ketentuan UU No. 14 Tahun 2008 tentang Keterbukaan Informasi Publik

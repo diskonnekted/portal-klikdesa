@@ -8,7 +8,7 @@ import {
     ChevronDown,
     User,
     Home,
-    Cpu,
+    AlertTriangle,
     Building2,
     BarChart3,
     FileText,
@@ -53,7 +53,7 @@ export function Header() {
         { href: "/ppid", label: "PPID", icon: BookCheck },
         { href: "/idm", label: "IDM", icon: FileText },
         { href: "/sdgs", label: "SDGs", icon: Globe },
-        { href: "/iot", label: "IoT", icon: Cpu },
+        { href: "/ews", label: "EWS", icon: AlertTriangle },
         { href: "/pengaduan", label: t("navigation.pengaduan"), icon: MessageSquare },
     ];
 
@@ -69,6 +69,13 @@ export function Header() {
         { href: "/berita", label: t("navigation.berita") },
         { href: "/pengumuman", label: "Pengumuman" },
         { href: "/kegiatan", label: t("navigation.kegiatan") },
+    ];
+
+    const ewsSubItems = [
+        { href: "/iot", label: "IoT" },
+        { href: "/peringatan-dini-cuaca", label: "Data Peringatan Dini Cuaca (Nowcast)" },
+        { href: "/gempa-terkini", label: "Data Gempa Bumi" },
+        { href: "/cuaca-desa-sijenggung", label: "Data Prakiraan Cuaca" },
     ];
 
     // Categorized statistik sub-items
@@ -171,7 +178,7 @@ export function Header() {
         <header className="bg-primary text-white fixed top-0 left-0 right-0 z-50 transition-transform duration-300">
             {/* Top Header Bar */}
             <div
-                className={`border-b border-primary-950/30 bg-[#0097A7] transition-opacity duration-300 ${
+                className={`bg-[#0097A7] transition-opacity duration-300 ${
                     isScrolled ? "opacity-0 h-0" : "opacity-100 h-16"
                 } overflow-hidden`}
             >
@@ -265,7 +272,7 @@ export function Header() {
 
                             {/* User Account */}
                             <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
+                                <DropdownMenuTrigger asChild id="header-account-trigger">
                                     <Button
                                         variant="ghost"
                                         size="sm"
@@ -322,7 +329,7 @@ export function Header() {
             </div>
 
             {/* Main Navigation - Desktop */}
-            <nav className="hidden lg:block border-b border-primary-950/30 bg-[#0097A7]">
+            <nav className="hidden lg:block bg-[#00ACC1]">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-center space-x-1 h-12">
                         {/* Main Navigation Items */}
@@ -331,16 +338,17 @@ export function Header() {
                             const isPemerintahanItem = item.href === "/pemerintahan";
                             const isInformasiItem = item.href === "/informasi";
                             const isStatistikItem = item.href === "/statistik";
+                            const isEwsItem = item.href === "/ews";
                             const IconComponent = item.icon;
 
                             if (isPemerintahanItem) {
                                 // Render as dropdown for pemerintahan sub-items
                                 return (
                                     <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild>
+                                        <DropdownMenuTrigger asChild id="header-nav-trigger-pemerintahan">
                                             <Button
                                                 variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-primary-500! hover:text-white! data-[state=open]:bg-primary-500! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
+                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
                                             >
                                                 <IconComponent className="h-4 w-4 mr-2" />
                                                 <span>{item.label}</span>
@@ -370,7 +378,7 @@ export function Header() {
                                         <DropdownMenuTrigger asChild id={`header-nav-trigger-${item.href.substring(1)}`}>
                                             <Button
                                                 variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-primary-600! hover:text-white! data-[state=open]:bg-primary-600! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
+                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
                                             >
                                                 <IconComponent className="h-4 w-4 mr-2" />
                                                 <span>{item.label}</span>
@@ -397,10 +405,10 @@ export function Header() {
                                 // Render as dropdown for statistik sub-items
                                 return (
                                     <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild>
+                                        <DropdownMenuTrigger asChild id="header-nav-trigger-statistik">
                                             <Button
                                                 variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-primary-500! hover:text-white! data-[state=open]:bg-primary-500! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
+                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
                                             >
                                                 <IconComponent className="h-4 w-4 mr-2" />
                                                 <span>{item.label}</span>
@@ -410,9 +418,12 @@ export function Header() {
                                         <DropdownMenuContent align="start" className="w-full">
                                             {statistikCategories.map((category) => {
                                                 const CategoryIcon = category.icon;
+                                                const categoryId = `header-nav-trigger-statistik-${category.category
+                                                    .toLowerCase()
+                                                    .replace(/\s+/g, "-")}`;
                                                 return (
                                                     <DropdownMenuSub key={category.category}>
-                                                        <DropdownMenuSubTrigger>
+                                                        <DropdownMenuSubTrigger id={categoryId}>
                                                             <CategoryIcon className="h-4 w-4 mr-2" />
                                                             {category.category}
                                                         </DropdownMenuSubTrigger>
@@ -436,12 +447,41 @@ export function Header() {
                                 );
                             }
 
+                            if (isEwsItem) {
+                                return (
+                                    <DropdownMenu key={item.href}>
+                                        <DropdownMenuTrigger asChild id="header-nav-trigger-ews">
+                                            <Button
+                                                variant="ghost"
+                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
+                                            >
+                                                <IconComponent className="h-4 w-4 mr-2" />
+                                                <span>{item.label}</span>
+                                                <ChevronDown className="h-4 w-4 ml-1" />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="start" className="w-full">
+                                            {ewsSubItems.map((subItem) => (
+                                                <DropdownMenuItem key={subItem.href} asChild>
+                                                    <Link
+                                                        href={subItem.href}
+                                                        className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
+                                                    >
+                                                        {subItem.label}
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                            ))}
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                );
+                            }
+
                             // Render as regular link
                             return (
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="px-4 py-2 text-sm text-white hover:bg-primary-500 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center"
+                                    className="px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center"
                                 >
                                     <IconComponent className="h-4 w-4 mr-2" />
                                     {item.label}

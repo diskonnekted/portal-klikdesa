@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { Users, Mail, Phone, MapPin, Calendar, UserCheck, Briefcase } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -200,14 +201,13 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                                 >
                                     <div className="relative w-full h-[316px] bg-gradient-to-br from-sky-100 to-blue-200 overflow-hidden">
                                         {photoUrl ? (
-                                            <img
+                                            <Image
                                                 src={photoUrl}
                                                 alt={pegawai.pamong_nama}
-                                                className="w-full h-full object-cover object-top scale-102"
-                                                style={{
-                                                    objectFit: "cover",
-                                                    objectPosition: "top center",
-                                                }}
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
+                                                className="object-cover object-top scale-102"
+                                                style={{ objectFit: "cover", objectPosition: "top center" }}
                                             />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center">
@@ -217,7 +217,7 @@ export function PegawaiDisplay({ className }: PegawaiDisplayProps) {
                                     </div>
                                     <CardContent className="p-4 pt-0 pb-0 space-y-3">
                                         <div>
-                                            <h3 className="text-sm font-bold text-primary mb-1">
+                                            <h3 className="text-sm font-bold text-foreground mb-1">
                                                 {pegawai.pamong_nama}
                                             </h3>
                                             <Badge variant="secondary" className="text-xs">

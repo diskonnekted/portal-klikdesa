@@ -119,10 +119,13 @@ function decodeHtmlEntities(text: string): string {
 }
 
 // Base API function - now uses proxy to avoid CORS issues
-async function fetchFromOpenSID(_endpoint: string = "", params: Record<string, string> = {}) {
+async function fetchFromOpenSID(params: Record<string, string> = {}) {
     // Use proxy API route to avoid CORS issues
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sijenggung.smartdesa.net";
-    const url = new URL("/api/opensid-proxy", baseUrl);
+    const origin =
+        typeof window !== "undefined"
+            ? window.location.origin
+            : env.NEXT_PUBLIC_SITE_URL ?? `http://localhost:${env.PORT ?? "5091"}`;
+    const url = new URL("/api/opensid-proxy", origin);
 
     // Add parameters if needed
     Object.entries(params).forEach(([key, value]) => {
@@ -160,26 +163,33 @@ async function fetchFromOpenSID(_endpoint: string = "", params: Record<string, s
 function transformArticle(article: OpenSIDArticle) {
     const { attributes } = article;
 
-    // Featured image with fallback - OpenSID uses /desa/upload/artikel/sedang_ prefix
+    function normalizeImageUrl(raw: string): string {
+        if (!raw) return raw;
+        let urlStr = raw.trim().replace(/^[)\s]+|[)\s]+$/g, "");
+        urlStr = urlStr.replace(/^http:\/\//i, "https://");
+        const base = (env.OPENSID_API_URL ?? "https://sijenggung-banjarnegara.desa.id").replace(/^http:\/\//, "https://");
+        try {
+            if (urlStr.startsWith("/")) {
+                return `${base}${urlStr}`;
+            }
+            if (!urlStr.includes("/")) {
+                return `${base}/desa/upload/artikel/sedang_${urlStr}`;
+            }
+            const u = new URL(urlStr);
+            const b = new URL(base);
+            if (u.hostname !== b.hostname) {
+                return `${b.origin}${u.pathname}`;
+            }
+            return u.toString().replace(/^http:\/\//i, "https://");
+        } catch {
+            return `${base}/desa/upload/artikel/${urlStr.replace(/[^a-zA-Z0-9._/-]/g, "")}`;
+        }
+    }
+
     let featuredImage =
         "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%23006064'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23ffffff' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
     if (attributes.gambar) {
-        // OpenSID image pattern: /desa/upload/artikel/sedang_<filename>
-        let imageUrl = attributes.gambar;
-
-        // If it's just a filename (no path), add the OpenSID path with sedang_ prefix
-        if (!imageUrl.includes("/")) {
-            imageUrl = `https://pondokrejo.sleman-desa.id/desa/upload/artikel/sedang_${imageUrl}`;
-        } else {
-            // If it's a relative path, add base URL
-            if (imageUrl.startsWith("/")) {
-                imageUrl = `https://pondokrejo.sleman-desa.id${imageUrl}`;
-            }
-            // Force HTTPS
-            imageUrl = imageUrl.replace(/^http:\/\//i, "https://");
-        }
-
-        featuredImage = imageUrl;
+        featuredImage = normalizeImageUrl(attributes.gambar);
     }
 
     // Generate excerpt from content

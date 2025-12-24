@@ -56,182 +56,109 @@
 }
 
 :root {
-    /* Sijenggung Village Theme - Light Mode Only */
+    /* Sijenggung Village Theme - Pastel Request */
     --radius: 0.625rem;
 
-    /* Base colors - Sijenggung Village Official (Updated to Modern Energetic) */
-    --background: #F9F9F9; /* Off-White Netral */
-    --foreground: #2D3436; /* Charcoal Gelap */
-    --card: #FFFFFF; /* Putih Murni */
-    --card-foreground: #2D3436;
+    /* User Requested Pastel Palette */
+    --powder-blush: #ffadad;
+    --apricot-cream: #ffd6a5;
+    --cream: #fdffb6;
+    --tea-green: #caffbf;
+    --electric-aqua: #9bf6ff;
+    --baby-blue-ice: #a0c4ff;
+    --periwinkle: #bdb2ff;
+    --mauve: #ffc6ff;
+    --porcelain: #fffffc;
+
+    /* Base colors */
+    --background: var(--porcelain); /* Porcelain */
+    --foreground: #1F2933; /* Charcoal */
+
+    --card: #FFFFFF;
+    --card-foreground: #1F2933;
+
     --popover: #FFFFFF;
-    --popover-foreground: #2D3436;
+    --popover-foreground: #1F2933;
 
-    /* Primary colors - Turquoise Segar */
-    --primary: #4ECDC4; /* Main Brand */
-    --primary-foreground: #FFFFFF;
+    /* Primary colors - Baby Blue Ice */
+    --primary: var(--baby-blue-ice);
+    --primary-foreground: #1F2933; /* Dark text for readability on light blue */
 
-    /* Secondary colors - Orange Energetik (even darker for contrast) */
-    --secondary: #E65100; /* Supportive */
-    --secondary-foreground: #FFFFFF;
+    /* Secondary colors - Tea Green */
+    --secondary: var(--tea-green);
+    --secondary-foreground: #1F2933; /* Dark text for readability on light green */
 
-    /* Accent colors - Coral Hangat */
-    --accent: #FF6B6B; /* Notifications, Status */
-    --accent-foreground: #FFFFFF;
+    /* Muted/Neutral */
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
 
-    /* Tertiary colors - Purple Modern */
-    --tertiary: #6C5CE7; /* Unique Elements */
-    --tertiary-foreground: #FFFFFF;
+    /* Accent - Powder Blush */
+    --accent: var(--powder-blush);
+    --accent-foreground: #1F2933;
 
-    /* Muted colors - Light variations */
-    --muted: #F3F4F6;
-    --muted-foreground: #6B7280;
-
-    /* Status colors */
-    --destructive: #E74C3C; /* Crimson Merah */
+    /* Destructive */
+    --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
 
-    /* UI elements - Adjusted for new color scheme */
-    --border: #B2EBF2; /* Primary 100 (Turquoise light) */
-    --input: #E0F7FA; /* Primary 50 (Turquoise very light) */
-    --ring: #4ECDC4;
+    /* Border/Input */
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: var(--baby-blue-ice);
 
-    /* Chart colors - Updated color scheme */
-    --chart-1: #4ECDC4; /* Primary */
-    --chart-2: #FF8A00; /* Secondary */
-    --chart-3: #6C5CE7; /* Accent */
-    --chart-4: #FDBB30; /* Warning */
-    --chart-5: #2ECC71; /* Success */
+    /* Charts (Pastel Palette) */
+    --chart-1: var(--baby-blue-ice);
+    --chart-2: var(--tea-green);
+    --chart-3: var(--periwinkle);
+    --chart-4: var(--apricot-cream);
+    --chart-5: var(--powder-blush);
 
-    /* Sidebar colors - Updated */
+    /* Sidebar */
     --sidebar: #FFFFFF;
-    --sidebar-foreground: #2D3436;
-    --sidebar-primary: #4ECDC4;
-    --sidebar-primary-foreground: #FFFFFF;
-    --sidebar-accent: #E0F7FA;
-    --sidebar-accent-foreground: #4ECDC4;
-    --sidebar-border: #B2EBF2;
-    --sidebar-ring: #4ECDC4;
+    --sidebar-foreground: #1F2933;
+    --sidebar-primary: var(--baby-blue-ice);
+    --sidebar-primary-foreground: #1F2933;
+    --sidebar-accent: var(--tea-green);
+    --sidebar-accent-foreground: #1F2933;
+    --sidebar-border: #E2E8F0;
+    --sidebar-ring: var(--baby-blue-ice);
+}
 
-    /* Village specific colors */
-    --village-success: #2ECC71;
-    --village-warning: #FDBB30;
-    --village-danger: #E74C3C;
-    --village-info: #3498DB;
+.dark {
+    /* Dark mode adjustments if needed, but keeping pastel vibe */
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
 
-    /* Text colors for dark/light contrast */
-    --text-normal: #FFFFFF;
-    --text-hover: #FFE0B2;
+    --popover: #1e293b;
+    --popover-foreground: #f8fafc;
+
+    --primary: var(--baby-blue-ice);
+    --primary-foreground: #1F2933;
+
+    --secondary: var(--tea-green);
+    --secondary-foreground: #1F2933;
+
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+
+    --accent: var(--powder-blush);
+    --accent-foreground: #1F2933;
+
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f8fafc;
+
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: var(--baby-blue-ice);
 }
 
 @layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-}
-
-/* Line clamping utility */
-@layer utilities {
-    .line-clamp-1 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-    }
-
-    .line-clamp-2 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-
-    .line-clamp-3 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-    }
-
-    .line-clamp-4 {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-    }
-}
-
-/* PWA Offline Styles */
-body.offline {
-    position: relative;
-}
-
-body.offline::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #f59e0b, #ef4444);
-    z-index: 9999;
-    animation: offlinePulse 2s ease-in-out infinite;
-}
-
-body.offline::after {
-    content: "📶 Mode Offline";
-    position: fixed;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fbbf24;
-    color: #78350f;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    z-index: 9999;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-@keyframes offlinePulse {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
-/* IDM Data Loading Animations */
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 100;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes wiggle {
-    0%,
-    100% {
-        transform: rotate(-3deg);
-    }
-    50% {
-        transform: rotate(3deg);
-    }
-}
-
-@keyframes progress {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

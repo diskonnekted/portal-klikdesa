@@ -16,7 +16,7 @@ export function EventDate({ event }: EventDateProps) {
 
     return (
         <div className="text-center bg-primary/10 rounded-lg p-2 min-w-[60px]">
-            <div className="text-lg font-bold text-primary">{format(date, "dd")}</div>
+            <div className="text-lg font-bold text-foreground">{format(date, "dd")}</div>
             <div className="text-xs text-muted-foreground">{format(date, "MMM")}</div>
         </div>
     );

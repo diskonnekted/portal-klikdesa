@@ -14,7 +14,7 @@ export default function PengaduanPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full">
                         <MessageSquare className="h-10 w-10 text-red-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Pengaduan Masyarakat</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Pengaduan Masyarakat</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
         Salurkan aspirasi, keluhan, dan saran Anda untuk kemajuan Desa Sijenggung. Setiap masukan
         Anda penting bagi kami.

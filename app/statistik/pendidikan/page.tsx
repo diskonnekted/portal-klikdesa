@@ -11,7 +11,7 @@ export default function PendidikanPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full">
                         <GraduationCap className="h-10 w-10 text-blue-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Pendidikan</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Pendidikan</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik pendidikan penduduk Desa Sijenggung
                     </p>

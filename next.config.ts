@@ -74,6 +74,12 @@ const nextConfig: NextConfig = {
                 port: '',
                 pathname: '/desa/upload/pembangunan/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'static.bmkg.go.id',
+                port: '',
+                pathname: '/**',
+            },
         ],
 
         dangerouslyAllowSVG: false,

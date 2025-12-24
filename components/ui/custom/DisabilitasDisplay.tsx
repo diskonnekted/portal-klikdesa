@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
-import { Accessibility, Users, UserCheck, Heart, TrendingUp, BarChart3 } from "lucide-react";
+import { Accessibility, Users, UserCheck, TrendingUp, BarChart3 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -229,7 +229,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
             {/* Summary Cards - Always 4 cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {/* Display Cards */}
-                {displayCards.map((card, index) => {
+                {displayCards.map((card) => {
                     const IconComponent = getDisabilitasIcon(card.attributes.nama, card.type);
                     const colorClass = getDisabilitasColor(card.attributes.nama, card.type);
                     const textColor = getTextColor(card.attributes.nama, card.type);
@@ -292,7 +292,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                                     <span className="font-semibold">Total Population</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.jumlah.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -302,7 +302,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                                     <span className="font-semibold">Perempuan</span>
                                     <UserCheck className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.perempuan.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -312,7 +312,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                                     <span className="font-semibold">Laki-laki</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.laki.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -345,8 +345,8 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                                         className="p-4 bg-muted/30 rounded-lg flex items-center justify-between"
                                     >
                                         <div>
-                                            <h4 className="font-semibold text-primary flex items-center gap-2">
-                                                <IconComponent className="h-4 w-4" />
+                                            <h4 className="font-semibold text-foreground flex items-center gap-2">
+                                                <IconComponent className="h-4 w-4 text-primary" />
                                                 {item.attributes.nama}
                                             </h4>
                                             <p className="text-sm text-muted-foreground">
@@ -354,7 +354,7 @@ export function DisabilitasDisplay({ className }: DisabilitasDisplayProps) {
                                             </p>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-2xl font-bold text-primary">
+                                            <div className="text-2xl font-bold text-foreground">
                                                 {item.attributes.jumlah.toLocaleString("id-ID")}
                                             </div>
                                             {item.attributes.persen && (

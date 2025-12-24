@@ -215,7 +215,7 @@ export default function PembangunanPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                             <Hammer className="h-10 w-10 text-orange-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Pembangunan Desa</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa
                             Sijenggung
@@ -235,7 +235,7 @@ export default function PembangunanPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                             <Hammer className="h-10 w-10 text-orange-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Pembangunan Desa</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa
                             Sijenggung
@@ -254,7 +254,7 @@ export default function PembangunanPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full">
                         <Hammer className="h-10 w-10 text-orange-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Pembangunan Desa</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Pembangunan Desa</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Informasi lengkap mengenai proyek pembangunan infrastruktur dan kemajuan Desa Sijenggung
                     </p>

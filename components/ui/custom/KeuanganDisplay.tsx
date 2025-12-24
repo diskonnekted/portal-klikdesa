@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { DollarSign, TrendingUp, TrendingDown, PieChart } from "lucide-react";
@@ -63,21 +63,6 @@ const formatCurrency = (value: number | string | null): string => {
     }).format(num);
 };
 
-// Helper function to format compact currency
-const formatCompactCurrency = (value: number | string | null): string => {
-    if (value === null || value === undefined) return "Rp 0";
-    const num = typeof value === "string" ? parseFloat(value) : value;
-    if (isNaN(num) || num === 0) return "Rp 0";
-    return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        notation: "compact",
-        compactDisplay: "short",
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-    }).format(num);
-};
-
 // Helper function to format percentage
 const formatPercentage = (value: number | null | undefined): string => {
     if (value === null || value === undefined || isNaN(value)) return "0,00%";
@@ -125,6 +110,26 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
 
         loadData();
     }, [tahun]);
+
+    if (loading) {
+        return (
+            <div className={cn("w-full space-y-4", className)}>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <DollarSign className="h-5 w-5 text-primary" />
+                            Laporan Keuangan Desa
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex items-center justify-center py-12">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
 
     if (!data || !data.data || data.data.length === 0) {
         return (
@@ -266,7 +271,7 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
                     <CardContent>
                         {/* Table Header */}
                         <div className="text-center mb-4">
-                            <h3 className="text-xl font-bold text-primary mb-1">Pendapatan APBDes {tahun}</h3>
+                            <h3 className="text-xl font-bold text-foreground mb-1">Pendapatan APBDes {tahun}</h3>
                             <p className="text-xs text-muted-foreground">Pendapatan</p>
                         </div>
 
@@ -323,7 +328,7 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
                     <CardContent>
                         {/* Table Header */}
                         <div className="text-center mb-4">
-                            <h3 className="text-xl font-bold text-primary mb-1">Pembelanjaan APBDes {tahun}</h3>
+                            <h3 className="text-xl font-bold text-foreground mb-1">Pembelanjaan APBDes {tahun}</h3>
                             <p className="text-xs text-muted-foreground">Pembelanjaan</p>
                         </div>
 
@@ -378,7 +383,7 @@ export function KeuanganDisplay({ className }: KeuanganDisplayProps) {
                     <CardContent>
                         {/* Table Header */}
                         <div className="text-center mb-4">
-                            <h3 className="text-xl font-bold text-primary mb-1">Pelaksanaan APBDes {tahun}</h3>
+                            <h3 className="text-xl font-bold text-foreground mb-1">Pelaksanaan APBDes {tahun}</h3>
                             <p className="text-xs text-muted-foreground">Pelaksanaan</p>
                         </div>
 

@@ -57,6 +57,7 @@ export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
         const kategori = searchParams.get("kategori");
+        const kategoriSlug = searchParams.get("kategori_slug") ?? "berita-desa";
 
         // Fetch news data from external API
         const response = await fetch(`${env.OPENSID_API_URL ?? "https://sijenggung-banjarnegara.desa.id"}/internal_api/arsip`, {
@@ -93,11 +94,28 @@ export async function GET(request: NextRequest) {
         // Sort by ID descending (latest posts first - id=25 is newer than id=1)
         articles = articles.sort((a: OpenSIDArticle, b: OpenSIDArticle) => parseInt(b.id) - parseInt(a.id));
 
-        // Filter by category if specified
         if (kategori) {
             articles = articles.filter((article: OpenSIDArticle) => {
-                // @ts-expect-error - OpenSID response may include 'category' without strict typing
+                // @ts-expect-error OpenSID category shape differs by API response
                 return article.attributes.category?.id === kategori;
+            });
+        }
+        if (kategoriSlug) {
+            const normalizedSlug = kategoriSlug.toLowerCase().trim();
+            articles = articles.filter((article: OpenSIDArticle) => {
+                // @ts-expect-error OpenSID category slug may be missing or non-string
+                const categorySlug = ((article.attributes.category?.slug ?? "") as string).toLowerCase();
+                // @ts-expect-error OpenSID category label may be missing or non-string
+                const categoryLabel = ((article.attributes.category?.kategori ?? "") as string).toLowerCase();
+                const urlSlug = ((article.attributes.url_slug as string) || "").toLowerCase();
+                const hyphenatedLabel = categoryLabel.replace(/\s+/g, "-");
+
+                const slugMatch = categorySlug === normalizedSlug || hyphenatedLabel === normalizedSlug;
+                const pathMatch =
+                    urlSlug.includes(`/artikel/kategori/${normalizedSlug}/`) ||
+                    urlSlug.includes(`/artikel/${normalizedSlug}/`) ||
+                    urlSlug.includes(`${normalizedSlug}/`);
+                return slugMatch || pathMatch;
             });
         }
 

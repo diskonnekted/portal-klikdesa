@@ -217,7 +217,7 @@ const CustomDialog = ({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className={cn(sizeClasses[size])}>
+            <DialogContent className={cn(sizeClasses[size])} showCloseButton={_showCloseButton}>
                 <DialogHeader>
                     <DialogTitle className="text-xl font-semibold">{title}</DialogTitle>
                     {description && (

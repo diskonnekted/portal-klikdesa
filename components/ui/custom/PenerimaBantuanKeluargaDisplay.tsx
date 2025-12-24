@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { BarChart3, Home, TrendingUp, Users, Heart } from "lucide-react";
@@ -107,8 +107,6 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
     }
 
     const totalData = data.data.find((item) => item.attributes.nama === "TOTAL");
-    const penerimaData = data.data.find((item) => item.attributes.nama === "PENERIMA");
-    const bukanPenerimaData = data.data.find((item) => item.attributes.nama === "BUKAN PENERIMA");
 
     const getBantuanColor = (nama: string) => {
         switch (nama) {
@@ -216,7 +214,7 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
                                     <span className="font-semibold">Total Data</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.jumlah.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -225,7 +223,7 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
                                     <span className="font-semibold">Perempuan</span>
                                     <Heart className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.perempuan.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -234,7 +232,7 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
                                     <span className="font-semibold">Laki-laki</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.laki.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -262,7 +260,7 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
                                         className="p-4 bg-muted/30 rounded-lg flex items-center justify-between"
                                     >
                                         <div>
-                                            <h4 className="font-semibold text-primary flex items-center gap-2">
+                                            <h4 className="font-semibold text-foreground flex items-center gap-2">
                                                 <IconComponent className="h-4 w-4" />
                                                 {item.attributes.nama}
                                             </h4>
@@ -271,7 +269,7 @@ export function PenerimaBantuanKeluargaDisplay({ className }: PenerimaBantuanKel
                                             </p>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-2xl font-bold text-primary">
+                                            <div className="text-2xl font-bold text-foreground">
                                                 {item.attributes.jumlah.toLocaleString("id-ID")}
                                             </div>
                                             {item.attributes.persen && (

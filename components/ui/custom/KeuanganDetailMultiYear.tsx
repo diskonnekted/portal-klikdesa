@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import {
@@ -256,7 +256,7 @@ export function KeuanganDetailMultiYear() {
         <div className="space-y-6">
             {/* Header */}
             <div className="text-center">
-                <h2 className="text-2xl font-bold text-primary mb-2">Analisis Detail Keuangan Multi-Tahun</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-2">Analisis Detail Keuangan Multi-Tahun</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                     Perbandingan detail item pendapatan dan belanja dari tahun 2021 hingga {currentYear}
                 </p>

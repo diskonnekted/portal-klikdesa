@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import {
@@ -291,7 +291,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                                 <span className="font-semibold">Ibu Hamil</span>
                                 <Baby className="h-5 w-5 text-primary" />
                             </div>
-                            <p className="text-2xl font-bold text-primary">{ibuHamilPeriksa}</p>
+                            <p className="text-2xl font-bold text-foreground">{ibuHamilPeriksa}</p>
                             <p className="text-sm text-muted-foreground">ibu hamil periksa bulan ini</p>
                         </div>
 
@@ -300,7 +300,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                                 <span className="font-semibold">Anak</span>
                                 <Activity className="h-5 w-5 text-primary" />
                             </div>
-                            <p className="text-2xl font-bold text-primary">{anakPeriksa}</p>
+                            <p className="text-2xl font-bold text-foreground">{anakPeriksa}</p>
                             <p className="text-sm text-muted-foreground">anak periksa bulan ini</p>
                         </div>
                     </CardContent>
@@ -335,7 +335,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                                 <span className="font-semibold">JTRT</span>
                                 <Users className="h-5 w-5 text-primary" />
                             </div>
-                            <p className="text-2xl font-bold text-primary">{scorecard.JTRT}</p>
+                            <p className="text-2xl font-bold text-foreground">{scorecard.JTRT}</p>
                         </div>
                     </CardContent>
                 </Card>
@@ -354,7 +354,7 @@ export function StuntingDisplay({ className }: StuntingDisplayProps) {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {scorecard.posyandu.map((pos) => (
                             <div key={pos.id} className="p-4 bg-muted/30 rounded-lg space-y-2">
-                                <h4 className="font-semibold text-primary">{pos.nama}</h4>
+                                <h4 className="font-semibold text-foreground">{pos.nama}</h4>
                                 <p className="text-sm text-muted-foreground flex items-start gap-2">
                                     <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                                     {pos.alamat}

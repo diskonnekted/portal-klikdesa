@@ -12,17 +12,19 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     }
 
     const response = await fetchSDGSDetail(goalId, locationCode);
-
     if (!response.success) {
         return NextResponse.json(
+            { target: [], header: [], recom: [] },
             {
-                error: "Failed to fetch SDGS detail data",
-                message: response.message,
-            },
-            { status: response.status || 500 }
+                status: 200,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                },
+            }
         );
     }
-
     return NextResponse.json(response.data, {
         headers: {
             "Access-Control-Allow-Origin": "*",

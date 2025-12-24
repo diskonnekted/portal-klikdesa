@@ -39,8 +39,6 @@ import { DecorativeSeparator } from "@/components/ui/custom/DecorativeSeparator"
 import { useExternalNews } from "@/hooks/useExternalNews";
 import { useHolidays } from "@/hooks/useHolidays";
 import { useTranslation } from "@/lib/useTranslation";
-import { useWeatherAnimation } from "@/hooks/useWeatherAnimation";
-import { WeatherAnimation } from "@/components/ui/custom/WeatherAnimation";
 import { EventDate } from "@/components/EventDate";
 import { HolidayCards } from "@/components/ui/custom/HolidayCards";
 
@@ -92,7 +90,6 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
 export function HomePageClient({ serverData }: { serverData: ServerData }) {
     const { t } = useTranslation();
     const { news: externalNews, error: newsError } = useExternalNews(20);
-    const { weatherData } = useWeatherAnimation();
     const { holidays, loading: holidaysLoading, error: holidaysError } = useHolidays(10);
     const [selectedYear, setSelectedYear] = React.useState<number>(2024);
 
@@ -171,39 +168,39 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
     return (
         <div className="beranda-container bg-background">
             {/* Hero Section with Layanan Cepat */}
-            <section className="hero-area bg-gradient-to-b from-[#E65100] to-[#EF6C00] py-16 relative">
-                <WeatherAnimation weatherData={weatherData} className="z-10" />
+            <section className="hero-area bg-[#26C6DA] py-16 relative">
+                {/* <WeatherAnimation weatherData={weatherData} className="z-10 opacity-60" /> */}
                 <div className="container mx-auto px-4 relative z-20">
                     {/* Hero Text */}
-                    <div className="text-center text-white mb-16">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">Selamat Datang</h1>
-                        <p className="text-lg md:text-xl mb-6 text-white/95 drop-shadow">
+                    <div className="text-center text-foreground mb-16">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-sm text-white">Selamat Datang</h1>
+                        <p className="text-lg md:text-xl mb-6 text-white/90 drop-shadow-sm">
                             Portal Resmi Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <Badge
                                 variant="default"
-                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
                             >
-                                <Eye /> Transparan
+                                <Eye className="text-primary-600" /> Transparan
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
                             >
-                                <NotebookPen /> Akuntabel
+                                <NotebookPen className="text-primary-600" /> Akuntabel
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
                             >
-                                <BriefcaseBusiness /> Profesional
+                                <BriefcaseBusiness className="text-primary-600" /> Profesional
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-secondary-700 text-white border-secondary-600 shadow-md hover:shadow-lg hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
                             >
-                                <Lightbulb /> Inovatif
+                                <Lightbulb className="text-primary-600" /> Inovatif
                             </Badge>
                         </div>
                     </div>
@@ -213,15 +210,15 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                         {quickLinks.map((link) => (
                             <div
                                 key={link.label}
-                                className="group rounded-sm border hover:shadow-md transition-all cursor-pointer overflow-hidden hover:scale-102"
+                                className="group rounded-xl border border-primary-100 bg-white/60 hover:bg-white hover:shadow-lg transition-all cursor-pointer overflow-hidden hover:scale-102 backdrop-blur-sm"
                             >
                                 <Link
                                     href={link.href ?? "#"}
-                                    className="block bg-tertiary-900/40 text-white hover:bg-white hover:text-primary"
+                                    className="block text-slate-700 hover:text-primary-700"
                                 >
                                     {/* Image section - full height minus text section */}
                                     <div
-                                        className="relative h-40 bg-gray-100"
+                                        className="relative h-40 bg-primary-50/50"
                                         style={{
                                             backgroundImage: `url(${link.svg})`,
                                             backgroundRepeat: "no-repeat",
@@ -230,8 +227,8 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         }}
                                     ></div>
                                     {/* Text section - at the bottom */}
-                                    <div className="p-1 hover:bg-white hover:text-primary">
-                                        <span className="text-sm font-medium text-center group-hover:text-primary transition-colors block">
+                                    <div className="p-3 bg-white/80 backdrop-blur-sm border-t border-primary-100">
+                                        <span className="text-sm font-semibold text-center group-hover:text-primary-700 transition-colors block text-slate-800">
                                             {link.label}
                                         </span>
                                     </div>
@@ -246,10 +243,10 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 rounded-2xl shadow-2xl hover:shadow-primary-500/50 transition-all duration-500 hover:scale-105 overflow-hidden border border-primary-600"
+                            className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl shadow-xl hover:shadow-primary-300/50 transition-all duration-500 hover:scale-105 overflow-hidden border border-primary-500"
                         >
                             {/* Animated background shimmer */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-100/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
 
                             {/* Custom SVG Icon */}
                             <div className="relative z-10 flex-shrink-0">
@@ -263,13 +260,13 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                 >
                                     {/* Document base */}
                                     <rect x="10" y="6" width="28" height="36" rx="3" fill="white" fillOpacity="0.95" />
-                                    <rect x="10" y="6" width="28" height="36" rx="3" stroke="white" strokeWidth="2" />
+                                    <rect x="10" y="6" width="28" height="36" rx="3" stroke="#e2e8f0" strokeWidth="2" />
 
                                     {/* Folded corner */}
-                                    <path d="M30 6 L38 14 L30 14 Z" fill="rgba(255,255,255,0.7)" />
+                                    <path d="M30 6 L38 14 L30 14 Z" fill="#f1f5f9" />
                                     <path
                                         d="M30 6 L38 14 L30 14 Z"
-                                        stroke="white"
+                                        stroke="#cbd5e1"
                                         strokeWidth="1.5"
                                         strokeLinejoin="round"
                                     />
@@ -318,36 +315,14 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                     />
-
-                                    {/* Sparkles */}
-                                    <circle cx="12" cy="10" r="1.5" fill="white" className="animate-pulse" />
-                                    <circle
-                                        cx="36"
-                                        cy="8"
-                                        r="1"
-                                        fill="white"
-                                        className="animate-pulse"
-                                        style={{ animationDelay: "0.3s" }}
-                                    />
-                                    <circle
-                                        cx="34"
-                                        cy="38"
-                                        r="1.5"
-                                        fill="white"
-                                        className="animate-pulse"
-                                        style={{ animationDelay: "0.6s" }}
-                                    />
                                 </svg>
                             </div>
 
                             {/* Text Content */}
                             <div className="relative z-10 text-left">
                                 <div className="text-2xl font-bold text-white drop-shadow-md">Layanan Mandiri</div>
-                                <div className="text-white/80 text-sm mt-1">Ajukan permohonan secara online â†’</div>
+                                <div className="text-white/90 text-sm mt-1">Ajukan permohonan secara online â†’</div>
                             </div>
-
-                            {/* Pulse effect on hover */}
-                            <div className="absolute inset-0 rounded-2xl bg-primary-100 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                         </a>
                     </div>
                 </div>
@@ -357,21 +332,21 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             <section className="content-area container mx-auto px-4 py-8 space-y-4">
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-secondary mb-2">Berita & Informasi Terbaru</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        Ada kegiatan apa saja di Desa Sijenggung hari ini?
-                    </p>
-                </div>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Berita & Informasi Terbaru</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Ada kegiatan apa saja di Desa Sijenggung hari ini?
+        </p>
+      </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Kolom 1 - Pengumuman */}
                     <div className="content-left space-y-4 lg:col-span-1 flex flex-col">
                         {/* Pengumuman */}
                         <Card className="bg-card border-border">
                             <CardHeader className="gap-0">
-                                <CardTitle className="flex items-center gap-2 text-lg text-secondary">
-                                    <Bell className="h-5 w-5 text-secondary" />
-                                    {t("pengumuman.pengumuman")}
-                                </CardTitle>
+                                <CardTitle className="flex items-center gap-2 text-lg text-foreground">
+                <Bell className="h-5 w-5 text-primary-950" />
+                {t("pengumuman.pengumuman")}
+              </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-3">
                                 {serverData.pengumuman.slice(0, 5).map((item) => (
@@ -445,7 +420,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                     </div>
                                 </div>
                                 <CardContent className="p-4">
-                                    <h2 className="text-1xl md:text-2xl font-bold mb-3 line-clamp-2 text-primary">
+                                    <h2 className="text-1xl md:text-2xl font-bold mb-3 line-clamp-2 text-foreground">
                                         {newsData.beritaUtama.judul}
                                     </h2>
                                     <p className="text-muted-foreground mb-4 line-clamp-3 text-justify">
@@ -500,9 +475,9 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                         {newsData && newsData.beritaLainnya && newsData.beritaLainnya.length > 0 && (
                             <Card>
                                 <CardHeader>
-                                    <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                                         <Newspaper className="h-5 w-5 text-primary" />
-                                        {t("berita.beritaLainnya")}
+                                        Berita Terbaru
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -548,9 +523,9 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                         {/* Kegiatan Hari Ini */}
                         <Card>
                             <CardHeader className="gap-0">
-                                <CardTitle className="flex items-center gap-2 text-lg text-primary">
+                                <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                                     <Calendar className="h-5 w-5 text-primary" />
-                                    {t("kegiatan.judul")}
+                                    Agenda Kegiatan
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
@@ -609,7 +584,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             {/* IDM - Indeks Desa Mandiri */}
             <section className="idm-area container mx-auto px-4 py-8">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Indeks Desa Mandiri (IDM)</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">Indeks Desa Mandiri (IDM)</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">Evaluasi capaian Indeks Desa Mandiri</p>
                     <div className="mt-4">
                         <YearSelector
@@ -636,7 +611,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             <section className="sdgs-area container mx-auto px-4 py-8 pb-20">
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">Tujuan Pembangunan Berkelanjutan (SDGs)</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">Tujuan Pembangunan Berkelanjutan (SDGs)</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Pantau kemajuan implementasi 18 Tujuan Pembangunan Berkelanjutan di Desa Sijenggung
                     </p>

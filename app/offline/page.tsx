@@ -33,7 +33,7 @@ export default function OfflinePage() {
 
                 {/* Branding */}
                 <div className="pt-4 border-t border-border">
-                    <p className="text-sm font-medium text-primary">{env.APP_NAME || "Portal Desa Sijenggung"}</p>
+                    <p className="text-sm font-medium text-foreground">{env.APP_NAME || "Portal Desa Sijenggung"}</p>
                     <p className="text-xs text-muted-foreground">Kabupaten Banjarnegara, Jawa Tengah</p>
                 </div>
             </div>

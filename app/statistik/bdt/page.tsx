@@ -1,6 +1,6 @@
 "use client";
 
-import { Database, Users, Star } from "lucide-react";
+import { Database, Users } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BDTDisplay } from "@/components/ui/custom/BDTDisplay";
@@ -14,7 +14,7 @@ export default function BdtPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-amber-100 rounded-full">
                         <Database className="h-10 w-10 text-amber-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Data BDT</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Data BDT</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik BDT (Basis Data Terpadu) penduduk Desa Sijenggung
                     </p>

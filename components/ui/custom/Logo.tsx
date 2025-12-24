@@ -12,7 +12,7 @@ interface LogoProps {
     showBackground?: boolean;
 }
 
-export const Logo: React.FC<LogoProps> = ({ size = 48, className, variant = "default", showBackground = true }) => {
+export const Logo: React.FC<LogoProps> = ({ size = 48, className }) => {
     const pixelSize = typeof size === "number" ? `${size}px` : size;
 
     return (

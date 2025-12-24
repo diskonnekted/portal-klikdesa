@@ -175,7 +175,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div>
-                            <h3 className="font-bold text-2xl text-primary mb-2">{petaInfo.desa.nama_desa}</h3>
+                            <h3 className="font-bold text-2xl text-foreground mb-2">{petaInfo.desa.nama_desa}</h3>
                             <div className="space-y-2 text-sm">
                                 <div className="flex items-start gap-2">
                                     <Building className="h-4 w-4 mt-1 text-muted-foreground" />
@@ -233,11 +233,11 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-muted/50 p-4 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Latitude</p>
-                                <p className="text-xl font-bold text-primary">{petaInfo.desa.lat}</p>
+                                <p className="text-xl font-bold text-foreground">{petaInfo.desa.lat}</p>
                             </div>
                             <div className="bg-muted/50 p-4 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Longitude</p>
-                                <p className="text-xl font-bold text-primary">{petaInfo.desa.lng}</p>
+                                <p className="text-xl font-bold text-foreground">{petaInfo.desa.lng}</p>
                             </div>
                         </div>
                         <div className="space-y-2 text-sm">
@@ -283,7 +283,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                             </div>
                             <div className="mt-3 text-center p-3 bg-primary/10 rounded-lg border-2 border-primary/20">
                                 <p className="text-sm text-muted-foreground">Total</p>
-                                <p className="text-2xl font-bold text-primary">{uniqueDusun.length}</p>
+                                <p className="text-2xl font-bold text-foreground">{uniqueDusun.length}</p>
                             </div>
                         </div>
 
@@ -307,7 +307,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                             </div>
                             <div className="mt-3 text-center p-3 bg-primary/10 rounded-lg border-2 border-primary/20">
                                 <p className="text-sm text-muted-foreground">Total</p>
-                                <p className="text-2xl font-bold text-primary">{uniqueRW.length}</p>
+                                <p className="text-2xl font-bold text-foreground">{uniqueRW.length}</p>
                             </div>
                         </div>
 
@@ -331,7 +331,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                             </div>
                             <div className="mt-3 text-center p-3 bg-primary/10 rounded-lg border-2 border-primary/20">
                                 <p className="text-sm text-muted-foreground">Total</p>
-                                <p className="text-2xl font-bold text-primary">{uniqueRT.length}</p>
+                                <p className="text-2xl font-bold text-foreground">{uniqueRT.length}</p>
                             </div>
                         </div>
                     </div>
@@ -352,7 +352,7 @@ export function PetaDisplay({ className }: PetaDisplayProps) {
                         <div className="grid md:grid-cols-2 gap-4">
                             {petaInfo.lokasi_pembangunan.map((proyek, index) => (
                                 <div key={index} className="p-4 bg-muted/30 rounded-lg space-y-3">
-                                    <h4 className="font-semibold text-primary">{proyek.judul}</h4>
+                                    <h4 className="font-semibold text-foreground">{proyek.judul}</h4>
                                     <div className="space-y-1 text-sm">
                                         <div className="flex items-center gap-2">
                                             <MapPin className="h-4 w-4 text-muted-foreground" />

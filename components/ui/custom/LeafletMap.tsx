@@ -6,6 +6,8 @@ import { Shield } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
+import type { GeoJSONProps, MapContainerProps, MarkerProps, PopupProps, TileLayerProps } from "react-leaflet";
+
 interface IoTSensor {
     id: string;
     name: string;
@@ -52,33 +54,40 @@ const loadLeaflet = async () => {
 
 // Dynamically import Leaflet components with explicit types
 const MapContainer = dynamic(
-    () => import("react-leaflet").then((mod) => mod.MapContainer),
+    () =>
+        import("react-leaflet").then(
+            (mod) => mod.MapContainer as unknown as React.ComponentType<MapContainerProps>
+        ),
     { ssr: false }
-) as React.ComponentType<any>;
+);
 
 const TileLayer = dynamic(
-    () => import("react-leaflet").then((mod) => mod.TileLayer),
+    () =>
+        import("react-leaflet").then((mod) => mod.TileLayer as unknown as React.ComponentType<TileLayerProps>),
     { ssr: false }
-) as React.ComponentType<any>;
+);
 
 const GeoJSON = dynamic(
-    () => import("react-leaflet").then((mod) => mod.GeoJSON),
+    () =>
+        import("react-leaflet").then((mod) => mod.GeoJSON as unknown as React.ComponentType<GeoJSONProps>),
     { ssr: false }
-) as React.ComponentType<any>;
+);
 
 const Marker = dynamic(
-    () => import("react-leaflet").then((mod) => mod.Marker),
+    () =>
+        import("react-leaflet").then((mod) => mod.Marker as unknown as React.ComponentType<MarkerProps>),
     { ssr: false }
-) as React.ComponentType<any>;
+);
 
 const Popup = dynamic(
-    () => import("react-leaflet").then((mod) => mod.Popup),
+    () =>
+        import("react-leaflet").then((mod) => mod.Popup as unknown as React.ComponentType<PopupProps>),
     { ssr: false }
-) as React.ComponentType<any>;
+);
 
 export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
-    const [leaflet, setLeaflet] = React.useState<unknown>(null);
+    const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
     const [mapKey, setMapKey] = React.useState(0);
     const [componentsReady, setComponentsReady] = React.useState(false);
@@ -140,10 +149,11 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
 
     // Ensure proper cleanup on unmount
     React.useEffect(() => {
+        const mapElement = mapRef.current;
         return () => {
             // Clean up any existing map instances
-            if (mapRef.current && mapRef.current.children.length > 0) {
-                mapRef.current.innerHTML = "";
+            if (mapElement && mapElement.children.length > 0) {
+                mapElement.innerHTML = "";
             }
         };
     }, []);
@@ -197,44 +207,9 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
         }
     };
 
-    const getTypeColor = (type: IoTSensor["type"]) => {
-        switch (type) {
-            case "seismic":
-                return "bg-red-100 text-red-800";
-            case "water-level":
-                return "bg-blue-100 text-blue-800";
-            case "rainfall":
-                return "bg-sky-100 text-sky-800";
-            case "weather":
-            case "temperature":
-                return "bg-orange-100 text-orange-800";
-            case "air-quality":
-                return "bg-purple-100 text-purple-800";
-            case "ground-tilt":
-                return "bg-amber-100 text-amber-800";
-            case "wind":
-                return "bg-cyan-100 text-cyan-800";
-            case "voltage":
-                return "bg-violet-100 text-violet-800";
-            case "current":
-                return "bg-sky-100 text-sky-800";
-            case "power":
-                return "bg-amber-100 text-amber-800";
-            case "energy":
-                return "bg-emerald-100 text-emerald-800";
-            case "cost":
-                return "bg-red-100 text-red-800";
-            case "humidity":
-                return "bg-blue-100 text-blue-800";
-            default:
-                return "bg-gray-100 text-gray-800";
-        }
-    };
-
     const createCustomIcon = (color: string) => {
         if (!leaflet) return null;
 
-        // @ts-expect-error - Leaflet runtime types mismatch
         return leaflet.divIcon({
             className: "custom-marker",
             html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transform: rotate(-45deg); display: flex; align-items: center; justify-content: center;">
@@ -293,7 +268,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                     />
 
                     {/* Village Boundary from GeoJSON */}
-                    {geoJsonData && (
+                    {geoJsonData != null ? (
                         <ErrorBoundary
                             fallback={null}
                             onError={(error) => console.error("Error rendering GeoJSON:", error)}
@@ -309,10 +284,10 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                                 }}
                             />
                         </ErrorBoundary>
-                    )}
+                    ) : null}
 
                     {/* IoT Sensor Markers */}
-                    {leaflet && (
+                    {leaflet ? (
                         <ErrorBoundary
                             fallback={null}
                             onError={(error) => console.error("Error rendering sensor markers:", error)}
@@ -328,13 +303,14 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                                         key={sensor.id}
                                         position={[sensor.lat, sensor.lng]}
                                         icon={customIcon}
+                                        eventHandlers={{ click: () => onSensorClick(sensor) }}
                                     >
                                         <Popup>
                                             <div className="p-2">
                                                 <h3 className="font-bold text-lg mb-2">{sensor.name}</h3>
                                                 <p className="text-sm text-gray-600 mb-2">{sensor.location}</p>
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-2xl font-bold text-primary">
+                                                    <span className="text-2xl font-bold text-foreground">
                                                         {sensor.value} {sensor.unit}
                                                     </span>
                                                     <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
@@ -361,7 +337,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                                 );
                             })}
                         </ErrorBoundary>
-                    )}
+                    ) : null}
                 </MapContainer>
             </ErrorBoundary>
         </div>

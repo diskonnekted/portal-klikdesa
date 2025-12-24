@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { Heart, Users, UserCheck, Activity, TrendingUp, BarChart3 } from "lucide-react";
@@ -257,7 +257,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                                     <span className="font-semibold">Total Population</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.jumlah.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -266,7 +266,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                                     <span className="font-semibold">Perempuan</span>
                                     <UserCheck className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.perempuan.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -275,7 +275,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                                     <span className="font-semibold">Laki-laki</span>
                                     <Users className="h-5 w-5 text-primary" />
                                 </div>
-                                <p className="text-2xl font-bold text-primary">
+                                <p className="text-2xl font-bold text-foreground">
                                     {totalData.attributes.laki.toLocaleString("id-ID")}
                                 </p>
                             </div>
@@ -307,8 +307,8 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                                         className="p-4 bg-muted/30 rounded-lg flex items-center justify-between"
                                     >
                                         <div>
-                                            <h4 className="font-semibold text-primary flex items-center gap-2">
-                                                <IconComponent className="h-4 w-4" />
+                                            <h4 className="font-semibold text-foreground flex items-center gap-2">
+                                                <IconComponent className="h-4 w-4 text-primary" />
                                                 {item.attributes.nama}
                                             </h4>
                                             <p className="text-sm text-muted-foreground">
@@ -316,7 +316,7 @@ export function DiseaseDisplay({ className }: EnfermededadDisplayProps) {
                                             </p>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-2xl font-bold text-primary">
+                                            <div className="text-2xl font-bold text-foreground">
                                                 {item.attributes.jumlah.toLocaleString("id-ID")}
                                             </div>
                                             {item.attributes.persen && (

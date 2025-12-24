@@ -119,7 +119,7 @@ export default function IDMPage() {
                                 className="object-contain"
                             />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Indeks Desa Mandiri (IDM)</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Indeks Desa Mandiri (IDM)</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Evaluasi menyeluruh terhadap capaian Indeks Desa Mandiri
                         </p>
@@ -157,7 +157,7 @@ export default function IDMPage() {
                                 className="object-contain"
                             />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Indeks Desa Mandiri (IDM)</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Indeks Desa Mandiri (IDM)</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Evaluasi menyeluruh terhadap capaian Indeks Desa Mandiri
                         </p>
@@ -211,7 +211,7 @@ export default function IDMPage() {
                             className="object-contain"
                         />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Indeks Desa Mandiri (IDM)</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Indeks Desa Mandiri (IDM)</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Evaluasi menyeluruh terhadap capaian Indeks Desa Mandiri
                     </p>

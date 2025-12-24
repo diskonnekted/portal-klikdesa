@@ -31,6 +31,10 @@ import {
     Users,
     Shield,
     CreditCard,
+    AlertTriangle,
+    Cloud,
+    CloudSun,
+    Activity,
     ChevronRight,
 } from "lucide-react";
 
@@ -81,9 +85,19 @@ export function MobileNavigation() {
         { href: "/ppid", label: "PPID", icon: FileCheck },
         { href: "/idm", label: "IDM", icon: FileText },
         { href: "/sdgs", label: "SDGs", icon: Globe },
-        { href: "/iot", label: "IoT", icon: Monitor },
         { href: "/pengaduan", label: translations.navigation.pengaduan, icon: MessageSquare },
     ];
+
+    const ewsCategory = {
+        category: "EWS",
+        icon: AlertTriangle,
+        items: [
+            { href: "/iot", label: "IoT", icon: Monitor },
+            { href: "/peringatan-dini-cuaca", label: "Data Peringatan Dini Cuaca (Nowcast)", icon: Cloud },
+            { href: "/gempa-terkini", label: "Data Gempa Bumi", icon: Activity },
+            { href: "/cuaca-desa-sijenggung", label: "Data Prakiraan Cuaca", icon: CloudSun },
+        ],
+    };
 
     // Additional items for sidebar
     // Categorized statistik items for mobile
@@ -250,6 +264,73 @@ export function MobileNavigation() {
                                             </Link>
                                         );
                                     })}
+
+                                    <div className="mb-2">
+                                        {(() => {
+                                            const CategoryIcon = ewsCategory.icon;
+                                            const isExpanded = expandedCategories.includes(ewsCategory.category);
+                                            const hasActiveItem = ewsCategory.items.some((item) => isActive(item.href));
+
+                                            return (
+                                                <>
+                                                    <button
+                                                        onClick={() => toggleCategory(ewsCategory.category)}
+                                                        className={`w-full flex items-center justify-between px-3 py-3 text-sm font-medium rounded-md transition-all duration-200 ${
+                                                            hasActiveItem
+                                                                ? "bg-primary text-primary-foreground"
+                                                                : "hover:bg-accent hover:text-accent-foreground"
+                                                        }`}
+                                                    >
+                                                        <div className="flex items-center gap-2">
+                                                            <CategoryIcon className="h-5 w-5 shrink-0" />
+                                                            <span>{ewsCategory.category}</span>
+                                                            <span className="text-xs opacity-60">
+                                                                ({ewsCategory.items.length})
+                                                            </span>
+                                                        </div>
+                                                        <ChevronRight
+                                                            className={`h-4 w-4 transition-transform duration-200 ${
+                                                                isExpanded ? "rotate-90" : ""
+                                                            }`}
+                                                        />
+                                                    </button>
+
+                                                    {isExpanded && (
+                                                        <div className="mt-1 space-y-1">
+                                                            {ewsCategory.items.map((item) => {
+                                                                const ItemIcon = item.icon;
+                                                                return (
+                                                                    <Link
+                                                                        key={item.href}
+                                                                        href={item.href}
+                                                                        onClick={() => setIsSidebarOpen(false)}
+                                                                        className={`flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer ml-4 ${
+                                                                            isActive(item.href)
+                                                                                ? "bg-primary/20 text-primary"
+                                                                                : "hover:bg-accent/50"
+                                                                        }`}
+                                                                    >
+                                                                        <ChevronRight className="h-3 w-3 shrink-0 text-muted-foreground" />
+                                                                        <ItemIcon
+                                                                            className={`h-4 w-4 shrink-0 ${
+                                                                                isActive(item.href)
+                                                                                    ? "text-primary"
+                                                                                    : "text-muted-foreground"
+                                                                            }`}
+                                                                        />
+                                                                        <span className="truncate">{item.label}</span>
+                                                                        {isActive(item.href) && (
+                                                                            <div className="ml-auto w-2 h-2 bg-primary rounded-full" />
+                                                                        )}
+                                                                    </Link>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    )}
+                                                </>
+                                            );
+                                        })()}
+                                    </div>
 
                                     {/* Pemerintahan Section Header */}
                                     <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4">

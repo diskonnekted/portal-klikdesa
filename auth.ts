@@ -4,7 +4,6 @@ import { authConfig } from './auth.config';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import { PeranPengguna } from '@prisma/client';
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,

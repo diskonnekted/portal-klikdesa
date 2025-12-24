@@ -11,7 +11,7 @@ export default function KelasSosialPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
                         <TrendingUp className="h-10 w-10 text-green-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Kelas Sosial</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Kelas Sosial</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik kelas sosial penduduk Desa Sijenggung
                     </p>

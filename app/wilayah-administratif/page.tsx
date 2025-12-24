@@ -156,7 +156,7 @@ export default function WilayahAdministratifPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
                             <Map className="h-10 w-10 text-secondary-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
                             termasuk data demografi dan statistik penduduk.
@@ -176,7 +176,7 @@ export default function WilayahAdministratifPage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
                             <Map className="h-10 w-10 text-secondary-600" />
                         </div>
-                        <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
+                        <h1 className="text-4xl font-bold text-foreground">Wilayah Administratif</h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
                             Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
                             termasuk data demografi dan statistik penduduk.
@@ -195,7 +195,7 @@ export default function WilayahAdministratifPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary-100 rounded-full">
                         <Map className="h-10 w-10 text-secondary-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Wilayah Administratif</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Wilayah Administratif</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Informasi lengkap mengenai wilayah administratif Desa Sijenggung,
                         termasuk data demografi dan statistik penduduk.
@@ -278,14 +278,14 @@ export default function WilayahAdministratifPage() {
                             <Users2 className="h-32 w-32" />
                         </div>
                         <CardHeader className="pb-2 relative z-10">
-                            <CardTitle className="text-sm font-medium text-primary-800 flex items-center gap-2">
-                                <Users2 className="h-4 w-4" />
+                            <CardTitle className="text-sm font-medium text-foreground flex items-center gap-2">
+                                <Users2 className="h-4 w-4 text-primary" />
                                 Penduduk
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="relative z-10">
-                            <div className="text-3xl font-bold text-primary-900 mb-2">{formatNumber(totalPenduduk)}</div>
-                            <p className="text-xs text-primary-700">Total penduduk</p>
+                            <div className="text-3xl font-bold text-foreground mb-2">{formatNumber(totalPenduduk)}</div>
+                            <p className="text-xs text-muted-foreground">Total penduduk</p>
                         </CardContent>
                     </Card>
                 </div>

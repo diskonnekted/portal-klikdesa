@@ -183,15 +183,6 @@ export default function IoTPage() {
     const [currentPage, setCurrentPage] = React.useState(1);
     const [isMobile, setIsMobile] = React.useState(false);
 
-    // Analytics state
-    const [analyticsMode] = React.useState<"line" | "area" | "bar" | "correlation">("line");
-    const [_selectedTimeRange] = React.useState<"1h" | "6h" | "24h" | "7d" | "30d">("6h");
-    const [showTrends] = React.useState(true);
-    const [chartData, setChartData] = React.useState<Array<{ timestamp: string; [key: string]: number | string }>>([]);
-    const [correlationData, setCorrelationData] = React.useState<Array<{ sensor1: string; sensor2: string; correlation: number; strength: number }>>([]);
-    const [trendData, setTrendData] = React.useState<Array<{ sensor: string; unit: string; firstHalf: number; secondHalf: number; change: number; trend: string; color: string } | null>>([]);
-    const [distributionData, setDistributionData] = React.useState<Array<{ sensor: string; unit: string; distribution: Array<{ label: string; min: number; max: number; count: number; percentage: number }>; total: number } | null>>([]);
-
     // Detect mobile viewport
     React.useEffect(() => {
         const checkMobile = () => {
@@ -349,157 +340,6 @@ export default function IoTPage() {
     React.useEffect(() => {
         setCurrentPage(1);
     }, [selectedDevice]);
-
-    // Analytics processing functions
-    const processAnalyticsData = React.useCallback(() => {
-        if (!selectedDevice?.historicalData) return;
-
-        const data = selectedDevice.historicalData.map((entry) => ({
-            timestamp: entry.timestamp,
-            entry_id: entry.entry_id,
-            time: new Date(entry.timestamp).toLocaleTimeString("id-ID", {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false,
-            }),
-            ...selectedDevice.sensors.reduce((acc, sensor) => {
-                acc[sensor.name] = entry[sensor.name] || 0;
-                return acc;
-            }, {} as Record<string, unknown>),
-        }));
-
-        // Process chart data based on selected mode
-        if (analyticsMode === "correlation") {
-            const corrData = processCorrelationData(data);
-            setCorrelationData(corrData);
-        } else {
-            setChartData(data);
-        }
-
-        // Process trend data
-        if (showTrends) {
-            const trends = processTrendData(data);
-            setTrendData(trends);
-        }
-
-        // Process distribution data
-        const distribution = processDistributionData(data);
-        setDistributionData(distribution);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedDevice, analyticsMode, showTrends]);
-
-    const processCorrelationData = (data: Array<{ timestamp: string; [key: string]: number | string }>) => {
-        if (!selectedDevice || selectedDevice.sensors.length < 2) return [];
-
-        const sensors = selectedDevice.sensors.slice(0, 6); // Limit to 6 sensors for correlation
-        const correlations = [];
-
-        for (let i = 0; i < sensors.length; i++) {
-            for (let j = i + 1; j < sensors.length; j++) {
-                const sensor1Data = data.map((d) => d[sensors[i].name]).filter((v) => v !== undefined).filter((v): v is number => typeof v === 'number');
-                const sensor2Data = data.map((d) => d[sensors[j].name]).filter((v) => v !== undefined).filter((v): v is number => typeof v === 'number');
-
-                if (sensor1Data.length > 1 && sensor2Data.length > 1) {
-                    const correlation = calculateCorrelation(sensor1Data, sensor2Data);
-                    correlations.push({
-                        sensor1: sensors[i].name,
-                        sensor2: sensors[j].name,
-                        correlation: correlation,
-                        strength: Math.abs(correlation),
-                    });
-                }
-            }
-        }
-
-        return correlations;
-    };
-
-    const calculateCorrelation = (x: number[], y: number[]) => {
-        const n = Math.min(x.length, y.length);
-        if (n === 0) return 0;
-
-        const sumX = x.slice(0, n).reduce((a, b) => a + b, 0);
-        const sumY = y.slice(0, n).reduce((a, b) => a + b, 0);
-        const sumXY = x.slice(0, n).reduce((acc, val, i) => acc + val * y[i], 0);
-        const sumX2 = x.slice(0, n).reduce((acc, val) => acc + val * val, 0);
-        const sumY2 = y.slice(0, n).reduce((acc, val) => acc + val * val, 0);
-
-        const numerator = n * sumXY - sumX * sumY;
-        const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
-
-        return denominator === 0 ? 0 : numerator / denominator;
-    };
-
-    const processTrendData = (data: Array<{ timestamp: string; [key: string]: number | string }>) => {
-        return (selectedDevice?.sensors || [])
-            .map((sensor) => {
-                const values = data.map((d) => d[sensor.name]).filter((v) => v !== undefined).filter((v): v is number => typeof v === 'number');
-                if (values.length < 2) return null;
-
-                const firstHalf = values.slice(0, Math.floor(values.length / 2));
-                const secondHalf = values.slice(Math.floor(values.length / 2));
-
-                const avg1 = firstHalf.reduce((a, b) => a + b, 0) / firstHalf.length;
-                const avg2 = secondHalf.reduce((a, b) => a + b, 0) / secondHalf.length;
-                const change = ((avg2 - avg1) / avg1) * 100;
-
-                return {
-                    sensor: sensor.name,
-                    unit: sensor.unit,
-                    firstHalf: avg1,
-                    secondHalf: avg2,
-                    change: change,
-                    trend: change > 5 ? "up" : change < -5 ? "down" : "stable",
-                    color: change > 5 ? "text-green-600" : change < -5 ? "text-red-600" : "text-gray-600",
-                };
-            })
-            .filter(Boolean);
-    };
-
-    const processDistributionData = (data: Array<{ timestamp: string; [key: string]: number | string }>) => {
-        return (selectedDevice?.sensors || [])
-            .map((sensor) => {
-                const values = data.map((d) => d[sensor.name]).filter((v) => v !== undefined).filter((v): v is number => typeof v === 'number');
-                if (values.length === 0) return null;
-
-                const min = Math.min(...values);
-                const max = Math.max(...values);
-                const avg = values.reduce((a, b) => a + b, 0) / values.length;
-
-                // Create distribution ranges
-                const ranges = [
-                    { label: "Very Low", min: min, max: avg - (max - min) * 0.2 },
-                    { label: "Low", min: avg - (max - min) * 0.2, max: avg },
-                    { label: "Normal", min: avg, max: avg + (max - min) * 0.2 },
-                    { label: "High", min: avg + (max - min) * 0.2, max: avg + (max - min) * 0.4 },
-                    { label: "Very High", min: avg + (max - min) * 0.4, max: max },
-                ];
-
-                const distribution = ranges.map((range) => ({
-                    ...range,
-                    count: values.filter((v) => v >= range.min && v < (range.label === "Very High" ? max : range.max))
-                        .length,
-                    percentage:
-                        (values.filter((v) => v >= range.min && v < (range.label === "Very High" ? max : range.max))
-                            .length /
-                            values.length) *
-                        100,
-                }));
-
-                return {
-                    sensor: sensor.name,
-                    unit: sensor.unit,
-                    distribution,
-                    total: values.length,
-                };
-            })
-            .filter(Boolean);
-    };
-
-    // Process analytics data when dependencies change
-    React.useEffect(() => {
-        processAnalyticsData();
-    }, [processAnalyticsData]);
 
     const totalSensors = devices.reduce((acc, d) => acc + d.sensors.length, 0);
     const activeDevices = devices.filter((d) => d.status === "active").length;
@@ -660,7 +500,7 @@ export default function IoTPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-100 rounded-full">
                         <Activity className="h-10 w-10 text-indigo-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Smart Monitoring System</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Smart Monitoring System</h1>
                     <p className="text-gray-600 max-w-3xl mx-auto">
                         Sistem Monitoring cerdas untuk Smart Office dan Environment Monitoring di Desa Sijenggung
                     </p>
@@ -1072,7 +912,7 @@ export default function IoTPage() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="bg-muted/50 p-4 rounded-lg">
                                         <p className="text-sm text-gray-600 mb-1">Nilai Sensor</p>
-                                        <p className="text-3xl font-bold text-primary">
+                                        <p className="text-3xl font-bold text-foreground">
                                             {selectedSensor.value}{" "}
                                             <span className="text-lg">{selectedSensor.unit}</span>
                                         </p>

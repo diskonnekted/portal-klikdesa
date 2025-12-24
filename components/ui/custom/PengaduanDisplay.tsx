@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { MessageSquare, Clock, User, Mail, Phone, Calendar, AlertCircle, X } from "lucide-react";
+import Image from "next/image";
+import { MessageSquare, Clock, User, Calendar, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -130,20 +131,24 @@ const formatDate = (dateString: string) => {
 export function PengaduanDisplay({ className }: PengaduanDisplayProps) {
     const [data, setData] = React.useState<PengaduanData | null>(null);
     const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
     const [selectedPengaduan, setSelectedPengaduan] = React.useState<PengaduanItem | null>(null);
 
     React.useEffect(() => {
         const loadData = async () => {
             setLoading(true);
+            setError(null);
             setData(null);
             try {
                 const result = await Promise.race([
                     fetchPengaduanData(),
                     new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 30000)),
                 ]);
+                if (!result) throw new Error("Gagal mengambil data dari server");
                 setData(result as PengaduanData);
             } catch (error) {
                 console.error("Failed to load pengaduan data:", error);
+                setError(error instanceof Error ? error.message : "Terjadi kesalahan");
                 setData(null);
             } finally {
                 setLoading(false);
@@ -157,7 +162,7 @@ export function PengaduanDisplay({ className }: PengaduanDisplayProps) {
             <div className={cn("w-full space-y-6", className)}>
                 <Card>
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
+                        <CardTitle className="flex items-center gap-2 text-foreground">
                             <MessageSquare className="h-5 w-5 text-primary" />
                             Daftar Pengaduan Masyarakat
                         </CardTitle>
@@ -165,6 +170,29 @@ export function PengaduanDisplay({ className }: PengaduanDisplayProps) {
                     <CardContent>
                         <div className="flex items-center justify-center py-12">
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className={cn("w-full space-y-6", className)}>
+                <Card className="border-red-200">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 text-red-600">
+                            <AlertCircle className="h-5 w-5" />
+                            Terjadi Kesalahan
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex items-center justify-center py-8 text-center text-red-600 bg-red-50 rounded-lg mx-6 mb-6">
+                            <div>
+                                <p className="font-medium">Gagal memuat data</p>
+                                <p className="text-sm mt-1">{error}</p>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
@@ -306,13 +334,12 @@ export function PengaduanDisplay({ className }: PengaduanDisplayProps) {
                                         <div>
                                             <h3 className="text-sm font-semibold text-gray-700 mb-2">Foto Pendukung</h3>
                                             <div className="rounded-lg overflow-hidden border">
-                                                <img
+                                                <Image
                                                     src={selectedPengaduan.attributes.foto}
                                                     alt={`Foto pengaduan: ${selectedPengaduan.attributes.judul}`}
+                                                    width={1200}
+                                                    height={800}
                                                     className="w-full h-auto max-h-96 object-contain bg-gray-50"
-                                                    onError={(e) => {
-                                                        e.currentTarget.style.display = "none";
-                                                    }}
                                                 />
                                             </div>
                                         </div>
@@ -402,13 +429,12 @@ export function PengaduanDisplay({ className }: PengaduanDisplayProps) {
                                                                 {/* Response Image if available */}
                                                                 {hasValidResponseFoto && (
                                                                     <div className="mt-3 rounded-lg overflow-hidden border border-green-300">
-                                                                        <img
+                                                                        <Image
                                                                             src={response.foto!}
                                                                             alt="Foto tanggapan"
+                                                                            width={1200}
+                                                                            height={800}
                                                                             className="w-full h-auto max-h-64 object-contain bg-white"
-                                                                            onError={(e) => {
-                                                                                e.currentTarget.style.display = "none";
-                                                                            }}
                                                                         />
                                                                     </div>
                                                                 )}

@@ -11,7 +11,7 @@ export default function KepemilikanAktaKematianPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full">
                         <FileText className="h-10 w-10 text-gray-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Kepemilikan Akta Kematian</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Kepemilikan Akta Kematian</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik kepemilikan akta kematian penduduk Desa Sijenggung
                     </p>

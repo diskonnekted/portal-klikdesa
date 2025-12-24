@@ -691,7 +691,7 @@ export const SDGsDashboard = React.forwardRef<HTMLDivElement, SDGsDashboardProps
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">Skor SDGs</h3>
                         </div>
                         <div className="text-center">
-                            <div className="text-6xl font-bold text-primary mb-6">
+                            <div className="text-6xl font-bold text-foreground mb-6">
                                 {loading ? "..." : `${overallScore.toFixed(2)}`}
                             </div>
                             <div className="max-w-md mx-auto">

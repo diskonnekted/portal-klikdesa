@@ -11,7 +11,7 @@ export default function KewarganegaraanPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full">
                         <Flag className="h-10 w-10 text-red-600" />
                     </div>
-                    <h1 className="text-4xl font-bold text-primary">Kewarganegaraan</h1>
+                    <h1 className="text-4xl font-bold text-foreground">Kewarganegaraan</h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Data statistik kewarganegaraan penduduk Desa Sijenggung
                     </p>

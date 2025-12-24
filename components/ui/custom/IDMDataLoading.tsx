@@ -158,7 +158,7 @@ export function IDMDataLoading({ className, onTimeout, year }: IDMDataLoadingPro
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Memuat Data IDM</h3>
                 <p className="text-sm text-gray-500 text-center mb-6">
                     Mengambil data dari{" "}
-                    <span className="text-primary font-bold">
+                    <span className="text-foreground font-bold">
                         Kementerian Desa, Pembangunan Daerah Tertinggal, dan Transmigrasi
                     </span>
                     ...

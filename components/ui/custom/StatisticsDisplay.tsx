@@ -222,7 +222,7 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
                 <div className={cn("w-full space-y-4", className)}>
                     {/* Header */}
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-primary mb-2">
+                        <h2 className="text-3xl font-bold text-foreground mb-2">
                             {title || t("statistik.judul") || "Statistik Desa"}
                         </h2>
                         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -250,7 +250,7 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
             <div ref={ref} className={cn("w-full space-y-4", className)}>
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-2">{title || t("statistik.judul")}</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">{title || t("statistik.judul")}</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">{description || t("statistik.deskripsi")}</p>
                 </div>
 

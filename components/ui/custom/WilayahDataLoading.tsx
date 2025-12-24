@@ -168,7 +168,7 @@ export function WilayahDataLoading({ className, onTimeout }: WilayahDataLoadingP
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Memuat Data Wilayah Administratif</h3>
                 <p className="text-sm text-gray-500 text-center mb-6">
                     Mengambil data dari{" "}
-                    <span className="text-primary font-bold">Sistem Informasi Wilayah Administratif</span>
+                    <span className="text-foreground font-bold">Sistem Informasi Wilayah Administratif</span>
                     ...
                 </p>
 

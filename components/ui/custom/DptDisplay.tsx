@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Users, UserCheck, MapPin, BarChart3, TrendingUp, Home } from "lucide-react";
+import { Users, UserCheck, MapPin, BarChart3, Home } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -308,14 +308,14 @@ export function DptDisplay({ className }: DptDisplayProps) {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        {dusunArray.map((dusun, index) => (
+                        {dusunArray.map((dusun) => (
                             <div
                                 key={dusun.name}
                                 className="p-4 bg-muted/30 rounded-lg flex items-center justify-between"
                             >
                                 <div>
-                                    <h4 className="font-semibold text-primary flex items-center gap-2">
-                                        <MapPin className="h-4 w-4" />
+                                    <h4 className="font-semibold text-foreground flex items-center gap-2">
+                                        <MapPin className="h-4 w-4 text-primary" />
                                         Dusun {dusun.name}
                                     </h4>
                                     <p className="text-sm text-muted-foreground">
@@ -324,7 +324,7 @@ export function DptDisplay({ className }: DptDisplayProps) {
                                     </p>
                                 </div>
                                 <div className="text-right">
-                                    <div className="text-2xl font-bold text-primary">
+                                    <div className="text-2xl font-bold text-foreground">
                                         {dusun.total.toLocaleString("id-ID")}
                                     </div>
                                     <Badge variant="secondary" className="text-xs">
