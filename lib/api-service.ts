@@ -219,7 +219,7 @@ export class ApiService {
  * OpenSID API service
  */
 export const opensidApi = new ApiService({
-    baseUrl: process.env.OPENSID_API_URL || "http://pondokrejo.sleman-desa.id",
+    baseUrl: process.env.OPENSID_API_URL || "https://sijenggung-banjarnegara.desa.id",
     timeout: 30000,
     cache: {
         revalidate: 3600, // 1 hour
@@ -251,7 +251,7 @@ export const externalApi = new ApiService({
  * Local API service (for internal API calls)
  */
 export const localApi = new ApiService({
-    baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pondokrejo.clasnet.co.id",
+    baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://sijenggung.smartdesa.net",
     timeout: 10000,
     cache: {
         revalidate: 3600, // 1 hour

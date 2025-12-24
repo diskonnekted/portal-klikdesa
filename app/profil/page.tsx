@@ -638,10 +638,9 @@ export default function ProfilPage() {
                                             Nomor: {DesaData.sejarah.nomor} Tahun {DesaData.sejarah.tahun}
                                         </span>
                                     </p>
-                                    <p className="text-xs text-muted-foreground">
-                                        {DesaData.sejarah.deskripsi}
-                                        Desa Ngentak (dengan pusat pemerintahan di Plotengan) dan Desa
-                                        Glagahombo (dengan pusat pemerintahan di Babadan/Banjarharjo).
+                                    <p className="text-gray-600 leading-relaxed text-justify mb-4">
+                                        Desa Sijenggung adalah salah satu desa di Kecamatan Banjarmangu,
+                                        Kabupaten Banjarnegara, Jawa Tengah.
                                     </p>
                                 </div>
                             </div>

@@ -8,17 +8,17 @@ import { createSuccessResponse, createNotFoundResponse, createErrorResponse } fr
 const mockBerita = [
     {
         id: 1,
-        judul: "Peluncuran Portal Web Kalurahan Sijenggung",
-        slug: "peluncuran-portal-web-kalurahan-sijenggung",
-        ringkasan: "Portal web resmi Kalurahan Sijenggung telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
-        konten: "Portal web resmi Kalurahan Sijenggung telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
+        judul: "Peluncuran Portal Web Desa Sijenggung",
+        slug: "peluncuran-portal-web-desa-sijenggung",
+        ringkasan: "Portal web resmi Desa Sijenggung telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
+        konten: "Portal web resmi Desa Sijenggung telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
         gambar: "/images/berita/portal-launch.jpg",
         kategori: "Teknologi",
         status: "PUBLISHED",
         publishedAt: "2025-10-24T10:00:00Z",
         createdAt: "2025-10-24T09:30:00Z",
         updatedAt: "2025-10-24T10:00:00Z",
-        penulis: "Admin Kalurahan",
+        penulis: "Admin Desa",
         views: 150,
     },
     {

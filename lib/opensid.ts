@@ -54,7 +54,7 @@ interface OpenSIDApiResponse {
 
 // Configuration
 const OPENSID_CONFIG = {
-    baseUrl: `${env.OPENSID_API_URL ?? "https://pondokrejo.sleman-desa.id"}/internal_api/arsip`,
+    baseUrl: `${env.OPENSID_API_URL ?? "https://sijenggung-banjarnegara.desa.id"}/internal_api/arsip`,
     postsPerPage: 50, // Increased to show more posts per page
     cacheTimeout: 60 * 60 * 1000, // 1 jam cache
 };
@@ -121,7 +121,7 @@ function decodeHtmlEntities(text: string): string {
 // Base API function - now uses proxy to avoid CORS issues
 async function fetchFromOpenSID(_endpoint: string = "", params: Record<string, string> = {}) {
     // Use proxy API route to avoid CORS issues
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pondokrejo.clasnet.co.id";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sijenggung.smartdesa.net";
     const url = new URL("/api/opensid-proxy", baseUrl);
 
     // Add parameters if needed
