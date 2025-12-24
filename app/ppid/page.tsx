@@ -471,7 +471,7 @@ export default function InformasiPublikPage() {
                                                     <Button
                                                         variant="default"
                                                         size="sm"
-                                                        className="flex-1 bg-blue-600 hover:bg-blue-700"
+                                                        className="flex-1 bg-teal-600 hover:bg-teal-700 text-white"
                                                         onClick={() => {
                                                             setSelectedItem(item);
                                                         }}
