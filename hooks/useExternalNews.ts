@@ -48,12 +48,12 @@ export function useExternalNews(limit: number = 10) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchNews = useCallback(async () => {
+    const fetchNews = useCallback(async (signal?: AbortSignal) => {
         try {
             setLoading(true);
             setError(null);
 
-            const response = await fetch("/api/external-news");
+            const response = await fetch(`/api/external-news?limit=${encodeURIComponent(String(limit))}`, { signal });
             const data: NewsResponse = await response.json();
 
             if (data.success) {
@@ -65,15 +65,20 @@ export function useExternalNews(limit: number = 10) {
             } else {
                 setError(data.error ?? "Failed to fetch news");
             }
-        } catch {
+        } catch (error) {
+            if (signal?.aborted) return;
+            if (error instanceof DOMException && error.name === "AbortError") return;
             setError("Failed to connect to news server");
         } finally {
+            if (signal?.aborted) return;
             setLoading(false);
         }
     }, [limit]);
 
     useEffect(() => {
-        fetchNews();
+        const controller = new AbortController();
+        fetchNews(controller.signal);
+        return () => controller.abort();
     }, [fetchNews]);
 
     return { news, loading, error, refetch: fetchNews };

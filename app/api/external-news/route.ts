@@ -1,52 +1,5 @@
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { fetchLocalAPI } from "@/lib/api-helpers";
-
-// Type definitions for OpenSID article structure
-interface OpenSIDAuthor {
-    nama: string;
-}
-
-interface OpenSIDCategory {
-    id: string;
-    kategori: string;
-    slug: string;
-}
-
-interface OpenSIDAttributes {
-    judul: string;
-    slug: string;
-    isi: string;
-    gambar: string | null;
-    author?: OpenSIDAuthor;
-    category?: OpenSIDCategory;
-    tgl_upload: string;
-    hit?: number;
-}
-
-interface OpenSIDArticle {
-    id: string;
-    attributes: OpenSIDAttributes;
-}
-
-// Calculate reading time based on content
-function calculateReadingTime(content: string): number {
-    // Strip HTML tags
-    const plainText = content.replace(/<[^>]*>/g, "");
-
-    // Count words (Indonesian and English)
-    const words = plainText
-        .trim()
-        .split(/\s+/)
-        .filter((word) => word.length > 0);
-    const wordCount = words.length;
-
-    // Average reading speed: 200-250 words per minute
-    const wordsPerMinute = 220;
-    const readingTime = Math.ceil(wordCount / wordsPerMinute);
-
-    // Minimum 1 minute
-    return Math.max(1, readingTime);
-}
 
 // Decode HTML entities like &nbsp;, &amp;, &hellip;, etc.
 function decodeHtmlEntities(text: string): string {
@@ -230,108 +183,133 @@ function decodeHtmlEntities(text: string): string {
     });
 }
 
-// Convert OpenSID date format (DD-MM-YYYY HH:mm:ss) to ISO
-function parseOpenSIDDate(dateStr: string): string {
-    // Split date and time
-    const [datePart, timePart] = dateStr.split(" ");
-    const [day, month, year] = datePart.split("-");
-    const [hour, minute, second] = (timePart || "00:00:00").split(":");
-
-    // Create ISO date string
-    return new Date(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day),
-        parseInt(hour),
-        parseInt(minute),
-        parseInt(second)
-    ).toISOString();
-}
-
-export async function GET() {
+export async function GET(request: NextRequest) {
     try {
-        // Use the new consolidated API service
-        const response = await fetchLocalAPI("/api/opensid-berita", {
-            cacheTags: ["opensid-data-berita"],
+        const { searchParams } = new URL(request.url);
+        const limitParam = searchParams.get("limit");
+        const limit = Math.max(1, Math.min(100, limitParam ? Number(limitParam) : 10));
+
+        const baseUrl = "https://sijenggung-banjarnegara.desa.id";
+        const categoryUrl = `${baseUrl}/artikel/kategori/berita-desa`;
+
+        const categoryRes = await fetch(categoryUrl, {
+            method: "GET",
+            headers: {
+                Accept: "text/html",
+            },
+            next: {
+                revalidate: 3600,
+                tags: ["opensid-berita-desa"],
+            },
+            signal: AbortSignal.timeout(30000),
         });
 
-        // Add explicit logging for debugging
-        if (!response.success || !response.data) {
-            console.error("External News API Error: Failed to fetch from opensid-berita", response);
-            throw new Error("Invalid response format: No data received");
+        if (!categoryRes.ok) {
+            throw new Error(`Failed to fetch category page: ${categoryRes.status}`);
         }
 
-        // Safely read data from unknown structure
-        const responseData: unknown = response.data;
+        const categoryHtml = await categoryRes.text();
+        const urlMatches = [...categoryHtml.matchAll(/\/artikel\/(\d{4})\/(\d{2})\/(\d{2})\/([a-z0-9-]+)/gi)];
+        const uniqueUrls = Array.from(
+            new Map(
+                urlMatches.map((m) => {
+                    const path = m[0].toLowerCase();
+                    const year = Number(m[1]);
+                    const month = Number(m[2]);
+                    const day = Number(m[3]);
+                    const slug = m[4].toLowerCase();
+                    const dateKey = `${m[1]}-${m[2]}-${m[3]}`;
+                    return [path, { path, slug, year, month, day, dateKey }];
+                })
+            ).values()
+        )
+            .filter((x) => x.year >= 2000 && x.month >= 1 && x.month <= 12 && x.day >= 1 && x.day <= 31)
+            .sort((a, b) => (a.dateKey < b.dateKey ? 1 : a.dateKey > b.dateKey ? -1 : a.slug.localeCompare(b.slug)))
+            .slice(0, limit);
 
-        function isArticleArray(value: unknown): value is OpenSIDArticle[] {
-            return (
-                Array.isArray(value) &&
-                value.every(
-                    (item) =>
-                        typeof item === "object" &&
-                        item !== null &&
-                        "attributes" in (item as Record<string, unknown>)
-                )
-            );
+        async function fetchArticleMeta(path: string) {
+            const url = `${baseUrl}${path}`;
+            const res = await fetch(url, {
+                method: "GET",
+                headers: {
+                    Accept: "text/html",
+                },
+                next: {
+                    revalidate: 3600,
+                    tags: ["opensid-berita-desa"],
+                },
+                signal: AbortSignal.timeout(30000),
+            });
+            if (!res.ok) {
+                throw new Error(`Failed to fetch article page: ${res.status}`);
+            }
+            const html = await res.text();
+
+            const ogTitleMatch = html.match(/<meta\s+property=[\"']og:title[\"']\s+content=[\"']([^\"']+)[\"'][^>]*>/i);
+            const titleTagMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+            const titleRaw = ogTitleMatch?.[1] ?? titleTagMatch?.[1] ?? "";
+
+            const ogImageMatch = html.match(/<meta\s+property=[\"']og:image[\"']\s+content=[\"']([^\"']+)[\"'][^>]*>/i);
+            const imageRaw = ogImageMatch?.[1] ?? null;
+
+            const descMatch = html.match(/<meta\s+name=[\"']description[\"']\s+content=[\"']([^\"']*)[\"'][^>]*>/i);
+            const descRaw = descMatch?.[1] ?? "";
+
+            const cleanTitle = decodeHtmlEntities(titleRaw).trim();
+            const cleanDesc = decodeHtmlEntities(descRaw).trim();
+
+            return { title: cleanTitle, image: imageRaw, description: cleanDesc, url };
         }
 
-        function hasDataArray(value: unknown): value is { data: OpenSIDArticle[] } {
-            if (typeof value !== "object" || value === null) return false;
-            const v = value as Record<string, unknown>;
-            return Array.isArray(v.data);
+        const metas: Array<{ path: string; slug: string; dateKey: string; year: number; month: number; day: number; meta?: Awaited<ReturnType<typeof fetchArticleMeta>> }> =
+            [];
+
+        for (const item of uniqueUrls) {
+            try {
+                const meta = await fetchArticleMeta(item.path);
+                metas.push({ ...item, meta });
+            } catch {
+                metas.push({ ...item });
+            }
         }
 
-        // Handle case where data might be nested differently or is the array directly
-        const articles = isArticleArray(responseData)
-            ? responseData
-            : hasDataArray(responseData)
-              ? responseData.data
-              : [];
-
-        if (!Array.isArray(articles)) {
-            console.error("External News API Error: Data is not an array", responseData);
-            throw new Error("Invalid response format: Data is not an array");
-        }
-
-        // Transform OpenSID data to match expected format for homepage
-        const transformedPosts = articles.slice(0, 10).map((article: OpenSIDArticle) => {
-            const attributes = article.attributes;
+        const transformedPosts = metas.map((item) => {
+            const isoDate = new Date(Date.UTC(item.year, item.month - 1, item.day, 0, 0, 0)).toISOString();
+            const title = item.meta?.title || item.slug.replace(/-/g, " ");
+            const excerpt = item.meta?.description ? `${item.meta.description.substring(0, 200)}...` : "";
 
             return {
-                id: article.id,
-                title: decodeHtmlEntities(attributes.judul),
-                slug: attributes.slug,
-                excerpt: `${decodeHtmlEntities(attributes.isi.replace(/<[^>]*>/g, "")).substring(0, 200)}...`,
-                content: attributes.isi,
-                featuredImage: attributes.gambar || null,
-                readingTime: calculateReadingTime(attributes.isi),
+                id: `${item.dateKey}-${item.slug}`,
+                title,
+                slug: item.slug,
+                excerpt,
+                content: "",
+                featuredImage: item.meta?.image || null,
+                readingTime: Math.max(1, Math.ceil((excerpt.split(/\s+/).filter(Boolean).length || 1) / 220)),
                 author: {
-                    name: attributes.author?.nama ?? "Admin Desa",
+                    name: "Admin Desa",
                     avatar: "/images/default-avatar.png",
                 },
-                category: attributes.category?.kategori ?? "Umum",
-                categories: attributes.category
-                    ? [
-                          {
-                              id: parseInt(attributes.category.id),
-                              name: attributes.category.kategori ?? "Umum",
-                              slug: attributes.category.slug ?? "uncategorized",
-                          },
-                      ]
-                    : [],
+                category: "Berita Desa",
+                categories: [
+                    {
+                        id: 0,
+                        name: "Berita Desa",
+                        slug: "berita-desa",
+                    },
+                ],
                 tags: [],
-                publishedAt: parseOpenSIDDate(attributes.tgl_upload),
-                updatedAt: parseOpenSIDDate(attributes.tgl_upload),
-                link: `/berita/${attributes.slug}`,
-                readTime: Math.max(1, Math.ceil(attributes.isi.split(" ").length / 200)),
+                publishedAt: isoDate,
+                updatedAt: isoDate,
+                link: item.meta?.url || `${baseUrl}${item.path}`,
+                readTime: Math.max(1, Math.ceil((excerpt.split(/\s+/).filter(Boolean).length || 1) / 220)),
                 isBreaking: false,
                 isFeatured: false,
                 isPinned: false,
-                viewCount: attributes.hit || 0,
-                likeCount: Math.floor(Math.random() * 100) + 10,
-                commentCount: Math.floor(Math.random() * 50) + 5,
-                shareCount: Math.floor(Math.random() * 30) + 5,
+                viewCount: 0,
+                likeCount: 0,
+                commentCount: 0,
+                shareCount: 0,
                 isBookmarked: false,
             };
         });
@@ -341,8 +319,7 @@ export async function GET() {
             data: transformedPosts,
             total: transformedPosts.length,
         });
-    } catch (error) {
-        console.error("Error fetching OpenSID news:", error);
+    } catch {
         return NextResponse.json(
             {
                 success: false,

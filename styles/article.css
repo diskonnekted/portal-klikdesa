@@ -125,6 +125,22 @@
     @apply w-full h-auto rounded-lg shadow-sm my-6;
 }
 
+.article-content svg,
+.article-content canvas,
+.article-content iframe,
+.article-content embed,
+.article-content object,
+.article-content video {
+    @apply max-w-full;
+}
+
+.article-content iframe,
+.article-content embed,
+.article-content object,
+.article-content video {
+    @apply w-full;
+}
+
 .article-content figure {
     @apply my-6;
 }

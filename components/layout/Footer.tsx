@@ -23,7 +23,7 @@ export function Footer() {
         { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri", label: "Layanan Mandiri", external: true },
         { href: "/pengaduan", label: "Pengaduan Masyarakat" },
         { href: "/iot", label: "IoT Monitoring" },
-        { href: "/statistik", label: "Data Statistik" },
+        { href: "/statistik/penduduk", label: "Data Statistik" },
     ];
 
     // Simple icon wrapper component for simple-icons

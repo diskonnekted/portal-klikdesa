@@ -118,6 +118,7 @@ export default function NewsSidebar({ currentCategory, currentTag, className = "
                                         <div className="flex-1 min-w-0">
                                             <Link
                                                 href={`/berita/${post.slug}`}
+                                                prefetch={false}
                                                 className="block hover:text-primary transition-colors"
                                             >
                                                 <h4 className="font-medium text-sm leading-tight line-clamp-2 group-hover:underline">

@@ -89,7 +89,7 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
 
 export function HomePageClient({ serverData }: { serverData: ServerData }) {
     const { t } = useTranslation();
-    const { news: externalNews, error: newsError } = useExternalNews(20);
+    const { news: externalNews, loading: newsLoading, error: newsError } = useExternalNews(20);
     const { holidays, loading: holidaysLoading, error: holidaysError } = useHolidays(10);
     const [selectedYear, setSelectedYear] = React.useState<number>(2024);
 
@@ -164,6 +164,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
     };
 
     const newsData = transformNewsData(externalNews);
+    const showNewsFallback = !newsData || !newsData.beritaUtama;
 
     return (
         <div className="beranda-container bg-background">
@@ -401,6 +402,52 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
 
                     {/* Kolom 2 - Berita */}
                     <div className="content-center space-y-4 lg:col-span-2 flex flex-col">
+                        {newsLoading && (
+                            <Card className="bg-card border-border">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
+                                        <Newspaper className="h-5 w-5 text-primary" />
+                                        Berita Desa
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-3">
+                                    <div className="h-4 w-3/4 bg-muted rounded animate-pulse" />
+                                    <div className="h-4 w-full bg-muted rounded animate-pulse" />
+                                    <div className="h-4 w-5/6 bg-muted rounded animate-pulse" />
+                                </CardContent>
+                            </Card>
+                        )}
+                        {!newsLoading && showNewsFallback && (
+                            <Card className="bg-card border-border">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2 text-lg text-foreground">
+                                        <Newspaper className="h-5 w-5 text-primary" />
+                                        Berita Desa
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-3">
+                                    <p className="text-sm text-muted-foreground">
+                                        {newsError ? "Gagal memuat berita. Silakan coba lagi." : "Berita belum tersedia."}
+                                    </p>
+                                    <div className="flex gap-2">
+                                        <CustomButton variant="outline" size="sm" className="flex-1" onClick={() => window.location.reload()}>
+                                            Muat Ulang
+                                        </CustomButton>
+                                        <CustomButton variant="default" size="sm" className="flex-1" asChild>
+                                            <a
+                                                href="https://sijenggung-banjarnegara.desa.id/artikel/kategori/berita-desa"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center justify-center gap-2 text-white"
+                                            >
+                                                Lihat di OpenSID
+                                                <ChevronRight className="h-4 w-4" />
+                                            </a>
+                                        </CustomButton>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        )}
                         {/* Berita Terbaru - Only show if we have news data */}
                         {newsData && newsData.beritaUtama && (
                             <Card className="overflow-hidden py-0 gap-0 pt-0">
@@ -446,6 +493,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         {/* Desktop */}
                                         <Link
                                             href={`/berita/${newsData.beritaUtama.slug}`}
+                                            prefetch={false}
                                             className="hidden md:inline-flex w-full sm:w-auto items-center justify-center gap-1 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors"
                                         >
                                             {t("berita.bacaSelengkapnya")}
@@ -460,6 +508,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                         >
                                             <Link
                                                 href={`/berita/${newsData.beritaUtama.slug}`}
+                                                prefetch={false}
                                                 className="flex items-center justify-center gap-2"
                                             >
                                                 {t("berita.bacaSelengkapnya")}
@@ -492,6 +541,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                                     <h4 className="font-medium text-sm leading-tight mb-1">
                                                         <Link
                                                             href={`/berita/${"slug" in berita ? berita.slug : ""}`}
+                                                            prefetch={false}
                                                             className="hover:text-primary transition-colors"
                                                         >
                                                             {berita.judul}

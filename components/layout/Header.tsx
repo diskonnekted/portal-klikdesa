@@ -49,7 +49,7 @@ export function Header() {
         { href: "/", label: t("navigation.beranda"), icon: Home },
         { href: "/pemerintahan", label: t("navigation.pemerintahan"), icon: Building2 },
         { href: "/informasi", label: "Informasi", icon: Newspaper },
-        { href: "/statistik", label: "Statistik", icon: BarChart3 },
+        { href: "/statistik/penduduk", label: "Statistik", icon: BarChart3 },
         { href: "/ppid", label: "PPID", icon: BookCheck },
         { href: "/idm", label: "IDM", icon: FileText },
         { href: "/sdgs", label: "SDGs", icon: Globe },

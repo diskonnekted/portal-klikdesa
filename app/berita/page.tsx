@@ -97,14 +97,16 @@ function NewsContent({
     useEffect(() => {
         async function loadFilters() {
             try {
-                const { getCategories, getArchiveDates } = await import("@/lib/opensid");
-                const [categoriesData, archivesData] = await Promise.all([getCategories(), getArchiveDates()]);
-
-                setCategories((categoriesData as Category[]) ?? []);
-                setArchives(
-                    (archivesData as Array<{ key: string; displayText: string; count: number }>)?.slice(0, 24) ??
-                        []
-                ); // Show up to 2 years of archives
+                setCategories([
+                    {
+                        id: 1,
+                        name: "Berita Desa",
+                        slug: "berita-desa",
+                        description: "",
+                        count: 0,
+                    },
+                ]);
+                setArchives([]);
             } catch {}
         }
 
@@ -113,6 +115,7 @@ function NewsContent({
 
     // Load posts
     useEffect(() => {
+        const controller = new AbortController();
         async function loadPosts() {
             try {
                 setLoading(true);
@@ -120,20 +123,122 @@ function NewsContent({
 
                 let allPosts: Post[] = [];
 
-                if (searchTerm) {
-                    // Search functionality
-                    const { searchPosts } = await import("@/lib/opensid");
-                    const searchResult = await searchPosts(searchTerm, 1);
-                    allPosts = (searchResult as { posts?: Post[] })?.posts || [];
-                } else {
-                    // Get all posts first, then filter client-side
-                    const { getPosts } = await import("@/lib/opensid");
-                    const postsResult = await getPosts(1, undefined, undefined);
-                    allPosts = postsResult?.posts || [];
+                const newsRes = await fetch("/api/external-news?limit=100", { signal: controller.signal });
+                const newsJson = (await newsRes.json()) as {
+                    success: boolean;
+                    data: Array<{
+                        id: string;
+                        title: string;
+                        slug: string;
+                        excerpt: string;
+                        content: string;
+                        featuredImage: string | null;
+                        author: { name: string; avatar: string | null };
+                        category: string;
+                        categories: Array<{ id: number; name: string; slug: string }>;
+                        publishedAt: string;
+                        updatedAt: string;
+                        link: string;
+                        readTime: number;
+                        viewCount: number;
+                    }>;
+                    error?: string;
+                };
+
+                if (!newsJson.success) {
+                    throw new Error(newsJson.error ?? "Failed to fetch news");
                 }
+
+                function monthName(month: number) {
+                    const monthNames = [
+                        "Januari",
+                        "Februari",
+                        "Maret",
+                        "April",
+                        "Mei",
+                        "Juni",
+                        "Juli",
+                        "Agustus",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Desember",
+                    ];
+                    return monthNames[month - 1] ?? "";
+                }
+
+                const postsFromNews: Post[] = newsJson.data.map((n, index) => {
+                    const date = new Date(n.publishedAt);
+                    const numericId = Math.floor(date.getTime() / 1000) + index;
+                    const words = n.excerpt?.split(/\s+/).filter(Boolean).length || 1;
+                    const readingTime = Math.max(1, Math.ceil(words / 220));
+                    const featuredImage =
+                        n.featuredImage ??
+                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23006064'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='36' fill='%23ffffff' text-anchor='middle' dy='.3em'%3EBerita%3C/text%3E%3C/svg%3E";
+
+                    return {
+                        id: numericId,
+                        title: n.title,
+                        content: n.content,
+                        excerpt: n.excerpt,
+                        slug: n.slug,
+                        date: n.publishedAt,
+                        modified: n.updatedAt,
+                        link: `/berita/${n.slug}`,
+                        status: "publish",
+                        readingTime,
+                        author: {
+                            id: 0,
+                            name: n.author?.name ?? "Admin Desa",
+                            avatar: n.author?.avatar ?? "/images/default-avatar.png",
+                        },
+                        featuredImage,
+                        featuredImageAlt: n.title,
+                        categories: [
+                            {
+                                id: 1,
+                                name: "Berita Desa",
+                                slug: "berita-desa",
+                            },
+                        ],
+                        tags: [],
+                        viewCount: n.viewCount ?? 0,
+                    };
+                });
+
+                allPosts = postsFromNews;
+
+                const archiveCounts = new Map<string, number>();
+                for (const p of allPosts) {
+                    const d = new Date(p.date);
+                    const y = d.getFullYear();
+                    const m = d.getMonth() + 1;
+                    const key = `${y}-${String(m).padStart(2, "0")}`;
+                    archiveCounts.set(key, (archiveCounts.get(key) ?? 0) + 1);
+                }
+
+                const archiveList = Array.from(archiveCounts.entries())
+                    .map(([key, count]) => {
+                        const [yearStr, monthStr] = key.split("-");
+                        const y = Number(yearStr);
+                        const m = Number(monthStr);
+                        return {
+                            key,
+                            displayText: `${monthName(m)} ${y} (${count})`,
+                            count,
+                        };
+                    })
+                    .sort((a, b) => (a.key < b.key ? 1 : a.key > b.key ? -1 : 0))
+                    .slice(0, 24);
+                setArchives(archiveList);
 
                 // Apply filters
                 let filteredPosts = allPosts;
+
+                if (searchTerm) {
+                    const q = searchTerm.toLowerCase();
+                    filteredPosts = filteredPosts.filter((p) => p.title.toLowerCase().includes(q));
+                }
 
                 // Category filter
                 if (selectedCategory && selectedCategory !== "all") {
@@ -194,7 +299,12 @@ function NewsContent({
                     setTotalPages(Math.ceil(sortedPosts.length / postsPerPage) || 1);
                 }
             } catch (error) {
-                console.error("Error loading posts:", error);
+                if (controller.signal.aborted) {
+                    return;
+                }
+                if (error instanceof DOMException && error.name === "AbortError") {
+                    return;
+                }
                 setError("Gagal memuat berita. Silakan coba lagi.");
                 setPosts([]);
                 setTotalPosts(0);
@@ -205,6 +315,9 @@ function NewsContent({
         }
 
         loadPosts();
+        return () => {
+            controller.abort();
+        };
     }, [currentPage, selectedCategory, selectedArchive, searchTerm, selectedSort, categories, postsPerPage]);
 
     // Handle search

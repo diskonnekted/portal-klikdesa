@@ -81,7 +81,7 @@ export function MobileNavigation() {
     const mainSidebarNavItems = [
         { href: "/pemerintahan", label: translations.navigation.pemerintahan, icon: Landmark },
         { href: "/informasi", label: translations.navigation.informasi, icon: Info },
-        { href: "/statistik", label: "Statistik", icon: BarChart3 },
+        { href: "/statistik/penduduk", label: "Statistik", icon: BarChart3 },
         { href: "/ppid", label: "PPID", icon: FileCheck },
         { href: "/idm", label: "IDM", icon: FileText },
         { href: "/sdgs", label: "SDGs", icon: Globe },

@@ -62,7 +62,7 @@ export default function NewsCard({
         >
             {/* Featured Image */}
             <div className="relative aspect-video overflow-hidden">
-                <Link href={`/berita/${post.slug}`} className="cursor-pointer">
+                <Link href={`/berita/${post.slug}`} prefetch={false} className="cursor-pointer">
                     <ImageFallback
                         src={post.featuredImage}
                         alt={post.featuredImageAlt}
@@ -102,7 +102,7 @@ export default function NewsCard({
                 )}
 
                 {/* Title */}
-                <Link href={`/berita/${post.slug}`} className="cursor-pointer">
+                <Link href={`/berita/${post.slug}`} prefetch={false} className="cursor-pointer">
                     <h3 className="font-semibold text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
                         {post.title}
                     </h3>
@@ -156,6 +156,7 @@ export default function NewsCard({
                     {/* Read more link */}
                     <Link
                         href={`/berita/${post.slug}`}
+                        prefetch={false}
                         className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 mt-3 transition-colors"
                     >
                         Baca selengkapnya

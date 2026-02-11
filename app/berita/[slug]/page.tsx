@@ -18,8 +18,22 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import NewsSidebar from "@/components/berita/NewsSidebar";
-import type { Post } from "@/lib/opensid";
-import { env } from "process";
+
+type Post = {
+    id: string | number;
+    title: string;
+    content: string;
+    excerpt: string;
+    slug: string;
+    date: string;
+    modified: string;
+    author: { name: string; avatar: string };
+    featuredImage: string;
+    featuredImageAlt: string;
+    categories: Array<{ id: number; name: string; slug: string }>;
+    tags: Array<{ id: number; name: string; slug: string }>;
+    viewCount: number;
+};
 
 // Share functionality
 function shareContent(url: string, title: string) {
@@ -95,6 +109,7 @@ function NewsDetailContent() {
 
     // Load post and related posts
     useEffect(() => {
+        const controller = new AbortController();
         async function loadPost() {
             if (!slug) return;
 
@@ -102,30 +117,105 @@ function NewsDetailContent() {
                 setLoading(true);
                 setError(null);
 
-                // Get post by slug
-                const { getPostBySlug, getPosts } = await import("@/lib/opensid");
-                const postData = (await getPostBySlug(slug)) as Post | null;
+                const postRes = await fetch(`/api/external-berita?slug=${encodeURIComponent(slug)}`, {
+                    signal: controller.signal,
+                });
+                const postJson = (await postRes.json()) as {
+                    success: boolean;
+                    data: null | {
+                        id: string;
+                        title: string;
+                        slug: string;
+                        excerpt: string;
+                        content: string;
+                        featuredImage: string | null;
+                        author: { name: string; avatar: string | null };
+                        category: string;
+                        publishedAt: string;
+                        link: string;
+                    };
+                    error?: string;
+                };
+
+                const postData = postJson.success ? postJson.data : null;
 
                 if (!postData) {
-                    setError("Berita tidak ditemukan");
+                    setError(postJson.error ?? "Berita tidak ditemukan");
                     return;
                 }
 
-                setPost(postData);
-                setViewCount(postData.viewCount);
+                const mappedPost: Post = {
+                    id: postData.id,
+                    title: postData.title,
+                    content: postData.content,
+                    excerpt: postData.excerpt,
+                    slug: postData.slug,
+                    date: postData.publishedAt,
+                    modified: postData.publishedAt,
+                    author: { name: postData.author.name, avatar: postData.author.avatar ?? "/images/default-avatar.png" },
+                    featuredImage:
+                        postData.featuredImage ??
+                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23006064'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='36' fill='%23ffffff' text-anchor='middle' dy='.3em'%3EBerita%3C/text%3E%3C/svg%3E",
+                    featuredImageAlt: postData.title,
+                    categories: [{ id: 1, name: "Berita Desa", slug: "berita-desa" }],
+                    tags: [],
+                    viewCount: 0,
+                };
 
-                // Load related posts (posts with same categories)
-                if (postData.categories.length > 0) {
-                    const categoryId = postData.categories[0].id;
-                    const relatedData = await getPosts(1, 3, categoryId);
+                setPost(mappedPost);
+                setViewCount(0);
 
-                    if (relatedData) {
-                        // Exclude current post from related posts
-                        const filtered = relatedData.posts.filter((p: Post) => p.id !== postData.id);
-                        setRelatedPosts(filtered);
-                    }
+                const relatedRes = await fetch("/api/external-news?limit=6", { signal: controller.signal });
+                const relatedJson = (await relatedRes.json()) as {
+                    success: boolean;
+                    data: Array<{
+                        id: string;
+                        title: string;
+                        slug: string;
+                        excerpt: string;
+                        content: string;
+                        featuredImage: string | null;
+                        author: { name: string; avatar: string | null };
+                        category: string;
+                        publishedAt: string;
+                        updatedAt: string;
+                        link: string;
+                        viewCount: number;
+                    }>;
+                };
+
+                if (relatedJson.success) {
+                    const mappedRelated: Post[] = relatedJson.data
+                        .filter((n) => n.slug !== slug)
+                        .slice(0, 3)
+                        .map((n) => ({
+                            id: n.id,
+                            title: n.title,
+                            content: n.content,
+                            excerpt: n.excerpt,
+                            slug: n.slug,
+                            date: n.publishedAt,
+                            modified: n.updatedAt,
+                            author: { name: n.author.name, avatar: n.author.avatar ?? "/images/default-avatar.png" },
+                            featuredImage:
+                                n.featuredImage ??
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23006064'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='36' fill='%23ffffff' text-anchor='middle' dy='.3em'%3EBerita%3C/text%3E%3C/svg%3E",
+                            featuredImageAlt: n.title,
+                            categories: [{ id: 1, name: "Berita Desa", slug: "berita-desa" }],
+                            tags: [],
+                            viewCount: n.viewCount ?? 0,
+                        }));
+                    setRelatedPosts(mappedRelated);
+                } else {
+                    setRelatedPosts([]);
                 }
-            } catch {
+            } catch (error) {
+                if (controller.signal.aborted) {
+                    return;
+                }
+                if (error instanceof DOMException && error.name === "AbortError") {
+                    return;
+                }
                 setError("Gagal memuat berita. Silakan coba lagi.");
             } finally {
                 setLoading(false);
@@ -133,6 +223,9 @@ function NewsDetailContent() {
         }
 
         loadPost();
+        return () => {
+            controller.abort();
+        };
     }, [slug]);
 
     // Update view count (simulated)
@@ -263,12 +356,12 @@ function NewsDetailContent() {
         );
     }
 
-    const currentUrl = `${env.NEXT_PUBLIC_SITE_URL ?? ""}/berita/${post.slug}`;
+    const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
     return (
         <div className="container mx-auto px-4 py-4">
             {/* Back button */}
-            <Link href="/berita">
+            <Link href="/berita" prefetch={false}>
                 <Button variant="ghost" className="mb-6">
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     Kembali ke Daftar Berita
@@ -399,6 +492,7 @@ function NewsDetailContent() {
                                         <Link
                                             key={relatedPost.id}
                                             href={`/berita/${relatedPost.slug}`}
+                                            prefetch={false}
                                             className="group block"
                                         >
                                             <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
