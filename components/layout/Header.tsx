@@ -69,6 +69,7 @@ export function Header() {
         { href: "/berita", label: t("navigation.berita") },
         { href: "/pengumuman", label: "Pengumuman" },
         { href: "/kegiatan", label: t("navigation.kegiatan") },
+        { href: "/perpustakaan", label: "Perpustakaan Desa" },
     ];
 
     const ewsSubItems = [

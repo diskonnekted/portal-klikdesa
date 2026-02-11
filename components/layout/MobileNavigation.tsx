@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
     Home,
     Newspaper,
+    BookOpen,
     FileText,
     MessageSquare,
     Menu,
@@ -522,6 +523,27 @@ export function MobileNavigation() {
                                         />
                                         <span className="truncate">Agenda & Kegiatan</span>
                                         {isActive("/kegiatan") && (
+                                            <div className="ml-auto w-2 h-2 bg-current rounded-full" />
+                                        )}
+                                    </Link>
+
+                                    <Link
+                                        key="/perpustakaan"
+                                        href="/perpustakaan"
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className={`flex items-center gap-3 px-3 py-3 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer ${
+                                            isActive("/perpustakaan")
+                                                ? "bg-primary text-primary-foreground font-medium"
+                                                : "hover:bg-accent hover:text-accent-foreground"
+                                        }`}
+                                    >
+                                        <BookOpen
+                                            className={`h-5 w-5 shrink-0 ${
+                                                isActive("/perpustakaan") ? "text-primary-foreground" : "text-primary"
+                                            }`}
+                                        />
+                                        <span className="truncate">Perpustakaan Desa</span>
+                                        {isActive("/perpustakaan") && (
                                             <div className="ml-auto w-2 h-2 bg-current rounded-full" />
                                         )}
                                     </Link>

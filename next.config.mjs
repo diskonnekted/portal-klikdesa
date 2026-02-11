@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+        localPatterns: [
+            {
+                pathname: "/api/takadisa-image",
+                search: "?url=*",
+            },
+        ],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -9,6 +15,11 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'sijenggung-banjarnegara.desa.id',
+            }
+            ,
+            {
+                protocol: 'https',
+                hostname: 'covers.openlibrary.org',
             }
         ],
     },
