@@ -670,12 +670,6 @@ export default function ProfilPage() {
                             <div className="flex items-start gap-3">
                                 <Calendar className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                                 <div className="flex-1">
-                                    <h3 className="text-sm font-semibold mb-1.5">{DesaData.sejarah.maklumat}</h3>
-                                    <p className="text-xs mb-1.5">
-                                        <span className="font-medium">
-                                            Nomor: {DesaData.sejarah.nomor} Tahun {DesaData.sejarah.tahun}
-                                        </span>
-                                    </p>
                                     <p className="text-gray-600 leading-relaxed text-justify mb-4">
                                         Desa Sijenggung adalah salah satu desa di Kecamatan Banjarmangu,
                                         Kabupaten Banjarnegara, Jawa Tengah.
