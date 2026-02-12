@@ -1,4 +1,4 @@
-﻿// Shared ThingSpeak data fetcher for both API routes and WebSocket
+// Shared ThingSpeak data fetcher for both API routes and WebSocket
 
 export interface ThingSpeakChannel {
     id: string;
@@ -60,22 +60,15 @@ export const THINGSPEAK_CHANNELS: ThingSpeakChannel[] = [
         id: "3155825",
         name: "IoT Monitoring Station 1",
         location: "Kantor Desa",
-        lat: -7.663494,
-        lng: 110.306996,
+        lat: -7.292870027472901,
+        lng: 109.66802307683243,
     },
     {
         id: "3156242",
         name: "IoT Monitoring Station 2",
         location: "Kantor Desa",
-        lat: -7.663494,
-        lng: 110.306996,
-    },
-    {
-        id: "3160660",
-        name: "IoT Monitoring Station 3",
-        location: "Kantor Desa",
-        lat: -7.663494,
-        lng: 110.306996,
+        lat: -7.292870027472901,
+        lng: 109.66802307683243,
     },
 ];
 
