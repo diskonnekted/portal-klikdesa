@@ -162,8 +162,6 @@ function parseTakadisaIndex(html: string): { headline: string; name: string; des
     return { headline, name, description, books: uniqueBooks };
 }
 
-export const dynamic = "force-dynamic";
-
 export default async function PerpustakaanPage() {
     const sourceUrl = "https://takadisa.smartdesa.net/index.php";
 
