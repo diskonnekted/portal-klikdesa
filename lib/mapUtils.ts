@@ -116,8 +116,8 @@ export interface MapViewport {
 
 // Default center coordinates for Sijenggung Village (Banjarnegara, Jateng)
 export const SIJENGGUNG_CENTER = {
-    lat: -7.293067,
-    lng: 109.668019,
+    lat: -7.292923582622618,
+    lng: 109.66800191560662,
 };
 
 // Default map configuration

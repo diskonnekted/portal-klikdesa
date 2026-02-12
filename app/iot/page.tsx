@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { formatIoTTimestamp } from "@/lib/dateUtils";
 import { formatLastSeen } from "@/lib/thingspeak";
+import { SIJENGGUNG_CENTER } from "@/lib/mapUtils";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -167,7 +168,7 @@ export default function IoTPage() {
     const [selectedSensor, setSelectedSensor] = React.useState<IoTSensor | null>(null);
     const [geoJsonData, setGeoJsonData] = React.useState<GeoJSON.FeatureCollection | null>(null);
     const [mapLoaded, setMapLoaded] = React.useState(false);
-    const [mapCenter, setMapCenter] = React.useState<[number, number]>([-7.659, 110.31]);
+    const mapCenter: [number, number] = [SIJENGGUNG_CENTER.lat, SIJENGGUNG_CENTER.lng];
     const [newEntryIds, setNewEntryIds] = React.useState<Set<number>>(new Set());
     const [mapKey, setMapKey] = React.useState(0);
 
@@ -211,28 +212,6 @@ export default function IoTPage() {
             .then((res) => res.json())
             .then((data) => {
                 setGeoJsonData(data);
-                // Calculate center from GeoJSON
-                try {
-                    if (data && data.features && data.features.length > 0) {
-                        const feature = data.features[0];
-                        const coords = feature.geometry.coordinates[0];
-                        if (coords && Array.isArray(coords) && coords.length > 0) {
-                            const lats = coords.map((c: number[]) => c[1]).filter((n: number) => !isNaN(n));
-                            const lngs = coords.map((c: number[]) => c[0]).filter((n: number) => !isNaN(n));
-
-                            if (lats.length > 0 && lngs.length > 0) {
-                                const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
-                                const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
-
-                                if (!isNaN(centerLat) && !isNaN(centerLng)) {
-                                    setMapCenter([centerLat, centerLng]);
-                                }
-                            }
-                        }
-                    }
-                } catch (e) {
-                    console.error("Error calculating center:", e);
-                }
                 setMapLoaded(true);
             })
             .catch((err) => {
