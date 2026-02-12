@@ -149,9 +149,6 @@ export default function ProfilPage() {
 
         // Historical Data
         sejarah: {
-            maklumat: "Maklumat Gubernur DIY Sri Sultan Hamengkubuwono ke IX",
-            nomor: "05",
-            tahun: "1948",
             deskripsi:
                 "Desa Sijenggung dulunya terbagi menjadi 2 (dua) Desa yaitu Desa Ngentak dan Desa Glagahombo.",
         },
