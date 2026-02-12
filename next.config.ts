@@ -42,13 +42,13 @@ const nextConfig: NextConfig = {
                 protocol: 'http',
                 hostname: 'sijenggung-banjarnegara.desa.id',
                 port: '',
-                pathname: '/storage-desa',
+                pathname: '/storage-desa**',
             },
             {
                 protocol: 'https',
                 hostname: 'sijenggung-banjarnegara.desa.id',
                 port: '',
-                pathname: '/storage-desa',
+                pathname: '/storage-desa**',
             },
             {
                 protocol: 'http',
@@ -79,6 +79,12 @@ const nextConfig: NextConfig = {
                 hostname: 'static.bmkg.go.id',
                 port: '',
                 pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'sijenggung.smartdesa.net',
+                port: '',
+                pathname: '/uploads/**',
             },
         ],
 
