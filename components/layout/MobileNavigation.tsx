@@ -548,6 +548,17 @@ export function MobileNavigation() {
                                         )}
                                     </Link>
 
+                                    <a
+                                        href="https://posyandu-sijenggung.smartdesa.net/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className="flex items-center gap-3 px-3 py-3 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer hover:bg-accent hover:text-accent-foreground"
+                                    >
+                                        <Heart className="h-5 w-5 shrink-0 text-primary" />
+                                        <span className="truncate">Posyandu</span>
+                                    </a>
+
                                     <Link
                                         key="/ppid"
                                         href="/ppid"

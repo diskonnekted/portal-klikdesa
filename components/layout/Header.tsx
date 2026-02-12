@@ -70,6 +70,7 @@ export function Header() {
         { href: "/pengumuman", label: "Pengumuman" },
         { href: "/kegiatan", label: t("navigation.kegiatan") },
         { href: "/perpustakaan", label: "Perpustakaan Desa" },
+        { href: "https://posyandu-sijenggung.smartdesa.net/", label: "Posyandu", external: true },
     ];
 
     const ewsSubItems = [
@@ -338,7 +339,7 @@ export function Header() {
                             // Check if this item should have a dropdown
                             const isPemerintahanItem = item.href === "/pemerintahan";
                             const isInformasiItem = item.href === "/informasi";
-                            const isStatistikItem = item.href === "/statistik";
+                            const isStatistikItem = item.href === "/statistik" || item.href.startsWith("/statistik/");
                             const isEwsItem = item.href === "/ews";
                             const IconComponent = item.icon;
 
@@ -389,12 +390,23 @@ export function Header() {
                                         <DropdownMenuContent align="start" className="w-full">
                                             {informasiSubItems.map((subItem) => (
                                                 <DropdownMenuItem key={subItem.href} asChild>
-                                                    <Link
-                                                        href={subItem.href}
-                                                        className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
-                                                    >
-                                                        {subItem.label}
-                                                    </Link>
+                                                    {subItem.external ? (
+                                                        <a
+                                                            href={subItem.href}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
+                                                        >
+                                                            {subItem.label}
+                                                        </a>
+                                                    ) : (
+                                                        <Link
+                                                            href={subItem.href}
+                                                            className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
+                                                        >
+                                                            {subItem.label}
+                                                        </Link>
+                                                    )}
                                                 </DropdownMenuItem>
                                             ))}
                                         </DropdownMenuContent>
