@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
     History,
     Users,
@@ -20,6 +21,38 @@ import Image from "next/image";
 import { PegawaiDisplay } from "@/components/ui/custom/PegawaiDisplay";
 
 export default function ProfilPage() {
+    const [wilayahTotals, setWilayahTotals] = useState<{ dusun: number; rw: number; rt: number } | null>(null);
+
+    useEffect(() => {
+        let isActive = true;
+        const fetchWilayahTotals = async () => {
+            try {
+                const response = await fetch("/api/wilayah");
+                if (!response.ok) return;
+                const data = (await response.json()) as {
+                    data?: Array<{ attributes: { rws_count: number; rts_count: number } }>;
+                };
+                const wilayahData = data.data ?? [];
+                const totals = {
+                    dusun: wilayahData.length,
+                    rw: wilayahData.reduce((sum, wilayah) => sum + wilayah.attributes.rws_count, 0),
+                    rt: wilayahData.reduce((sum, wilayah) => sum + wilayah.attributes.rts_count, 0),
+                };
+                if (isActive) {
+                    setWilayahTotals(totals);
+                }
+            } catch {
+                if (isActive) {
+                    setWilayahTotals(null);
+                }
+            }
+        };
+        fetchWilayahTotals();
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
     // Real comprehensive data Desa Sijenggung
     const DesaData = {
         // Basic Info
@@ -198,13 +231,14 @@ export default function ProfilPage() {
                                 <div className="bg-muted p-3 rounded-lg text-center">
                                     <h4 className="text-xs font-semibold text-muted-foreground">Dusun</h4>
                                     <p className="text-xl font-bold text-foreground">
-                                        {DesaData.government.dusun}
+                                        {wilayahTotals?.dusun ?? DesaData.government.dusun}
                                     </p>
                                 </div>
                                 <div className="bg-muted p-3 rounded-lg text-center">
                                     <h4 className="text-xs font-semibold text-muted-foreground">RW/RT</h4>
                                     <p className="text-xl font-bold text-foreground">
-                                        {DesaData.government.rw}/{DesaData.government.rt}
+                                        {wilayahTotals?.rw ?? DesaData.government.rw}/
+                                        {wilayahTotals?.rt ?? DesaData.government.rt}
                                     </p>
                                 </div>
                             </div>
@@ -423,16 +457,20 @@ export default function ProfilPage() {
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Padukuhan/Dusun</span>
                                 <span className="text-xl font-bold text-foreground">
-                                    {DesaData.government.dusun}
+                                    {wilayahTotals?.dusun ?? DesaData.government.dusun}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Rukun Warga (RW)</span>
-                                <span className="text-xl font-bold text-foreground">{DesaData.government.rw}</span>
+                                <span className="text-xl font-bold text-foreground">
+                                    {wilayahTotals?.rw ?? DesaData.government.rw}
+                                </span>
                             </div>
                             <div className="flex justify-between items-center p-2 bg-muted/30 rounded-lg">
                                 <span className="text-sm font-medium">Rukun Tetangga (RT)</span>
-                                <span className="text-xl font-bold text-foreground">{DesaData.government.rt}</span>
+                                <span className="text-xl font-bold text-foreground">
+                                    {wilayahTotals?.rt ?? DesaData.government.rt}
+                                </span>
                             </div>
                         </CardContent>
                     </Card>
