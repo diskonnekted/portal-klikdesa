@@ -214,12 +214,23 @@ export class ApiService {
 }
 
 // Pre-configured API services for common use cases
+const DEFAULT_OPENSID_URL = "https://sijenggung-banjarnegara.desa.id";
+const opensidBaseUrl = (() => {
+    const raw = process.env.OPENSID_API_URL;
+    if (!raw) return DEFAULT_OPENSID_URL;
+    try {
+        const parsed = new URL(raw);
+        if (parsed.hostname === "sijenggung-banjarnegara.desa.id") {
+            return parsed.toString().replace(/\/$/, "");
+        }
+    } catch {
+        return DEFAULT_OPENSID_URL;
+    }
+    return DEFAULT_OPENSID_URL;
+})();
 
-/**
- * OpenSID API service
- */
 export const opensidApi = new ApiService({
-    baseUrl: process.env.OPENSID_API_URL || "https://sijenggung-banjarnegara.desa.id",
+    baseUrl: opensidBaseUrl,
     timeout: 30000,
     cache: {
         revalidate: 3600, // 1 hour
