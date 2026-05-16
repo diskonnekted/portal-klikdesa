@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
-    cacheComponents: true,
+    cacheComponents: false,
     poweredByHeader: false,
 
     allowedDevOrigins: ['*.clasnet.co.id'],
