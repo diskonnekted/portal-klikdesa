@@ -1,7 +1,7 @@
 "use client";
 
 import { Users } from "lucide-react";
-import { StatisticsDisplay } from "@/components/ui/custom/StatisticsDisplay";
+import { StatistikDisplay } from "@/components/ui/custom/StatistikDisplay";
 
 export default function PendudukPage() {
     return (
@@ -16,7 +16,7 @@ export default function PendudukPage() {
                         Data statistik kependudukan Desa Sijenggung
                     </p>
                 </div>
-                <StatisticsDisplay />
+                <StatistikDisplay />
             </div>
         </div>
     );

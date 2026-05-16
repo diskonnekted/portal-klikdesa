@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { LayoutDashboard, Newspaper, Users, LogOut, Home } from "lucide-react";
+import { LayoutDashboard, Newspaper, Users, LogOut, Home, MessageSquare, Megaphone, FileText } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import {
@@ -52,6 +52,30 @@ export function AdminLayoutClient({ children }: { children: React.ReactNode }) {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
+                                <SidebarMenuButton asChild isActive={pathname.startsWith("/admin/pengumuman")} tooltip="Pengumuman">
+                                    <Link href="/admin/pengumuman">
+                                        <Megaphone />
+                                        <span>Pengumuman</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild isActive={pathname.startsWith("/admin/layanan")} tooltip="Layanan">
+                                    <Link href="/admin/layanan">
+                                        <FileText />
+                                        <span>Layanan</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild isActive={pathname.startsWith("/admin/pengaduan")} tooltip="Pengaduan">
+                                    <Link href="/admin/pengaduan">
+                                        <MessageSquare />
+                                        <span>Pengaduan</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
                                 <SidebarMenuButton asChild isActive={pathname.startsWith("/admin/pengguna")} tooltip="Pengguna">
                                     <Link href="/admin/pengguna">
                                         <Users />
@@ -89,6 +113,9 @@ export function AdminLayoutClient({ children }: { children: React.ReactNode }) {
                             <h1 className="text-lg font-semibold">
                                 {pathname === "/admin" && "Dashboard"}
                                 {pathname.includes("/admin/berita") && "Manajemen Berita"}
+                                {pathname.includes("/admin/pengumuman") && "Manajemen Pengumuman"}
+                                {pathname.includes("/admin/layanan") && "Manajemen Layanan"}
+                                {pathname.includes("/admin/pengaduan") && "Manajemen Pengaduan"}
                                 {pathname.includes("/admin/pengguna") && "Manajemen Pengguna"}
                             </h1>
                         </div>

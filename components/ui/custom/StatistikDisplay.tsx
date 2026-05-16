@@ -175,7 +175,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                         <Users className="h-5 w-5 text-primary" />
                         Statistik Penduduk Desa
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground">Data berdasarkan tingkat pendidikan</p>
+                    <p className="text-sm text-muted-foreground">Distribusi penduduk berdasarkan kategori</p>
                 </CardHeader>
             </Card>
 
@@ -216,7 +216,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                             {totalLaki.toLocaleString("id-ID")}
                         </div>
                         <p className="text-xs text-indigo-700">
-                            {((totalLaki / totalPopulation) * 100).toFixed(1)}% dari total
+                            {totalPopulation > 0 ? ((totalLaki / totalPopulation) * 100).toFixed(1) : 0}% dari total
                         </p>
                     </CardContent>
                 </Card>
@@ -237,7 +237,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                             {totalPerempuan.toLocaleString("id-ID")}
                         </div>
                         <p className="text-xs text-rose-700">
-                            {((totalPerempuan / totalPopulation) * 100).toFixed(1)}% dari total
+                            {totalPopulation > 0 ? ((totalPerempuan / totalPopulation) * 100).toFixed(1) : 0}% dari total
                         </p>
                     </CardContent>
                 </Card>
@@ -250,7 +250,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <BarChart3 className="h-5 w-5 text-primary" />
-                            Distribusi Penduduk per Tingkat Pendidikan
+                            Distribusi Penduduk per Kategori
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -261,7 +261,7 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
                                 <YAxis dataKey="name" type="category" width={100} />
                                 <Tooltip
                                     formatter={(value: number) => [value.toLocaleString("id-ID"), "Jumlah"]}
-                                    labelFormatter={(label) => `Pendidikan: ${label}`}
+                                    labelFormatter={(label) => `Kategori: ${label}`}
                                 />
                                 <Bar dataKey="jumlah" radius={[0, 8, 8, 0]}>
                                     {educationData.map((entry, index) => (
@@ -308,8 +308,8 @@ export function StatistikDisplay({ className }: StatistikDisplayProps) {
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                        <GraduationCap className="h-5 w-5 text-primary" />
-                        Detail Statistik Pendidikan
+                        <Users className="h-5 w-5 text-primary" />
+                        Detail Statistik Kependudukan
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

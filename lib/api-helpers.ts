@@ -60,7 +60,7 @@ export async function fetchOpenSIDStatistikById(
     const endpoint = `/internal_api/statistik/${statistikId}`;
     return fetchOpenSIDStatistik(endpoint, {
         cacheTags: [`opensid-data-${dataType}`],
-        fallbackData: config?.fallbackData || [],
+        fallbackData: config?.fallbackData || { data: [] },
     });
 }
 
