@@ -82,6 +82,12 @@ export function MobileNavigation() {
     const mainSidebarNavItems = [
         { href: "/pemerintahan", label: translations.navigation.pemerintahan, icon: Landmark },
         { href: "/informasi", label: translations.navigation.informasi, icon: Info },
+        {
+            href: "https://geospasial.clasnet.my.id",
+            label: "Geospasial Desa",
+            icon: MapPin,
+            external: true,
+        },
         { href: "/statistik/penduduk", label: "Statistik", icon: BarChart3 },
         { href: "/ppid", label: "PPID", icon: FileCheck },
         { href: "/idm", label: "IDM", icon: FileText },

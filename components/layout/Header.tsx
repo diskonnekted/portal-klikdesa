@@ -49,6 +49,7 @@ export function Header() {
         { href: "/", label: t("navigation.beranda"), icon: Home },
         { href: "/pemerintahan", label: t("navigation.pemerintahan"), icon: Building2 },
         { href: "/informasi", label: "Informasi", icon: Newspaper },
+        { href: "https://geospasial.clasnet.my.id", label: "Geospasial Desa", icon: Globe, external: true },
         { href: "/statistik/penduduk", label: "Statistik", icon: BarChart3 },
         { href: "/ppid", label: "PPID", icon: BookCheck },
         { href: "/idm", label: "IDM", icon: FileText },
@@ -60,6 +61,7 @@ export function Header() {
     const pemerintahanSubItems = [
         { href: "/profil", label: t("navigation.profilDesa") },
         { href: "/wilayah-administratif", label: "Wilayah Administratif" },
+        { href: "https://geospasial.clasnet.my.id", label: "Geospasial Desa", external: true },
         { href: "/keuangan", label: t("navigation.keuangan") },
         { href: "/pembangunan", label: t("navigation.pembangunan") },
         { href: "/bumdes", label: t("navigation.bumdes") },
@@ -490,6 +492,21 @@ export function Header() {
                             }
 
                             // Render as regular link
+                            if (item.external) {
+                                return (
+                                    <a
+                                        key={item.href}
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center"
+                                    >
+                                        <IconComponent className="h-4 w-4 mr-2" />
+                                        {item.label}
+                                    </a>
+                                );
+                            }
+
                             return (
                                 <Link
                                     key={item.href}
