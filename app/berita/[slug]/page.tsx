@@ -379,9 +379,10 @@ function NewsDetailContent() {
                                 src={post.featuredImage}
                                 alt={post.featuredImageAlt}
                                 fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                                 className="object-cover"
                                 priority={true}
+                                quality={95}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
