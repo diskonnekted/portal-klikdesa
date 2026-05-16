@@ -173,7 +173,7 @@ function transformArticle(article: OpenSIDArticle) {
                 return `${base}${urlStr}`;
             }
             if (!urlStr.includes("/")) {
-                return `${base}/desa/upload/artikel/sedang_${urlStr}`;
+                return `${base}/desa/upload/artikel/${urlStr}`;
             }
             const u = new URL(urlStr);
             const b = new URL(base);
