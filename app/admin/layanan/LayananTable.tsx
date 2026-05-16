@@ -43,16 +43,11 @@ export function LayananTable({ data }: LayananTableProps) {
         {
             key: "statusPermohonan" as keyof LayananPermohonan,
             label: "Status",
-            render: (value: StatusPermohonan) => {
-                const variants: Record<StatusPermohonan, string> = {
-                    MENUNGGU: "outline",
-                    DIPROSES: "default",
-                    SELESAI: "success",
-                    DITOLAK: "destructive",
-                };
+            render: (value: any) => {
+                const s = value as StatusPermohonan;
                 return (
-                    <Badge variant={value === "DITOLAK" ? "destructive" : value === "SELESAI" ? "default" : "outline"}>
-                        {value}
+                    <Badge variant={s === "DITOLAK" ? "destructive" : s === "SELESAI" ? "default" : "outline"}>
+                        {s}
                     </Badge>
                 );
             },

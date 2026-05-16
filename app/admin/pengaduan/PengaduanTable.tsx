@@ -46,18 +46,13 @@ export function PengaduanTable({ data }: PengaduanTableProps) {
         {
             key: "status" as keyof Pengaduan,
             label: "Status",
-            render: (value: StatusPengaduan) => {
-                const variants: Record<StatusPengaduan, string> = {
-                    MENUNGGU: "secondary",
-                    DIPROSES: "warning",
-                    SELESAI: "success",
-                    DITOLAK: "destructive",
-                };
+            render: (value: any) => {
+                const s = value as StatusPengaduan;
                 // Map warning/success to shadcn compatible variants or use custom styling
                 // Since Badge variant is limited, we'll use a mix
                 return (
-                    <Badge variant={value === "DITOLAK" ? "destructive" : value === "SELESAI" ? "default" : "outline"}>
-                        {value}
+                    <Badge variant={s === "DITOLAK" ? "destructive" : s === "SELESAI" ? "default" : "outline"}>
+                        {s}
                     </Badge>
                 );
             },
