@@ -108,7 +108,7 @@ export function MobileNavigation() {
             category: "Tata Kelola Pemerintahan",
             icon: Landmark,
             items: [
-                { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri/masuk", label: "Layanan Mandiri Desa", external: true, icon: FileText },
+                { href: "/klikdesa/tata-kelola", label: "Layanan Mandiri Desa", icon: FileText },
                 { href: "/pengaduan", label: "Pengaduan Masyarakat tentang Desa", icon: MessageSquare },
             ]
         },

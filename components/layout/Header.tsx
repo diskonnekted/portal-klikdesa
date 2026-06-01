@@ -78,7 +78,7 @@ export function Header() {
             label: "Tata Kelola",
             icon: Building2,
             subItems: [
-                { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri/masuk", label: "Layanan Mandiri Desa", external: true },
+                { href: "/klikdesa/tata-kelola", label: "Layanan Mandiri Desa" },
                 { href: "/pengaduan", label: "Pengaduan Masyarakat tentang Desa" },
             ]
         },
