@@ -172,7 +172,12 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
     return (
         <div className="beranda-container bg-background">
             {/* Hero Section with Layanan Cepat */}
-            <section className="hero-area bg-[#26C6DA] py-16 relative">
+            <section 
+                className="hero-area py-16 relative bg-cover bg-center bg-no-repeat overflow-hidden"
+                style={{ backgroundImage: "url('/images/dispermades.jpg')" }}
+            >
+                {/* Overlay gradient for contrast and readability */}
+                <div className="absolute inset-0 bg-slate-900/65 z-10" />
                 {/* <WeatherAnimation weatherData={weatherData} className="z-10 opacity-60" /> */}
                 <div className="container mx-auto px-4 relative z-20">
                     {/* Hero Text */}
