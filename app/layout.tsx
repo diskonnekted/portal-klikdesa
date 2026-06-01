@@ -21,33 +21,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL || "https://sijenggung-banjarnegara.desa.id"),
-    title: "Portal Resmi Desa Sijenggung - Banjarnegara, Jawa Tengah",
+    metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL || "https://klikdesa-banjarnegara.desa.id"),
+    title: "Klikdesa - Dinas Dispermades PPKB Kabupaten Banjarnegara",
     description:
-        "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah. Informasi lengkap layanan publik, berita terkini, dan transparansi pemerintahan desa.",
+        "Klikdesa (Katalog Layanan Interaktif & Kolaborasi Desa) - Portal resmi Dinas Dispermades PPKB Kabupaten Banjarnegara. Mengintegrasikan layanan kesehatan, pengentasan kemiskinan, pemberdayaan masyarakat, tata kelola, dan ketahanan bencana.",
     keywords:
-        "Desa Sijenggung, Banjarnegara, Jawa Tengah, pemerintahan desa, layanan publik, berita desa, transparansi, APBDes",
-    authors: [{ name: "Pemerintah Desa Sijenggung" }],
+        "Klikdesa, Dispermades PPKB, Banjarnegara, Jawa Tengah, pelayanan publik, pemberdayaan masyarakat, ketahanan bencana, desil kemiskinan, posyandu",
+    authors: [{ name: "Dinas Dispermades PPKB Kabupaten Banjarnegara" }],
     openGraph: {
-        title: "Portal Resmi Desa Sijenggung",
-        description: "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah",
+        title: "Klikdesa - Dinas Dispermades PPKB Banjarnegara",
+        description: "Portal resmi Klikdesa untuk Dinas Dispermades PPKB Kabupaten Banjarnegara",
         type: "website",
         locale: "id_ID",
-        url: "https://sijenggung-banjarnegara.desa.id",
-        siteName: env.APP_NAME || "Portal Desa Sijenggung",
+        url: "https://klikdesa-banjarnegara.desa.id",
+        siteName: env.APP_NAME || "Klikdesa",
         images: [
             {
                 url: "/favicon-512x512.png",
                 width: 512,
                 height: 512,
-                alt: "Desa Sijenggung Logo",
+                alt: "Klikdesa Logo",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Portal Resmi Desa Sijenggung",
-        description: "Portal resmi Pemerintah Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah",
+        title: "Klikdesa - Dinas Dispermades PPKB Banjarnegara",
+        description: "Portal resmi Klikdesa untuk Dinas Dispermades PPKB Kabupaten Banjarnegara",
     },
     other: {
         "msapplication-TileColor": "#FF8A00",

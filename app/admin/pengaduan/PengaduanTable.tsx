@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Pengaduan, StatusPengaduan } from "@prisma/client";
+import { Pengaduan } from "@prisma/client";
 import { CustomDataTable } from "@/components/ui/custom/CustomDataTable";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
@@ -47,7 +47,7 @@ export function PengaduanTable({ data }: PengaduanTableProps) {
             key: "status" as keyof Pengaduan,
             label: "Status",
             render: (value: any) => {
-                const s = value as StatusPengaduan;
+                const s = value as string;
                 // Map warning/success to shadcn compatible variants or use custom styling
                 // Since Badge variant is limited, we'll use a mix
                 return (

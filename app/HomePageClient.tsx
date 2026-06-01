@@ -23,6 +23,9 @@ import {
     NotebookPen,
     BriefcaseBusiness,
     Lightbulb,
+    AlertTriangle,
+    Users,
+    CreditCard,
 } from "lucide-react";
 
 import ImageFallback from "@/components/ui/custom/ImageFallback";
@@ -173,69 +176,110 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 {/* <WeatherAnimation weatherData={weatherData} className="z-10 opacity-60" /> */}
                 <div className="container mx-auto px-4 relative z-20">
                     {/* Hero Text */}
-                    <div className="text-center text-foreground mb-16">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-sm text-white">Selamat Datang</h1>
-                        <p className="text-lg md:text-xl mb-6 text-white/90 drop-shadow-sm">
-                            Portal Resmi Desa Sijenggung, Kabupaten Banjarnegara, Jawa Tengah
+                    <div className="text-center text-foreground mb-12">
+                        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-sm text-white tracking-tight">Klikdesa</h1>
+                        <p className="text-xl md:text-2xl mb-8 text-white/95 drop-shadow-sm font-medium max-w-4xl mx-auto">
+                            Katalog Layanan Interaktif & Kolaborasi Desa - Dispermades PPKB Kabupaten Banjarnegara
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <Badge
                                 variant="default"
-                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/95 text-cyan-900 border-cyan-200 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 backdrop-blur-sm px-4 py-1.5 text-sm"
                             >
-                                <Eye className="text-primary-600" /> Transparan
+                                <Eye className="text-cyan-600 mr-1.5 h-4 w-4" /> Transparan
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/95 text-cyan-900 border-cyan-200 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 backdrop-blur-sm px-4 py-1.5 text-sm"
                             >
-                                <NotebookPen className="text-primary-600" /> Akuntabel
+                                <NotebookPen className="text-cyan-600 mr-1.5 h-4 w-4" /> Akuntabel
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/95 text-cyan-900 border-cyan-200 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 backdrop-blur-sm px-4 py-1.5 text-sm"
                             >
-                                <BriefcaseBusiness className="text-primary-600" /> Profesional
+                                <BriefcaseBusiness className="text-cyan-600 mr-1.5 h-4 w-4" /> Profesional
                             </Badge>
                             <Badge
                                 variant="default"
-                                className="bg-white/90 text-primary-900 border-primary-200 shadow-sm hover:shadow-md hover:scale-105 backdrop-blur-sm"
+                                className="bg-white/95 text-cyan-900 border-cyan-200 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 backdrop-blur-sm px-4 py-1.5 text-sm"
                             >
-                                <Lightbulb className="text-primary-600" /> Inovatif
+                                <Lightbulb className="text-cyan-600 mr-1.5 h-4 w-4" /> Inovatif
                             </Badge>
                         </div>
                     </div>
 
-                    {/* Layanan Cepat in Hero */}
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                        {quickLinks.map((link) => (
-                            <div
-                                key={link.label}
-                                className="group rounded-xl border border-primary-100 bg-white/60 hover:bg-white hover:shadow-lg transition-all cursor-pointer overflow-hidden hover:scale-102 backdrop-blur-sm"
-                            >
+                    {/* Layanan Cepat / Klikdesa 5 Modul Utama */}
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-7xl mx-auto">
+                        {[
+                            {
+                                href: "/klikdesa/kesehatan",
+                                title: "Kesehatan",
+                                subtitle: "Posyandu & KB",
+                                desc: "Stunting & KB tracker",
+                                icon: Heart,
+                                color: "bg-rose-50 border-rose-100 hover:border-rose-300 text-rose-700",
+                                iconBg: "bg-rose-100 text-rose-600",
+                            },
+                            {
+                                href: "/klikdesa/kemiskinan",
+                                title: "Kemiskinan",
+                                subtitle: "Pemetaan Desil",
+                                desc: "Data desil 1-10 warga",
+                                icon: ChartNoAxesColumnDecreasing,
+                                color: "bg-amber-50 border-amber-100 hover:border-amber-300 text-amber-800",
+                                iconBg: "bg-amber-100 text-amber-600",
+                            },
+                            {
+                                href: "/klikdesa/pemberdayaan",
+                                title: "Pemberdayaan",
+                                subtitle: "Sidara & TTG",
+                                desc: "Katalog UMKM & TTG",
+                                icon: Users,
+                                color: "bg-emerald-50 border-emerald-100 hover:border-emerald-300 text-emerald-800",
+                                iconBg: "bg-emerald-100 text-emerald-600",
+                            },
+                            {
+                                href: "/klikdesa/tata-kelola",
+                                title: "Tata Kelola",
+                                subtitle: "Layanan & Pengaduan",
+                                desc: "Surat online & aduan",
+                                icon: FileText,
+                                color: "bg-blue-50 border-blue-100 hover:border-blue-300 text-blue-800",
+                                iconBg: "bg-blue-100 text-blue-600",
+                            },
+                            {
+                                href: "/klikdesa/bencana",
+                                title: "Kebencanaan",
+                                subtitle: "CCTV, Peta & EWS",
+                                desc: "Deteksi dini longsor",
+                                icon: AlertTriangle,
+                                color: "bg-cyan-50 border-cyan-100 hover:border-cyan-300 text-cyan-850",
+                                iconBg: "bg-cyan-100 text-cyan-600",
+                            },
+                        ].map((link) => {
+                            const IconComponent = link.icon;
+                            return (
                                 <Link
-                                    href={link.href ?? "#"}
-                                    className="block text-slate-700 hover:text-primary-700"
+                                    key={link.title}
+                                    href={link.href}
+                                    className={`group flex flex-col p-5 rounded-2xl border bg-white/95 hover:shadow-xl transition-all duration-300 cursor-pointer hover:scale-103 backdrop-blur-sm ${link.color}`}
                                 >
-                                    {/* Image section - full height minus text section */}
-                                    <div
-                                        className="relative h-40 bg-primary-50/50"
-                                        style={{
-                                            backgroundImage: `url(${link.svg})`,
-                                            backgroundRepeat: "no-repeat",
-                                            backgroundPosition: "center",
-                                            backgroundSize: "cover",
-                                        }}
-                                    ></div>
-                                    {/* Text section - at the bottom */}
-                                    <div className="p-3 bg-white/80 backdrop-blur-sm border-t border-primary-100">
-                                        <span className="text-sm font-semibold text-center group-hover:text-primary-700 transition-colors block text-slate-800">
-                                            {link.label}
-                                        </span>
+                                    <div className={`p-3 rounded-xl w-fit mb-4 ${link.iconBg} group-hover:scale-110 transition-transform duration-300`}>
+                                        <IconComponent className="h-6 w-6" />
                                     </div>
+                                    <h3 className="font-bold text-lg leading-tight mb-1 text-slate-800">
+                                        {link.title}
+                                    </h3>
+                                    <p className="text-xs font-semibold text-slate-500 mb-2">
+                                        {link.subtitle}
+                                    </p>
+                                    <p className="text-xs text-slate-600 leading-normal line-clamp-2 mt-auto">
+                                        {link.desc}
+                                    </p>
                                 </Link>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     {/* Layanan Mandiri CTA Button */}

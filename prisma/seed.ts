@@ -1,4 +1,4 @@
-import { PrismaClient, PeranPengguna } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -18,7 +18,7 @@ async function main() {
       email,
       namaLengkap: 'Administrator',
       kataSandi: hashedPassword,
-      peran: PeranPengguna.ADMIN,
+      peran: 'ADMIN',
       aktif: true,
       telepon: '08123456789',
       alamat: 'Kantor Desa Sijenggung',

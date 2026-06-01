@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Status } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -19,7 +18,7 @@ export async function createBerita(formData: FormData) {
   const ringkasan = formData.get("ringkasan") as string;
   const kategori = formData.get("kategori") as string;
   const penulis = formData.get("penulis") as string || "Admin"; // Default author
-  const status = formData.get("status") as Status;
+  const status = formData.get("status") as string;
   
   const slug = generateSlug(judul) + "-" + Date.now();
 
@@ -45,7 +44,7 @@ export async function updateBerita(id: number, formData: FormData) {
   const konten = formData.get("konten") as string;
   const ringkasan = formData.get("ringkasan") as string;
   const kategori = formData.get("kategori") as string;
-  const status = formData.get("status") as Status;
+  const status = formData.get("status") as string;
 
   await prisma.berita.update({
     where: { id },

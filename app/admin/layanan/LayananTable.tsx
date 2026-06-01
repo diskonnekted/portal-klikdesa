@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { LayananPermohonan, StatusPermohonan } from "@prisma/client";
+import { LayananPermohonan } from "@prisma/client";
 import { CustomDataTable } from "@/components/ui/custom/CustomDataTable";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
@@ -44,7 +44,7 @@ export function LayananTable({ data }: LayananTableProps) {
             key: "statusPermohonan" as keyof LayananPermohonan,
             label: "Status",
             render: (value: any) => {
-                const s = value as StatusPermohonan;
+                const s = value as string;
                 return (
                     <Badge variant={s === "DITOLAK" ? "destructive" : s === "SELESAI" ? "default" : "outline"}>
                         {s}

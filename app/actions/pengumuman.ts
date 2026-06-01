@@ -1,15 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Status, Prioritas } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createPengumuman(formData: FormData) {
   const judul = formData.get("judul") as string;
   const konten = formData.get("konten") as string;
-  const prioritas = formData.get("prioritas") as Prioritas;
-  const status = formData.get("status") as Status;
+  const prioritas = formData.get("prioritas") as string;
+  const status = formData.get("status") as string;
   const expiresAt = formData.get("expiresAt") ? new Date(formData.get("expiresAt") as string) : null;
 
   await prisma.pengumuman.create({
@@ -30,8 +29,8 @@ export async function createPengumuman(formData: FormData) {
 export async function updatePengumuman(id: number, formData: FormData) {
   const judul = formData.get("judul") as string;
   const konten = formData.get("konten") as string;
-  const prioritas = formData.get("prioritas") as Prioritas;
-  const status = formData.get("status") as Status;
+  const prioritas = formData.get("prioritas") as string;
+  const status = formData.get("status") as string;
   const expiresAt = formData.get("expiresAt") ? new Date(formData.get("expiresAt") as string) : null;
 
   await prisma.pengumuman.update({

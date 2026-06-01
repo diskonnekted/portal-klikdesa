@@ -43,3 +43,8 @@ next-env.d.ts
 # backups and temporary files
 *.backup.ts
 public/*.csv
+
+# database
+*.db
+*.db-journal
+dev.db

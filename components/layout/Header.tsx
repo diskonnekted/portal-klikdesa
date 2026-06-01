@@ -46,118 +46,51 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const mainNavItems = [
-        { href: "/", label: t("navigation.beranda"), icon: Home },
-        { href: "/pemerintahan", label: t("navigation.pemerintahan"), icon: Building2 },
-        { href: "/informasi", label: "Informasi", icon: Newspaper },
-        { href: "https://geospasial.clasnet.my.id", label: "Geospasial Desa", icon: Globe, external: true },
-        { href: "/statistik/penduduk", label: "Statistik", icon: BarChart3 },
-        { href: "/ppid", label: "PPID", icon: BookCheck },
-        { href: "/idm", label: "IDM", icon: FileText },
-        { href: "/sdgs", label: "SDGs", icon: Globe },
-        { href: "/ews", label: "EWS", icon: AlertTriangle },
-        { href: "/pengaduan", label: t("navigation.pengaduan"), icon: MessageSquare },
-    ];
-
-    const pemerintahanSubItems = [
-        { href: "/profil", label: t("navigation.profilDesa") },
-        { href: "/wilayah-administratif", label: "Wilayah Administratif" },
-        { href: "https://geospasial.clasnet.my.id", label: "Geospasial Desa", external: true },
-        { href: "/keuangan", label: t("navigation.keuangan") },
-        { href: "/pembangunan", label: t("navigation.pembangunan") },
-        { href: "/bumdes", label: t("navigation.bumdes") },
-    ];
-
-    const informasiSubItems = [
-        { href: "/berita", label: t("navigation.berita") },
-        { href: "/pengumuman", label: "Pengumuman" },
-        { href: "/kegiatan", label: t("navigation.kegiatan") },
-        { href: "/perpustakaan", label: "Perpustakaan Desa" },
-        { href: "https://posyandu-sijenggung.smartdesa.net/", label: "Posyandu", external: true },
-    ];
-
-    const ewsSubItems = [
-        { href: "/iot", label: "IoT" },
-        { href: "/peringatan-dini-cuaca", label: "Data Peringatan Dini Cuaca (Nowcast)" },
-        { href: "/gempa-terkini", label: "Data Gempa Bumi" },
-        { href: "/cuaca-desa-sijenggung", label: "Data Prakiraan Cuaca" },
-    ];
-
-    // Categorized statistik sub-items
-    const statistikCategories = [
+        { href: "/", label: "Beranda", icon: Home },
         {
-            category: "Demografi",
-            icon: Users,
-            items: [
-                { href: "/statistik/penduduk", label: "Penduduk" },
-                { href: "/statistik/umur", label: "Umur" },
-                { href: "/statistik/kelompok-usia", label: "Kelompok Usia" },
-                { href: "/statistik/hubungan-dalam-kk", label: "Hubungan Dalam KK" },
-                { href: "/statistik/kewarganegaraan", label: "Kewarganegaraan" },
-                { href: "/statistik/etnis", label: "Etnis" },
-                { href: "/statistik/kelas-sosial", label: "Kelas Sosial" },
-            ],
-        },
-        {
-            category: "Pendidikan",
-            icon: GraduationCap,
-            items: [
-                { href: "/statistik/pendidikan", label: "Kelompok Pendidikan" },
-                { href: "/statistik/pendidikan-ditempuh", label: "Pendidikan Ditempuh" },
-            ],
-        },
-        {
-            category: "Kesehatan & KB",
+            href: "/klikdesa/kesehatan",
+            label: "Kesehatan",
             icon: Heart,
-            items: [
-                { href: "/statistik/stunting", label: "Stunting" },
-                { href: "/statistik/hamil", label: "Ibu Hamil" },
-                { href: "/statistik/kontrasepsi-kb", label: "Kontrasepsi/KB" },
-                { href: "/statistik/disabilitas", label: "Disabilitas" },
-                { href: "/statistik/penyakit", label: "Sakit/Penyakit" },
-            ],
+            subItems: [
+                { href: "https://posyandu-sijenggung.smartdesa.net/", label: "Posyandu", external: true },
+                { href: "/klikdesa/kesehatan", label: "KB" },
+            ]
         },
         {
-            category: "Pernikahan & Keluarga",
-            icon: Heart,
-            items: [
-                { href: "/statistik/perkawinan", label: "Perkawinan" },
-                { href: "/statistik/buku-nikah", label: "Buku Nikah" },
-                { href: "/statistik/kepemilikan-akta-kematian", label: "Kepemilikan Akta Kematian" },
-            ],
-        },
-        {
-            category: "Sosial & Bantuan",
-            icon: Heart,
-            items: [
-                { href: "/statistik/penerima-bantuan-penduduk", label: "Penerima Bantuan Penduduk" },
-                { href: "/statistik/penerima-bantuan-keluarga", label: "Penerima Bantuan Keluarga" },
-                { href: "/statistik/bdt", label: "BDT" },
-            ],
-        },
-        {
-            category: "Administrasi",
+            href: "/klikdesa/kemiskinan",
+            label: "Pengentasan Kemiskinan",
             icon: CreditCard,
-            items: [
-                { href: "/statistik/ktp-elektronik", label: "KTP Elektronik" },
-                { href: "/statistik/kepemilikan-kia", label: "Kepemilikan KIA" },
-                { href: "/statistik/dpt", label: "DPT" },
-            ],
+            subItems: [
+                { href: "/klikdesa/kemiskinan", label: "Pemetaan Desil" },
+            ]
         },
         {
-            category: "Jaminan Sosial",
-            icon: Shield,
-            items: [
-                { href: "/statistik/bpjs", label: "BPJS" },
-                { href: "/statistik/bpjs-ketenagakerjaan", label: "BPJS Ketenagakerjaan" },
-            ],
+            href: "/klikdesa/pemberdayaan",
+            label: "Pemberdayaan Masyarakat",
+            icon: Users,
+            subItems: [
+                { href: "/klikdesa/pemberdayaan?tab=sidara", label: "Sidara" },
+                { href: "/klikdesa/pemberdayaan?tab=ttg", label: "TTG" },
+            ]
         },
         {
-            category: "Lainnya",
-            icon: FileText,
-            items: [
-                { href: "/statistik/agama", label: "Agama" },
-                { href: "/statistik/pekerjaan", label: "Pekerjaan" },
-            ],
+            href: "/klikdesa/tata-kelola",
+            label: "Tata Kelola",
+            icon: Building2,
+            subItems: [
+                { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri/masuk", label: "Layanan Mandiri Desa", external: true },
+                { href: "/pengaduan", label: "Pengaduan Masyarakat tentang Desa" },
+            ]
+        },
+        {
+            href: "/klikdesa/bencana",
+            label: "Ketahanan Bencana",
+            icon: AlertTriangle,
+            subItems: [
+                { href: "/klikdesa/bencana#cctv", label: "CCTV" },
+                { href: "/klikdesa/bencana#pemetaan", label: "Pemetaan" },
+                { href: "/klikdesa/bencana#ews", label: "Ews" },
+            ]
         },
     ];
 
@@ -196,11 +129,11 @@ export function Header() {
                             >
                                 <Logo {...LogoVariant.light} size={40} />
                                 <div className="hidden sm:block">
-                                    <h1 className="text-lg font-bold text-white">Desa Sijenggung</h1>
-                                    <p className="text-xs text-primary-100">Kabupaten Banjarnegara, Jateng</p>
+                                    <h1 className="text-lg font-bold text-white">Klikdesa</h1>
+                                    <p className="text-xs text-primary-100">Dispermades PPKB Banjarnegara</p>
                                 </div>
                                 <div className="block sm:hidden">
-                                    <h1 className="text-lg font-bold text-white">Sijenggung</h1>
+                                    <h1 className="text-lg font-bold text-white">Klikdesa</h1>
                                     <p className="text-xs text-primary-100">Banjarnegara</p>
                                 </div>
                             </Link>
@@ -338,175 +271,40 @@ export function Header() {
                     <div className="flex items-center justify-center space-x-1 h-12">
                         {/* Main Navigation Items */}
                         {mainNavItems.map((item) => {
-                            // Check if this item should have a dropdown
-                            const isPemerintahanItem = item.href === "/pemerintahan";
-                            const isInformasiItem = item.href === "/informasi";
-                            const isStatistikItem = item.href === "/statistik" || item.href.startsWith("/statistik/");
-                            const isEwsItem = item.href === "/ews";
                             const IconComponent = item.icon;
-
-                            if (isPemerintahanItem) {
-                                // Render as dropdown for pemerintahan sub-items
+                            if (item.subItems) {
                                 return (
-                                    <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild id="header-nav-trigger-pemerintahan">
-                                            <Button
-                                                variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
-                                            >
+                                    <DropdownMenu key={item.label}>
+                                        <DropdownMenuTrigger asChild>
+                                            <button className="px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center focus:outline-hidden">
                                                 <IconComponent className="h-4 w-4 mr-2" />
-                                                <span>{item.label}</span>
-                                                <ChevronDown className="h-4 w-4 ml-1" />
-                                            </Button>
+                                                {item.label}
+                                                <ChevronDown className="h-3 w-3 ml-1 opacity-70" />
+                                            </button>
                                         </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="start" className="w-full">
-                                            {pemerintahanSubItems.map((subItem) => (
-                                                <DropdownMenuItem key={subItem.href} asChild>
-                                                    <Link
-                                                        href={subItem.href}
-                                                        className="w-full cursor-pointer data-highlighted:bg-primary-500 data-highlighted:text-white"
-                                                    >
-                                                        {subItem.label}
-                                                    </Link>
-                                                </DropdownMenuItem>
-                                            ))}
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                );
-                            }
-
-                            if (isInformasiItem) {
-                                // Render as dropdown for informasi sub-items
-                                return (
-                                    <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild id={`header-nav-trigger-${item.href.substring(1)}`}>
-                                            <Button
-                                                variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
-                                            >
-                                                <IconComponent className="h-4 w-4 mr-2" />
-                                                <span>{item.label}</span>
-                                                <ChevronDown className="h-4 w-4 ml-1" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="start" className="w-full">
-                                            {informasiSubItems.map((subItem) => (
-                                                <DropdownMenuItem key={subItem.href} asChild>
-                                                    {subItem.external ? (
-                                                        <a
-                                                            href={subItem.href}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
-                                                        >
-                                                            {subItem.label}
-                                                        </a>
-                                                    ) : (
-                                                        <Link
-                                                            href={subItem.href}
-                                                            className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
-                                                        >
-                                                            {subItem.label}
-                                                        </Link>
-                                                    )}
-                                                </DropdownMenuItem>
-                                            ))}
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                );
-                            }
-
-                            if (isStatistikItem) {
-                                // Render as dropdown for statistik sub-items
-                                return (
-                                    <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild id="header-nav-trigger-statistik">
-                                            <Button
-                                                variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
-                                            >
-                                                <IconComponent className="h-4 w-4 mr-2" />
-                                                <span>{item.label}</span>
-                                                <ChevronDown className="h-4 w-4 ml-1" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="start" className="w-full">
-                                            {statistikCategories.map((category) => {
-                                                const CategoryIcon = category.icon;
-                                                const categoryId = `header-nav-trigger-statistik-${category.category
-                                                    .toLowerCase()
-                                                    .replace(/\s+/g, "-")}`;
+                                        <DropdownMenuContent className="w-56 bg-white text-slate-800">
+                                            {item.subItems.map((sub) => {
+                                                if (sub.external) {
+                                                    return (
+                                                        <DropdownMenuItem key={sub.label} asChild className="data-highlighted:bg-[#00ACC1] data-highlighted:text-white">
+                                                            <a href={sub.href} target="_blank" rel="noopener noreferrer" className="w-full cursor-pointer">
+                                                                {sub.label}
+                                                            </a>
+                                                        </DropdownMenuItem>
+                                                    );
+                                                }
                                                 return (
-                                                    <DropdownMenuSub key={category.category}>
-                                                        <DropdownMenuSubTrigger id={categoryId}>
-                                                            <CategoryIcon className="h-4 w-4 mr-2" />
-                                                            {category.category}
-                                                        </DropdownMenuSubTrigger>
-                                                        <DropdownMenuSubContent alignOffset={-4}>
-                                                            {category.items.map((subItem) => (
-                                                                <DropdownMenuItem key={subItem.href} asChild>
-                                                                    <Link
-                                                                        href={subItem.href}
-                                                                        className="w-full cursor-pointer data-highlighted:bg-primary-500 data-highlighted:text-white"
-                                                                    >
-                                                                        {subItem.label}
-                                                                    </Link>
-                                                                </DropdownMenuItem>
-                                                            ))}
-                                                        </DropdownMenuSubContent>
-                                                    </DropdownMenuSub>
+                                                    <DropdownMenuItem key={sub.label} asChild className="data-highlighted:bg-[#00ACC1] data-highlighted:text-white">
+                                                        <Link href={sub.href} className="w-full cursor-pointer">
+                                                            {sub.label}
+                                                        </Link>
+                                                    </DropdownMenuItem>
                                                 );
                                             })}
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 );
                             }
-
-                            if (isEwsItem) {
-                                return (
-                                    <DropdownMenu key={item.href}>
-                                        <DropdownMenuTrigger asChild id="header-nav-trigger-ews">
-                                            <Button
-                                                variant="ghost"
-                                                className="px-4! py-2! text-sm! text-white! bg-transparent! hover:bg-white/20! hover:text-white! data-[state=open]:bg-white/20! data-[state=open]:text-white! rounded-md transition-colors cursor-pointer h-auto"
-                                            >
-                                                <IconComponent className="h-4 w-4 mr-2" />
-                                                <span>{item.label}</span>
-                                                <ChevronDown className="h-4 w-4 ml-1" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="start" className="w-full">
-                                            {ewsSubItems.map((subItem) => (
-                                                <DropdownMenuItem key={subItem.href} asChild>
-                                                    <Link
-                                                        href={subItem.href}
-                                                        className="w-full cursor-pointer data-highlighted:bg-primary-600 data-highlighted:text-white"
-                                                    >
-                                                        {subItem.label}
-                                                    </Link>
-                                                </DropdownMenuItem>
-                                            ))}
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                );
-                            }
-
-                            // Render as regular link
-                            if (item.external) {
-                                return (
-                                    <a
-                                        key={item.href}
-                                        href={item.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center"
-                                    >
-                                        <IconComponent className="h-4 w-4 mr-2" />
-                                        {item.label}
-                                    </a>
-                                );
-                            }
-
                             return (
                                 <Link
                                     key={item.href}

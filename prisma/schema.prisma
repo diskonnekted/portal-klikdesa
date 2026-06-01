@@ -6,105 +6,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 // ===========================================
 // ENUMS (Indonesian Naming Conventions)
 // ===========================================
-
-enum PeranPengguna {
-  ADMIN
-  STAFF
-  WARGA
-  PENGUNJUNG
-}
-
-enum Status {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
-}
-
-enum Prioritas {
-  RENDAH
-  NORMAL
-  TINGGI
-  PENTING
-}
-
-enum JenisLayanan {
-  KK
-  KTP
-  KELAHIRAN
-  KEMATIAN
-  SURAT_DOMISILI
-  SURAT_USAHA
-  SURAT_PENGANTAR
-}
-
-enum StatusPermohonan {
-  MENUNGGU
-  DIPROSES
-  SELESAI
-  DITOLAK
-}
-
-enum StatusProyek {
-  PERENCANAAN
-  BERJALAN
-  SELESAI
-  DITUNDA
-}
-
-enum KategoriKegiatan {
-  PEMUDA
-  KEAGAMAAN
-  BUDAYA
-  OLAHRAGA
-  LINGKUNGAN
-  LAINNYA
-}
-
-enum StatusPengaduan {
-  MENUNGGU
-  DIPROSES
-  SELESAI
-  DITOLAK
-}
-
-enum JenisLokasi {
-  PEMERINTAHAN
-  KESEHATAN
-  PENDIDIKAN
-  FASILITAS_UMUM
-  IBADAH
-  EKONOMI
-  BUDAYA
-  OLAHRAGA
-}
-
-enum JenisNotifikasi {
-  EMERGENCY
-  PENGUMUMAN
-  CUACA
-  EVENT
-  INFORMASI
-}
-
-enum StatusRelawan {
-  TERDAFTAR
-  AKTIF
-  NONAKTIF
-}
-
-enum StatusCrowdfunding {
-  PENDAFTARAN
-  BERJALAN
-  SELESAI
-  DIBATALKAN
-}
 
 // ===========================================
 // CORE MODELS
@@ -113,14 +21,14 @@ enum StatusCrowdfunding {
 // User Management dengan Enhanced Fields
 model Pengguna {
   id          Int           @id @default(autoincrement())
-  email       String        @unique @db.VarChar(255)
-  namaLengkap String        @map("nama_lengkap") @db.VarChar(255)
-  kataSandi   String        @map("kata_sandi") @db.VarChar(255)
-  nik         String?       @unique @db.VarChar(20)
-  telepon     String?       @db.VarChar(20)
-  alamat      String?       @db.Text
-  peran       PeranPengguna @default(WARGA)
-  avatar      String?       @db.VarChar(500)
+  email       String        @unique 
+  namaLengkap String        @map("nama_lengkap") 
+  kataSandi   String        @map("kata_sandi") 
+  nik         String?       @unique 
+  telepon     String?       
+  alamat      String?       
+  peran       String @default("WARGA")
+  avatar      String?       
   aktif       Boolean       @default(true)
   createdAt   DateTime      @default(now()) @map("created_at")
   updatedAt   DateTime      @updatedAt @map("updated_at")
@@ -138,15 +46,15 @@ model Pengguna {
 // Content Management - Berita
 model Berita {
   id          Int      @id @default(autoincrement())
-  judul       String   @db.VarChar(255)
-  slug        String   @unique @db.VarChar(255)
-  ringkasan   String?  @db.Text
-  konten      String   @db.Text
-  gambar      String?  @db.VarChar(500)
-  kategori    String   @default("umum") @db.VarChar(100)
-  tag         String?  @db.Text
-  penulis     String   @db.VarChar(255)
-  status      Status   @default(DRAFT)
+  judul       String   
+  slug        String   @unique 
+  ringkasan   String?  
+  konten      String   
+  gambar      String?  
+  kategori    String   @default("umum") 
+  tag         String?  
+  penulis     String   
+  status      String   @default("DRAFT")
   dipublikasi DateTime? @map("dipublikasi")
   viewCount   Int      @default(0) @map("view_count")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -158,11 +66,11 @@ model Berita {
 // Content Management - Pengumuman
 model Pengumuman {
   id          Int      @id @default(autoincrement())
-  judul       String   @db.VarChar(255)
-  konten      String   @db.Text
-  gambar      String?  @db.VarChar(500)
-  prioritas   Prioritas @default(NORMAL)
-  status      Status   @default(DRAFT)
+  judul       String   
+  konten      String   
+  gambar      String?  
+  prioritas   String @default("NORMAL")
+  status      String   @default("DRAFT")
   dipublikasi DateTime? @map("dipublikasi")
   expiresAt   DateTime? @map("expires_at")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -174,16 +82,16 @@ model Pengumuman {
 // Layanan Mandiri - Permohonan Layanan
 model LayananPermohonan {
   id              Int              @id @default(autoincrement())
-  namaPemohon     String           @map("nama_pemohon") @db.VarChar(255)
-  nikPemohon      String           @map("nik_pemohon") @db.VarChar(20)
-  emailPemohon    String           @map("email_pemohon") @db.VarChar(255)
-  teleponPemohon  String           @map("telepon_pemohon") @db.VarChar(20)
-  alamatLengkap   String           @map("alamat_lengkap") @db.Text
-  jenisLayanan    JenisLayanan     @map("jenis_layanan")
-  keterangan      String?          @db.Text
-  dokumen         String?          @db.VarChar(500)
-  statusPermohonan StatusPermohonan @map("status_permohonan") @default(MENUNGGU)
-  idPelacakan     String           @unique @map("id_pelacakan") @db.VarChar(50)
+  namaPemohon     String           @map("nama_pemohon") 
+  nikPemohon      String           @map("nik_pemohon") 
+  emailPemohon    String           @map("email_pemohon") 
+  teleponPemohon  String           @map("telepon_pemohon") 
+  alamatLengkap   String           @map("alamat_lengkap") 
+  jenisLayanan    String     @map("jenis_layanan")
+  keterangan      String?          
+  dokumen         String?          
+  statusPermohonan String @map("status_permohonan") @default("MENUNGGU")
+  idPelacakan     String           @unique @map("id_pelacakan") 
   tanggalPengajuan DateTime         @default(now()) @map("tanggal_pengajuan")
   tanggalUpdate   DateTime         @updatedAt @map("tanggal_update")
 
@@ -193,10 +101,10 @@ model LayananPermohonan {
 // Transparansi Keuangan - APBDes
 model APBDes {
   id             Int         @id @default(autoincrement())
-  tahunAnggaran  String      @map("tahun_anggaran") @db.VarChar(10)
-  totalAnggaran  Decimal     @map("total_anggaran") @db.Decimal(15, 2)
-  totalRealisasi Decimal?    @map("total_realisasi") @db.Decimal(15, 2)
-  status         StatusAPBDes @default(AKTIF)
+  tahunAnggaran  String      @map("tahun_anggaran") 
+  totalAnggaran  Decimal     @map("total_anggaran") 
+  totalRealisasi Decimal?    @map("total_realisasi") 
+  status         String @default("AKTIF")
   createdAt      DateTime    @default(now()) @map("created_at")
   updatedAt      DateTime    @updatedAt @map("updated_at")
 
@@ -210,11 +118,11 @@ model APBDes {
 model APBDesRincian {
   id          Int      @id @default(autoincrement())
   apbdesId    Int      @map("apbdes_id")
-  kategori    String   @db.VarChar(100)
-  subKategori String?  @map("sub_kategori") @db.VarChar(100)
-  anggaran    Decimal  @db.Decimal(15, 2)
-  realisasi   Decimal? @db.Decimal(15, 2)
-  persentase  Float?   @db.Float
+  kategori    String   
+  subKategori String?  @map("sub_kategori") 
+  anggaran    Decimal  
+  realisasi   Decimal? 
+  persentase  Float?   
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
@@ -225,24 +133,18 @@ model APBDesRincian {
   @@map("apbdes_rincian")
 }
 
-enum StatusAPBDes {
-  DRAFT
-  AKTIF
-  SELESAI
-}
-
 // Pembangunan Desa - Proyek
 model Proyek {
   id          Int         @id @default(autoincrement())
-  nama        String      @db.VarChar(255)
-  deskripsi   String      @db.Text
-  lokasi      String      @db.VarChar(255)
-  anggaran    Decimal     @db.Decimal(15, 2)
-  progress    Float       @default(0) @db.Float
-  status      StatusProyek @default(PERENCANAAN)
-  mulai       DateTime    @db.Date
-  selesai     DateTime?   @db.Date
-  koordinat   String?     @db.VarChar(100) // GPS coordinates
+  nama        String      
+  deskripsi   String      
+  lokasi      String      
+  anggaran    Decimal     
+  progress    Float       @default(0) 
+  status      String @default("PERENCANAAN")
+  mulai       DateTime    
+  selesai     DateTime?   
+  koordinat   String?      // GPS coordinates
   createdAt   DateTime    @default(now()) @map("created_at")
   updatedAt   DateTime    @updatedAt @map("updated_at")
 
@@ -255,8 +157,8 @@ model Proyek {
 model ProyekGaleri {
   id         Int      @id @default(autoincrement())
   proyekId   Int      @map("proyek_id")
-  gambar     String   @db.VarChar(500)
-  keterangan String?  @db.Text
+  gambar     String   
+  keterangan String?  
   createdAt  DateTime @default(now()) @map("created_at")
 
   // Relations
@@ -268,24 +170,18 @@ model ProyekGaleri {
 // Kegiatan Masyarakat
 model Kegiatan {
   id        Int              @id @default(autoincrement())
-  nama      String           @db.VarChar(255)
-  deskripsi String           @db.Text
-  kategori  KategoriKegiatan
-  tanggal   DateTime         @db.Date
-  waktu     DateTime?        @db.Time
-  lokasi    String           @db.VarChar(255)
-  koordinat String?          @db.VarChar(100) // GPS coordinates
-  status    StatusKegiatan   @default(AKTIF)
+  nama      String           
+  deskripsi String           
+  kategori  String
+  tanggal   DateTime         
+  waktu     DateTime?        
+  lokasi    String           
+  koordinat String?           // GPS coordinates
+  status    String   @default("AKTIF")
   createdAt DateTime         @default(now()) @map("created_at")
   updatedAt DateTime         @updatedAt @map("updated_at")
 
   @@map("kegiatan")
-}
-
-enum StatusKegiatan {
-  AKTIF
-  SELESAI
-  DIBATALKAN
 }
 
 // ===========================================
@@ -296,11 +192,11 @@ enum StatusKegiatan {
 model SDGsProgress {
   id          Int      @id @default(autoincrement())
   goal        Int      // 1-17
-  judul       String   @db.VarChar(255)
-  deskripsi   String   @db.Text
-  progress    Float    @default(0) @db.Float // Percentage 0-100
+  judul       String   
+  deskripsi   String   
+  progress    Float    @default(0)  // Percentage 0-100
   targetTahun Int      @map("target_tahun")
-  satuan      String   @db.VarChar(100)
+  satuan      String   
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
@@ -315,13 +211,13 @@ model SDGsProgress {
 model Program {
   id            Int      @id @default(autoincrement())
   sdgsGoalId    Int      @map("sdgs_goal_id")
-  namaProgram   String   @map("nama_program") @db.VarChar(255)
-  deskripsi     String   @db.Text
-  anggaran      Decimal  @db.Decimal(15, 2)
-  progress      Float    @default(0) @db.Float
-  tanggalMulai  DateTime @map("tanggal_mulai") @db.Date
-  tanggalSelesai DateTime? @map("tanggal_selesai") @db.Date
-  penanggungJawab String  @map("penanggung_jawab") @db.VarChar(255)
+  namaProgram   String   @map("nama_program") 
+  deskripsi     String   
+  anggaran      Decimal  
+  progress      Float    @default(0) 
+  tanggalMulai  DateTime @map("tanggal_mulai") 
+  tanggalSelesai DateTime? @map("tanggal_selesai") 
+  penanggungJawab String  @map("penanggung_jawab") 
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
@@ -334,15 +230,15 @@ model Program {
 // Interactive Map Locations
 model LokasiInteraktif {
   id          Int         @id @default(autoincrement())
-  nama        String      @db.VarChar(255)
-  deskripsi   String?     @db.Text
-  jenis       JenisLokasi
-  alamat      String      @db.Text
-  koordinat   String      @db.VarChar(100) // "latitude,longitude"
-  telepon     String?     @db.VarChar(20)
-  jamOperasi  String?     @db.VarChar(255)
-  website     String?     @db.VarChar(255)
-  gambar      String?     @db.VarChar(500)
+  nama        String      
+  deskripsi   String?     
+  jenis       String
+  alamat      String      
+  koordinat   String       // "latitude,longitude"
+  telepon     String?     
+  jamOperasi  String?     
+  website     String?     
+  gambar      String?     
   aktif       Boolean     @default(true)
   createdAt   DateTime    @default(now()) @map("created_at")
   updatedAt   DateTime    @updatedAt @map("updated_at")
@@ -353,11 +249,11 @@ model LokasiInteraktif {
 // Community Polling System
 model CommunityPoll {
   id          Int      @id @default(autoincrement())
-  pertanyaan  String   @db.VarChar(500)
-  deskripsi   String?  @db.Text
-  kategori    String   @db.VarChar(100)
-  tanggalMulai DateTime @map("tanggal_mulai") @db.Date
-  tanggalSelesai DateTime? @map("tanggal_selesai") @db.Date
+  pertanyaan  String   
+  deskripsi   String?  
+  kategori    String   
+  tanggalMulai DateTime @map("tanggal_mulai") 
+  tanggalSelesai DateTime? @map("tanggal_selesai") 
   aktif       Boolean  @default(true)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
@@ -372,7 +268,7 @@ model CommunityPoll {
 model PollingPilihan {
   id      Int      @id @default(autoincrement())
   pollId  Int      @map("poll_id")
-  pilihan String   @db.VarChar(255)
+  pilihan String   
   urutan  Int      @default(0)
   createdAt DateTime @default(now()) @map("created_at")
 
@@ -389,7 +285,7 @@ model PollingSuara {
   pollId    Int      @map("poll_id")
   pilihanId Int      @map("pilihan_id")
   penggunaId Int?    @map("pengguna_id")
-  ipAlamat  String   @map("ip_alamat") @db.VarChar(45)
+  ipAlamat  String   @map("ip_alamat") 
   createdAt DateTime @default(now()) @map("created_at")
 
   // Relations
@@ -404,11 +300,11 @@ model PollingSuara {
 // Live Statistics
 model LiveStatistics {
   id          Int      @id @default(autoincrement())
-  kategori    String   @db.VarChar(100)
-  judul       String   @db.VarChar(255)
+  kategori    String   
+  judul       String   
   nilai       BigInt
-  satuan      String   @db.VarChar(50)
-  persenChange Float?  @map("persen_change") @db.Float
+  satuan      String   
+  persenChange Float?  @map("persen_change") 
   lastUpdate  DateTime @default(now()) @map("last_update")
 
   @@unique([kategori, judul])
@@ -418,12 +314,12 @@ model LiveStatistics {
 // Emergency Alerts
 model EmergencyAlert {
   id          Int              @id @default(autoincrement())
-  judul       String           @db.VarChar(255)
-  pesan       String           @db.Text
-  tingkat     String           @db.VarChar(50) // LOW, MEDIUM, HIGH, CRITICAL
-  kategori    String           @db.VarChar(100)
-  lokasi      String?          @db.VarChar(255)
-  koordinat   String?          @db.VarChar(100)
+  judul       String           
+  pesan       String           
+  tingkat     String            // LOW, MEDIUM, HIGH, CRITICAL
+  kategori    String           
+  lokasi      String?          
+  koordinat   String?          
   expiresAt   DateTime?        @map("expires_at")
   aktif       Boolean          @default(true)
   createdAt   DateTime         @default(now()) @map("created_at")
@@ -439,9 +335,9 @@ model WeatherData {
   kelembaban  Float
   tekanan     Float?
   kecepatanAngin Float?  @map("kecepatan_angin")
-  arahAngin   String?  @map("arah_angin") @db.VarChar(50)
-  kondisi     String   @db.VarChar(100)
-  deskripsi   String?  @db.Text
+  arahAngin   String?  @map("arah_angin") 
+  kondisi     String   
+  deskripsi   String?  
   lastUpdate  DateTime @default(now()) @map("last_update")
 
   @@map("weather_data")
@@ -450,11 +346,11 @@ model WeatherData {
 // Notifications
 model Notifikasi {
   id          Int              @id @default(autoincrement())
-  judul       String           @db.VarChar(255)
-  pesan       String           @db.Text
-  jenis       JenisNotifikasi
-  icon        String?          @db.VarChar(100)
-  link        String?          @db.VarChar(500)
+  judul       String           
+  pesan       String           
+  jenis       String
+  icon        String?          
+  link        String?          
   global      Boolean          @default(false) // True untuk semua pengguna
   expiresAt   DateTime?        @map("expires_at")
   createdAt   DateTime         @default(now()) @map("created_at")
@@ -485,15 +381,15 @@ model NotifikasiUser {
 model Relawan {
   id            Int          @id @default(autoincrement())
   penggunaId    Int          @map("pengguna_id")
-  namaLengkap   String       @map("nama_lengkap") @db.VarChar(255)
-  nik           String       @db.VarChar(20)
-  email         String       @db.VarChar(255)
-  telepon       String       @db.VarChar(20)
-  alamat        String       @db.Text
-  keahlian      String?      @db.Text
-  pengalaman    String?      @db.Text
-  ketersediaan String?      @db.Text
-  status        StatusRelawan @default(TERDAFTAR)
+  namaLengkap   String       @map("nama_lengkap") 
+  nik           String       
+  email         String       
+  telepon       String       
+  alamat        String       
+  keahlian      String?      
+  pengalaman    String?      
+  ketersediaan String?      
+  status        String @default("TERDAFTAR")
   createdAt     DateTime     @default(now()) @map("created_at")
   updatedAt     DateTime     @updatedAt @map("updated_at")
 
@@ -506,14 +402,14 @@ model Relawan {
 // Crowdfunding Platform
 model Crowdfunding {
   id          Int               @id @default(autoincrement())
-  judul       String            @db.VarChar(255)
-  deskripsi   String            @db.Text
-  gambar      String?           @db.VarChar(500)
-  target      Decimal           @db.Decimal(15, 2)
-  terkumpul   Decimal           @default(0) @db.Decimal(15, 2)
-  deadline    DateTime          @db.Date
-  kategori    String            @db.VarChar(100)
-  status      StatusCrowdfunding @default(PENDAFTARAN)
+  judul       String            
+  deskripsi   String            
+  gambar      String?           
+  target      Decimal           
+  terkumpul   Decimal           @default(0) 
+  deadline    DateTime          
+  kategori    String            
+  status      String @default("PENDAFTARAN")
   createdAt   DateTime          @default(now()) @map("created_at")
   updatedAt   DateTime          @updatedAt @map("updated_at")
 
@@ -527,10 +423,10 @@ model CrowdfundKontribusi {
   id           Int      @id @default(autoincrement())
   crowdfundingId Int     @map("crowdfunding_id")
   penggunaId     Int?    @map("pengguna_id")
-  namaDonatur   String  @map("nama_donatur") @db.VarChar(255)
-  emailDonatur  String  @map("email_donatur") @db.VarChar(255)
-  jumlah        Decimal @db.Decimal(15, 2)
-  pesan         String? @db.Text
+  namaDonatur   String  @map("nama_donatur") 
+  emailDonatur  String  @map("email_donatur") 
+  jumlah        Decimal 
+  pesan         String? 
   anonim        Boolean @default(false)
   createdAt     DateTime @default(now()) @map("created_at")
 
@@ -549,17 +445,17 @@ model CrowdfundKontribusi {
 model Pengaduan {
   id          Int              @id @default(autoincrement())
   userId      Int?             @map("user_id")
-  nama        String           @db.VarChar(255)
-  email       String           @db.VarChar(255)
-  telepon     String           @db.VarChar(20)
-  kategori    String           @db.VarChar(100)
-  subjek      String           @db.VarChar(255)
-  pesan       String           @db.Text
-  lokasi      String?          @db.VarChar(255)
-  koordinat   String?          @db.VarChar(100)
-  gambar      String?          @db.VarChar(500)
-  status      StatusPengaduan  @default(MENUNGGU)
-  tiketId     String           @unique @db.VarChar(50)
+  nama        String           
+  email       String           
+  telepon     String           
+  kategori    String           
+  subjek      String           
+  pesan       String           
+  lokasi      String?          
+  koordinat   String?          
+  gambar      String?          
+  status      String  @default("MENUNGGU")
+  tiketId     String           @unique 
   createdAt   DateTime         @default(now()) @map("created_at")
   updatedAt   DateTime         @updatedAt @map("updated_at")
 
@@ -572,12 +468,12 @@ model Pengaduan {
 // Media Management
 model Media {
   id          Int      @id @default(autoincrement())
-  nama        String   @db.VarChar(255)
-  path        String   @db.VarChar(500)
+  nama        String   
+  path        String   
   ukuran      Int      // bytes
-  tipe        String   @db.VarChar(100)
-  alt         String?  @db.VarChar(255)
-  kategori    String?  @db.VarChar(100)
+  tipe        String   
+  alt         String?  
+  kategori    String?  
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("media")
@@ -586,9 +482,9 @@ model Media {
 // Configuration
 model Konfigurasi {
   id        Int    @id @default(autoincrement())
-  kunci     String @unique @db.VarChar(100)
-  nilai     String @db.Text
-  kategori  String? @db.VarChar(100)
+  kunci     String @unique 
+  nilai     String 
+  kategori  String? 
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("konfigurasi")

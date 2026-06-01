@@ -1,10 +1,9 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { StatusPengaduan } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function updatePengaduanStatus(id: number, status: StatusPengaduan) {
+export async function updatePengaduanStatus(id: number, status: string) {
   await prisma.pengaduan.update({
     where: { id },
     data: { status },
