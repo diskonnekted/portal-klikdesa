@@ -13,7 +13,7 @@
         "db-studio": "prisma studio",
         "db-seed": "tsx prisma/seed.ts",
         "db-purge": "tsx prisma/seed.ts",
-        "postinstall": "prisma generate"
+        "postinstall": "prisma generate && prisma db push"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.2.2",
