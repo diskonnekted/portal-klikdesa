@@ -44,6 +44,7 @@ export function Header() {
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     const mainNavItems = [
         { href: "/", label: "Beranda", icon: Home },
@@ -103,6 +104,7 @@ export function Header() {
     };
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
@@ -172,71 +174,96 @@ export function Header() {
                             </Button>
 
                             {/* Notifications */}
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild id="header-notifications-trigger">
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="relative text-white hover:text-white! hover:bg-primary-600! cursor-pointer"
-                                    >
-                                        <Bell className="h-5 w-5" />
-                                        <Badge className="absolute -top-1 -right-1 w-5 h-5 bg-[#f87171] text-white text-xs rounded-full p-0 flex items-center justify-center">
-                                            3
-                                        </Badge>
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end" className="w-80">
-                                    <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <span>Pengumuman Baru</span>
-                                        <Badge variant="destructive">Baru</Badge>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <span>Update APBDes</span>
-                                        <Badge variant="secondary">Info</Badge>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <span>Jadwal Kegiatan</span>
-                                        <Badge variant="outline">Reminder</Badge>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <Link href="/notifikasi" className="w-full cursor-pointer">
-                                            Lihat Semua Notifikasi
-                                        </Link>
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            {mounted ? (
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild id="header-notifications-trigger">
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="relative text-white hover:text-white! hover:bg-primary-600! cursor-pointer"
+                                        >
+                                            <Bell className="h-5 w-5" />
+                                            <Badge className="absolute -top-1 -right-1 w-5 h-5 bg-[#f87171] text-white text-xs rounded-full p-0 flex items-center justify-center">
+                                                3
+                                            </Badge>
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end" className="w-80">
+                                        <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <span>Pengumuman Baru</span>
+                                            <Badge variant="destructive">Baru</Badge>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <span>Update APBDes</span>
+                                            <Badge variant="secondary">Info</Badge>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="flex items-center justify-between data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <span>Jadwal Kegiatan</span>
+                                            <Badge variant="outline">Reminder</Badge>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <Link href="/notifikasi" className="w-full cursor-pointer">
+                                                Lihat Semua Notifikasi
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            ) : (
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="relative text-white hover:text-white! hover:bg-primary-600! cursor-pointer"
+                                >
+                                    <Bell className="h-5 w-5" />
+                                    <Badge className="absolute -top-1 -right-1 w-5 h-5 bg-[#f87171] text-white text-xs rounded-full p-0 flex items-center justify-center">
+                                        3
+                                    </Badge>
+                                </Button>
+                            )}
 
                             {/* User Account */}
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild id="header-account-trigger">
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="text-white hover:text-white! hover:bg-primary-600! cursor-pointer px-0! ml-4! sm:ml-0!"
-                                    >
-                                        <User className="h-4 w-4 mr-2" />
-                                        <span className="hidden sm:inline">Account</span>
-                                        <ChevronDown className="h-4 w-4 ml-1" />
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                    <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <Link href="/profile" className="w-full cursor-pointer">
-                                            Profil Saya
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        <Link href="/admin" className="w-full cursor-pointer">
-                                            Admin Panel
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="text-red-600 data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                        {t("navigation.logout")}
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            {mounted ? (
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild id="header-account-trigger">
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-white hover:text-white! hover:bg-primary-600! cursor-pointer px-0! ml-4! sm:ml-0!"
+                                        >
+                                            <User className="h-4 w-4 mr-2" />
+                                            <span className="hidden sm:inline">Account</span>
+                                            <ChevronDown className="h-4 w-4 ml-1" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                        <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <Link href="/profile" className="w-full cursor-pointer">
+                                                Profil Saya
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            <Link href="/admin" className="w-full cursor-pointer">
+                                                Admin Panel
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-red-600 data-highlighted:bg-primary-600 data-highlighted:text-white">
+                                            {t("navigation.logout")}
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            ) : (
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-white hover:text-white! hover:bg-primary-600! cursor-pointer px-0! ml-4! sm:ml-0!"
+                                >
+                                    <User className="h-4 w-4 mr-2" />
+                                    <span className="hidden sm:inline">Account</span>
+                                    <ChevronDown className="h-4 w-4 ml-1" />
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -273,6 +300,18 @@ export function Header() {
                         {mainNavItems.map((item) => {
                             const IconComponent = item.icon;
                             if (item.subItems) {
+                                if (!mounted) {
+                                    return (
+                                        <button
+                                            key={item.label}
+                                            className="px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-white! rounded-md transition-colors cursor-pointer flex items-center focus:outline-hidden"
+                                        >
+                                            <IconComponent className="h-4 w-4 mr-2" />
+                                            {item.label}
+                                            <ChevronDown className="h-3 w-3 ml-1 opacity-70" />
+                                        </button>
+                                    );
+                                }
                                 return (
                                     <DropdownMenu key={item.label}>
                                         <DropdownMenuTrigger asChild>
