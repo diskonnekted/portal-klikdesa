@@ -75,7 +75,7 @@ export default function GadisDesaPage() {
         setLoading(true);
         try {
             const lokasi = `${selectedKec}, ${selectedDesa}`;
-            const subjek = `Pengaduan Aparatus: ${kategori}`;
+            const subjek = `Pengaduan Aparatur: ${kategori}`;
             const mockUploadPath = fileName ? `/uploads/identitas_${Date.now()}_${fileName}` : "/uploads/default_ktp.jpg";
 
             const result = await createPengaduanAction({
@@ -116,10 +116,10 @@ export default function GadisDesaPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-1.5">
                             <Scale className="h-5 w-5 text-red-600" />
-                            <span className="text-xs font-bold text-red-600 tracking-widest uppercase font-mono">PORTAL DISIPLIN APARAT</span>
+                            <span className="text-xs font-bold text-red-600 tracking-widest uppercase font-mono">PORTAL DISIPLIN APARATUR</span>
                         </div>
                         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                            Penegakkan Disiplin Aparatus Desa (Gadis Desa)
+                            Penegakkan Disiplin Aparatur Desa (Gadis Desa)
                         </h1>
                         <p className="text-slate-500 mt-1">
                             Layanan pengaduan pelanggaran disiplin, kode etik, dan tindakan pidana oleh perangkat desa se-Kabupaten Banjarnegara
@@ -184,7 +184,7 @@ export default function GadisDesaPage() {
                                         {/* Lokasi Dropdowns */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Kecamatan Aparat</label>
+                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Kecamatan Aparatur</label>
                                                 <select
                                                     value={selectedKec}
                                                     onChange={handleKecChange}
@@ -196,7 +196,7 @@ export default function GadisDesaPage() {
                                                 </select>
                                             </div>
                                             <div>
-                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Desa Aparat</label>
+                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Desa Aparatur</label>
                                                 <select
                                                     value={selectedDesa}
                                                     onChange={(e) => setSelectedDesa(e.target.value)}
@@ -227,7 +227,7 @@ export default function GadisDesaPage() {
                                         <div>
                                             <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Uraian Kejadian Pelanggaran</label>
                                             <Textarea
-                                                placeholder="Jelaskan secara rinci tindakan pelanggaran yang dilakukan oleh aparat desa, nama jabatan aparat bersangkutan, serta kronologi waktu kejadian..."
+                                                placeholder="Jelaskan secara rinci tindakan pelanggaran yang dilakukan oleh aparatur desa, nama jabatan aparatur bersangkutan, serta kronologi waktu kejadian..."
                                                 value={pesan}
                                                 onChange={(e) => setPesan(e.target.value)}
                                                 className="min-h-32 border-slate-200 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500"
@@ -345,10 +345,13 @@ export default function GadisDesaPage() {
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-3 text-xs text-slate-500">
-                                    <p>Jika Anda mengalami kendala teknis dalam pengiriman pengaduan, silakan hubungi pusat layanan pengaduan Dispermades.</p>
-                                    <div className="pt-2 border-t font-semibold text-slate-700 font-mono">
-                                        <p>Hotline: 0286-xxxxxx</p>
-                                        <p>Email: gadisdesa@banjarnegara.go.id</p>
+                                    <p>Jika Anda mengalami kendala teknis atau membutuhkan bantuan langsung, silakan hubungi kami:</p>
+                                    <div className="pt-2 border-t text-slate-700 space-y-1.5">
+                                        <p className="font-semibold">Alamat Kantor:</p>
+                                        <p className="text-slate-500 leading-normal">Jl. S. Parman No.7, Parakancanggah, Kec. Banjarnegara, Kab. Banjarnegara, Jawa Tengah 53412</p>
+                                        <p className="font-semibold pt-1">Hubungi Kami:</p>
+                                        <p className="font-mono text-slate-500">Telpon : (0286) 594442</p>
+                                        <p className="font-mono text-slate-500">Email : dispermadesppkb@banjarnegarakab.go.id</p>
                                     </div>
                                 </CardContent>
                             </Card>

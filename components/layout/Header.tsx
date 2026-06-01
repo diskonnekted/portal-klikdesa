@@ -79,7 +79,7 @@ export function Header() {
             icon: Building2,
             subItems: [
                 { href: "/klikdesa/tata-kelola", label: "Layanan Mandiri Desa" },
-                { href: "/pengaduan", label: "Penegakkan Disiplin Aparat (Gadis Desa)" },
+                { href: "/pengaduan", label: "Penegakkan Disiplin Aparatur Desa (Gadis Desa)" },
             ]
         },
         {
