@@ -289,10 +289,8 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
 
                     {/* Layanan Mandiri CTA Button */}
                     <div className="mt-16 flex justify-center">
-                        <a
-                            href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            href="/klikdesa/tata-kelola"
                             className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-primary-700 to-primary-600 rounded-2xl shadow-xl hover:shadow-primary-300/50 transition-all duration-500 hover:scale-105 overflow-hidden border border-primary-500"
                         >
                             {/* Animated background shimmer */}
@@ -371,9 +369,9 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             {/* Text Content */}
                             <div className="relative z-10 text-left">
                                 <div className="text-2xl font-bold text-white drop-shadow-md">Layanan Mandiri</div>
-                                <div className="text-white/90 text-sm mt-1">Ajukan permohonan secara online â†’</div>
+                                <div className="text-white/90 text-sm mt-1">Ajukan permohonan secara online →</div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
