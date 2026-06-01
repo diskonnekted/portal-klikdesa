@@ -217,8 +217,39 @@ export default async function Home() {
                 konten: item.konten,
             }));
         }
+
+        // Ambil data kegiatan dari database yang statusnya AKTIF
+        const dbKegiatan = await prisma.kegiatan.findMany({
+            where: {
+                status: "AKTIF"
+            },
+            orderBy: {
+                tanggal: "asc"
+            },
+            take: 5
+        });
+
+        if (dbKegiatan && dbKegiatan.length > 0) {
+            serverData.events = dbKegiatan.map((item) => {
+                let waktuStr = "00:00";
+                if (item.waktu) {
+                    const w = new Date(item.waktu);
+                    const hours = String(w.getHours()).padStart(2, '0');
+                    const minutes = String(w.getMinutes()).padStart(2, '0');
+                    waktuStr = `${hours}:${minutes}`;
+                }
+                return {
+                    id: item.id,
+                    nama: item.nama,
+                    tanggal: item.tanggal.toISOString(),
+                    waktu: waktuStr,
+                    lokasi: item.lokasi,
+                    kategori: item.kategori,
+                };
+            });
+        }
     } catch (error) {
-        console.error("Gagal memuat pengumuman dari database:", error);
+        console.error("Gagal memuat pengumuman atau kegiatan dari database:", error);
     }
 
     return (
