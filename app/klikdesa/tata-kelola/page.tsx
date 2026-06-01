@@ -64,49 +64,65 @@ export default function TataKelolaPage() {
 
                 {/* OpenSID Integration Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <Card className="border-blue-100 bg-white">
-                        <CardContent className="pt-6">
+                    {/* Card 1: Total Desa OpenSID */}
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-blue-100 to-blue-200 border-0 gap-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-blue-600">
+                            <Building2 className="h-24 w-24" />
+                        </div>
+                        <CardContent className="pt-6 relative z-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-500 font-semibold">Total Desa OpenSID</span>
-                                <Building2 className="h-5 w-5 text-blue-500" />
+                                <span className="text-sm font-semibold text-blue-800">Total Desa OpenSID</span>
+                                <Building2 className="h-5 w-5 text-blue-600" />
                             </div>
-                            <div className="text-3xl font-bold text-blue-700">{stats.total} Desa</div>
-                            <p className="text-xs text-slate-500 mt-1">Terdeteksi & terdaftar di Kabupaten</p>
+                            <div className="text-3xl font-black text-blue-900">{stats.total} Desa</div>
+                            <p className="text-xs text-blue-700 mt-1">Terdeteksi & terdaftar di Kabupaten</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-blue-100 bg-white">
-                        <CardContent className="pt-6">
+                    {/* Card 2: Website Online */}
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-100 to-emerald-200 border-0 gap-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-emerald-600">
+                            <Server className="h-24 w-24" />
+                        </div>
+                        <CardContent className="pt-6 relative z-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-500 font-semibold">Website Online</span>
-                                <Server className="h-5 w-5 text-emerald-500" />
+                                <span className="text-sm font-semibold text-emerald-800">Website Online</span>
+                                <Server className="h-5 w-5 text-emerald-600" />
                             </div>
-                            <div className="text-3xl font-bold text-emerald-700">{stats.online} Desa</div>
-                            <p className="text-xs text-emerald-600 mt-1 font-semibold">Status Web: Aktif / UP</p>
+                            <div className="text-3xl font-black text-emerald-900">{stats.online} Desa</div>
+                            <p className="text-xs text-emerald-700 mt-1">Status Web: Aktif / UP</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-blue-100 bg-white">
-                        <CardContent className="pt-6">
+                    {/* Card 3: DB Penduduk Sinkron */}
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 border-0 gap-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-purple-600">
+                            <Users className="h-24 w-24" />
+                        </div>
+                        <CardContent className="pt-6 relative z-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-500 font-semibold">DB Penduduk Sinkron</span>
-                                <Users className="h-5 w-5 text-blue-500" />
+                                <span className="text-sm font-semibold text-purple-800">DB Penduduk Sinkron</span>
+                                <Users className="h-5 w-5 text-purple-600" />
                             </div>
-                            <div className="text-3xl font-bold text-blue-700">{stats.syncDb} Desa</div>
-                            <p className="text-xs text-emerald-600 mt-1 font-semibold">Integrasi API Disdukcapil</p>
+                            <div className="text-3xl font-black text-purple-900">{stats.syncDb} Desa</div>
+                            <p className="text-xs text-purple-700 mt-1">Integrasi API Disdukcapil</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-blue-100 bg-white">
-                        <CardContent className="pt-6">
+                    {/* Card 4: Persentase Integrasi */}
+                    <Card className="relative overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 border-0 gap-0">
+                        <div className="absolute -top-4 -right-4 opacity-10 text-amber-600">
+                            <Globe className="h-24 w-24" />
+                        </div>
+                        <CardContent className="pt-6 relative z-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-slate-500 font-semibold">Persentase Integrasi</span>
-                                <Globe className="h-5 w-5 text-blue-500" />
+                                <span className="text-sm font-semibold text-amber-800">Persentase Integrasi</span>
+                                <Globe className="h-5 w-5 text-amber-600" />
                             </div>
-                            <div className="text-xl font-bold text-blue-700">
+                            <div className="text-3xl font-black text-amber-900">
                                 {stats.percentage}% Terhubung
                             </div>
-                            <p className="text-xs text-slate-500 mt-1">Evaluasi Capaian Smart Village</p>
+                            <p className="text-xs text-amber-700 mt-1">Evaluasi Capaian Smart Village</p>
                         </CardContent>
                     </Card>
                 </div>
