@@ -109,7 +109,7 @@ export function MobileNavigation() {
             icon: Landmark,
             items: [
                 { href: "/klikdesa/tata-kelola", label: "Layanan Mandiri Desa", icon: FileText },
-                { href: "/pengaduan", label: "Pengaduan Masyarakat tentang Desa", icon: MessageSquare },
+                { href: "/pengaduan", label: "Penegakkan Disiplin Aparat (Gadis Desa)", icon: MessageSquare },
             ]
         },
         {

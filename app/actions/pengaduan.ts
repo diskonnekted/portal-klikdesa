@@ -19,3 +19,32 @@ export async function deletePengaduan(id: number) {
 
   revalidatePath("/admin/pengaduan");
 }
+
+export async function createPengaduanAction(data: {
+  nama: string;
+  email: string;
+  telepon: string;
+  kategori: string;
+  subjek: string;
+  pesan: string;
+  lokasi: string;
+  gambar?: string;
+}) {
+  const tiketId = "TRK-" + Math.floor(100000 + Math.random() * 900000);
+  await prisma.pengaduan.create({
+    data: {
+      nama: data.nama,
+      email: data.email,
+      telepon: data.telepon,
+      kategori: data.kategori,
+      subjek: data.subjek,
+      pesan: data.pesan,
+      lokasi: data.lokasi,
+      gambar: data.gambar || null,
+      status: "MENUNGGU",
+      tiketId: tiketId,
+    },
+  });
+  revalidatePath("/admin/pengaduan");
+  return { success: true, tiketId };
+}
