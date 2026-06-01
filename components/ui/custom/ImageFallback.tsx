@@ -19,12 +19,16 @@ export default function ImageFallback({
     const normalizeSrc = (url: string | null | undefined) => {
         if (!url || typeof url !== "string") return null;
         const trimmed = url.trim().replace(/^[)\s]+|[)\s]+$/g, "");
-        if (trimmed.startsWith("/") && !trimmed.startsWith("//")) return null;
+        if (trimmed.startsWith("/") && !trimmed.startsWith("//")) return trimmed;
         if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) return null;
         try {
             const parsed = new URL(trimmed);
             const host = parsed.hostname.toLowerCase();
-            if (host !== "sijenggung-banjarnegara.desa.id" && host !== "localhost") {
+            if (
+                host !== "sijenggung-banjarnegara.desa.id" &&
+                host !== "dispermadesppkb.banjarnegarakab.go.id" &&
+                host !== "localhost"
+            ) {
                 return null;
             }
             return parsed.toString();

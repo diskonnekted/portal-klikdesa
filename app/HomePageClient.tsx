@@ -14,6 +14,9 @@ import {
     ChevronRight,
     Bell,
     Building,
+    Building2,
+    Globe,
+    Server,
     GraduationCap,
     ChartNoAxesColumnDecreasing,
     Vote,
@@ -33,17 +36,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CustomButton } from "@/components/ui/custom/CustomButton";
 import { SDGsDashboard } from "@/components/ui/custom/SDGsDashboard";
-import { StatisticsDisplay } from "@/components/ui/custom/StatisticsDisplay";
 import { WeatherCard } from "@/components/ui/custom/WeatherCard";
-import { IDMDisplay } from "@/components/ui/custom/IDMDisplay";
+import { OpenSIDStatsDisplay } from "@/components/ui/custom/OpenSIDStatsDisplay";
 import { KeuanganSummary } from "@/components/ui/custom/KeuanganSummary";
-import { YearSelector } from "@/components/ui/custom/YearSelector";
 import { DecorativeSeparator } from "@/components/ui/custom/DecorativeSeparator";
 import { useExternalNews } from "@/hooks/useExternalNews";
-import { useHolidays } from "@/hooks/useHolidays";
 import { useTranslation } from "@/lib/useTranslation";
 import { EventDate } from "@/components/EventDate";
-import { HolidayCards } from "@/components/ui/custom/HolidayCards";
 
 interface ServerData {
     heroSlides: Array<{
@@ -93,20 +92,18 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
 export function HomePageClient({ serverData }: { serverData: ServerData }) {
     const { t } = useTranslation();
     const { news: externalNews, loading: newsLoading, error: newsError } = useExternalNews(20);
-    const { holidays, loading: holidaysLoading, error: holidaysError } = useHolidays(10);
-    const [selectedYear, setSelectedYear] = React.useState<number>(2024);
+    const [sdgsAverage, setSdgsAverage] = React.useState<number | null>(null);
 
-    // Calculate available years (2021 to current year)
-    // Using fixed current year to avoid Next.js prerender issues
-    // TODO: Update this value annually (e.g., change 2025 to 2026 in 2026)
-    const currentYear = 2025;
-    const availableYears = React.useMemo(() => {
-        const years = [];
-        for (let year = 2021; year <= currentYear; year++) {
-            years.push(year);
-        }
-        return years;
-    }, [currentYear]);
+    React.useEffect(() => {
+        fetch("/api/sdgs?location_code=3404140004")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.average) {
+                    setSdgsAverage(parseFloat(data.average));
+                }
+            })
+            .catch((err) => console.error("Error fetching SDGs average:", err));
+    }, []);
 
     // Transform quickLinks dengan proper icons
     const quickLinks = serverData.quickLinks.map((link) => ({
@@ -174,7 +171,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             {/* Hero Section with Layanan Cepat */}
             <section 
                 className="hero-area py-16 relative bg-cover bg-center bg-no-repeat overflow-hidden"
-                style={{ backgroundImage: "url('/images/dispermades.jpg')" }}
+                style={{ backgroundImage: "url('/images/klikdesa-banner.jpg')" }}
             >
                 {/* Overlay gradient for contrast and readability */}
                 <div className="absolute inset-0 bg-slate-900/65 z-10" />
@@ -382,7 +379,7 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 <div className="text-center">
         <h2 className="text-3xl font-bold text-foreground mb-2">Berita & Informasi Terbaru</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Ada kegiatan apa saja di Desa Sijenggung hari ini?
+          Informasi dan kegiatan terbaru seputar Dispermades PPKB Kabupaten Banjarnegara
         </p>
       </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -433,16 +430,48 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                             </CardContent>
                         </Card>
 
-                        {/* Laporan Keuangan - Current Year Only */}
+                        {/* Tata Kelola Pemerintahan (OpenSID Integration) */}
                         <Card className="bg-card border-border">
-                            <CardHeader className="gap-0">
-                                <CardTitle className="flex items-center gap-2 text-lg text-secondary">
-                                    <DollarSign className="h-5 w-5 text-secondary" />
-                                    Laporan Keuangan
+                            <CardHeader className="gap-0 pb-3">
+                                <CardTitle className="flex items-center gap-2 text-lg text-blue-700 font-bold">
+                                    <Building2 className="h-5 w-5 text-blue-600" />
+                                    Tata Kelola Pemerintahan
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <KeuanganSummary />
+                            <CardContent className="space-y-4">
+                                <div className="space-y-1.5 p-3 rounded-xl bg-blue-50/50 border border-blue-100">
+                                    <div className="flex justify-between items-center text-xs text-blue-800 font-bold">
+                                        <span>Website Desa (OpenSID)</span>
+                                        <Badge className="bg-emerald-600 text-white hover:bg-emerald-700 scale-90 border-none font-bold text-[9px]">175 Online</Badge>
+                                    </div>
+                                    <div className="text-2xl font-extrabold text-blue-900">270 Desa</div>
+                                    <p className="text-[10px] text-slate-500">Jumlah desa di Kabupaten Banjarnegara yang terdeteksi di dasbor OpenSID</p>
+                                </div>
+
+                                <div className="space-y-1.5 p-3 rounded-xl bg-purple-50/50 border border-purple-100">
+                                    <div className="flex justify-between items-center text-xs text-purple-800 font-bold">
+                                        <span>Sinkronisasi OpenData</span>
+                                        <span className="text-[10px] text-purple-650 font-bold">Kominfo</span>
+                                    </div>
+                                    <div className="text-2xl font-extrabold text-purple-900">150 Desa</div>
+                                    <p className="text-[10px] text-slate-500">Desa dengan database kependudukan tersinkronisasi portal OpenData Kominfo</p>
+                                </div>
+
+                                <div className="space-y-1.5 p-3 rounded-xl bg-amber-50/50 border border-amber-100">
+                                    <div className="flex justify-between items-center text-xs text-amber-800 font-bold">
+                                        <span>Persentase Smart Village</span>
+                                        <span className="text-[10px] text-amber-600 font-bold">★ Cukup Baik</span>
+                                    </div>
+                                    <div className="text-2xl font-extrabold text-amber-900">65% Terhubung</div>
+                                    <p className="text-[10px] text-slate-500">Rata-rata integrasi layanan surat-menyurat dan portal informasi desa</p>
+                                </div>
+
+                                <CustomButton variant="default" size="sm" className="w-full bg-blue-600 hover:bg-blue-700 mt-2 text-white border-none" asChild>
+                                    <Link href="/klikdesa/tata-kelola" className="flex items-center justify-center gap-2">
+                                        Pantau OpenSID & Layanan
+                                        <ChevronRight className="h-4 w-4" />
+                                    </Link>
+                                </CustomButton>
                             </CardContent>
                         </Card>
                     </div>
@@ -671,36 +700,20 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
 
             <DecorativeSeparator />
 
-            {/* Hari Libur Cards Section */}
-            <section className="holidays-area container mx-auto px-4 py-8">
-                <HolidayCards holidays={holidays} loading={holidaysLoading} error={holidaysError} />
-            </section>
-
-            <DecorativeSeparator />
-
-            {/* IDM - Indeks Desa Mandiri */}
+            {/* Tata Kelola Pemerintahan Desa (OpenSID) */}
             <section className="idm-area container mx-auto px-4 py-8">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold text-foreground mb-2">Indeks Desa Mandiri (IDM)</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">Evaluasi capaian Indeks Desa Mandiri</p>
-                    <div className="mt-4">
-                        <YearSelector
-                            years={availableYears}
-                            selectedYear={selectedYear}
-                            onYearChange={setSelectedYear}
-                            className="max-w-4xl mx-auto mb-4"
-                        />
-                    </div>
+                <div className="text-center mb-6">
+                    <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Integrasi Tata Kelola Pemerintahan Desa (OpenSID)
+                    </h2>
+                    <p className="text-gray-600 max-w-2xl mx-auto font-medium">
+                        Status konektivitas website desa, sinkronisasi database kependudukan, dan persentase Smart Village se-Kabupaten Banjarnegara
+                    </p>
                 </div>
-                <IDMDisplay year={selectedYear.toString()} />
+                <OpenSIDStatsDisplay />
             </section>
 
-            <DecorativeSeparator />
 
-            {/* Statistik Desa */}
-            <section className="statistics-area container mx-auto px-4 py-8">
-                <StatisticsDisplay />
-            </section>
 
             <DecorativeSeparator />
 
@@ -708,7 +721,9 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             <section className="sdgs-area container mx-auto px-4 py-8 pb-20">
                 {/* Header */}
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-foreground mb-2">Tujuan Pembangunan Berkelanjutan (SDGs)</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">
+                        Tujuan Pembangunan Berkelanjutan (SDGs): Skor Rata-rata {sdgsAverage !== null ? sdgsAverage.toFixed(2) : "23.27"}
+                    </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
                         Pantau kemajuan implementasi 18 Tujuan Pembangunan Berkelanjutan di Desa Sijenggung
                     </p>

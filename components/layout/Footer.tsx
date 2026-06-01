@@ -10,20 +10,28 @@ import { Logo, LogoVariant } from "@/components/ui/custom/Logo";
 export function Footer() {
     const { t } = useTranslation();
 
-    const quickLinks = [
-        { href: "/berita", label: t("navigation.berita") },
-        { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri", label: t("navigation.layanan"), external: true },
-        { href: "/profil/sejarah", label: "Sejarah Desa" },
-        { href: "/pemerintahan", label: t("navigation.pemerintahan") },
-        { href: "/keuangan", label: t("navigation.keuangan") },
-        { href: "/pengaduan", label: t("navigation.pengaduan") },
+    interface FooterLink {
+        href: string;
+        label: string;
+        external?: boolean;
+    }
+
+    const quickLinks: FooterLink[] = [
+        { href: "/", label: "Beranda" },
+        { href: "/klikdesa/kesehatan", label: "Kesehatan" },
+        { href: "/klikdesa/kemiskinan", label: "Pengentasan Kemiskinan" },
+        { href: "/klikdesa/pemberdayaan", label: "Pemberdayaan Masyarakat" },
+        { href: "/klikdesa/tata-kelola", label: "Tata Kelola Pemerintahan" },
+        { href: "/klikdesa/bencana", label: "Ketahanan Bencana" },
     ];
 
-    const layananLinks = [
-        { href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri", label: "Layanan Mandiri", external: true },
-        { href: "/pengaduan", label: "Pengaduan Masyarakat" },
-        { href: "/iot", label: "IoT Monitoring" },
-        { href: "/statistik/penduduk", label: "Data Statistik" },
+    const layananLinks: FooterLink[] = [
+        { href: "/klikdesa/kesehatan", label: "Posyandu & KB" },
+        { href: "/klikdesa/kemiskinan", label: "Pemetaan Desil" },
+        { href: "/klikdesa/pemberdayaan?tab=sidara", label: "Sidara (Potensi Desa)" },
+        { href: "/klikdesa/pemberdayaan?tab=ttg", label: "Teknologi Tepat Guna (TTG)" },
+        { href: "/klikdesa/tata-kelola", label: "Layanan Mandiri Desa" },
+        { href: "/pengaduan", label: "Disiplin Aparatur (Gadis Desa)" },
     ];
 
     // Simple icon wrapper component for simple-icons
@@ -69,13 +77,13 @@ export function Footer() {
                         <div className="flex items-center space-x-3">
                             <Logo {...LogoVariant.footer} />
                             <div>
-                                <h3 className="text-lg font-bold text-white">Desa Sijenggung</h3>
-                                <p className="text-xs text-white">Kabupaten Banjarnegara, Jateng</p>
+                                <h3 className="text-lg font-bold text-white">Klikdesa</h3>
+                                <p className="text-xs text-white">Dispermades PPKB Banjarnegara</p>
                             </div>
                         </div>
                         <p className="text-sm text-white leading-relaxed">
-                            Portal resmi Pemerintah Desa Sijenggung yang menyediakan informasi dan layanan publik
-                            digital untuk warga desa.
+                            Portal resmi Klikdesa (Katalog Layanan Interaktif & Kolaborasi Desa) Dinas Dispermades PPKB
+                            Kabupaten Banjarnegara yang menyediakan informasi dan layanan publik digital terintegrasi.
                         </p>
                         <div className="flex space-x-3">
                             {socialLinks.map((social) => (
@@ -178,10 +186,6 @@ export function Footer() {
                                     {t("footer.email")}
                                 </a>
                             </div>
-                            <div className="flex items-center space-x-3">
-                                <Clock className="h-5 w-5 text-primary shrink-0" />
-                                <span className="text-sm text-white">{t("footer.jamOperasional")}</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,15 +198,10 @@ export function Footer() {
                         <div className="text-sm text-white text-center md:text-left">
                             <p>{t("footer.copyright")}</p>
                         </div>
-
-                        <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4">
-                            <div className="flex items-center space-x-2 text-xs sm:text-sm text-white">
-                                <span>Made with</span>
-                                <Heart className="h-4 w-4 text-[#f87171]" />
-                                <span>by</span>
-                                <a href="https://www.clasnet.co.id" target="_blank" rel="noopener noreferrer">
-                                    Clasnet
-                                </a>
+                        <div className="flex items-center space-x-3 text-xs sm:text-sm text-white">
+                            <span>Mitra Digital:</span>
+                            <div className="flex items-center bg-white/5 hover:bg-white/10 transition px-3 py-1.5 rounded-lg border border-white/15">
+                                <img src="/images/despin.png" alt="DesaPintar" className="h-8 w-auto object-contain brightness-0 invert" />
                             </div>
                         </div>
                     </div>

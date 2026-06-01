@@ -82,6 +82,12 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'dispermadesppkb.banjarnegarakab.go.id',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'sijenggung.smartdesa.net',
                 port: '',
                 pathname: '/uploads/**',

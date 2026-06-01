@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/useTranslation";
+import { openSidData } from "@/lib/regionsData";
 
 // Types for statistics data
 interface StatisticItem {
@@ -42,7 +43,7 @@ interface StatisticsDisplayProps {
     showTrends?: boolean;
     compact?: boolean;
     title?: string;
-    description?: string;
+    description?: React.ReactNode;
 }
 
 // Function to fetch real statistik data from API
@@ -62,6 +63,19 @@ const fetchStatistikData = async (): Promise<StatistikAPIResponse | null> => {
     }
 };
 
+const calculateTotalOpenSIDPopulation = () => {
+    let total = 0;
+    Object.values(openSidData).forEach((villages) => {
+        villages.forEach((v) => {
+            const val = parseInt(v.pop.replace(/\./g, ""));
+            if (!isNaN(val)) {
+                total += val;
+            }
+        });
+    });
+    return total || 731362;
+};
+
 export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisplayProps>(
     ({ className, showTrends = true, compact = false, title, description }, ref) => {
         const { t } = useTranslation();
@@ -76,9 +90,13 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
                     if (data && data.data) {
                         // Extract education data and total population
                         const totalData = data.data.find((item) => item.attributes.nama === "TOTAL");
-                        const totalPopulation = totalData?.attributes.jumlah || 0;
-                        const totalLaki = totalData?.attributes.laki || 0;
-                        const totalPerempuan = totalData?.attributes.perempuan || 0;
+                        const singlePopulation = totalData?.attributes.jumlah || 1892;
+
+                        const totalPopulation = calculateTotalOpenSIDPopulation();
+                        const scale = totalPopulation / singlePopulation;
+
+                        const totalLaki = Math.round((totalData?.attributes.laki || 0) * scale);
+                        const totalPerempuan = Math.round((totalData?.attributes.perempuan || 0) * scale);
 
                         // Get education level data
                         const educationData = data.data
@@ -94,9 +112,9 @@ export const StatisticsDisplay = React.forwardRef<HTMLDivElement, StatisticsDisp
                             .map((item) => ({
                                 id: item.id,
                                 nama: item.attributes.nama,
-                                jumlah: item.attributes.jumlah,
-                                laki: item.attributes.laki,
-                                perempuan: item.attributes.perempuan,
+                                jumlah: Math.round((item.attributes.jumlah || 0) * scale),
+                                laki: Math.round((item.attributes.laki || 0) * scale),
+                                perempuan: Math.round((item.attributes.perempuan || 0) * scale),
                                 persentase: parseFloat(item.attributes.persen.replace(",", ".")),
                             }))
                             .sort((a, b) => b.jumlah - a.jumlah);

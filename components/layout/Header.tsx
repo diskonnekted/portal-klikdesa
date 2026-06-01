@@ -46,15 +46,27 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mounted, setMounted] = useState(false);
 
-    const mainNavItems = [
+    interface NavSubItem {
+        href: string;
+        label: string;
+        external?: boolean;
+    }
+
+    interface NavItem {
+        href: string;
+        label: string;
+        icon: React.ComponentType<any>;
+        subItems?: NavSubItem[];
+    }
+
+    const mainNavItems: NavItem[] = [
         { href: "/", label: "Beranda", icon: Home },
         {
             href: "/klikdesa/kesehatan",
             label: "Kesehatan",
             icon: Heart,
             subItems: [
-                { href: "https://posyandu-sijenggung.smartdesa.net/", label: "Posyandu", external: true },
-                { href: "/klikdesa/kesehatan", label: "KB" },
+                { href: "/klikdesa/kesehatan", label: "Posyandu & KB" },
             ]
         },
         {

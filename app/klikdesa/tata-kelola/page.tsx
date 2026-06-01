@@ -94,18 +94,18 @@ export default function TataKelolaPage() {
                         </CardContent>
                     </Card>
 
-                    {/* Card 3: DB Penduduk Sinkron */}
+                    {/* Card 3: Sinkronisasi OpenData */}
                     <Card className="relative overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 border-0 gap-0">
                         <div className="absolute -top-4 -right-4 opacity-10 text-purple-600">
                             <Users className="h-24 w-24" />
                         </div>
                         <CardContent className="pt-6 relative z-10">
                             <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-semibold text-purple-800">DB Penduduk Sinkron</span>
-                                <Users className="h-5 w-5 text-purple-600" />
+                                <span className="text-sm font-semibold text-purple-800">Sinkronisasi OpenData</span>
+                                <span className="text-xs font-bold text-purple-750">Kominfo</span>
                             </div>
                             <div className="text-3xl font-black text-purple-900">{stats.syncDb} Desa</div>
-                            <p className="text-xs text-purple-700 mt-1">Integrasi API Disdukcapil</p>
+                            <p className="text-xs text-purple-700 mt-1">Integrasi Portal OpenData Kominfo</p>
                         </CardContent>
                     </Card>
 
@@ -133,7 +133,7 @@ export default function TataKelolaPage() {
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <CardTitle className="text-lg text-slate-800">Direktori OpenSID Desa</CardTitle>
-                                <CardDescription>Pantau domain website, jumlah penduduk, dan sinkronisasi database kependudukan desa</CardDescription>
+                                <CardDescription>Pantau domain website, jumlah penduduk, dan sinkronisasi database OpenData Kominfo desa</CardDescription>
                             </div>
                             {/* Filter Controls */}
                             <div className="flex flex-wrap gap-2 items-center">

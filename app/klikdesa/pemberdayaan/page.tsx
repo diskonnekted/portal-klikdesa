@@ -12,13 +12,128 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, PieC
 // List of Kecamatan and their corresponding Desa
 import { regionData } from "@/lib/regionsData";
 
+// Fallback products with real details and image URLs from https://sidara.smartvillage.center/
+interface UmkmProduct {
+    id: number;
+    name: string;
+    category: string;
+    price: string;
+    rating: string;
+    img: string;
+    description: string;
+    village: string;
+    href: string;
+}
+
+const defaultUmkmProducts: UmkmProduct[] = [
+    {
+        id: 1,
+        name: "Piring Lidi Sijenggung",
+        category: "Kriya",
+        price: "Hubungi pelapak",
+        rating: "4.8",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Piring Lidi.jpeg",
+        description: "Piring ramah lingkungan dari bahan lidi, kuat dan tahan lama, cocok untuk sajian tradisional maupun dekorasi. Pelapak: SUWANTI.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/piring-lidi-sijenggung"
+    },
+    {
+        id: 2,
+        name: "Agro Independent Sijenggung",
+        category: "Pertanian",
+        price: "Hubungi pelapak",
+        rating: "4.9",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung AGRO INDEPENDENT.jpg",
+        description: "Menyediakan berbagai bibit tanaman (durian, alpukat, kelapa genjah, pisang, dan lainnya), pupuk organik, serta bibit ikan air tawar.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/agro-independent-sijenggung"
+    },
+    {
+        id: 3,
+        name: "Tempe Goreng/Mendoan Sijenggung",
+        category: "Kuliner",
+        price: "Hubungi pelapak",
+        rating: "4.7",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Tempe Goreng mendoan.jpeg",
+        description: "Tempe goreng dan mendoan dari kedelai pilihan dengan resep turun temurun, nikmat disajikan hangat. Pelapak: MIDIN.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/tempe-gorengmendoan-sijenggung"
+    },
+    {
+        id: 4,
+        name: "Karagku dan Karonku Sijenggung",
+        category: "Kuliner",
+        price: "Hubungi pelapak",
+        rating: "4.8",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Karagku dan karonku.jpeg",
+        description: "Nasi kering siap saji berbahan dasar jagung dan ketela, praktis untuk stok pangan harian. Pelapak: AJI RISTANTO.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/karagku-dan-karonku-sijenggung"
+    },
+    {
+        id: 5,
+        name: "Nasi Jagung Sijenggung",
+        category: "Kuliner",
+        price: "Rp 2.500/paket",
+        rating: "4.6",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Nasi Jagung.png",
+        description: "Nasi berbahan jagung dengan porsi per tangkep, alternatif makanan pokok yang lebih sehat. Pelapak: SARTINAH.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/nasi-jagung-sijenggung"
+    },
+    {
+        id: 6,
+        name: "Nasi Ketela/Tumpeng Sijenggung",
+        category: "Kuliner",
+        price: "Rp 2.500/bungkus",
+        rating: "4.5",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Nasi Ketela Tumpeng.jpeg",
+        description: "Nasi dari ketela pohon sebagai solusi makanan sehat, dikemas per bungkus/tangkep. Pelapak: MIDIN.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/nasi-ketelatumpeng-sijenggung"
+    },
+    {
+        id: 7,
+        name: "Fashion Sijenggung",
+        category: "Kriya",
+        price: "Hubungi pelapak",
+        rating: "4.9",
+        img: "https://sidara.smartvillage.center/potensi/sijenggung Fashion.jpeg",
+        description: "Berbagai tas dan aksesori wanita, katalog dan harga akan diinformasikan ketika ada pesanan. Pelapak: TANIA IDA RAHAYU.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/fashion-sijenggung"
+    },
+    {
+        id: 8,
+        name: "Independent Accessories Sijenggung",
+        category: "Kriya",
+        price: "Hubungi pelapak",
+        rating: "4.9",
+        img: "https://sidara.smartvillage.center/storage/potentials/Gei8iHRHekDbKPShtsApxBCxKlErM6xGGLu9lLlS.jpg",
+        description: "Menjual berbagai mainan anak dan aksesori, dengan layanan antar ke lokasi pembeli di hari yang sama. Pelapak: TRIMA YUANA.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/independent-accessories-sijenggung"
+    },
+    {
+        id: 9,
+        name: "Bumboe Dapoer Makake Sijenggung",
+        category: "Kuliner",
+        price: "Rp 1.000 - Rp 10.000",
+        rating: "4.7",
+        img: "https://images.pexels.com/photos/2403207/pexels-photo-2403207.jpeg",
+        description: "Bumbu serbaguna untuk masakan, tersedia kemasan 1/4 dan eceran sachet. Pelapak: RIZALDI SAPUTRA.",
+        village: "Sijenggung",
+        href: "https://sidara.smartvillage.center/potensi/bumboe-dapoer-makake-sijenggung"
+    }
+];
+
 // Scraped TTG cards data from https://ttg.pondokrejo.id/
 const ttgCards = [
     {
         id: 82,
         title: "Kelola Sampah",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=82",
-        img: "https://ttg.pondokrejo.id/uploads/kelola_sampah.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/kelola_sampah.jpg",
         date: "2 bulan lalu",
         category: "Kesehatan & Lingkungan"
     },
@@ -26,7 +141,7 @@ const ttgCards = [
         id: 83,
         title: "Minyak Atsiri Fuli Buah Pala",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=83",
-        img: "https://ttg.pondokrejo.id/uploads/minyak_atsiri.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/minyak_atsiri.jpg",
         date: "2 bulan lalu",
         category: "Pertanian & Industri"
     },
@@ -34,7 +149,7 @@ const ttgCards = [
         id: 84,
         title: "Mujair",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=84",
-        img: "https://ttg.pondokrejo.id/uploads/mujair.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/mujair.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -42,7 +157,7 @@ const ttgCards = [
         id: 85,
         title: "Budidaya Patin",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=85",
-        img: "https://ttg.pondokrejo.id/uploads/patinooooooooooo.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/patinooooooooooo.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -50,7 +165,7 @@ const ttgCards = [
         id: 86,
         title: "Pedoman Penyakit Ikan Laut",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=86",
-        img: "https://ttg.pondokrejo.id/uploads/penyakit_ikan_laut_2.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/penyakit_ikan_laut_2.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -58,7 +173,7 @@ const ttgCards = [
         id: 87,
         title: "Pektin Kakao",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=87",
-        img: "https://ttg.pondokrejo.id/uploads/Pektin Kakao.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/Pektin Kakao.jpg",
         date: "2 bulan lalu",
         category: "Pertanian & Industri"
     },
@@ -66,7 +181,7 @@ const ttgCards = [
         id: 88,
         title: "Pelihara Ikan Mina Padi",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=88",
-        img: "https://ttg.pondokrejo.id/uploads/pelihara_ikan_mina_padi.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/pelihara_ikan_mina_padi.jpg",
         date: "2 bulan lalu",
         category: "Perikanan & Pertanian"
     },
@@ -74,7 +189,7 @@ const ttgCards = [
         id: 89,
         title: "Pembenihan Bandeng",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=89",
-        img: "https://ttg.pondokrejo.id/uploads/pembenihan_bandeng.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/pembenihan_bandeng.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -82,7 +197,7 @@ const ttgCards = [
         id: 90,
         title: "Pembenihan Ikan Tawes",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=90",
-        img: "https://ttg.pondokrejo.id/uploads/pembenihan_ikan_tawes.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/pembenihan_ikan_tawes.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -90,7 +205,7 @@ const ttgCards = [
         id: 91,
         title: "Pembenihan Kakap Putih",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=91",
-        img: "https://ttg.pondokrejo.id/uploads/kakap.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/kakap.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -98,7 +213,7 @@ const ttgCards = [
         id: 92,
         title: "Pembenihan Kakap Putih Hsrt",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=92",
-        img: "https://ttg.pondokrejo.id/uploads/file_69d7bd04110de.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/file_69d7bd04110de.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     },
@@ -106,7 +221,7 @@ const ttgCards = [
         id: 93,
         title: "Pembenihan Kerapu Macan Bagian 1",
         href: "https://ttg.pondokrejo.id/tutorial.php?id=93",
-        img: "https://ttg.pondokrejo.id/uploads/pembenihan_kerapu_macan01000000.jpg",
+        img: "/api/ttg-image?url=https://ttg.pondokrejo.id/uploads/pembenihan_kerapu_macan01000000.jpg",
         date: "2 bulan lalu",
         category: "Perikanan"
     }
@@ -189,25 +304,61 @@ function PemberdayaanContent() {
     // Calculate Sidara stats dynamically
     const sidara = useMemo(() => getSidaraMockData(selectedDesa), [selectedDesa]);
 
-    // Mock products synchronized with https://sidara.smartvillage.center/
-    const umkmProducts = useMemo(() => {
-        return [
-            { id: 1, name: "Kopi Robusta Banjarnegara", category: "Kuliner", price: "Rp 35.000/pcs", rating: "4.8" },
-            { id: 2, name: "Batik Tulis Gumelem", category: "Kriya", price: "Rp 180.000/pcs", rating: "4.9" },
-            { id: 3, name: "Keripik Tempe Sagu", category: "Kuliner", price: "Rp 15.000/pcs", rating: "4.7" },
-            { id: 4, name: "Minyak Kelapa Murni (VCO)", category: "Pertanian", price: "Rp 50.000/botol", rating: "4.8" },
-            { id: 5, name: "Gula Aren Cair", category: "Kuliner", price: "Rp 25.000/pcs", rating: "4.6" },
-            { id: 6, name: "Pupuk Organik Kompos", category: "Pertanian", price: "Rp 15.000/karung", rating: "4.5" },
-            { id: 7, name: "Susu Kambing Etawa", category: "Peternakan", price: "Rp 40.000/botol", rating: "4.9" },
-            { id: 8, name: "Madu Klanceng", category: "Peternakan", price: "Rp 95.000/botol", rating: "4.9" },
-        ];
-    }, []);
+    const [products, setProducts] = useState<UmkmProduct[]>(defaultUmkmProducts);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const filteredUmkm = umkmProducts.filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = filterCategory === "Semua" || product.category === filterCategory;
-        return matchesSearch && matchesCategory;
-    });
+    // Fetch products dynamically from our server-side API proxy
+    useEffect(() => {
+        if (activeTab !== "sidara") return;
+
+        let active = true;
+        setIsLoading(true);
+
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch(`/api/sidara-products?village=${encodeURIComponent(selectedDesa)}`);
+                if (!res.ok) throw new Error("Network response was not ok");
+                const result = await res.json();
+                if (active) {
+                    if (result.success && Array.isArray(result.data) && result.data.length > 0) {
+                        setProducts(result.data);
+                    } else {
+                        // Filter fallbacks matching selected village
+                        const normalizedDesa = selectedDesa.toLowerCase().replace(/^(desa|kelurahan)\s+/i, "").trim();
+                        const fallback = defaultUmkmProducts.filter(p => 
+                            p.village.toLowerCase().includes(normalizedDesa)
+                        );
+                        setProducts(fallback.length > 0 ? fallback : defaultUmkmProducts);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to load dynamic SIDARA products:", err);
+                if (active) {
+                    const normalizedDesa = selectedDesa.toLowerCase().replace(/^(desa|kelurahan)\s+/i, "").trim();
+                    const fallback = defaultUmkmProducts.filter(p => 
+                        p.village.toLowerCase().includes(normalizedDesa)
+                    );
+                    setProducts(fallback.length > 0 ? fallback : defaultUmkmProducts);
+                }
+            } finally {
+                if (active) setIsLoading(false);
+            }
+        };
+
+        fetchProducts();
+
+        return () => {
+            active = false;
+        };
+    }, [selectedDesa, activeTab]);
+
+    const filteredUmkm = useMemo(() => {
+        return products.filter((product) => {
+            const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesCategory = filterCategory === "Semua" || product.category === filterCategory;
+            return matchesSearch && matchesCategory;
+        });
+    }, [products, searchQuery, filterCategory]);
 
     return (
         <div className="min-h-screen bg-slate-50/50 py-8 px-4 md:px-8">
@@ -426,12 +577,12 @@ function PemberdayaanContent() {
                                             className="pl-9 pr-4 py-2 border-emerald-200 focus:border-emerald-500 rounded-xl bg-white w-60"
                                         />
                                     </div>
-                                    <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200">
-                                        {["Semua", "Kuliner", "Kriya", "Pertanian", "Peternakan"].map((cat) => (
+                                    <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 overflow-x-auto max-w-[280px] sm:max-w-md md:max-w-lg lg:max-w-none scrollbar-none">
+                                        {["Semua", "Kuliner", "Kriya", "Pertanian", "Peternakan", "Wisata", "Penginapan", "Event", "Jasa", "Lainnya"].map((cat) => (
                                             <button
                                                 key={cat}
                                                 onClick={() => setFilterCategory(cat)}
-                                                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${filterCategory === cat ? "bg-emerald-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-50"}`}
+                                                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 ${filterCategory === cat ? "bg-emerald-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-50"}`}
                                             >
                                                 {cat}
                                             </button>
@@ -441,31 +592,69 @@ function PemberdayaanContent() {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {filteredUmkm.length > 0 ? (
+                                {isLoading ? (
+                                    <div className="col-span-3 flex flex-col items-center justify-center py-16 space-y-3">
+                                        <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+                                        <p className="text-sm font-medium text-slate-500">Mengambil data dari SIDARA...</p>
+                                    </div>
+                                ) : filteredUmkm.length > 0 ? (
                                     filteredUmkm.map((product) => (
-                                        <Card key={product.id} className="border-emerald-100 bg-white">
-                                            <CardHeader className="p-4 pb-2">
-                                                <div className="flex justify-between items-center">
-                                                    <Badge variant="outline" className="text-emerald-700 border-emerald-300 bg-emerald-50 text-[10px]">
+                                        <Card key={product.id} className="border-emerald-100 bg-white overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col h-full">
+                                            {product.img && (
+                                                <div className="relative h-44 bg-slate-100 flex-shrink-0">
+                                                    <img src={product.img} className="w-full h-full object-cover" alt={product.name} />
+                                                    <Badge className="absolute top-3 left-3 bg-emerald-600/95 text-white text-[10px] font-semibold border-none">
                                                         {product.category}
                                                     </Badge>
-                                                    <span className="text-xs text-amber-500 font-bold">★ {product.rating}</span>
                                                 </div>
-                                                <CardTitle className="text-base text-slate-800 mt-2 line-clamp-1">{product.name}</CardTitle>
+                                            )}
+                                            <CardHeader className="p-4 pb-2 flex-1 flex flex-col">
+                                                <div className="flex justify-between items-center mb-1">
+                                                    {!product.img && (
+                                                        <Badge variant="outline" className="text-emerald-700 border-emerald-300 bg-emerald-50 text-[10px]">
+                                                            {product.category}
+                                                        </Badge>
+                                                    )}
+                                                    <span className="text-xs text-amber-500 font-bold ml-auto">★ {product.rating}</span>
+                                                </div>
+                                                <CardTitle className="text-base text-slate-800 mt-1 line-clamp-1">{product.name}</CardTitle>
+                                                {product.description && (
+                                                    <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed">
+                                                        {product.description}
+                                                    </p>
+                                                )}
+                                                {product.village && (
+                                                    <p className="text-[10px] text-slate-400 mt-auto pt-2 flex items-center gap-1 font-semibold">
+                                                        <MapPin className="h-3.5 w-3.5 text-emerald-500" /> {product.village}
+                                                    </p>
+                                                )}
                                             </CardHeader>
                                             <CardContent className="p-4 pt-0">
                                                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
-                                                    <span className="text-sm font-bold text-emerald-700">{product.price}</span>
-                                                    <button className="px-3 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg text-xs font-bold transition-all shadow-sm">
-                                                        Detail Komoditas
-                                                    </button>
+                                                    <span className="text-xs font-bold text-emerald-700 truncate max-w-[120px]" title={product.price}>
+                                                        {product.price}
+                                                    </span>
+                                                    {product.href ? (
+                                                        <a 
+                                                            href={product.href} 
+                                                            target="_blank" 
+                                                            rel="noopener noreferrer" 
+                                                            className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm"
+                                                        >
+                                                            Detail Komoditas
+                                                        </a>
+                                                    ) : (
+                                                        <button className="px-3 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-lg text-xs font-bold transition-all shadow-sm">
+                                                            Detail Komoditas
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </CardContent>
                                         </Card>
                                     ))
                                 ) : (
                                     <div className="col-span-3 text-center py-12 text-slate-400">
-                                        Produk UMKM / Komoditas di {selectedDesa} tidak ditemukan.
+                                        Produk / Komoditas di {selectedDesa} dengan kategori {filterCategory} tidak ditemukan.
                                     </div>
                                 )}
                             </div>

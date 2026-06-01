@@ -79,14 +79,26 @@ export function MobileNavigation() {
         { href: "/pengaduan", label: translations.navigation.pengaduan, icon: MessageSquare },
     ];
 
+    interface ModuleCategoryItem {
+        href: string;
+        label: string;
+        icon: React.ComponentType<any>;
+        external?: boolean;
+    }
+
+    interface ModuleCategory {
+        category: string;
+        icon: React.ComponentType<any>;
+        items: ModuleCategoryItem[];
+    }
+
     // SINOBLIK Modules categories matching the mind map
-    const modulesCategories = [
+    const modulesCategories: ModuleCategory[] = [
         {
             category: "Kesehatan",
             icon: Heart,
             items: [
-                { href: "https://posyandu-sijenggung.smartdesa.net/", label: "Posyandu", external: true, icon: Heart },
-                { href: "/klikdesa/kesehatan", label: "KB", icon: Heart },
+                { href: "/klikdesa/kesehatan", label: "Posyandu & KB", icon: Heart },
             ]
         },
         {
@@ -541,16 +553,14 @@ export function MobileNavigation() {
                                         )}
                                     </Link>
 
-                                    <a
-                                        href="https://posyandu-sijenggung.smartdesa.net/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <Link
+                                        href="/klikdesa/kesehatan"
                                         onClick={() => setIsSidebarOpen(false)}
                                         className="flex items-center gap-3 px-3 py-3 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer hover:bg-accent hover:text-accent-foreground"
                                     >
                                         <Heart className="h-5 w-5 shrink-0 text-primary" />
-                                        <span className="truncate">Posyandu</span>
-                                    </a>
+                                        <span className="truncate">Posyandu & KB</span>
+                                    </Link>
 
                                     <Link
                                         key="/ppid"
