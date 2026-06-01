@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { HomePageClient } from "./HomePageClient";
 import { getServerTranslation } from "@/lib/server-translation";
+import { prisma } from "@/lib/prisma";
 
 // Generate data di server side untuk menghindari hydration issues
 function getServerSideData() {
@@ -121,7 +122,7 @@ function getServerSideData() {
             },
         ],
 
-        // Data pengumuman
+        // Fallback data pengumuman
         pengumuman: [
             {
                 id: 1,
@@ -152,36 +153,6 @@ function getServerSideData() {
                 judul: "Pembayaran PBB Tahun 2025",
                 prioritas: "penting",
                 konten: "Batas waktu pembayaran PBB tahun 2025 sampai dengan 31 Desember 2025.",
-            },
-            {
-                id: 6,
-                judul: "Pembayaran PBB Tahun 2026",
-                prioritas: "penting",
-                konten: "Batas waktu pembayaran PBB tahun 2026 sampai dengan 31 Desember 2026.",
-            },
-            {
-                id: 7,
-                judul: "Pembayaran PBB Tahun 2027",
-                prioritas: "penting",
-                konten: "Batas waktu pembayaran PBB tahun 2027 sampai dengan 31 Desember 2027.",
-            },
-            {
-                id: 8,
-                judul: "Pembayaran PBB Tahun 2027",
-                prioritas: "penting",
-                konten: "Batas waktu pembayaran PBB tahun 2027 sampai dengan 31 Desember 2027.",
-            },
-            {
-                id: 9,
-                judul: "Pembayaran PBB Tahun 2027",
-                prioritas: "penting",
-                konten: "Batas waktu pembayaran PBB tahun 2027 sampai dengan 31 Desember 2027.",
-            },
-            {
-                id: 10,
-                judul: "Pembayaran PBB Tahun 2027",
-                prioritas: "penting",
-                konten: "Batas waktu pembayaran PBB tahun 2027 sampai dengan 31 Desember 2027.",
             },
         ],
 
@@ -223,8 +194,32 @@ function getServerSideData() {
     };
 }
 
-export default function Home() {
+export default async function Home() {
     const serverData = getServerSideData();
+
+    try {
+        // Ambil data pengumuman yang statusnya PUBLISHED dari database
+        const dbPengumuman = await prisma.pengumuman.findMany({
+            where: {
+                status: "PUBLISHED"
+            },
+            orderBy: {
+                dipublikasi: "desc"
+            },
+            take: 10
+        });
+
+        if (dbPengumuman && dbPengumuman.length > 0) {
+            serverData.pengumuman = dbPengumuman.map((item) => ({
+                id: item.id,
+                judul: item.judul,
+                prioritas: (item.prioritas || "NORMAL").toLowerCase(),
+                konten: item.konten,
+            }));
+        }
+    } catch (error) {
+        console.error("Gagal memuat pengumuman dari database:", error);
+    }
 
     return (
         <Suspense
