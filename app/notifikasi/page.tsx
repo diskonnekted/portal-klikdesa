@@ -29,8 +29,8 @@ export default function NotifikasiPage() {
     const [notifications, setNotifications] = useState<NotificationItem[]>([
         {
             id: 1,
-            title: "Pengumuman Siaga Kebencanaan Lereng Dusun Sijenggung",
-            description: "Dihimbau kepada seluruh warga Dusun Sijenggung untuk tetap waspada terhadap pergeseran lereng tanah sebesar 1.2mm yang terdeteksi oleh stasiun EWS Longsor. Harap selalu memantau stream CCTV bencana.",
+            title: "Pengumuman Siaga Kebencanaan Lereng Wilayah Rawan",
+            description: "Dihimbau kepada seluruh warga di lereng rawan longsor untuk tetap waspada terhadap pergeseran tanah sebesar 1.2mm yang terdeteksi oleh stasiun pemantau EWS. Harap selalu memantau stream CCTV siaga bencana.",
             time: "5 menit lalu",
             type: "warning",
             read: false
@@ -38,15 +38,15 @@ export default function NotifikasiPage() {
         {
             id: 2,
             title: "Update Realisasi Anggaran APBDes 2026",
-            description: "Dispermades PPKB Banjarnegara telah menyetujui update laporan transparansi realisasi anggaran APBDes Tahap I tahun 2026. Laporan selengkapnya dapat diakses pada modul Tata Kelola Keuangan.",
+            description: "Pemerintah daerah telah menyetujui update laporan transparansi realisasi anggaran APBDes Tahap I tahun 2026. Laporan selengkapnya dapat diakses pada modul Tata Kelola Keuangan.",
             time: "1 jam lalu",
             type: "info",
             read: false
         },
         {
             id: 3,
-            title: "Jadwal Imunisasi & Posyandu Melati Desa Sijenggung",
-            description: "Diingatkan bagi ibu dan balita jadwal kegiatan Posyandu rutin bulanan akan diselenggarakan besok pagi pukul 08.00 WIB bertempat di Balai Posyandu Melati. Harap membawa KIA.",
+            title: "Jadwal Imunisasi & Posyandu Rutin Bulanan",
+            description: "Diingatkan bagi ibu dan balita jadwal kegiatan Posyandu rutin bulanan akan diselenggarakan besok pagi pukul 08.00 WIB bertempat di Balai Posyandu setempat. Harap membawa buku KIA.",
             time: "3 jam lalu",
             type: "announcement",
             read: false
@@ -54,7 +54,7 @@ export default function NotifikasiPage() {
         {
             id: 4,
             title: "Pembagian Bantuan Beras Cadangan Pangan Pemerintah",
-            description: "Pemerintah Desa akan membagikan beras cadangan pangan besok pagi mulai pukul 09:00 WIB di Balai Desa. Harap membawa Kartu Keluarga dan KTP asli.",
+            description: "Pemerintah setempat akan membagikan beras cadangan pangan besok pagi mulai pukul 09:00 WIB di Kantor Desa/Kelurahan setempat. Harap membawa Kartu Keluarga dan KTP asli.",
             time: "1 hari lalu",
             type: "announcement",
             read: true
@@ -62,7 +62,7 @@ export default function NotifikasiPage() {
         {
             id: 5,
             title: "Peringatan Dini Cuaca Ekstrem BMKG",
-            description: "BMKG merilis peringatan potensi hujan lebat disertai angin kencang berdurasi singkat untuk wilayah Banjarmangu dan sekitarnya pada sore hari nanti.",
+            description: "BMKG merilis peringatan potensi hujan lebat disertai angin kencang berdurasi singkat untuk wilayah setempat dan sekitarnya pada sore hari nanti.",
             time: "2 hari lalu",
             type: "warning",
             read: true
