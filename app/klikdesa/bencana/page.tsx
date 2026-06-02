@@ -488,22 +488,22 @@ export default function BencanaPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
                             { 
-                                name: "CCTV 01 - Pantauan Gunung Merapi", 
+                                name: "CCTV 01 - Pantauan Gunung Merapi (Official)", 
                                 status: "SIAGA", 
-                                desc: "Live visual aktivitas vulkanik Gunung Merapi via BPPTKG.", 
-                                src: "https://www.youtube.com/embed/videoseries?list=PL2e5Yn6p28vR_Z7l-q9_nK8-pE1t-9E0t" 
+                                desc: "Live visual aktivitas vulkanik Gunung Merapi via BPPTKG Badan Geologi.", 
+                                src: "https://www.youtube.com/embed/live_stream?channel=UC-lHJZR3Gqxm24_Vd_AJ5Yw" 
                             },
                             { 
-                                name: "CCTV 02 - Pintu Air Manggarai", 
-                                status: "NORMAL", 
-                                desc: "Monitoring ketinggian air dan debit sungai utama (Simulasi Banjir).", 
-                                src: "https://cctv.balitower.co.id/Manggarai-Pintu-Air_1/embed.html?proto=hls"
+                                name: "CCTV 02 - Pantauan Merapi (Komunitas)", 
+                                status: "SIAGA", 
+                                desc: "Monitoring visual 24 jam dengan audio seismogram dari relawan Induk Frekom 86.", 
+                                src: "https://www.youtube.com/embed/live_stream?channel=UCUQnHReiTd5_HLXJLOiUObw"
                             },
                             { 
-                                name: "CCTV 03 - Jalur Dieng Banjarnegara", 
+                                name: "CCTV 03 - Pantauan Global (VolcanoYT)", 
                                 status: "NORMAL", 
-                                desc: "Pantauan kondisi cuaca dan lalu lintas di dataran tinggi Dieng.", 
-                                src: "https://www.youtube.com/embed/q_M6mS_v7hU" 
+                                desc: "Siaran berkualitas tinggi (4K) memantau aktivitas tektonik dan vulkanik Merapi.", 
+                                src: "https://www.youtube.com/embed/live_stream?channel=UCsh_zD7_Nf8iI7b7H9Q_9tg" 
                             },
                         ].map((cctv, index) => (
                             <Card key={cctv.name} className="border-slate-850 bg-slate-900 text-slate-100 overflow-hidden shadow-lg">
