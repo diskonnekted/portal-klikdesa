@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { AlertTriangle, ShieldCheck, Eye, CloudRain, Radio, MapPin, Activity, HardDrive, Compass, Thermometer } from "lucide-react";
+import { AlertTriangle, ShieldCheck, Eye, CloudRain, Radio, MapPin, Activity, HardDrive, Compass, Thermometer, Play, Loader2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -41,6 +41,78 @@ interface IoTSensor {
     battery: number;
     description: string;
 }
+
+interface CCTV {
+    name: string;
+    status: string;
+    desc: string;
+    src: string;
+    placeholder: string;
+}
+
+const CCTVCard = ({ cctv, index }: { cctv: CCTV; index: number }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handlePlay = () => {
+        setIsPlaying(true);
+        setIsLoading(true);
+    };
+
+    return (
+        <Card className="border-slate-850 bg-slate-900 text-slate-100 overflow-hidden shadow-lg transition-all duration-300 hover:border-cyan-900/50">
+            <div className="aspect-video bg-black relative group cursor-pointer overflow-hidden" onClick={!isPlaying ? handlePlay : undefined}>
+                {!isPlaying ? (
+                    <>
+                        <img 
+                            src={cctv.placeholder} 
+                            alt={cctv.name}
+                            className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="bg-cyan-500/20 backdrop-blur-sm border border-cyan-400/50 p-4 rounded-full group-hover:bg-cyan-500/30 transition-all duration-300">
+                                <Play className="h-8 w-8 text-cyan-400 fill-cyan-400" />
+                            </div>
+                        </div>
+                        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white text-[9px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                            <Activity className="h-3 w-3 text-red-500" /> Live Stream
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-950 z-10">
+                                <Loader2 className="h-8 w-8 text-cyan-500 animate-spin" />
+                            </div>
+                        )}
+                        <iframe 
+                            src={`${cctv.src}${cctv.src.includes('?') ? '&' : '?'}autoplay=1`}
+                            className="w-full h-full border-0 relative z-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            onLoad={() => setIsLoading(false)}
+                        ></iframe>
+                    </>
+                )}
+                <div className="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded text-[10px] font-mono pointer-events-none z-20">
+                    CH: 0{index + 1}
+                </div>
+            </div>
+            <CardContent className="p-4">
+                <div className="flex justify-between items-center mb-1">
+                    <h4 className="font-bold text-sm text-slate-200">{cctv.name}</h4>
+                    <Badge className={`${
+                        cctv.status === "SIAGA" ? "bg-amber-900/50 border border-amber-500 text-amber-400" :
+                        "bg-emerald-900/50 border border-emerald-500 text-emerald-400"
+                    } text-[10px] font-semibold px-2 py-0.5`}>
+                        {cctv.status}
+                    </Badge>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed mt-1.5">{cctv.desc}</p>
+            </CardContent>
+        </Card>
+    );
+};
 
 // Region coordinates map
 const villageCoordinates: { [key: string]: { lat: number; lng: number } } = {
@@ -304,7 +376,7 @@ export default function BencanaPage() {
                 </Card>
 
                 {/* Danger Alerts & Status Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div id="ews" className="grid grid-cols-1 md:grid-cols-4 gap-6 scroll-mt-28">
                     <Card className="border-slate-800 bg-slate-900/60 text-slate-100 shadow-md">
                         <CardContent className="pt-6">
                             <div className="flex items-center justify-between mb-2">
@@ -351,7 +423,7 @@ export default function BencanaPage() {
                 </div>
 
                 {/* Main Interactive Map & Telemetry Dashboard Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div id="pemetaan" className="grid grid-cols-1 lg:grid-cols-3 gap-6 scroll-mt-28">
                     
                     {/* Live Telemetry Map */}
                     <Card className="lg:col-span-2 border-slate-800 bg-slate-900/70 text-slate-100 shadow-xl overflow-hidden min-h-[450px] lg:min-h-[550px] flex flex-col">
@@ -480,7 +552,7 @@ export default function BencanaPage() {
                 </div>
 
                 {/* CCTV Telemetry Pantauan Bencana */}
-                <div className="space-y-4">
+                <div id="cctv" className="space-y-4 scroll-mt-28">
                     <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
                         <Eye className="h-5 w-5 text-cyan-400" />
                         Kamera CCTV Pemantau Kondisi Visual Kerawanan
@@ -491,49 +563,25 @@ export default function BencanaPage() {
                                 name: "CCTV 01 - Pantauan Gunung Merapi (Official)", 
                                 status: "SIAGA", 
                                 desc: "Live visual aktivitas vulkanik Gunung Merapi via BPPTKG Badan Geologi.", 
-                                src: "https://www.youtube.com/embed/live_stream?channel=UC-lHJZR3Gqxm24_Vd_AJ5Yw" 
+                                src: "https://www.youtube.com/embed/live_stream?channel=UC-lHJZR3Gqxm24_Vd_AJ5Yw",
+                                placeholder: "/images/cctv01.jpg"
                             },
                             { 
                                 name: "CCTV 02 - Pantauan Merapi (Komunitas)", 
                                 status: "SIAGA", 
                                 desc: "Monitoring visual 24 jam dengan audio seismogram dari relawan Induk Frekom 86.", 
-                                src: "https://www.youtube.com/embed/live_stream?channel=UCUQnHReiTd5_HLXJLOiUObw"
+                                src: "https://www.youtube.com/embed/live_stream?channel=UCUQnHReiTd5_HLXJLOiUObw",
+                                placeholder: "/images/cctv02.jpg"
                             },
                             { 
                                 name: "CCTV 03 - Pantauan Global (VolcanoYT)", 
                                 status: "NORMAL", 
                                 desc: "Siaran berkualitas tinggi (4K) memantau aktivitas tektonik dan vulkanik Merapi.", 
-                                src: "https://www.youtube.com/embed/live_stream?channel=UCsh_zD7_Nf8iI7b7H9Q_9tg" 
+                                src: "https://www.youtube.com/embed/live_stream?channel=UCsh_zD7_Nf8iI7b7H9Q_9tg",
+                                placeholder: "/images/cctv03.jpg"
                             },
                         ].map((cctv, index) => (
-                            <Card key={cctv.name} className="border-slate-850 bg-slate-900 text-slate-100 overflow-hidden shadow-lg">
-                                <div className="aspect-video bg-black relative">
-                                    <iframe 
-                                        src={cctv.src}
-                                        className="w-full h-full border-0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowFullScreen
-                                    ></iframe>
-                                    <div className="absolute top-3 left-3 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded-md font-extrabold uppercase tracking-wider animate-pulse flex items-center gap-1.5 shadow-md pointer-events-none">
-                                        <Activity className="h-3 w-3" /> Live
-                                    </div>
-                                    <div className="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded text-[10px] font-mono pointer-events-none">
-                                        CH: 0{index + 1}
-                                    </div>
-                                </div>
-                                <CardContent className="p-4">
-                                    <div className="flex justify-between items-center mb-1">
-                                        <h4 className="font-bold text-sm text-slate-200">{cctv.name}</h4>
-                                        <Badge className={`${
-                                            cctv.status === "SIAGA" ? "bg-amber-900/50 border border-amber-500 text-amber-400" :
-                                            "bg-emerald-900/50 border border-emerald-500 text-emerald-400"
-                                        } text-[10px] font-semibold px-2 py-0.5`}>
-                                            {cctv.status}
-                                        </Badge>
-                                    </div>
-                                    <p className="text-xs text-slate-400 leading-relaxed mt-1.5">{cctv.desc}</p>
-                                </CardContent>
-                            </Card>
+                            <CCTVCard key={cctv.name} cctv={cctv} index={index} />
                         ))}
                     </div>
                 </div>
