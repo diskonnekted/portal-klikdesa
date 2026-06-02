@@ -250,7 +250,7 @@ export function Header() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
                                         <DropdownMenuItem className="data-highlighted:bg-primary-600 data-highlighted:text-white">
-                                            <Link href="/profile" className="w-full cursor-pointer">
+                                            <Link href="/profil" className="w-full cursor-pointer">
                                                 Profil Saya
                                             </Link>
                                         </DropdownMenuItem>
