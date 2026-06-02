@@ -25,7 +25,8 @@ interface IoTSensor {
         | "power"
         | "energy"
         | "cost"
-        | "humidity";
+        | "humidity"
+        | "cctv";
     lat: number;
     lng: number;
     status: "active" | "inactive" | "warning" | "critical";
@@ -85,6 +86,16 @@ const Popup = dynamic(
     { ssr: false }
 );
 
+const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number, number]; zoom: number }) => {
+    const map = useMap();
+    React.useEffect(() => {
+        if (map) {
+            map.setView(center, zoom);
+        }
+    }, [center, zoom, map]);
+    return null;
+};
+
 export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
@@ -92,6 +103,15 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
     const [mapKey, setMapKey] = React.useState(0);
     const [componentsReady, setComponentsReady] = React.useState(false);
     const mapRef = React.useRef<HTMLDivElement>(null);
+    const [useMapHook, setUseMapHook] = React.useState<any>(null);
+
+    React.useEffect(() => {
+        if (typeof window !== "undefined") {
+            import("react-leaflet").then((mod) => {
+                setUseMapHook(() => mod.useMap);
+            });
+        }
+    }, []);
 
     React.useEffect(() => {
         if (typeof window !== "undefined") {
@@ -187,6 +207,8 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                 return "#ef4444";
             case "humidity":
                 return "#3b82f6";
+            case "cctv":
+                return "#0891b2"; // cyan-darker / teal
             default:
                 return "#6b7280";
         }
@@ -207,16 +229,24 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
         }
     };
 
-    const createCustomIcon = (color: string) => {
+    const createCustomIcon = (color: string, type: string) => {
         if (!leaflet) return null;
+
+        const isCctv = type === "cctv";
+        const svgContent = isCctv 
+            ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                 <circle cx="12" cy="13" r="4"/>
+               </svg>`
+            : `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                 <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 9.74s9-4.19 9-9.74V7l-10-5z"/>
+               </svg>`;
 
         return leaflet.divIcon({
             className: "custom-marker",
             html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transform: rotate(-45deg); display: flex; align-items: center; justify-content: center;">
-                     <div style="transform: rotate(45deg); color: white;">
-                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                         <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 9.74s9-4.19 9-9.74V7l-10-5z"/>
-                       </svg>
+                     <div style="transform: rotate(45deg); color: white; display: flex; align-items: center; justify-content: center;">
+                       ${svgContent}
                      </div>
                    </div>`,
             iconSize: [30, 30],
@@ -262,6 +292,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                     zoomControl={true}
                     className="leaflet-map-container"
                 >
+                    {useMapHook && <RecenterHelper useMap={useMapHook} center={center} zoom={zoomLevel} />}
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -294,7 +325,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                         >
                             {sensors.map((sensor) => {
                                 const iconColor = getIconColor(sensor.type);
-                                const customIcon = createCustomIcon(iconColor);
+                                const customIcon = createCustomIcon(iconColor, sensor.type);
 
                                 if (!customIcon) return null;
 
@@ -306,31 +337,58 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                                         eventHandlers={{ click: () => onSensorClick(sensor) }}
                                     >
                                         <Popup>
-                                            <div className="p-2">
-                                                <h3 className="font-bold text-lg mb-2">{sensor.name}</h3>
-                                                <p className="text-sm text-gray-600 mb-2">{sensor.location}</p>
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-2xl font-bold text-foreground">
-                                                        {sensor.value} {sensor.unit}
-                                                    </span>
-                                                    <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
-                                                        {sensor.id}
-                                                    </span>
-                                                </div>
-                                                <div className="mt-2 flex items-center gap-2">
-                                                    <div
-                                                        className={`w-3 h-3 rounded-full ${getStatusColor(sensor.status)}`}
-                                                    ></div>
-                                                    <span className="text-sm capitalize">
-                                                        {sensor.status === "active"
-                                                            ? "Aktif"
-                                                            : sensor.status === "warning"
-                                                              ? "Peringatan"
-                                                              : sensor.status === "critical"
-                                                                ? "Kritis"
-                                                                : "Tidak Aktif"}
-                                                    </span>
-                                                </div>
+                                            <div className="p-2 min-w-[200px]">
+                                                <h3 className="font-bold text-sm text-slate-800 mb-0.5">{sensor.name}</h3>
+                                                <p className="text-[10px] text-gray-500 mb-1.5">{sensor.location}</p>
+                                                
+                                                {sensor.type === "cctv" ? (
+                                                    <div className="space-y-1.5">
+                                                        <div className="aspect-video w-full rounded overflow-hidden bg-black relative">
+                                                            <video 
+                                                                src={`/images/${sensor.id.toLowerCase()}.mp4`}
+                                                                className="w-full h-full object-cover"
+                                                                autoPlay
+                                                                loop
+                                                                muted
+                                                                playsInline
+                                                            />
+                                                            <div className="absolute top-1 left-1 bg-red-600 text-white text-[8px] font-bold px-1 py-0.2 rounded uppercase">
+                                                                LIVE
+                                                            </div>
+                                                        </div>
+                                                        <a 
+                                                            href="#cctv" 
+                                                            className="block w-full text-center text-[10px] bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-1 rounded transition"
+                                                        >
+                                                            Lihat Detail Pantauan
+                                                        </a>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-xl font-bold text-slate-850">
+                                                                {sensor.value} {sensor.unit}
+                                                            </span>
+                                                            <span className="text-[10px] bg-gray-150 text-gray-600 px-1.5 py-0.5 rounded font-mono">
+                                                                {sensor.id}
+                                                            </span>
+                                                        </div>
+                                                        <div className="mt-1.5 flex items-center gap-1.5">
+                                                            <div
+                                                                className={`w-2 h-2 rounded-full ${getStatusColor(sensor.status)}`}
+                                                            ></div>
+                                                            <span className="text-xs text-gray-600 capitalize">
+                                                                {sensor.status === "active"
+                                                                    ? "Aktif"
+                                                                    : sensor.status === "warning"
+                                                                      ? "Peringatan"
+                                                                      : sensor.status === "critical"
+                                                                        ? "Kritis"
+                                                                        : "Tidak Aktif"}
+                                                            </span>
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
                                         </Popup>
                                     </Marker>

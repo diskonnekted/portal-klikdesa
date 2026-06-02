@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
     ShieldAlert, 
@@ -13,7 +13,9 @@ import {
     CheckCircle2, 
     AlertTriangle, 
     Scale, 
-    HelpCircle 
+    HelpCircle,
+    Building2,
+    Briefcase
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -52,6 +54,11 @@ export default function GadisDesaPage() {
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [submittedTicket, setSubmittedTicket] = useState<string | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const handleKecChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const kec = e.target.value;
@@ -116,11 +123,8 @@ export default function GadisDesaPage() {
             const lokasi = `${selectedKec}, ${selectedDesa}`;
             const subjek = `Pengaduan Aparatur: ${kategori}`;
             
-            // Combine all uploaded file paths into one string if needed, or handle as array
-            // Here we'll use the first image if available for the 'gambar' field, or a list in the pesan
             const mainImage = uploadedFiles.find(f => f.type.startsWith("image/"))?.path;
             
-            // Append list of files to message if there are multiple
             let enhancedPesan = pesan;
             if (uploadedFiles.length > 0) {
                 enhancedPesan += "\n\nLampiran File:\n" + uploadedFiles.map(f => `- ${f.name} (${f.path})`).join("\n");
@@ -152,25 +156,33 @@ export default function GadisDesaPage() {
         }
     };
 
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-slate-50/50 py-8 px-4 md:px-8">
-            <div className="max-w-4xl mx-auto space-y-8">
+        <div className="min-h-screen bg-slate-50/50 text-slate-800 py-8 px-4 md:px-8">
+            <div className="max-w-5xl mx-auto space-y-8">
                 {/* Back Link */}
-                <Link href="/" className="inline-flex items-center text-sm font-medium text-red-650 hover:text-red-700 transition-colors">
+                <Link href="/" className="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-700 transition-colors">
                     <ChevronLeft className="h-4 w-4 mr-1" /> Kembali ke Beranda
                 </Link>
 
                 {/* Page Title */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-red-100 pb-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-red-100 pb-6">
                     <div>
                         <div className="flex items-center gap-2 mb-1.5">
-                            <Scale className="h-5 w-5 text-red-600" />
-                            <span className="text-xs font-bold text-red-600 tracking-widest uppercase font-mono">PORTAL DISIPLIN APARATUR</span>
+                            <span className="h-2 w-2 rounded-full bg-red-650 animate-pulse"></span>
+                            <span className="text-xs font-bold text-red-600 tracking-wider uppercase font-mono">Dispermades Integrity System Active</span>
                         </div>
-                        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                        <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 bg-clip-text text-transparent">
                             Penegakkan Disiplin Aparatur Desa (Gadis Desa)
                         </h1>
-                        <p className="text-slate-500 mt-1">
+                        <p className="text-slate-500 mt-1 text-sm leading-relaxed">
                             Layanan pengaduan pelanggaran disiplin, kode etik, dan tindakan pidana oleh perangkat desa se-Kabupaten Banjarnegara
                         </p>
                     </div>
@@ -178,36 +190,36 @@ export default function GadisDesaPage() {
 
                 {submittedTicket ? (
                     /* Success State Card */
-                    <Card className="border-emerald-200 bg-white shadow-md">
-                        <CardHeader className="text-center pb-4">
+                    <Card className="border-emerald-200 bg-white text-slate-800 shadow-md overflow-hidden">
+                        <CardHeader className="text-center pb-4 border-b border-slate-100">
                             <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100">
                                 <CheckCircle2 className="h-8 w-8 text-emerald-600 animate-bounce" />
                             </div>
-                            <CardTitle className="text-2xl text-emerald-800">Laporan Berhasil Diterima</CardTitle>
-                            <CardDescription>
+                            <CardTitle className="text-2xl text-emerald-800 font-bold">Laporan Berhasil Diterima</CardTitle>
+                            <CardDescription className="text-slate-500 text-xs">
                                 Terima kasih atas partisipasi Anda dalam mengawasi integritas pelayanan publik desa.
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-6 max-w-lg mx-auto">
-                            <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center space-y-2">
+                        <CardContent className="space-y-6 max-w-lg mx-auto pt-6">
+                            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl text-center space-y-2">
                                 <span className="text-xs font-semibold text-slate-400 block uppercase tracking-wider font-mono">NOMOR TIKET PELACAKAN</span>
-                                <span className="text-3xl font-black text-slate-800 tracking-widest font-mono block">
+                                <span className="text-3xl font-black text-slate-850 tracking-widest font-mono block">
                                     {submittedTicket}
                                 </span>
-                                <p className="text-xs text-slate-500">
-                                    Simpan nomor tiket ini untuk melacak status penanganan laporan Anda oleh Dispermades.
+                                <p className="text-xs text-slate-500 leading-relaxed mt-2">
+                                    Simpan nomor tiket ini untuk melacak status penanganan laporan Anda oleh pihak Dinas Dispermades PPKB Banjarnegara.
                                 </p>
                             </div>
                             <div className="flex gap-4">
                                 <button
                                     onClick={() => setSubmittedTicket(null)}
-                                    className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-sm"
+                                    className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition text-sm cursor-pointer border border-slate-200"
                                 >
                                     Buat Laporan Baru
                                 </button>
                                 <Link
                                     href="/"
-                                    className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition text-sm flex items-center justify-center"
+                                    className="flex-1 py-2.5 bg-red-650 hover:bg-red-750 text-white text-center font-bold rounded-xl transition text-sm flex items-center justify-center"
                                 >
                                     Selesai
                                 </Link>
@@ -218,40 +230,44 @@ export default function GadisDesaPage() {
                     /* Form State */
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2 space-y-6">
-                            <Card className="border-red-100 bg-white shadow-sm">
-                                <CardHeader>
-                                    <CardTitle className="text-lg text-slate-800 flex items-center gap-2">
+                            <Card className="border-slate-200 bg-white text-slate-800 shadow-sm">
+                                <CardHeader className="border-b border-slate-100">
+                                    <CardTitle className="text-lg text-slate-800 flex items-center gap-2 font-bold">
                                         <ShieldAlert className="h-5 w-5 text-red-600" />
                                         Formulir Pengaduan Pelanggaran
                                     </CardTitle>
-                                    <CardDescription>
-                                        Isi data laporan dengan benar. Identitas Anda dijamin aman & dirahasiakan oleh dinas.
+                                    <CardDescription className="text-slate-500 text-xs">
+                                        Isi data laporan dengan benar. Identitas Anda dijamin aman & dirahasiakan sepenuhnya oleh Dinas.
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent>
+                                <CardContent className="pt-6">
                                     <form onSubmit={handleSubmit} className="space-y-5">
                                         {/* Lokasi Dropdowns */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Kecamatan Aparatur</label>
+                                            <div className="space-y-1.5">
+                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                                    <Building2 className="h-3.5 w-3.5 text-red-600" /> Kecamatan Aparatur
+                                                </label>
                                                 <select
                                                     value={selectedKec}
                                                     onChange={handleKecChange}
-                                                    className="w-full border border-slate-200 rounded-xl px-3 py-2 bg-white text-sm text-slate-700 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                    className="w-full bg-white border border-slate-200 text-slate-700 rounded-xl px-3 py-2 text-sm focus:border-red-500 focus:outline-hidden"
                                                 >
                                                     {kecamatans.map((kec) => (
                                                         <option key={kec} value={kec}>{kec}</option>
                                                     ))}
                                                 </select>
                                             </div>
-                                            <div>
-                                                <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Desa Aparatur</label>
+                                            <div className="space-y-1.5">
+                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                                    <Building2 className="h-3.5 w-3.5 text-red-600" /> Desa Aparatur
+                                                </label>
                                                 <select
                                                     value={selectedDesa}
                                                     onChange={(e) => setSelectedDesa(e.target.value)}
-                                                    className="w-full border border-slate-200 rounded-xl px-3 py-2 bg-white text-sm text-slate-700 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                    className="w-full bg-white border border-slate-200 text-slate-700 rounded-xl px-3 py-2 text-sm focus:border-red-500 focus:outline-hidden"
                                                 >
-                                                    {regionData[selectedKec].map((desa) => (
+                                                    {regionData[selectedKec]?.map((desa) => (
                                                         <option key={desa} value={desa}>{desa}</option>
                                                     ))}
                                                 </select>
@@ -259,12 +275,14 @@ export default function GadisDesaPage() {
                                         </div>
 
                                         {/* Kategori Pelanggaran */}
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Kategori Pelanggaran</label>
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                                <Briefcase className="h-3.5 w-3.5 text-red-600" /> Kategori Pelanggaran
+                                            </label>
                                             <select
                                                 value={kategori}
                                                 onChange={(e) => setKategori(e.target.value)}
-                                                className="w-full border border-slate-200 rounded-xl px-3 py-2 bg-white text-sm text-slate-700 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                className="w-full bg-white border border-slate-200 text-slate-700 rounded-xl px-3 py-2 text-sm focus:border-red-500 focus:outline-hidden"
                                             >
                                                 {VIOLATION_CATEGORIES.map((cat) => (
                                                     <option key={cat} value={cat}>{cat}</option>
@@ -273,13 +291,13 @@ export default function GadisDesaPage() {
                                         </div>
 
                                         {/* Deskripsi Pelanggaran */}
-                                        <div>
-                                            <label className="block text-xs font-bold text-slate-500 mb-1.5 uppercase">Uraian Kejadian Pelanggaran</label>
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Uraian Kejadian Pelanggaran</label>
                                             <Textarea
                                                 placeholder="Jelaskan secara rinci tindakan pelanggaran yang dilakukan oleh aparatur desa, nama jabatan aparatur bersangkutan, serta kronologi waktu kejadian..."
                                                 value={pesan}
                                                 onChange={(e) => setPesan(e.target.value)}
-                                                className="min-h-32 border-slate-200 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                className="min-h-32 bg-white border-slate-200 text-slate-700 placeholder:text-slate-400 rounded-xl focus:border-red-500 focus:ring-red-500/20"
                                                 required
                                             />
                                         </div>
@@ -290,45 +308,45 @@ export default function GadisDesaPage() {
                                             
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div className="relative">
-                                                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-450" />
+                                                    <User className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-450" />
                                                     <Input
                                                         type="text"
                                                         placeholder="Nama Lengkap Pelapor"
                                                         value={nama}
                                                         onChange={(e) => setNama(e.target.value)}
-                                                        className="pl-9 border-slate-200 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                        className="pl-10 bg-white border-slate-200 text-slate-700 placeholder:text-slate-400 rounded-xl focus:border-red-500 focus:ring-red-500/20"
                                                         required
                                                     />
                                                 </div>
                                                 <div className="relative">
-                                                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-450" />
+                                                    <Mail className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-450" />
                                                     <Input
                                                         type="email"
                                                         placeholder="Alamat Email Aktif"
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)}
-                                                        className="pl-9 border-slate-200 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                        className="pl-10 bg-white border-slate-200 text-slate-700 placeholder:text-slate-400 rounded-xl focus:border-red-500 focus:ring-red-500/20"
                                                         required
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="relative">
-                                                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-450" />
+                                                <Phone className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-455" />
                                                 <Input
                                                     type="tel"
                                                     placeholder="Nomor Telepon / WhatsApp Aktif"
                                                     value={telepon}
                                                     onChange={(e) => setTelepon(e.target.value)}
-                                                    className="pl-9 border-slate-200 rounded-xl focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                                                    className="pl-10 bg-white border-slate-200 text-slate-700 placeholder:text-slate-400 rounded-xl focus:border-red-500 focus:ring-red-500/20"
                                                     required
                                                 />
                                             </div>
                                         </div>
 
-                                        {/* Upload Bukti (Foto, Video, Dokumen) */}
+                                        {/* Upload Bukti */}
                                         <div className="border-t border-slate-100 pt-5">
-                                            <label className="block text-xs font-bold text-slate-500 mb-2 uppercase">Upload Bukti Pendukung (Foto, Video, Dokumen)</label>
+                                            <label className="block text-xs font-bold text-slate-500 mb-2.5 uppercase tracking-wider">Upload Bukti Pendukung (Foto, Video, Dokumen)</label>
                                             <div className="border border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50 transition cursor-pointer relative mb-4">
                                                 <input
                                                     type="file"
@@ -341,7 +359,7 @@ export default function GadisDesaPage() {
                                                 {uploading ? (
                                                     <div className="flex flex-col items-center">
                                                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mb-2"></div>
-                                                        <span className="text-xs font-semibold text-slate-600">Sedang mengunggah...</span>
+                                                        <span className="text-xs font-semibold text-slate-500">Sedang mengunggah...</span>
                                                     </div>
                                                 ) : (
                                                     <>
@@ -357,28 +375,25 @@ export default function GadisDesaPage() {
                                             {/* List of Uploaded Files */}
                                             {uploadedFiles.length > 0 && (
                                                 <div className="space-y-2">
-                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">File Terlampir ({uploadedFiles.length})</span>
+                                                    <span className="text-[10px] font-bold text-slate-450 uppercase tracking-wider font-mono">File Terlampir ({uploadedFiles.length})</span>
                                                     <div className="grid grid-cols-1 gap-2">
                                                         {uploadedFiles.map((file, index) => (
-                                                            <div key={index} className="flex items-center justify-between p-2.5 bg-white border border-slate-100 rounded-lg shadow-sm">
+                                                            <div key={index} className="flex items-center justify-between p-2.5 bg-white border border-slate-200 rounded-xl shadow-sm">
                                                                 <div className="flex items-center gap-3 overflow-hidden">
-                                                                    <div className="p-2 bg-slate-50 rounded text-slate-500">
-                                                                        {file.type.startsWith("image/") ? (
-                                                                            <FileText className="h-4 w-4 text-emerald-500" />
-                                                                        ) : file.type.startsWith("video/") ? (
-                                                                            <FileText className="h-4 w-4 text-blue-500" />
-                                                                        ) : (
-                                                                            <FileText className="h-4 w-4 text-amber-500" />
-                                                                        )}
+                                                                    <div className="p-2 bg-slate-50 rounded-lg text-slate-500">
+                                                                        <FileText className={`h-4 w-4 ${
+                                                                            file.type.startsWith("image/") ? "text-emerald-500" :
+                                                                            file.type.startsWith("video/") ? "text-blue-500" : "text-amber-500"
+                                                                        }`} />
                                                                     </div>
-                                                                    <span className="text-xs font-medium text-slate-700 truncate max-w-[200px] md:max-w-xs">
+                                                                    <span className="text-xs font-semibold text-slate-700 truncate max-w-[200px] md:max-w-xs">
                                                                         {file.name}
                                                                     </span>
                                                                 </div>
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => removeFile(index)}
-                                                                    className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                                                                    className="p-1.5 text-slate-400 hover:text-red-650 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                                                                 >
                                                                     <AlertTriangle className="h-4 w-4" />
                                                                 </button>
@@ -393,7 +408,7 @@ export default function GadisDesaPage() {
                                         <button
                                             type="submit"
                                             disabled={loading}
-                                            className="w-full py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-300 text-white font-bold rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                                            className="w-full py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-200 text-white font-bold rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-2"
                                         >
                                             {loading ? (
                                                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -411,14 +426,14 @@ export default function GadisDesaPage() {
 
                         {/* Sidebar Info */}
                         <div className="space-y-6">
-                            <Card className="border-red-100 bg-red-50/50">
-                                <CardHeader>
+                            <Card className="border-red-100 bg-red-50/60 text-red-900">
+                                <CardHeader className="pb-3 border-b border-red-100/50">
                                     <CardTitle className="text-sm font-bold text-red-800 flex items-center gap-2">
                                         <AlertTriangle className="h-4 w-4" />
                                         Informasi Penting & SOP
                                     </CardTitle>
                                 </CardHeader>
-                                <CardContent className="space-y-3.5 text-xs text-red-900 leading-relaxed">
+                                <CardContent className="pt-4 space-y-4 text-xs leading-relaxed text-red-950">
                                     <p>
                                         <strong>Kerahasiaan Dijamin:</strong> Dispermades PPKB Banjarnegara wajib merahasiakan identitas pelapor (Whistleblower) demi perlindungan hukum.
                                     </p>
@@ -431,21 +446,21 @@ export default function GadisDesaPage() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-slate-200 bg-white">
-                                <CardHeader>
+                            <Card className="border-slate-200 bg-white text-slate-800 shadow-sm">
+                                <CardHeader className="pb-3 border-b border-slate-100">
                                     <CardTitle className="text-sm font-bold text-slate-800 flex items-center gap-2">
-                                        <HelpCircle className="h-4 w-4" />
+                                        <HelpCircle className="h-4 w-4 text-cyan-600" />
                                         Butuh Bantuan Lain?
                                     </CardTitle>
                                 </CardHeader>
-                                <CardContent className="space-y-3 text-xs text-slate-500">
+                                <CardContent className="pt-4 space-y-3.5 text-xs text-slate-500 leading-relaxed">
                                     <p>Jika Anda mengalami kendala teknis atau membutuhkan bantuan langsung, silakan hubungi kami:</p>
-                                    <div className="pt-2 border-t text-slate-700 space-y-1.5">
-                                        <p className="font-semibold">Alamat Kantor:</p>
+                                    <div className="pt-3.5 border-t border-slate-100 text-slate-700 space-y-2">
+                                        <p className="font-semibold text-slate-800">Alamat Kantor:</p>
                                         <p className="text-slate-500 leading-normal">Jl. S. Parman No.7, Parakancanggah, Kec. Banjarnegara, Kab. Banjarnegara, Jawa Tengah 53412</p>
-                                        <p className="font-semibold pt-1">Hubungi Kami:</p>
-                                        <p className="font-mono text-slate-500">Telpon : (0286) 594442</p>
-                                        <p className="font-mono text-slate-500">Email : dispermadesppkb@banjarnegarakab.go.id</p>
+                                        <p className="font-semibold pt-1 text-slate-800">Hubungi Kami:</p>
+                                        <p className="font-mono text-cyan-600">Telpon : (0286) 594442</p>
+                                        <p className="font-mono text-cyan-600">Email : dispermadesppkb@banjarnegarakab.go.id</p>
                                     </div>
                                 </CardContent>
                             </Card>

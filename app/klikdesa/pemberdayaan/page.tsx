@@ -563,7 +563,7 @@ function PemberdayaanContent() {
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                 <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
                                     <ShoppingBag className="h-6 w-6 text-emerald-600" />
-                                    Database Produk UMKM Desa ({selectedDesa})
+                                    Database Produk UMKM Desa
                                 </h2>
                                 {/* Search and Filters */}
                                 <div className="flex flex-wrap gap-2 items-center">
