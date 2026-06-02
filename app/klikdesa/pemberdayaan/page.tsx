@@ -392,7 +392,7 @@ function PemberdayaanContent() {
                             className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 hover:border-emerald-400 p-3 rounded-2xl text-emerald-800 hover:text-emerald-900 text-sm font-semibold hover:shadow-md transition-all cursor-pointer"
                         >
                             <Wrench className="h-5 w-5 text-emerald-600" />
-                            TTG Pondokrejo Portal
+                            Teknologi Tepat Guna
                         </a>
                     )}
                 </div>
