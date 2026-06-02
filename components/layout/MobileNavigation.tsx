@@ -67,7 +67,7 @@ export function MobileNavigation() {
     };
 
     // Main 5-item bottom navigation
-    const mainNavItems = [
+    const mainNavItems: ModuleCategoryItem[] = [
         { href: "/", label: translations.navigation.beranda, icon: Home },
         { href: "/berita", label: translations.navigation.berita, icon: Newspaper },
         {

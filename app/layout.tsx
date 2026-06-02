@@ -7,7 +7,6 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileNavigationWrapper } from "@/components/layout/MobileNavigationWrapper";
 import { CustomToast } from "@/components/ui/custom/CustomToast";
 import { BackToTop } from "@/components/ui/custom/BackToTop";
-import { PWAInstallPrompt } from "@/components/ui/custom/PWAInstallPrompt";
 import { env } from "process";
 
 const geistSans = Geist({
@@ -92,7 +91,6 @@ export default function RootLayout({
                 <MobileNavigationWrapper />
                 <CustomToast />
                 <BackToTop />
-                <PWAInstallPrompt />
             </body>
         </html>
     );
