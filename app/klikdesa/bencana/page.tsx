@@ -487,28 +487,39 @@ export default function BencanaPage() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            { name: "CCTV 01 - Lereng Gunung Jenggawur", status: "SIAGA", desc: "Pemantauan visual pergeseran retakan tanah lereng tebing atas pemukiman.", stream: "JENGGAWUR_LNW_01.H264" },
-                            { name: "CCTV 02 - Aliran Sungai DAS Klampok", status: "NORMAL", desc: "Pemantauan visual tumpukan sampah penyumbat jembatan & debit air.", stream: "KLAMPOK_STR_02.H264" },
-                            { name: "CCTV 03 - Tikungan Tebing Sleman", status: "NORMAL", desc: "Pemantauan visual retakan dinding penahan tebing jalan utama kabupaten.", stream: "SLEMAN_SLP_03.H264" },
+                            { 
+                                name: "CCTV 01 - Pantauan Gunung Merapi", 
+                                status: "SIAGA", 
+                                desc: "Live visual aktivitas vulkanik Gunung Merapi via BPPTKG.", 
+                                src: "https://www.youtube.com/embed/videoseries?list=PL2e5Yn6p28vR_Z7l-q9_nK8-pE1t-9E0t" 
+                            },
+                            { 
+                                name: "CCTV 02 - Pintu Air Manggarai", 
+                                status: "NORMAL", 
+                                desc: "Monitoring ketinggian air dan debit sungai utama (Simulasi Banjir).", 
+                                src: "https://cctv.balitower.co.id/Manggarai-Pintu-Air_1/embed.html?proto=hls"
+                            },
+                            { 
+                                name: "CCTV 03 - Jalur Dieng Banjarnegara", 
+                                status: "NORMAL", 
+                                desc: "Pantauan kondisi cuaca dan lalu lintas di dataran tinggi Dieng.", 
+                                src: "https://www.youtube.com/embed/q_M6mS_v7hU" 
+                            },
                         ].map((cctv, index) => (
                             <Card key={cctv.name} className="border-slate-850 bg-slate-900 text-slate-100 overflow-hidden shadow-lg">
-                                <div className="aspect-video bg-slate-950 relative flex flex-col items-center justify-center text-white">
-                                    {/* CCTV Static overlay grids to look premium */}
-                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,24,38,0)_95%,rgba(0,255,255,0.08)_95%)] bg-[length:100%_24px] pointer-events-none opacity-60"></div>
-                                    <div className="absolute top-3 left-3 bg-red-650 text-white text-[9px] px-2 py-0.5 rounded-md font-extrabold uppercase tracking-wider animate-pulse flex items-center gap-1.5 shadow-md">
-                                        <Activity className="h-3 w-3" /> Live Camera
+                                <div className="aspect-video bg-black relative">
+                                    <iframe 
+                                        src={cctv.src}
+                                        className="w-full h-full border-0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    ></iframe>
+                                    <div className="absolute top-3 left-3 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded-md font-extrabold uppercase tracking-wider animate-pulse flex items-center gap-1.5 shadow-md pointer-events-none">
+                                        <Activity className="h-3 w-3" /> Live
                                     </div>
-                                    <div className="absolute top-3 right-3 text-[9px] text-slate-500 font-mono">
-                                        REC 2026-06-01
+                                    <div className="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-md border border-slate-700 px-2 py-0.5 rounded text-[10px] font-mono pointer-events-none">
+                                        CH: 0{index + 1}
                                     </div>
-                                    
-                                    {/* Sensor data mockup inside CCTV stream */}
-                                    <div className="absolute bottom-3 left-3 text-[9px] text-cyan-450 font-mono bg-slate-955/80 px-2 py-1 rounded border border-cyan-500/20">
-                                        T: 28.4°C | H: 82%
-                                    </div>
-                                    
-                                    <Eye className="h-10 w-10 text-slate-700/60" />
-                                    <span className="text-[10px] text-slate-600 mt-2 font-mono">{cctv.stream}</span>
                                 </div>
                                 <CardContent className="p-4">
                                     <div className="flex justify-between items-center mb-1">
