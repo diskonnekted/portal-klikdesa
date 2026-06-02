@@ -19,7 +19,6 @@ import {
     Server,
     GraduationCap,
     ChartNoAxesColumnDecreasing,
-    Vote,
     Clock,
     Newspaper,
     Eye,
@@ -28,17 +27,14 @@ import {
     Lightbulb,
     AlertTriangle,
     Users,
-    CreditCard,
 } from "lucide-react";
 
 import ImageFallback from "@/components/ui/custom/ImageFallback";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CustomButton } from "@/components/ui/custom/CustomButton";
-import { SDGsDashboard } from "@/components/ui/custom/SDGsDashboard";
 import { WeatherCard } from "@/components/ui/custom/WeatherCard";
 import { OpenSIDStatsDisplay } from "@/components/ui/custom/OpenSIDStatsDisplay";
-import { KeuanganSummary } from "@/components/ui/custom/KeuanganSummary";
 import { DecorativeSeparator } from "@/components/ui/custom/DecorativeSeparator";
 import { useExternalNews } from "@/hooks/useExternalNews";
 import { useTranslation } from "@/lib/useTranslation";
@@ -84,7 +80,6 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
     GraduationCap,
     Building,
     ChartNoAxesColumnDecreasing,
-    Vote,
     Phone,
     Download,
 };
@@ -92,18 +87,6 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
 export function HomePageClient({ serverData }: { serverData: ServerData }) {
     const { t } = useTranslation();
     const { news: externalNews, loading: newsLoading, error: newsError } = useExternalNews(20);
-    const [sdgsAverage, setSdgsAverage] = React.useState<number | null>(null);
-
-    React.useEffect(() => {
-        fetch("/api/sdgs?location_code=3404140004")
-            .then((res) => res.json())
-            .then((data) => {
-                if (data?.average) {
-                    setSdgsAverage(parseFloat(data.average));
-                }
-            })
-            .catch((err) => console.error("Error fetching SDGs average:", err));
-    }, []);
 
     // Transform quickLinks dengan proper icons
     const quickLinks = serverData.quickLinks.map((link) => ({
@@ -121,7 +104,6 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             Heart: "kesehatan.svg",
             GraduationCap: "pendidikan.svg",
             Building: "pembangunan.svg",
-            Vote: "sdgs.svg",
             Phone: "kontak.svg",
             ChartNoAxesColumnDecreasing: "idm.svg",
         };
@@ -510,15 +492,13 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                                             Muat Ulang
                                         </CustomButton>
                                         <CustomButton variant="default" size="sm" className="flex-1" asChild>
-                                            <a
-                                                href="https://sijenggung-banjarnegara.desa.id/artikel/kategori/berita-desa"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <Link
+                                                href="/berita"
                                                 className="flex items-center justify-center gap-2 text-white"
                                             >
-                                                Lihat di OpenSID
+                                                Lihat Semua Berita
                                                 <ChevronRight className="h-4 w-4" />
-                                            </a>
+                                            </Link>
                                         </CustomButton>
                                     </div>
                                 </CardContent>
@@ -711,24 +691,6 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                     </p>
                 </div>
                 <OpenSIDStatsDisplay />
-            </section>
-
-
-
-            <DecorativeSeparator />
-
-            {/* Dasbor SDGs */}
-            <section className="sdgs-area container mx-auto px-4 py-8 pb-20">
-                {/* Header */}
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold text-foreground mb-2">
-                        Tujuan Pembangunan Berkelanjutan (SDGs): Skor Rata-rata {sdgsAverage !== null ? sdgsAverage.toFixed(2) : "23.27"}
-                    </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        Pantau kemajuan implementasi 18 Tujuan Pembangunan Berkelanjutan di Desa Sijenggung
-                    </p>
-                </div>
-                <SDGsDashboard />
             </section>
         </div>
     );

@@ -71,10 +71,9 @@ export function MobileNavigation() {
         { href: "/", label: translations.navigation.beranda, icon: Home },
         { href: "/berita", label: translations.navigation.berita, icon: Newspaper },
         {
-            href: "https://sijenggung-banjarnegara.desa.id/layanan-mandiri",
+            href: "/klikdesa/tata-kelola",
             label: translations.navigation.layanan,
             icon: FileText,
-            external: true,
         },
         { href: "/pengaduan", label: translations.navigation.pengaduan, icon: MessageSquare },
     ];
@@ -365,17 +364,23 @@ export function MobileNavigation() {
                                         )}
                                     </Link>
 
-                                    <a
+                                    <Link
                                         key="/layanan"
-                                        href="https://sijenggung-banjarnegara.desa.id/layanan-mandiri"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        href="/klikdesa/tata-kelola"
                                         onClick={() => setIsSidebarOpen(false)}
-                                        className="flex items-center gap-3 px-3 py-3 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer hover:bg-accent hover:text-accent-foreground"
+                                        className={`flex items-center gap-3 px-3 py-3 text-sm rounded-md transition-all duration-200 mb-1 cursor-pointer ${
+                                            isActive("/klikdesa/tata-kelola")
+                                                ? "bg-primary text-primary-foreground font-medium"
+                                                : "hover:bg-accent hover:text-accent-foreground"
+                                        }`}
                                     >
-                                        <FileText className="h-5 w-5 shrink-0 text-primary" />
+                                        <FileText
+                                            className={`h-5 w-5 shrink-0 ${
+                                                isActive("/klikdesa/tata-kelola") ? "text-primary-foreground" : "text-primary"
+                                            }`}
+                                        />
                                         <span className="truncate">Layanan</span>
-                                    </a>
+                                    </Link>
 
                                     <Link
                                         key="/keuangan"
@@ -689,8 +694,8 @@ export function MobileNavigation() {
                                 {/* Additional info section */}
                                 <div className="p-4 border-t mt-2">
                                     <div className="text-xs text-muted-foreground space-y-2">
-                                        <p>Portal Resmi Desa Sijenggung</p>
-                                    <p>Kabupaten Banjarnegara, Jawa Tengah</p>
+                                        <p>Klikdesa - Katalog Layanan Interaktif & Kolaborasi Desa</p>
+                                    <p>Dispermades PPKB Kabupaten Banjarnegara</p>
                                         <div className="pt-2">
                                             <p className="font-medium text-foreground mb-1">Butuh Bantuan?</p>
                                             <p>Hubungi kami melalui halaman pengaduan</p>

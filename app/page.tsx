@@ -34,7 +34,7 @@ function getServerSideData() {
             {
                 id: "4",
                 title: "Pelestarian Budaya",
-                description: "Melestarikan seni dan budaya lokal Sijenggung",
+                description: "Melestarikan seni dan budaya lokal Kabupaten Banjarnegara",
                 image: "/uploads/sliders/taman.avif",
                 ctaText: getServerTranslation("hero.ctaDownloadAplikasi"),
                 ctaLink: "/aplikasi",
@@ -107,13 +107,6 @@ function getServerSideData() {
                 color: "bg-secondary-800",
             },
             {
-                icon: "Vote",
-                label: getServerTranslation("quickLinks.eVoting"),
-                description: getServerTranslation("quickLinks.eVotingDesk"),
-                href: "/sdgs",
-                color: "bg-secondary-900",
-            },
-            {
                 icon: "Phone",
                 label: getServerTranslation("quickLinks.kontakDarurat"),
                 description: getServerTranslation("quickLinks.kontakDaruratDesk"),
@@ -144,9 +137,9 @@ function getServerSideData() {
             },
             {
                 id: 4,
-                judul: "Pengumuman Pemenang Lomba Desa",
+                judul: "Evaluasi Kinerja Desa",
                 prioritas: "normal",
-                konten: "Pengumuman pemenang lomba Desa dalam rangka HUT Desa Sijenggung ke-125.",
+                konten: "Pengumuman hasil evaluasi kinerja desa se-Kabupaten Banjarnegara tahun 2026.",
             },
             {
                 id: 5,

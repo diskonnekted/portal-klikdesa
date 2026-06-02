@@ -46,10 +46,11 @@ export default function GadisDesaPage() {
     const [email, setEmail] = useState("");
     const [telepon, setTelepon] = useState("");
     const [pesan, setPesan] = useState("");
-    const [fileName, setFileName] = useState("");
+    const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; path: string; type: string }>>([]);
     
     // UI States
     const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [submittedTicket, setSubmittedTicket] = useState<string | null>(null);
 
     const handleKecChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,10 +59,48 @@ export default function GadisDesaPage() {
         setSelectedDesa(regionData[kec][0]);
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            setFileName(e.target.files[0].name);
+            const files = Array.from(e.target.files);
+            
+            setUploading(true);
+            try {
+                for (const file of files) {
+                    if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                        showToast.peringatan(`File ${file.name} terlalu besar (Maks. 10MB)`);
+                        continue;
+                    }
+
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    const response = await fetch("/api/upload", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        setUploadedFiles(prev => [...prev, {
+                            name: result.name,
+                            path: result.path,
+                            type: result.type
+                        }]);
+                    } else {
+                        showToast.peringatan(`Gagal mengunggah ${file.name}`);
+                    }
+                }
+            } catch (error) {
+                console.error("Upload error:", error);
+                showToast.terjadiKesalahan();
+            } finally {
+                setUploading(false);
+            }
         }
+    };
+
+    const removeFile = (index: number) => {
+        setUploadedFiles(prev => prev.filter((_, i) => i !== index));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -76,7 +115,16 @@ export default function GadisDesaPage() {
         try {
             const lokasi = `${selectedKec}, ${selectedDesa}`;
             const subjek = `Pengaduan Aparatur: ${kategori}`;
-            const mockUploadPath = fileName ? `/uploads/identitas_${Date.now()}_${fileName}` : "/uploads/default_ktp.jpg";
+            
+            // Combine all uploaded file paths into one string if needed, or handle as array
+            // Here we'll use the first image if available for the 'gambar' field, or a list in the pesan
+            const mainImage = uploadedFiles.find(f => f.type.startsWith("image/"))?.path;
+            
+            // Append list of files to message if there are multiple
+            let enhancedPesan = pesan;
+            if (uploadedFiles.length > 0) {
+                enhancedPesan += "\n\nLampiran File:\n" + uploadedFiles.map(f => `- ${f.name} (${f.path})`).join("\n");
+            }
 
             const result = await createPengaduanAction({
                 nama,
@@ -84,13 +132,14 @@ export default function GadisDesaPage() {
                 telepon,
                 kategori,
                 subjek,
-                pesan,
+                pesan: enhancedPesan,
                 lokasi,
-                gambar: mockUploadPath
+                gambar: mainImage
             });
 
             if (result.success) {
                 setSubmittedTicket(result.tiketId);
+                setUploadedFiles([]);
                 showToast.berhasil("Laporan disiplin berhasil terkirim!");
             } else {
                 showToast.terjadiKesalahan();
@@ -277,22 +326,67 @@ export default function GadisDesaPage() {
                                             </div>
                                         </div>
 
-                                        {/* Upload Identitas */}
+                                        {/* Upload Bukti (Foto, Video, Dokumen) */}
                                         <div className="border-t border-slate-100 pt-5">
-                                            <label className="block text-xs font-bold text-slate-500 mb-2 uppercase">Upload Kartu Identitas (KTP / Paspor)</label>
-                                            <div className="border border-dashed border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50 transition cursor-pointer relative">
+                                            <label className="block text-xs font-bold text-slate-500 mb-2 uppercase">Upload Bukti Pendukung (Foto, Video, Dokumen)</label>
+                                            <div className="border border-dashed border-slate-200 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50/50 hover:bg-slate-50 transition cursor-pointer relative mb-4">
                                                 <input
                                                     type="file"
-                                                    accept="image/*,application/pdf"
+                                                    multiple
+                                                    accept="image/*,video/*,application/pdf,.doc,.docx,.xls,.xlsx"
                                                     onChange={handleFileChange}
                                                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                                                    disabled={uploading}
                                                 />
-                                                <Upload className="h-8 w-8 text-slate-400 mb-2" />
-                                                <span className="text-xs font-semibold text-slate-600">
-                                                    {fileName ? `File terpilih: ${fileName}` : "Klik atau seret file identitas ke sini"}
-                                                </span>
-                                                <span className="text-[10px] text-slate-400 mt-1">Format: JPG, PNG, PDF (Maks. 5MB)</span>
+                                                {uploading ? (
+                                                    <div className="flex flex-col items-center">
+                                                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mb-2"></div>
+                                                        <span className="text-xs font-semibold text-slate-600">Sedang mengunggah...</span>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <Upload className="h-10 w-10 text-slate-400 mb-2" />
+                                                        <span className="text-sm font-semibold text-slate-600 text-center">
+                                                            Klik atau seret file bukti ke sini
+                                                        </span>
+                                                        <span className="text-xs text-slate-400 mt-1">Format: Foto, Video, PDF, Dokumen (Maks. 10MB per file)</span>
+                                                    </>
+                                                )}
                                             </div>
+
+                                            {/* List of Uploaded Files */}
+                                            {uploadedFiles.length > 0 && (
+                                                <div className="space-y-2">
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">File Terlampir ({uploadedFiles.length})</span>
+                                                    <div className="grid grid-cols-1 gap-2">
+                                                        {uploadedFiles.map((file, index) => (
+                                                            <div key={index} className="flex items-center justify-between p-2.5 bg-white border border-slate-100 rounded-lg shadow-sm">
+                                                                <div className="flex items-center gap-3 overflow-hidden">
+                                                                    <div className="p-2 bg-slate-50 rounded text-slate-500">
+                                                                        {file.type.startsWith("image/") ? (
+                                                                            <FileText className="h-4 w-4 text-emerald-500" />
+                                                                        ) : file.type.startsWith("video/") ? (
+                                                                            <FileText className="h-4 w-4 text-blue-500" />
+                                                                        ) : (
+                                                                            <FileText className="h-4 w-4 text-amber-500" />
+                                                                        )}
+                                                                    </div>
+                                                                    <span className="text-xs font-medium text-slate-700 truncate max-w-[200px] md:max-w-xs">
+                                                                        {file.name}
+                                                                    </span>
+                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => removeFile(index)}
+                                                                    className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                                                                >
+                                                                    <AlertTriangle className="h-4 w-4" />
+                                                                </button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
 
                                         {/* Submit Button */}

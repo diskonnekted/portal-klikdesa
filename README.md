@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Klikdesa - Portal Layanan Terintegrasi Kabupaten Banjarnegara
 
-## Getting Started
+Klikdesa adalah platform katalog layanan interaktif dan kolaborasi desa yang dirancang untuk mendigitalisasi tata kelola pemerintahan desa dan meningkatkan keterlibatan masyarakat di seluruh Kabupaten Banjarnegara.
 
-First, run the development server:
+## 🚀 Fitur Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Integrasi OpenSID**: Agregasi berita dan data statistik dari ratusan desa di Banjarnegara.
+- **Layanan Mandiri Digital**: Akses cepat ke dokumen publik, surat online, dan laporan keuangan desa.
+- **Sistem Pengaduan (Gadis Desa)**: Platform penegakkan disiplin aparatur desa dengan dukungan unggah bukti multimedia (foto, video, dokumen).
+- **Dashboard SDGs**: Visualisasi kemajuan Tujuan Pembangunan Berkelanjutan tingkat desa.
+- **Peta Interaktif**: Pemetaan lokasi penting, sarana publik, dan infrastruktur desa.
+- **Statistik Real-time**: Data kependudukan dan anggaran yang selalu diperbarui.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Teknologi
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS & Shadcn UI
+- **Database**: Prisma ORM with MariaDB/PostgreSQL
+- **Real-time**: WebSockets & Recharts for data visualization
+- **Icons**: Lucide React & Simple Icons
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏃 Memulai Pengembangan
 
-## Learn More
+1.  **Instalasi Dependensi**:
+    ```bash
+    npm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Konfigurasi Environment**:
+    Salin `.env.example` ke `.env` dan sesuaikan variabel database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Jalankan Server Development**:
+    ```bash
+    npm run dev
+    ```
+    Aplikasi akan berjalan di [http://localhost:5091](http://localhost:5091).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4.  **Build untuk Produksi**:
+    ```bash
+    npm run build
+    npm start
+    ```
 
-## Deploy on Vercel
+## 📄 Dokumentasi
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Detail implementasi dan rencana pengembangan dapat ditemukan di folder `docs/`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+© 2026 Dispermades PPKB Kabupaten Banjarnegara & DesaPintar

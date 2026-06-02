@@ -171,24 +171,9 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ success: true, data: fallback, total: fallback.length });
         }
 
-        // 2. Select target desas to query (Sijenggung + 8 random ones)
-        const primaryDesa = onlineDesas.find((d) => d.web.toLowerCase().includes("sijenggung")) || {
-            name: "Sijenggung",
-            web: "https://sijenggung-banjarnegara.desa.id",
-        };
-
-        const otherDesas = onlineDesas.filter((d) => !d.web.toLowerCase().includes("sijenggung"));
-
-        const randomDesas = [];
-        const pool = [...otherDesas];
-        const numToSelect = Math.min(8, pool.length);
-
-        for (let i = 0; i < numToSelect; i++) {
-            const randomIndex = Math.floor(Math.random() * pool.length);
-            randomDesas.push(pool.splice(randomIndex, 1)[0]);
-        }
-
-        const targetDesas = [primaryDesa, ...randomDesas];
+        // 2. Select target desas to query (Increased variety)
+        const shuffled = [...onlineDesas].sort(() => 0.5 - Math.random());
+        const targetDesas = shuffled.slice(0, 15);
 
         // 3. Query desas in parallel
         const fetchResults = await Promise.allSettled(
@@ -202,7 +187,7 @@ export async function GET(request: NextRequest) {
                         "Accept-Language": "id-ID,id;q=0.9,en;q=0.8",
                     },
                     next: { revalidate: 3600 },
-                    signal: AbortSignal.timeout(3500),
+                    signal: AbortSignal.timeout(4000), // Slightly longer timeout for more parallel requests
                 });
 
                 if (!res.ok) {
@@ -223,7 +208,10 @@ export async function GET(request: NextRequest) {
                 const articles = data.data;
 
                 if (Array.isArray(articles)) {
-                    for (const article of articles) {
+                    // Limit to 2 latest articles per village to ensure variety across the feed
+                    const villageArticles = articles.slice(0, 2);
+                    
+                    for (const article of villageArticles) {
                         if (!article.attributes) continue;
 
                         const attr = article.attributes;
