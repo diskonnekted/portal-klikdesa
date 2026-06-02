@@ -5,6 +5,21 @@ const nextConfig: NextConfig = {
     cacheComponents: false,
     poweredByHeader: false,
 
+    async redirects() {
+        return [
+            {
+                source: "/profile",
+                destination: "/profil",
+                permanent: true,
+            },
+            {
+                source: "/profile/:path*",
+                destination: "/profil/:path*",
+                permanent: true,
+            },
+        ];
+    },
+
     allowedDevOrigins: ['*.clasnet.co.id'],
 
     images: {

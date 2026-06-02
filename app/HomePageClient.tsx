@@ -156,12 +156,13 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 style={{ backgroundImage: "url('/images/klikdesa-banner.jpg')" }}
             >
                 {/* Overlay gradient for contrast and readability */}
-                <div className="absolute inset-0 bg-slate-900/65 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900/85 via-blue-950/80 to-emerald-950/80 z-10" />
                 {/* <WeatherAnimation weatherData={weatherData} className="z-10 opacity-60" /> */}
                 <div className="container mx-auto px-4 relative z-20">
                     {/* Hero Text */}
-                    <div className="text-center text-foreground mb-12">
-                        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-sm text-white tracking-tight">Klikdesa</h1>
+                    <div className="text-center text-foreground mb-12 flex flex-col items-center justify-center">
+                        <img src="/images/logo.png" alt="Portal Klikdesa Logo" className="h-16 w-auto mb-5 drop-shadow-md hover:scale-105 transition-transform duration-300" />
+                        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-sm text-white tracking-tight">Portal Klikdesa</h1>
                         <p className="text-xl md:text-2xl mb-8 text-white/95 drop-shadow-sm font-medium max-w-4xl mx-auto">
                             Katalog Layanan Interaktif & Kolaborasi Desa - Dispermades PPKB Kabupaten Banjarnegara
                         </p>
