@@ -16,6 +16,7 @@ export const opendataConfig = {
         "PAGENTENTAN": "25d03f50-c534-4a0a-93c0-bb50a4485a39", // Wait, API said "Kecamatan Pagentan"
         "PAGENTAN": "25d03f50-c534-4a0a-93c0-bb50a4485a39",
         "WANADADI": "e3ae8f8d-b927-4384-82f1-b99147381c45",
+        "PURWANEGARA": "8ece09ef-7903-4eab-88eb-c4953974285f",
     } as Record<string, string>,
 
     // Helper to get resource ID by Kecamatan Name safely
