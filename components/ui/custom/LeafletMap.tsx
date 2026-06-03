@@ -248,7 +248,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             weight: 2,
             opacity: 1,
             color,
-            fillOpacity: 0.8
+            fillOpacity: 0.5
         };
     }, [pkkData, kbData, kesejahteraanData, activeMapLayer]);
 
@@ -284,7 +284,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             weight: 1.5,
             opacity: 1,
             color,
-            fillOpacity: 0.8
+            fillOpacity: 0.5
         };
     }, [activeMapLayer, desaStuntingData]);
 
