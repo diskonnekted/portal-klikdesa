@@ -9,14 +9,14 @@ import { LeafletMap } from "@/components/ui/custom/LeafletMap";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useOpenDataDesaStunting } from "@/hooks/useOpenDataDesaStunting";
+import { opendataConfig } from "@/lib/opendata-config";
 import * as turf from "@turf/turf";
 
 export default function KecamatanDashboard({ params }: { params: { nama: string } }) {
     const kecamatanName = params.nama.replace(/-/g, " ");
-    const isWanayasa = kecamatanName.toLowerCase() === "wanayasa";
     
-    // Resource ID for Wanayasa Stunting
-    const resourceId = isWanayasa ? "3e146372-8765-450a-8122-9def72c4f581" : null;
+    // Auto-detect Resource ID based on Kecamatan name
+    const resourceId = opendataConfig.getStuntingResourceIdByKecamatan(kecamatanName);
 
     const [geoJsonData, setGeoJsonData] = useState<any>(null);
     const [bounds, setBounds] = useState<[[number, number], [number, number]] | null>(null);
