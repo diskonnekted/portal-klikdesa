@@ -356,6 +356,60 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
                 </div>
             </section>
 
+            {/* Dasbor Eksekutif Terintegrasi (Mini Dashboard) */}
+            <section className="bg-slate-50 border-y border-slate-200 py-12 relative overflow-hidden">
+                {/* Decorative background circle */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-60"></div>
+                
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="flex flex-col xl:flex-row gap-8 items-center justify-between">
+                        {/* Text and Map/Banner side */}
+                        <div className="xl:w-1/3 space-y-6 text-center xl:text-left">
+                            <div>
+                                <Badge className="bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-indigo-200 mb-3 text-xs font-bold px-3 py-1">
+                                    <MapPin className="w-3 h-3 mr-1.5 inline" /> Banjarnegara Command Center
+                                </Badge>
+                                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Dasbor Eksekutif Kabupaten</h2>
+                                <p className="text-slate-600 mt-3 text-sm leading-relaxed">
+                                    Pusat pemantauan data sektoral terintegrasi level kabupaten. Memonitor demografi, pengentasan kemiskinan (VEDA), layanan kesehatan, dan potensi UMKM secara real-time dari 270 desa.
+                                </p>
+                            </div>
+                            
+                            <Link 
+                                href="/kabupaten"
+                                className="group relative inline-flex items-center justify-center gap-3 px-6 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                                <Globe className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                                Buka Dasbor Eksekutif
+                                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
+
+                        {/* Macro Stats Grid */}
+                        <div className="xl:w-2/3 w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {[
+                                { title: "Total Penduduk", value: "1.043", unit: "Ribu Jiwa", icon: Users, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
+                                { title: "Indeks Stunting", value: "14.2", unit: "%", icon: Heart, color: "text-rose-600", bg: "bg-rose-50", border: "border-rose-100" },
+                                { title: "RTLH Terdata", value: "4.520", unit: "Unit", icon: Building, color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-100" },
+                                { title: "Desa Digital", value: "65", unit: "%", icon: Server, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" }
+                            ].map((stat, idx) => (
+                                <div key={idx} className={`p-5 rounded-2xl border ${stat.border} bg-white hover:shadow-md transition-shadow group`}>
+                                    <div className={`p-2.5 rounded-lg w-fit ${stat.bg} mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                                        <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                                    </div>
+                                    <div className="text-sm font-semibold text-slate-500 mb-1">{stat.title}</div>
+                                    <div className="flex items-baseline gap-1">
+                                        <span className={`text-3xl font-black ${stat.color}`}>{stat.value}</span>
+                                        <span className="text-xs font-bold text-slate-400">{stat.unit}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Main Content - 3 Columns with Berita bigger */}
             <section className="content-area container mx-auto px-4 py-8 space-y-4">
                 {/* Header */}

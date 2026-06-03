@@ -1,0 +1,1892 @@
+{
+  "DESA BINORONG_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "5.295",
+    "website": "https://binorong-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA BLAMBANGAN_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": true,
+    "pop": "6.031",
+    "website": "https://blambangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA GEMURUH_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "6.392",
+    "website": "https://gemuruh-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BANJARKULON_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.381",
+    "website": "https://banjarkulon-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BANJARMANGU_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "3.462",
+    "website": "https://banjarmangu-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BEJI_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.860",
+    "website": "https://beji-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA GRIPIT_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "1.216",
+    "website": "https://gripit-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA JENGGAWUR_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.856",
+    "website": "https://jenggawur-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KALILUNJAR_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "3.148",
+    "website": "https://kalilunjar-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KENDAGA_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "4.108",
+    "website": "https://kendaga-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA KESENET_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "4.456",
+    "website": "https://kesenet-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA MAJATENGAH_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "1.172",
+    "website": "https://majatengah-banjarmangu.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA PASEH_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "3.163",
+    "website": "https://paseh-banjarnegara.desa.id",
+    "provider": "lainnya"
+  },
+  "DESA PEKANDANGAN_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.443",
+    "website": "https://pekandangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PRENDENGAN_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.543",
+    "website": "https://prendengan-banjarmangu.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA REJASARI_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.627",
+    "website": "https://rejasari-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SIGEBLOG_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "4.212",
+    "website": "https://sigeblog-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA SIJENGGUNG_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "1.892",
+    "website": "https://sijenggung-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SIJERUK_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "2.481",
+    "website": "https://sijeruk-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SIPEDANG_BANJARMANGU": {
+    "kecamatan": "Kecamatan Banjarmangu",
+    "isDigital": true,
+    "pop": "3.535",
+    "website": "https://sipedang-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BANTARWARU_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": false,
+    "pop": "3.645",
+    "website": "https://bantarwaru-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA CLAPAR_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.468",
+    "website": "https://clapar-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA DAWUHAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "3.301",
+    "website": "https://dawuhan-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA GUNUNGGIANA_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.577",
+    "website": "https://gununggiana-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA KALIURIP_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "3.580",
+    "website": "https://kaliurip-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGANYAR_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "944",
+    "website": "https://karanganyar-madukara.sistemdata.id",
+    "provider": "clasnet"
+  },
+  "DESA LIMBANGAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "1.802",
+    "website": "https://limbangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA MADUKARA_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.421",
+    "website": "https://madukara-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PAGELAK_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.453",
+    "website": "https://pagelak-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA PAKELEN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "1.548",
+    "website": "https://pakelen-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PENAWANGAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "1.138",
+    "website": "https://penawangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PETAMBAKAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "3.121",
+    "website": "https://petambakan-madukara.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA RAKITAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.863",
+    "website": "https://rakitan-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA TALUNAMBA_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "1.654",
+    "website": "https://talunamba-madukara.sistemdata.id",
+    "provider": "clasnet"
+  },
+  "DESA MERDEN_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": true,
+    "pop": "11.362",
+    "website": "https://merden-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA MERTASARI_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": true,
+    "pop": "4.107",
+    "website": "https://mertasari-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA GUMINGSIR_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "1.736",
+    "website": "https://gumingsir-wanadadi.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA KANDANGWANGI_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": true,
+    "pop": "3.113",
+    "website": "https://kandangwangi-wanadadi.sistemdata.id",
+    "provider": "clasnet"
+  },
+  "DESA KARANGJAMBE_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": true,
+    "pop": "2.138",
+    "website": "https://karangjambe-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGKEMIRI_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": true,
+    "pop": "3.106",
+    "website": "https://karangkemiri-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA LEMAHJAYA_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "5.735",
+    "website": "https://lemahjaya-wanadadi.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA MEDAYU_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": true,
+    "pop": "3.118",
+    "website": "https://medayu-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BADAKARYA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.510",
+    "website": "https://badakarya-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BONDOLHARJO_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "6.337",
+    "website": "https://bondolharjo-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA DANAKERTA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "6.418",
+    "website": "https://danakerta-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA JEMBANGAN_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "4.506",
+    "website": "https://jembangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGSARI_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.838",
+    "website": "https://karangsari-punggelan.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KECEPIT_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.845",
+    "website": "https://kecepit-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KLAPA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "3.512",
+    "website": "https://klapa-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA MLAYA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "1.970",
+    "website": "https://mlaya-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PETUGURAN_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "7.641",
+    "website": "https://petuguran-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PUNGGELAN_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "7.388",
+    "website": "https://punggelan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PURWASANA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.033",
+    "website": "https://purwasana-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SAMBONG_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "4.190",
+    "website": "https://sambong-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SAWANGAN_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "3.683",
+    "website": "https://sawangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SIDARATA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.653",
+    "website": "https://sidarata-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA TANJUNGTIRTA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "4.791",
+    "website": "https://tanjungtirta-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA TLAGA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "5.144",
+    "website": "https://tlaga-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA TRIBUANA_PUNGGELAN": {
+    "kecamatan": "Kecamatan Punggelan",
+    "isDigital": true,
+    "pop": "3.933",
+    "website": "https://tribuana-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PANGGISARI_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": true,
+    "pop": "5.321",
+    "website": "https://panggisari-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SAMPANG_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": true,
+    "pop": "1.891",
+    "website": "https://sampang-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BALUN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "3.888",
+    "website": "https://balun-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BANTAR_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "2.656",
+    "website": "https://bantar-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA DAWUHAN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "1.788",
+    "website": "https://dawuhan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA JATILAWANG_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "3.130",
+    "website": "https://jatilawang-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGTENGAH_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "1.873",
+    "website": "https://karangtengah-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KASIMPAR_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "1.877",
+    "website": "https://kasimpar-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KUBANG_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "4.326",
+    "website": "https://kubang-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA LEGOKSAYEM_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "1.024",
+    "website": "https://legoksayem-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PAGERGUNUNG_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "1.996",
+    "website": "https://pagergunung-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PANDANSARI_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "4.012",
+    "website": "https://pandansari-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PENANGGUNGAN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "2.378",
+    "website": "https://penanggungan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PESANTREN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "3.261",
+    "website": "https://pesantren-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA SUSUKAN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "2.516",
+    "website": "https://susukan-wanayasa.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA SUWIDAK_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "2.057",
+    "website": "https://suwidak-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA TEMPURAN_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "2.917",
+    "website": "https://tempuran-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA WANARAJA_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "5.552",
+    "website": "https://wanaraja-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA WANAYASA_WANAYASA": {
+    "kecamatan": "Kecamatan Wanayasa",
+    "isDigital": true,
+    "pop": "5.887",
+    "website": "https://wanayasa-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA PURWAREJA_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "9.962",
+    "website": "https://purwareja.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA KECITRAN_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "97",
+    "website": "https://kecitran.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA SIRKANDI_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "8.086",
+    "website": "https://sirkandi.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA PAGAK_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": false,
+    "pop": "3.573",
+    "website": "https://pagak.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA KALILANDAK_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "3.761",
+    "website": "https://kalilandak.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA KLAMPOK_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "7.652",
+    "website": "https://klampok.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA KALIMANDI_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "6.382",
+    "website": "https://kalimandi.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA KALIWINASUH_PURWAREJA KLAMPOK": {
+    "kecamatan": "Kecamatan Purwareja Klampok",
+    "isDigital": true,
+    "pop": "5.679",
+    "website": "https://kaliwinasuh-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PIASA WETAN_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "6",
+    "website": "https://piasawetan.layanandesa.cloud/",
+    "provider": "clasnet"
+  },
+  "DESA PEKIKIRAN_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "4",
+    "website": "https://pekikiran.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA BRENGKOK_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "583",
+    "website": "https://brengkok-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PANERUSAN KULON_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "25",
+    "website": "https://panerusankulon-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PANERUSAN WETAN_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://panerusanwetan.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA GUMELEM KULON_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "16",
+    "website": "https://gumelemkulon.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA GUMELEM WETAN_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://gumelemwetan.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA DERIK_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "8",
+    "website": "https://derik.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA BERTA_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://berta.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA KARANGJATI_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": false,
+    "pop": "4.874",
+    "website": "https://karangjati-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA KEDAWUNG_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": false,
+    "pop": "4.434",
+    "website": "https://kedawung-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA DERMASARI_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://dermasari.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA SUSUKAN_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://susukan.layanandesa.cloud",
+    "provider": "clasnet"
+  },
+  "DESA KEMRANGGON_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": true,
+    "pop": "3.644",
+    "website": "https://kemranggon-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGSALAM_SUSUKAN": {
+    "kecamatan": "Kecamatan Susukan",
+    "isDigital": false,
+    "pop": "1.871",
+    "website": "https://karangsalam-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA ARIBAYA_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.353",
+    "website": "https://aribaya-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA BABADAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "3.960",
+    "website": "https://babadan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA GUMINGSIR_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.126",
+    "website": "https://gumingsir-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KALITLAGA_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.463",
+    "website": "https://kalitlaga-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KARANGNANGKA_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.019",
+    "website": "https://karangnangka-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KAREKAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": false,
+    "pop": "2.847",
+    "website": "https://karekan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KASMARAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "5",
+    "website": "https://kasmaran-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA KAYUARES_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "1.531",
+    "website": "https://kayuares-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA LARANGAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.117",
+    "website": "https://larangan-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA MAJASARI_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": false,
+    "pop": "3.236",
+    "website": "https://majasari-pagentan.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA NAGASARI_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "97",
+    "website": "https://nagasari-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PLUMBUNGAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "97",
+    "website": "https://plumbungan-pagentan.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA SOKARAJA_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.462",
+    "website": "https://sokaraja-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA TEGALJERUK_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": false,
+    "pop": "1.948",
+    "website": "https://tegaljeruk-pagentan.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA KALIBOMBONG_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": false,
+    "pop": "4.479",
+    "website": "https://kalibombong-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA MAJATENGAH_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "2.392",
+    "website": "https://majatengah-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PLORENGAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "3.898",
+    "website": "https://plorengan-banjarnegara.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA BEJI_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "1.155",
+    "website": "https://beji-pandanarum.desa.id",
+    "provider": "clasnet"
+  },
+  "DESA LAWEN_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "4.870",
+    "website": "https://lawen-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PANDANARUM_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "3.107",
+    "website": "https://pandanarum-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PASEGERAN_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "2.888",
+    "website": "https://pasegeran-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PINGIT LOR_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "2.321",
+    "website": "https://pingitlor-pandanarum.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA PRINGAMBA_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "2.646",
+    "website": "https://pringamba-pandanarum.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA SINDUAJI_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "1.697",
+    "website": "https://sinduaji-pandanarum.webdeva.io/",
+    "provider": "clasnet"
+  },
+  "DESA SIRONGGE_PANDANARUM": {
+    "kecamatan": "Kecamatan Pandanarum",
+    "isDigital": true,
+    "pop": "3.284",
+    "website": "https://sirongge-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA AMPELSARI_BANJARNEGARA": {
+    "kecamatan": "Kecamatan Banjarnegara",
+    "isDigital": false,
+    "pop": "5.136",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA ARGASOKA_BANJARNEGARA": {
+    "kecamatan": "Kecamatan Banjarnegara",
+    "isDigital": false,
+    "pop": "5.520",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA CENDANA_BANJARNEGARA": {
+    "kecamatan": "Kecamatan Banjarnegara",
+    "isDigital": false,
+    "pop": "3.594",
+    "website": "https://cendana-desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA KARANGTENGAH_BANJARNEGARA": {
+    "kecamatan": "Kecamatan Banjarnegara",
+    "isDigital": false,
+    "pop": "4.193",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BANDINGAN_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "1.728",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BAWANG_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": true,
+    "pop": "2.084",
+    "website": "https://desabawang.id/",
+    "provider": "lainnya"
+  },
+  "DESA DEPOK_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "1.023",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA JOHO_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "2.518",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KEBONDALEM_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "4.280",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KUTAYASA_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "1.910",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA MAJALENGKA_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "3.702",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA MANTRIANOM_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "5.294",
+    "website": "https://mantrianom-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA MASARAN_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "3.085",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PUCANG_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "6.771",
+    "website": "https://desapucang-banjarnegara.com/",
+    "provider": "Belum Ada"
+  },
+  "DESA SERANG_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "1.299",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA WANADRI_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "4.735",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA WATUURIP_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "1.251",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA WINONG_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "3.072",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA WIRAMASTRA_BAWANG": {
+    "kecamatan": "Kecamatan Bawang",
+    "isDigital": false,
+    "pop": "3.319",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BANDINGAN_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2.083",
+    "website": "https://bandingan-sigaluh.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA BOJANEGARA_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": false,
+    "pop": "3.124",
+    "website": "https://desabojanegara.wordpress.com/",
+    "provider": "lainnya"
+  },
+  "DESA GEMBONGAN_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "3.163",
+    "website": "https://gembongan-banjarnegara.desa.id/",
+    "provider": "opendesa"
+  },
+  "DESA KALIBENDA_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": false,
+    "pop": "2.023",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANGMANGU_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": false,
+    "pop": "825",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KEMIRI_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "1.008",
+    "website": "https://kemiri-banjarnegara.desa.id/",
+    "provider": "opendesa"
+  },
+  "DESA PANAWAREN_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2.668",
+    "website": "https://www.panawaren.desa.id/",
+    "provider": "opendesa"
+  },
+  "DESA PRIGI_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2",
+    "website": "https://prigi-banjarnegara.desa.id/first",
+    "provider": "supri rtik"
+  },
+  "DESA PRINGAMBA_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "1.867",
+    "website": "https://www.pringamba-banjarnegara.desa.id/",
+    "provider": "sraya"
+  },
+  "DESA RANDEGAN_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "1.192",
+    "website": "https://randegan-banjarnegara.desa.id/",
+    "provider": "sraya"
+  },
+  "DESA SAWAL_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2.818",
+    "website": "https://sawal-banjarnegara.desa.id/",
+    "provider": "sraya"
+  },
+  "DESA SIGALUH_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": false,
+    "pop": "1.380",
+    "website": "https://www.sigaluh-banjarnegara.desa.id/",
+    "provider": "Belum Ada"
+  },
+  "DESA SINGOMERTO_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2.595",
+    "website": "https://singamerta-banjarnegara.desa.id/",
+    "provider": "sraya"
+  },
+  "DESA TUNGGORO_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": true,
+    "pop": "2.003",
+    "website": "https://www.tunggara-banjarnegara.desa.id/",
+    "provider": "opendesa"
+  },
+  "DESA WANACIPTA_SIGALUH": {
+    "kecamatan": "Kecamatan Sigaluh",
+    "isDigital": false,
+    "pop": "497",
+    "website": "https://wanacipta-banjarnegara.desa.id/index.php/",
+    "provider": "Belum Ada"
+  },
+  "DESA BLITAR_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": false,
+    "pop": "2.144",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KUTAYASA_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "1.985",
+    "website": "https://kutayasa-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA PEKAUMAN_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "0",
+    "website": null,
+    "provider": "clasnet"
+  },
+  "DESA SERED_MADUKARA": {
+    "kecamatan": "Kecamatan Madukara",
+    "isDigital": true,
+    "pop": "2.037",
+    "website": null,
+    "provider": "lainnya"
+  },
+  "DESA DANARAJA_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "5.515",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GUMIWANG_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "8.052",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALIAJIR_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "5.801",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALIPELUS_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "4.732",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALITENGAH_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "4.981",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANGANYAR_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "7.314",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KUTAWULUH_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "3.143",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PARAKAN_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "5.458",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PETIR_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "8.299",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PUCUNGBEDUG_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "6.973",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PURWANEGARA_PURWANEGARA": {
+    "kecamatan": "Kecamatan Purwanegara",
+    "isDigital": false,
+    "pop": "8.740",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KASALIB_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "2.796",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA LINGGASARI_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "3.018",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA TAPEN_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "97",
+    "website": "https://tapen-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA WANADADI_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "49",
+    "website": "https://wanadadi.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA WANAKARSA_WANADADI": {
+    "kecamatan": "Kecamatan Wanadadi",
+    "isDigital": false,
+    "pop": "3.457",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA MANDIRAJAWETAN_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "5.096",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA MANDIRAJAKULON_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "6.386",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BANJENGAN_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": true,
+    "pop": "2.252",
+    "website": "https://desabanjengan.id/",
+    "provider": "lainnya"
+  },
+  "DESA KEBAKALAN_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "1.674",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KERTAYASA_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "7.129",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA CANDIWULAN_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "2.726",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SIMBANG_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "2.623",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BLIMBING_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": true,
+    "pop": "2.337",
+    "website": "https://desablimbing.id/",
+    "provider": "lainnya"
+  },
+  "DESA PURWASABA_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "7.575",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GLEMPANG_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": true,
+    "pop": "5.085",
+    "website": "https://desaglempang.id/",
+    "provider": "lainnya"
+  },
+  "DESA KEBANARAN_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "6.099",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SALAMERTA_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "5.356",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SOMAWANGI_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "9.659",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA JALATUNDA_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "5.915",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALIWUNGU_MANDIRAJA": {
+    "kecamatan": "Kecamatan Mandiraja",
+    "isDigital": false,
+    "pop": "4.740",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA AMBAL_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "2.624",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BINANGUN_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "3.024",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GUMELAR_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "1.010",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA JLEGONG_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "1.005",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANGGONDANG_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "2.655",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANGKOBAR_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "5.468",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA LEKSANA_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "4.575",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PAGERPELAH_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "2.052",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PASURUHAN_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "1.436",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PAWEDEN_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "1.512",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PURWODADI_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "2.604",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SLATRI_KARANGKOBAR": {
+    "kecamatan": "Kecamatan Karangkobar",
+    "isDigital": false,
+    "pop": "2.461",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "RAKIT ADIPASIR_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "3",
+    "website": "https://www.adipasir-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT BADAMITA_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "2",
+    "website": "https://badamita-banjarnegara.desa.id/index.php/first",
+    "provider": "lainnya"
+  },
+  "RAKIT BANDINGAN_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "4.411",
+    "website": "https://bandingan.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT GELANG_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": false,
+    "pop": "4.792",
+    "website": "https://gelang-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "RAKIT KINCANG_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": false,
+    "pop": "4.505",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "RAKIT LENGKONG_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "6.038",
+    "website": "https://lengkong-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT LUWUNG_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "2.047",
+    "website": "https://www.luwung-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT PINGIT_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": false,
+    "pop": "6.372",
+    "website": "https://pingit-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT RAKIT_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "4.551",
+    "website": "https://www.rakit-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT SITUWANGI_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "619",
+    "website": "https://www.situwangi-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "RAKIT TANJUNGANOM_RAKIT": {
+    "kecamatan": "Kecamatan Rakit",
+    "isDigital": true,
+    "pop": "3.613",
+    "website": "https://www.tanjunganom-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA BEJI_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.252",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BITING_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.909",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA CONDONG CAMPUR_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": true,
+    "pop": "2.940",
+    "website": "https://condongcampur-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA DARMAYASA_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": true,
+    "pop": "3.938",
+    "website": "https://darmayasa-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA GEMBOL_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "2.951",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GIRITIRTA_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": true,
+    "pop": "1.264",
+    "website": "https://giritirta-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA GROGOL_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "3.243",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALILUNJAR_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.263",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANGSARI_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": true,
+    "pop": "97",
+    "website": "https://karangsari-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA PANUSUPAN_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "4.212",
+    "website": "https://penusupan-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA PEGUNDUNGAN_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.800",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PEJAWARAN_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "4.384",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA RATAMBA_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "2.651",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SARWODADI_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": true,
+    "pop": "1.645",
+    "website": null,
+    "provider": "lainnya"
+  },
+  "DESA SEMANGKUNG_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.875",
+    "website": null,
+    "provider": "lainnya"
+  },
+  "DESA SIDENGOK_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "3.437",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA TLAHAP_PEJAWARAN": {
+    "kecamatan": "Kecamatan Pejawaran",
+    "isDigital": false,
+    "pop": "1.661",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA METAWANA_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": false,
+    "pop": "1.985",
+    "website": "https://metawana-pagentan.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA PAGENTAN_PAGENTAN": {
+    "kecamatan": "Kecamatan Pagentan",
+    "isDigital": true,
+    "pop": "5.326",
+    "website": "https://pagentan-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA BAKAL_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": false,
+    "pop": "3.617",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BATUR_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": true,
+    "pop": "7.630",
+    "website": "https://batur.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA DIENG KULON_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": true,
+    "pop": "4.185",
+    "website": "https://www.dieng.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA KARANGTENGAH_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": false,
+    "pop": "4.548",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KEPAKISAN_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": false,
+    "pop": "3.122",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PASURENAN_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": false,
+    "pop": "2.885",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PEKASIRAN_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": false,
+    "pop": "5.326",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SUMBEREJO_BATUR": {
+    "kecamatan": "Kecamatan Batur",
+    "isDigital": true,
+    "pop": "5.734",
+    "website": "https://www.sumberejo-banjarnegara.desa.id/koneksi-database",
+    "provider": "lainnya"
+  },
+  "DESA ASINAN_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.488",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA BEDANA_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "1.864",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GUNUNGLANGIT_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": true,
+    "pop": "2.985",
+    "website": "https://gununglangit-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA KALIBENING_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "5.029",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KALIBOMBONG_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "4.516",
+    "website": "https://kalibombong-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA KALISAT KIDUL_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "4.212",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KARANG ANYAR_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.988",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KASINOMAN_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.907",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KERTASARI_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.310",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA MAJATENGAH_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": true,
+    "pop": "2.392",
+    "website": "https://majatengah-banjarnegara.desa.id/",
+    "provider": "clasnet"
+  },
+  "DESA PLORENGAN_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "3.788",
+    "website": "https://plorengan-kalibening.sistemdata.id/",
+    "provider": "clasnet"
+  },
+  "DESA SEMBAWA_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.481",
+    "website": "https://sembawa-banjarnegara.desa.id/",
+    "provider": "lainnya"
+  },
+  "DESA SIDAKANGEN_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "3.445",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SIKUMPUL_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "3.143",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SIRUKEM_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.072",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA SIRUKUN_KALIBENING": {
+    "kecamatan": "Kecamatan Kalibening",
+    "isDigital": false,
+    "pop": "2.159",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA TWELAGIRI_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "5.744",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PAGEDONGAN_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "6.734",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KEBUTUHJURANG_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "4.742",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA KEBUTUH DUWUR_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "6.343",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA PESANGKALAN_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "3.549",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA DUREN_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "3.024",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA LEBAKWANGI_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "5.117",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GUNUNGJATI_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": false,
+    "pop": "3.339",
+    "website": null,
+    "provider": "Belum Ada"
+  },
+  "DESA GENTANSARI_PAGEDONGAN": {
+    "kecamatan": "Kecamatan Pagedongan",
+    "isDigital": true,
+    "pop": "5.880",
+    "website": "https://desagentansari-pagedongan.com/",
+    "provider": "lainnya"
+  }
+}

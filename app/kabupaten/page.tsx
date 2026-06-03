@@ -1,0 +1,263 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import { ChevronLeft, MapPin, Users, Building, Heart, Server, Activity, ArrowUpRight, Award, ShieldCheck, CheckCircle2, Globe, Layers, X, Info } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, FileText } from "lucide-react";
+import { LeafletMap } from "@/components/ui/custom/LeafletMap";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+
+export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk";
+
+export default function KabupatenDashboard() {
+    const [geoJsonData, setGeoJsonData] = useState<any>(null);
+    const [selectedVillage, setSelectedVillage] = useState<any>(null);
+    const [realData, setRealData] = useState<Record<string, any>>({});
+    
+    // Controls which layer data is shown on map
+    const [activeLayer, setActiveLayer] = useState<MapLayer>("digital");
+    const [showInfoPanel, setShowInfoPanel] = useState(true);
+
+    React.useEffect(() => {
+        fetch('/peta_desa.geojson')
+            .then(res => res.json())
+            .then(data => setGeoJsonData(data))
+            .catch(err => console.error("Gagal memuat peta_desa.geojson", err));
+
+        fetch('/desa_data.json')
+            .then(res => res.json())
+            .then(data => setRealData(data))
+            .catch(err => console.error("Gagal memuat desa_data.json", err));
+    }, []);
+
+    const mapMarkers: any[] = [
+        { id: "ST-01", name: "Zona Stunting Tinggi", type: "seismic", lat: -7.3820, lng: 109.6500, status: "critical", value: 24, unit: "%", lastUpdate: "Baru saja", location: "Kecamatan Bawang", battery: 100, description: "Area dengan prevalensi stunting tinggi" },
+        { id: "KM-01", name: "Konsentrasi RTLH", type: "power", lat: -7.4100, lng: 109.6800, status: "warning", value: 450, unit: "KK", lastUpdate: "Baru saja", location: "Kecamatan Banjarnegara", battery: 100, description: "Titik konsentrasi keluarga rentan" },
+        { id: "DG-01", name: "Desa Digital Terbaik", type: "energy", lat: -7.2100, lng: 109.8300, status: "active", value: 100, unit: "Skor", lastUpdate: "Baru saja", location: "Desa Batur", battery: 100, description: "Desa dengan integrasi SID penuh" },
+    ];
+
+    const handleFeatureClick = (feature: any) => {
+        const name = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa Tidak Diketahui";
+        const kec = feature?.properties?.Kecamatan || "Kecamatan";
+        
+        const cleanKec = kec.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+        const cleanDesa = name.toUpperCase();
+        const upperName = cleanDesa + "_" + cleanKec;
+        
+        const villageData = realData[upperName] || { isDigital: false, pop: "0", website: null, provider: "Belum Ada" };
+        const isDigital = villageData.isDigital;
+        
+        // Mock Stunting & Poverty data based on name length for consistency
+        let hash = 0;
+        for (let i = 0; i < upperName.length; i++) {
+            hash = upperName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const mockStunting = (Math.abs(hash) % 15) + 5; // 5% to 20%
+        const mockKemiskinan = (Math.abs(hash) % 25) + 10; // 10% to 35%
+        
+        setSelectedVillage({
+            name,
+            kec,
+            isDigital,
+            pop: villageData.pop,
+            website: villageData.website,
+            provider: villageData.provider,
+            stunting: mockStunting,
+            kemiskinan: mockKemiskinan,
+            news: [
+                { id: 1, date: "Hari Ini", title: `Informasi Terbaru dari ${name}`, source: isDigital ? "Website Desa" : "Pemkab Banjarnegara" },
+            ]
+        });
+    };
+
+    return (
+        <div className="h-screen w-screen overflow-hidden bg-slate-900 relative font-sans">
+            {/* 1. Full Screen Map */}
+            <div className="absolute inset-0 z-0">
+                <LeafletMap 
+                    sensors={mapMarkers} 
+                    geoJsonData={geoJsonData}
+                    center={[-7.3986, 109.6963]} 
+                    onSensorClick={() => {}}
+                    onFeatureClick={handleFeatureClick}
+                    digitalStatusMap={Object.keys(realData).reduce((acc, key) => { acc[key] = realData[key].isDigital; return acc; }, {} as Record<string, boolean>)}
+                    activeMapLayer={activeLayer}
+                />
+            </div>
+
+            {/* 2. Top Header Navigation (Floating) */}
+            <div className="absolute top-0 left-0 right-0 z-[400] p-4 pointer-events-none flex flex-col sm:flex-row justify-between items-end sm:items-start gap-4">
+                <div className="flex gap-4 items-start pointer-events-auto self-start">
+                    <Link href="/" className="h-10 w-10 bg-white/90 backdrop-blur rounded-xl shadow-md flex items-center justify-center text-slate-700 hover:text-indigo-600 hover:bg-white transition-colors border border-slate-200">
+                        <ChevronLeft className="h-6 w-6" />
+                    </Link>
+                    <div className="bg-white/90 backdrop-blur rounded-xl shadow-md border border-slate-200 px-5 py-3">
+                        <div className="flex items-center gap-2 mb-1">
+                            <Badge className="bg-indigo-100 text-indigo-800 border-indigo-200 shadow-none hover:bg-indigo-200">Super Map</Badge>
+                            <Badge className="bg-emerald-100 text-emerald-800 border-emerald-200 shadow-none"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>Live</Badge>
+                        </div>
+                        <h1 className="text-xl font-black text-slate-900">Banjarnegara Command Center</h1>
+                    </div>
+                </div>
+
+                {/* 3. Layer Controls (Checkboxes/Switches) */}
+                <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-slate-200 w-72 overflow-hidden pointer-events-auto">
+                    <div className="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center cursor-pointer" onClick={() => setShowInfoPanel(!showInfoPanel)}>
+                        <h2 className="text-sm font-bold text-white flex items-center gap-2"><Layers className="w-4 h-4 text-indigo-400" /> Kontrol Lapisan Data</h2>
+                    </div>
+                    {showInfoPanel && (
+                        <div className="p-4 space-y-5">
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-digital" className="flex flex-col gap-1 cursor-pointer">
+                                    <span className="font-bold text-slate-800 text-sm">Desa Digital (SID)</span>
+                                    <span className="text-xs text-slate-500 font-medium">Ketersediaan sistem database</span>
+                                </Label>
+                                <Checkbox id="layer-digital" checked={activeLayer === "digital"} onCheckedChange={(c) => c && setActiveLayer("digital")} className="w-5 h-5 rounded-md" />
+                            </div>
+                            
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-stunting" className="flex flex-col gap-1 cursor-pointer">
+                                    <span className="font-bold text-slate-800 text-sm">Risiko Stunting</span>
+                                    <span className="text-xs text-slate-500 font-medium">Pemetaan persentase balita</span>
+                                </Label>
+                                <Checkbox id="layer-stunting" checked={activeLayer === "stunting"} onCheckedChange={(c) => c && setActiveLayer("stunting")} className="w-5 h-5 rounded-md" />
+                            </div>
+
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-kemiskinan" className="flex flex-col gap-1 cursor-pointer">
+                                    <span className="font-bold text-slate-800 text-sm">Keluarga Rentan</span>
+                                    <span className="text-xs text-slate-500 font-medium">Berdasarkan data RTLH</span>
+                                </Label>
+                                <Checkbox id="layer-kemiskinan" checked={activeLayer === "kemiskinan"} onCheckedChange={(c) => c && setActiveLayer("kemiskinan")} className="w-5 h-5 rounded-md" />
+                            </div>
+
+                            <div className="h-px bg-slate-200 my-2"></div>
+
+                            {/* Legend Display based on Active Layer */}
+                            <div>
+                                <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Legenda Peta</h3>
+                                {activeLayer === "digital" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-blue-500 opacity-70"></span> Sudah Terdigitalisasi</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-yellow-400 opacity-70"></span> Belum Digital</div>
+                                    </div>
+                                )}
+                                {activeLayer === "stunting" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-red-600 opacity-70"></span> Risiko Tinggi (&gt;15%)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-orange-400 opacity-70"></span> Risiko Sedang (10-15%)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-green-500 opacity-70"></span> Risiko Rendah (&lt;10%)</div>
+                                    </div>
+                                )}
+                                {activeLayer === "kemiskinan" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-purple-600 opacity-70"></span> Sangat Rentan (&gt;30%)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-purple-400 opacity-70"></span> Rentan (20-30%)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-slate-300 opacity-70"></span> Terkendali (&lt;20%)</div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* 4. KPI Floater Bottom Left */}
+            <div className="absolute bottom-6 left-6 z-[400] pointer-events-none flex gap-4">
+                <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-slate-200 p-4 w-44 pointer-events-auto flex items-center gap-3">
+                    <div className="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600"><Users className="w-5 h-5"/></div>
+                    <div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase">Total Penduduk</div>
+                        <div className="font-black text-slate-800">1.04M <span className="text-xs font-bold text-slate-400">Jiwa</span></div>
+                    </div>
+                </div>
+                <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-slate-200 p-4 w-44 pointer-events-auto flex items-center gap-3">
+                    <div className="h-10 w-10 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-600"><Server className="w-5 h-5"/></div>
+                    <div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase">Desa Digital</div>
+                        <div className="font-black text-slate-800">175 <span className="text-xs font-bold text-slate-400">Desa</span></div>
+                    </div>
+                </div>
+            </div>
+
+            {/* 5. Village Detail Modal (Floating Card) */}
+            {selectedVillage && (
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[500] w-full max-w-md pointer-events-auto">
+                    <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-slate-800 to-slate-900 px-5 py-4 flex justify-between items-center">
+                            <div className="flex items-center gap-2">
+                                <div className="bg-white/10 p-1.5 rounded-lg backdrop-blur text-white"><MapPin className="w-4 h-4"/></div>
+                                <div>
+                                    <h3 className="font-black text-white text-lg leading-tight">{selectedVillage.name}</h3>
+                                    <p className="text-slate-300 text-xs font-medium">{selectedVillage.kec}</p>
+                                </div>
+                            </div>
+                            <button onClick={() => setSelectedVillage(null)} className="h-8 w-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors">
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="p-5 space-y-5">
+                            {/* Status Pills */}
+                            <div className="flex gap-2">
+                                <Badge className={`px-2.5 py-1 ${selectedVillage.isDigital ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200'}`} variant="outline">
+                                    {selectedVillage.isDigital ? 'Desa Digital OpenSID' : 'Belum Digital'}
+                                </Badge>
+                                <Badge className="bg-slate-50 text-slate-600 border-slate-200 px-2.5 py-1" variant="outline">
+                                    <Users className="w-3 h-3 mr-1 inline"/> {selectedVillage.pop} Jiwa
+                                </Badge>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Prevalensi Stunting</div>
+                                    <div className="text-xl font-black flex items-end gap-1">
+                                        <span className={selectedVillage.stunting > 15 ? 'text-red-600' : selectedVillage.stunting > 10 ? 'text-orange-500' : 'text-emerald-600'}>
+                                            {selectedVillage.stunting}%
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
+                                        <div className={`h-full ${selectedVillage.stunting > 15 ? 'bg-red-500' : selectedVillage.stunting > 10 ? 'bg-orange-500' : 'bg-emerald-500'}`} style={{width: `${(selectedVillage.stunting/25)*100}%`}}></div>
+                                    </div>
+                                </div>
+                                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Keluarga Rentan</div>
+                                    <div className="text-xl font-black flex items-end gap-1">
+                                        <span className={selectedVillage.kemiskinan > 30 ? 'text-purple-600' : selectedVillage.kemiskinan > 20 ? 'text-purple-400' : 'text-slate-600'}>
+                                            {selectedVillage.kemiskinan}%
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
+                                        <div className={`h-full ${selectedVillage.kemiskinan > 30 ? 'bg-purple-600' : selectedVillage.kemiskinan > 20 ? 'bg-purple-400' : 'bg-slate-400'}`} style={{width: `${(selectedVillage.kemiskinan/40)*100}%`}}></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3 pt-2">
+                                <div className="flex items-center justify-between text-sm">
+                                    <span className="font-semibold text-slate-500 flex items-center gap-1.5"><Globe className="w-4 h-4"/> Website Portal</span>
+                                    {selectedVillage.isDigital && selectedVillage.website ? (
+                                        <a href={selectedVillage.website} target="_blank" rel="noreferrer" className="text-indigo-600 font-bold hover:underline flex items-center gap-1">
+                                            Kunjungi <ExternalLink className="w-3 h-3" />
+                                        </a>
+                                    ) : (
+                                        <span className="text-slate-400 font-medium italic">Tidak Tersedia</span>
+                                    )}
+                                </div>
+                                <div className="flex items-center justify-between text-sm">
+                                    <span className="font-semibold text-slate-500 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4"/> Provider Integrasi</span>
+                                    <span className="font-bold text-slate-800">{selectedVillage.provider}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}

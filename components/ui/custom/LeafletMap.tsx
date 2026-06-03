@@ -45,6 +45,9 @@ interface LeafletMapProps {
     geoJsonData: unknown;
     center: [number, number];
     onSensorClick: (sensor: IoTSensor) => void;
+    onFeatureClick?: (feature: any) => void;
+    digitalStatusMap?: Record<string, boolean>;
+    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk";
 }
 
 // Dynamically import Leaflet
@@ -90,20 +93,84 @@ const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number
     const map = useMap();
     React.useEffect(() => {
         if (map) {
-            map.setView(center, zoom);
+            try {
+                map.setView(center, zoom);
+            } catch (error) {
+                console.warn("Leaflet map setView skipped during unmount/remount");
+            }
         }
     }, [center, zoom, map]);
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital" }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
+    
+    // Add a ref to the GeoJSON layer to update styles without remounting
+    const geoJsonRef = React.useRef<any>(null);
     const [mapKey, setMapKey] = React.useState(0);
     const [componentsReady, setComponentsReady] = React.useState(false);
     const mapRef = React.useRef<HTMLDivElement>(null);
     const [useMapHook, setUseMapHook] = React.useState<any>(null);
+    
+    // Style function extracted to be reusable
+    const getFeatureStyle = React.useCallback((feature: any) => {
+        const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
+        const kecName = feature?.properties?.Kecamatan || "";
+        
+        const cleanKec = kecName.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+        const cleanDesa = villageName.toUpperCase();
+        const keyName = cleanDesa + "_" + cleanKec;
+    
+        let isDigital = false;
+        if (digitalStatusMap && digitalStatusMap[keyName] !== undefined) {
+            isDigital = digitalStatusMap[keyName];
+        } else {
+            let hash = 0;
+            for (let i = 0; i < keyName.length; i++) {
+                hash = keyName.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            isDigital = Math.abs(hash) % 100 < 65;
+        }
+        
+        let hash = 0;
+        for (let i = 0; i < keyName.length; i++) {
+            hash = keyName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const stunting = (Math.abs(hash) % 15) + 5;
+        const kemiskinan = (Math.abs(hash) % 25) + 10;
+        
+        let fillColor = "#facc15";
+        let color = "#eab308";
+        
+        if (activeMapLayer === "digital") {
+            fillColor = isDigital ? "#3b82f6" : "#facc15";
+            color = isDigital ? "#0ea5e9" : "#eab308";
+        } else if (activeMapLayer === "stunting") {
+            fillColor = stunting > 15 ? "#ef4444" : stunting > 10 ? "#f97316" : "#22c55e";
+            color = stunting > 15 ? "#b91c1c" : stunting > 10 ? "#c2410c" : "#15803d";
+        } else if (activeMapLayer === "kemiskinan") {
+            fillColor = kemiskinan > 30 ? "#9333ea" : kemiskinan > 20 ? "#c084fc" : "#cbd5e1";
+            color = kemiskinan > 30 ? "#7e22ce" : kemiskinan > 20 ? "#9333ea" : "#94a3b8";
+        }
+
+        return {
+            color: color,
+            weight: 1.5,
+            opacity: 0.9,
+            fillColor: fillColor,
+            fillOpacity: 0.55,
+        };
+    }, [digitalStatusMap, activeMapLayer]);
+
+    // Apply styles dynamically without unmounting the component
+    React.useEffect(() => {
+        if (geoJsonRef.current && geoJsonRef.current.setStyle) {
+            geoJsonRef.current.setStyle(getFeatureStyle);
+        }
+    }, [activeMapLayer, getFeatureStyle]);
 
     React.useEffect(() => {
         if (typeof window !== "undefined") {
@@ -159,24 +226,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
         };
     }, []);
 
-    // Cleanup and remount effect
-    React.useEffect(() => {
-        return () => {
-            // Force remount when component unmounts
-            setMapKey((prev) => prev + 1);
-        };
-    }, []);
-
-    // Ensure proper cleanup on unmount
-    React.useEffect(() => {
-        const mapElement = mapRef.current;
-        return () => {
-            // Clean up any existing map instances
-            if (mapElement && mapElement.children.length > 0) {
-                mapElement.innerHTML = "";
-            }
-        };
-    }, []);
+    // Let react-leaflet handle its own cleanup internally
 
     const getIconColor = (type: IoTSensor["type"]) => {
         switch (type) {
@@ -299,19 +349,27 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick }: Leaf
                     />
 
                     {/* Village Boundary from GeoJSON */}
-                    {geoJsonData != null ? (
+                    {geoJsonData != null && digitalStatusMap && Object.keys(digitalStatusMap).length > 0 ? (
                         <ErrorBoundary
                             fallback={null}
                             onError={(error) => console.error("Error rendering GeoJSON:", error)}
                         >
                             <GeoJSON
+                                ref={geoJsonRef}
                                 data={geoJsonData as import("geojson").GeoJsonObject}
-                                style={{
-                                    color: "#0ea5e9",
-                                    weight: 2,
-                                    opacity: 0.8,
-                                    fillColor: "#0ea5e9",
-                                    fillOpacity: 0.1,
+                                style={getFeatureStyle}
+                                onEachFeature={(feature, layer) => {
+                                    const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
+                                    const kec = feature?.properties?.Kecamatan || "";
+                                    layer.bindTooltip(`<b>${villageName}</b><br/><span style="font-size:10px;color:gray;">${kec}</span>`);
+                                    
+                                    if (onFeatureClick) {
+                                        layer.on({
+                                            click: () => {
+                                                onFeatureClick(feature);
+                                            }
+                                        });
+                                    }
                                 }}
                             />
                         </ErrorBoundary>

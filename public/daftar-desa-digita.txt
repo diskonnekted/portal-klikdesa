@@ -1,0 +1,541 @@
+#	Kecamatan	Desa	Website	Cek Terakhir	Jml Penduduk	DB Penduduk
+1	Kecamatan Banjarmangu	Desa Banjarkulon
+https://banjarkulon-banjarnegara.desa.id/	2025-12-02 20:28:57	2.381	Sudah Ada
+2	Kecamatan Banjarmangu	Desa Banjarmangu
+https://banjarmangu-banjarnegara.desa.id/	2025-12-02 20:28:57	3.462	Sudah Ada
+3	Kecamatan Banjarmangu	Desa Beji
+https://beji-banjarnegara.desa.id	2025-12-02 20:28:57	2.860	Sudah Ada
+4	Kecamatan Banjarmangu	Desa Gripit
+https://gripit-banjarnegara.desa.id	2025-12-02 20:28:57	1.216	Sudah Ada
+5	Kecamatan Banjarmangu	Desa Jenggawur
+https://jenggawur-banjarnegara.desa.id/	2025-12-02 20:28:57	2.856	Sudah Ada
+6	Kecamatan Banjarmangu	Desa Kalilunjar
+https://kalilunjar-banjarnegara.desa.id/	2025-12-02 20:28:57	3.148	Sudah Ada
+7	Kecamatan Banjarmangu	Desa Kendaga
+https://kendaga-banjarnegara.desa.id	2025-12-02 20:28:57	4.108	Sudah Ada
+8	Kecamatan Banjarmangu	Desa Kesenet
+https://kesenet-banjarnegara.desa.id/	2025-12-02 20:28:57	4.456	Sudah Ada
+9	Kecamatan Banjarmangu	Desa Majatengah
+https://majatengah-banjarmangu.sistemdata.id/	2025-12-02 20:28:57	1.172	Sudah Ada
+10	Kecamatan Banjarmangu	Desa Paseh
+https://paseh-banjarnegara.desa.id	2025-12-02 20:28:57	3.163	Sudah Ada
+11	Kecamatan Banjarmangu	Desa Pekandangan
+https://pekandangan-banjarnegara.desa.id/	2025-12-02 20:28:57	2.443	Sudah Ada
+12	Kecamatan Banjarmangu	Desa Prendengan
+https://prendengan-banjarmangu.sistemdata.id/	2025-12-02 20:28:57	2.543	Sudah Ada
+13	Kecamatan Banjarmangu	Desa Rejasari
+https://rejasari-banjarnegara.desa.id/	2025-12-02 20:28:57	2.627	Sudah Ada
+14	Kecamatan Banjarmangu	Desa Sigeblog
+https://sigeblog-banjarnegara.desa.id	2025-12-02 20:28:57	4.212	Sudah Ada
+15	Kecamatan Banjarmangu	Desa Sijenggung
+https://sijenggung-banjarnegara.desa.id/	2025-12-02 20:28:57	1.892	Sudah Ada
+16	Kecamatan Banjarmangu	Desa Sijeruk
+https://sijeruk-banjarnegara.desa.id/	2025-12-02 20:28:57	2.481	Sudah Ada
+17	Kecamatan Banjarmangu	Desa Sipedang
+https://sipedang-banjarnegara.desa.id/	2025-12-02 20:28:57	3.535	Sudah Ada
+18	Kecamatan Banjarnegara	Desa Ampelsari
+5.136	Belum Ada
+19	Kecamatan Banjarnegara	Desa Argasoka
+5.520	Belum Ada
+20	Kecamatan Banjarnegara	Desa Cendana
+https://cendana-desa.id/		3.594	Belum Ada
+21	Kecamatan Banjarnegara	Desa Karangtengah
+4.193	Belum Ada
+22	Kecamatan Batur	Desa Bakal
+3.617	Belum Ada
+23	Kecamatan Batur	Desa Batur
+https://batur.desa.id/		7.630	Sudah Ada
+24	Kecamatan Batur	Desa Dieng Kulon
+https://www.dieng.desa.id/		4.185	Sudah Ada
+25	Kecamatan Batur	Desa Karangtengah
+4.548	Belum Ada
+26	Kecamatan Batur	Desa Kepakisan
+3.122	Belum Ada
+27	Kecamatan Batur	Desa Pasurenan
+2.885	Belum Ada
+28	Kecamatan Batur	Desa Pekasiran
+5.326	Belum Ada
+29	Kecamatan Batur	Desa Sumberejo
+https://www.sumberejo-banjarnegara.desa.id/koneksi-database		5.734	Sudah Ada
+30	Kecamatan Bawang	Desa Bandingan
+1.728	Belum Ada
+31	Kecamatan Bawang	Desa Bawang
+https://desabawang.id/		2.084	Sudah Ada
+32	Kecamatan Bawang	Desa Binorong
+https://binorong-banjarnegara.desa.id	2025-12-02 20:28:57	5.295	Belum Ada
+33	Kecamatan Bawang	Desa Blambangan
+https://blambangan-banjarnegara.desa.id/	2025-12-02 20:28:57	6.031	Sudah Ada
+34	Kecamatan Bawang	Desa Depok
+1.023	Belum Ada
+35	Kecamatan Bawang	Desa Gemuruh
+https://gemuruh-banjarnegara.desa.id/	2025-12-02 20:28:57	6.392	Belum Ada
+36	Kecamatan Bawang	Desa Joho
+2.518	Belum Ada
+37	Kecamatan Bawang	Desa Kebondalem
+4.280	Belum Ada
+38	Kecamatan Bawang	Desa Kutayasa
+1.910	Belum Ada
+39	Kecamatan Bawang	Desa Majalengka
+3.702	Belum Ada
+40	Kecamatan Bawang	Desa Mantrianom
+https://mantrianom-banjarnegara.desa.id/		5.294	Belum Ada
+41	Kecamatan Bawang	Desa Masaran
+3.085	Belum Ada
+42	Kecamatan Bawang	Desa Pucang
+https://desapucang-banjarnegara.com/		6.771	Belum Ada
+43	Kecamatan Bawang	Desa Serang
+1.299	Belum Ada
+44	Kecamatan Bawang	Desa Wanadri
+4.735	Belum Ada
+45	Kecamatan Bawang	Desa Watuurip
+1.251	Belum Ada
+46	Kecamatan Bawang	Desa Winong
+3.072	Belum Ada
+47	Kecamatan Bawang	Desa Wiramastra
+3.319	Belum Ada
+48	Kecamatan Kalibening	Desa Asinan
+2.488	Belum Ada
+49	Kecamatan Kalibening	Desa Bedana
+1.864	Belum Ada
+50	Kecamatan Kalibening	Desa Gununglangit
+https://gununglangit-banjarnegara.desa.id/		2.985	Sudah Ada
+51	Kecamatan Kalibening	Desa Kalibening
+5.029	Belum Ada
+52	Kecamatan Kalibening	Desa Kalibombong
+https://kalibombong-banjarnegara.desa.id/		4.516	Belum Ada
+53	Kecamatan Kalibening	Desa Kalisat Kidul
+4.212	Belum Ada
+54	Kecamatan Kalibening	Desa Karang Anyar
+2.988	Belum Ada
+55	Kecamatan Kalibening	Desa Kasinoman
+2.907	Belum Ada
+56	Kecamatan Kalibening	Desa Kertasari
+2.310	Belum Ada
+57	Kecamatan Kalibening	Desa Majatengah
+https://majatengah-banjarnegara.desa.id/		2.392	Sudah Ada
+58	Kecamatan Kalibening	Desa Plorengan
+https://plorengan-kalibening.sistemdata.id/		3.788	Belum Ada
+59	Kecamatan Kalibening	Desa Sembawa
+https://sembawa-banjarnegara.desa.id/		2.481	Belum Ada
+60	Kecamatan Kalibening	Desa Sidakangen
+3.445	Belum Ada
+61	Kecamatan Kalibening	Desa Sikumpul
+3.143	Belum Ada
+62	Kecamatan Kalibening	Desa Sirukem
+2.072	Belum Ada
+63	Kecamatan Kalibening	Desa Sirukun
+2.159	Belum Ada
+64	Kecamatan Karangkobar	Desa Ambal
+2.624	Belum Ada
+65	Kecamatan Karangkobar	Desa Binangun
+3.024	Belum Ada
+66	Kecamatan Karangkobar	Desa Gumelar
+1.010	Belum Ada
+67	Kecamatan Karangkobar	Desa Jlegong
+1.005	Belum Ada
+68	Kecamatan Karangkobar	Desa Karanggondang
+2.655	Belum Ada
+69	Kecamatan Karangkobar	Desa Karangkobar
+5.468	Belum Ada
+70	Kecamatan Karangkobar	Desa Leksana
+4.575	Belum Ada
+71	Kecamatan Karangkobar	Desa Pagerpelah
+2.052	Belum Ada
+72	Kecamatan Karangkobar	Desa Pasuruhan
+1.436	Belum Ada
+73	Kecamatan Karangkobar	Desa Paweden
+1.512	Belum Ada
+74	Kecamatan Karangkobar	Desa Purwodadi
+2.604	Belum Ada
+75	Kecamatan Karangkobar	Desa Sampang
+https://sampang-banjarnegara.desa.id/	2025-12-02 20:28:57	1.891	Sudah Ada
+76	Kecamatan Karangkobar	Desa Slatri
+2.461	Belum Ada
+77	Kecamatan Madukara	Desa Bantarwaru
+https://bantarwaru-madukara.webdeva.io/	2025-12-02 20:28:57	3.645	Belum Ada
+78	Kecamatan Madukara	Desa Blitar
+2.144	Belum Ada
+79	Kecamatan Madukara	Desa Clapar
+https://clapar-madukara.webdeva.io/	2025-12-02 20:28:57	2.468	Sudah Ada
+80	Kecamatan Madukara	Desa Dawuhan
+https://dawuhan-madukara.webdeva.io/	2025-12-02 20:28:57	3.301	Sudah Ada
+81	Kecamatan Madukara	Desa Gununggiana
+https://gununggiana-madukara.webdeva.io/	2025-12-02 20:28:57	2.577	Sudah Ada
+82	Kecamatan Madukara	Desa Kaliurip
+https://kaliurip-banjarnegara.desa.id/	2025-12-02 20:28:57	3.580	Sudah Ada
+83	Kecamatan Madukara	Desa Karanganyar
+https://karanganyar-madukara.sistemdata.id	2025-12-02 20:28:57	944	Sudah Ada
+84	Kecamatan Madukara	Desa Kutayasa
+https://kutayasa-banjarnegara.desa.id/		1.985	Sudah Ada
+85	Kecamatan Madukara	Desa Limbangan
+https://limbangan-banjarnegara.desa.id/	2025-12-02 20:28:57	1.802	Sudah Ada
+86	Kecamatan Madukara	Desa Madukara
+https://madukara-banjarnegara.desa.id/	2025-12-02 20:28:57	2.421	Sudah Ada
+87	Kecamatan Madukara	Desa Pagelak
+https://pagelak-madukara.webdeva.io/	2025-12-02 20:28:57	2.453	Sudah Ada
+88	Kecamatan Madukara	Desa Pakelen
+https://pakelen-banjarnegara.desa.id/	2025-12-02 20:28:57	1.548	Sudah Ada
+89	Kecamatan Madukara	Desa Pekauman
+Sudah Ada
+90	Kecamatan Madukara	Desa Penawangan
+https://penawangan-banjarnegara.desa.id/	2025-12-02 20:28:57	1.138	Sudah Ada
+91	Kecamatan Madukara	Desa Petambakan
+https://petambakan-madukara.webdeva.io/	2025-12-02 20:28:57	3.121	Sudah Ada
+92	Kecamatan Madukara	Desa Rakitan
+https://rakitan-banjarnegara.desa.id	2025-12-02 20:28:57	2.863	Sudah Ada
+93	Kecamatan Madukara	Desa Sered
+2.037	Sudah Ada
+94	Kecamatan Madukara	Desa Talunamba
+https://talunamba-madukara.sistemdata.id	2025-12-02 20:28:57	1.654	Sudah Ada
+95	Kecamatan Mandiraja	Desa Banjengan
+https://desabanjengan.id/		2.252	Sudah Ada
+96	Kecamatan Mandiraja	Desa Blimbing
+https://desablimbing.id/		2.337	Sudah Ada
+97	Kecamatan Mandiraja	Desa Candiwulan
+2.726	Belum Ada
+98	Kecamatan Mandiraja	Desa Glempang
+https://desaglempang.id/		5.085	Sudah Ada
+99	Kecamatan Mandiraja	Desa Jalatunda
+5.915	Belum Ada
+100	Kecamatan Mandiraja	Desa Kaliwungu
+4.740	Belum Ada
+101	Kecamatan Mandiraja	Desa Kebakalan
+1.674	Belum Ada
+102	Kecamatan Mandiraja	Desa Kebanaran
+6.099	Belum Ada
+103	Kecamatan Mandiraja	Desa Kertayasa
+7.129	Belum Ada
+104	Kecamatan Mandiraja	Desa Mandirajakulon
+6.386	Belum Ada
+105	Kecamatan Mandiraja	Desa Mandirajawetan
+5.096	Belum Ada
+106	Kecamatan Mandiraja	Desa Panggisari
+https://panggisari-banjarnegara.desa.id/	2025-12-02 20:28:57	5.321	Sudah Ada
+107	Kecamatan Mandiraja	Desa Purwasaba
+7.575	Belum Ada
+108	Kecamatan Mandiraja	Desa Salamerta
+5.356	Belum Ada
+109	Kecamatan Mandiraja	Desa Simbang
+2.623	Belum Ada
+110	Kecamatan Mandiraja	Desa Somawangi
+9.659	Belum Ada
+111	Kecamatan Pagedongan	Desa Duren
+3.024	Belum Ada
+112	Kecamatan Pagedongan	Desa Gentansari
+https://desagentansari-pagedongan.com/		5.880	Sudah Ada
+113	Kecamatan Pagedongan	Desa Gunungjati
+3.339	Belum Ada
+114	Kecamatan Pagedongan	Desa Kebutuh Duwur
+6.343	Belum Ada
+115	Kecamatan Pagedongan	Desa Kebutuhjurang
+4.742	Belum Ada
+116	Kecamatan Pagedongan	Desa Lebakwangi
+5.117	Belum Ada
+117	Kecamatan Pagedongan	Desa Pagedongan
+6.734	Belum Ada
+118	Kecamatan Pagedongan	Desa Pesangkalan
+3.549	Belum Ada
+119	Kecamatan Pagedongan	Desa Twelagiri
+5.744	Belum Ada
+120	Kecamatan Pagentan	Desa Aribaya
+https://aribaya-banjarnegara.desa.id/	2025-12-02 20:28:57	2.353	Sudah Ada
+121	Kecamatan Pagentan	Desa Babadan
+https://babadan-banjarnegara.desa.id/	2025-12-02 20:28:57	3.960	Sudah Ada
+122	Kecamatan Pagentan	Desa Gumingsir
+https://gumingsir-banjarnegara.desa.id/	2025-12-02 20:28:57	2.126	Sudah Ada
+123	Kecamatan Pagentan	Desa Kalibombong
+https://kalibombong-banjarnegara.desa.id	2025-12-02 20:28:57	4.479	Belum Ada
+124	Kecamatan Pagentan	Desa Kalitlaga
+https://kalitlaga-banjarnegara.desa.id/	2025-12-02 20:28:57	2.463	Sudah Ada
+125	Kecamatan Pagentan	Desa Karangnangka
+https://karangnangka-banjarnegara.desa.id/	2025-12-02 20:28:57	2.019	Sudah Ada
+126	Kecamatan Pagentan	Desa Karekan
+https://karekan-banjarnegara.desa.id/	2025-12-02 20:28:57	2.847	Belum Ada
+127	Kecamatan Pagentan	Desa Kasmaran
+https://kasmaran-banjarnegara.desa.id	2025-12-02 20:28:57	5	Sudah Ada
+128	Kecamatan Pagentan	Desa Kayuares
+https://kayuares-banjarnegara.desa.id/	2025-12-02 20:28:57	1.531	Sudah Ada
+129	Kecamatan Pagentan	Desa Larangan
+https://larangan-banjarnegara.desa.id/	2025-12-02 20:28:57	2.117	Sudah Ada
+130	Kecamatan Pagentan	Desa Majasari
+https://majasari-pagentan.desa.id/	2025-12-02 20:28:57	3.236	Belum Ada
+131	Kecamatan Pagentan	Desa Majatengah
+https://majatengah-banjarnegara.desa.id/	2025-12-02 20:28:57	2.392	Sudah Ada
+132	Kecamatan Pagentan	Desa Metawana
+https://metawana-pagentan.sistemdata.id/		1.985	Belum Ada
+133	Kecamatan Pagentan	Desa Nagasari
+https://nagasari-banjarnegara.desa.id/	2025-12-02 20:28:57	97	Sudah Ada
+134	Kecamatan Pagentan	Desa Pagentan
+https://pagentan-banjarnegara.desa.id/		5.326	Sudah Ada
+135	Kecamatan Pagentan	Desa Plorengan
+https://plorengan-banjarnegara.desa.id	2025-12-02 20:28:57	3.898	Sudah Ada
+136	Kecamatan Pagentan	Desa Plumbungan
+https://plumbungan-pagentan.sistemdata.id/	2025-12-02 20:28:57	97	Sudah Ada
+137	Kecamatan Pagentan	Desa Sokaraja
+https://sokaraja-banjarnegara.desa.id/	2025-12-02 20:28:57	2.462	Sudah Ada
+138	Kecamatan Pagentan	Desa Tegaljeruk
+https://tegaljeruk-pagentan.sistemdata.id/	2025-12-02 20:28:57	1.948	Belum Ada
+139	Kecamatan Pandanarum	Desa Beji
+https://beji-pandanarum.desa.id	2025-12-02 20:28:57	1.155	Sudah Ada
+140	Kecamatan Pandanarum	Desa Lawen
+https://lawen-banjarnegara.desa.id/	2025-12-02 20:28:57	4.870	Sudah Ada
+141	Kecamatan Pandanarum	Desa Pandanarum
+https://pandanarum-banjarnegara.desa.id/	2025-12-02 20:28:57	3.107	Sudah Ada
+142	Kecamatan Pandanarum	Desa Pasegeran
+https://pasegeran-banjarnegara.desa.id/	2025-12-02 20:28:57	2.888	Sudah Ada
+143	Kecamatan Pandanarum	Desa Pingit Lor
+https://pingitlor-pandanarum.webdeva.io/	2025-12-02 20:28:57	2.321	Sudah Ada
+144	Kecamatan Pandanarum	Desa Pringamba
+https://pringamba-pandanarum.webdeva.io/	2025-12-02 20:28:57	2.646	Sudah Ada
+145	Kecamatan Pandanarum	Desa Sinduaji
+https://sinduaji-pandanarum.webdeva.io/	2025-12-02 20:28:57	1.697	Sudah Ada
+146	Kecamatan Pandanarum	Desa Sirongge
+https://sirongge-banjarnegara.desa.id/	2025-12-02 20:28:57	3.284	Sudah Ada
+147	Kecamatan Pejawaran	Desa Beji
+1.252	Belum Ada
+148	Kecamatan Pejawaran	Desa Biting
+1.909	Belum Ada
+149	Kecamatan Pejawaran	Desa Condong Campur
+https://condongcampur-banjarnegara.desa.id/		2.940	Sudah Ada
+150	Kecamatan Pejawaran	Desa Darmayasa
+https://darmayasa-banjarnegara.desa.id/		3.938	Sudah Ada
+151	Kecamatan Pejawaran	Desa Gembol
+2.951	Belum Ada
+152	Kecamatan Pejawaran	Desa Giritirta
+https://giritirta-banjarnegara.desa.id/		1.264	Sudah Ada
+153	Kecamatan Pejawaran	Desa Grogol
+3.243	Belum Ada
+154	Kecamatan Pejawaran	Desa Kalilunjar
+1.263	Belum Ada
+155	Kecamatan Pejawaran	Desa Karangsari
+https://karangsari-banjarnegara.desa.id/		97	Sudah Ada
+156	Kecamatan Pejawaran	Desa Panusupan
+https://penusupan-banjarnegara.desa.id/		4.212	Belum Ada
+157	Kecamatan Pejawaran	Desa Pegundungan
+1.800	Belum Ada
+158	Kecamatan Pejawaran	Desa Pejawaran
+4.384	Belum Ada
+159	Kecamatan Pejawaran	Desa Ratamba
+2.651	Belum Ada
+160	Kecamatan Pejawaran	Desa Sarwodadi
+1.645	Sudah Ada
+161	Kecamatan Pejawaran	Desa Semangkung
+1.875	Belum Ada
+162	Kecamatan Pejawaran	Desa Sidengok
+3.437	Belum Ada
+163	Kecamatan Pejawaran	Desa Tlahap
+1.661	Belum Ada
+164	Kecamatan Punggelan	Desa Badakarya
+https://badakarya-banjarnegara.desa.id/	2025-12-02 20:28:57	5.510	Sudah Ada
+165	Kecamatan Punggelan	Desa Bondolharjo
+https://bondolharjo-banjarnegara.desa.id/	2025-12-02 20:28:57	6.337	Sudah Ada
+166	Kecamatan Punggelan	Desa Danakerta
+https://danakerta-banjarnegara.desa.id/	2025-12-02 20:28:57	6.418	Sudah Ada
+167	Kecamatan Punggelan	Desa Jembangan
+https://jembangan-banjarnegara.desa.id/	2025-12-02 20:28:57	4.506	Sudah Ada
+168	Kecamatan Punggelan	Desa Karangsari
+https://karangsari-punggelan.desa.id/	2025-12-02 20:28:57	5.838	Sudah Ada
+169	Kecamatan Punggelan	Desa Kecepit
+https://kecepit-banjarnegara.desa.id/	2025-12-02 20:28:57	5.845	Sudah Ada
+170	Kecamatan Punggelan	Desa Klapa
+https://klapa-banjarnegara.desa.id/	2025-12-02 20:28:57	3.512	Sudah Ada
+171	Kecamatan Punggelan	Desa Mlaya
+https://mlaya-banjarnegara.desa.id/	2025-12-02 20:28:57	1.970	Sudah Ada
+172	Kecamatan Punggelan	Desa Petuguran
+https://petuguran-banjarnegara.desa.id/	2025-12-02 20:28:57	7.641	Sudah Ada
+173	Kecamatan Punggelan	Desa Punggelan
+https://punggelan-banjarnegara.desa.id/	2025-12-02 20:28:57	7.388	Sudah Ada
+174	Kecamatan Punggelan	Desa Purwasana
+https://purwasana-banjarnegara.desa.id/	2025-12-02 20:28:57	5.033	Sudah Ada
+175	Kecamatan Punggelan	Desa Sambong
+https://sambong-banjarnegara.desa.id/	2025-12-02 20:28:57	4.190	Sudah Ada
+176	Kecamatan Punggelan	Desa Sawangan
+https://sawangan-banjarnegara.desa.id/	2025-12-02 20:28:57	3.683	Sudah Ada
+177	Kecamatan Punggelan	Desa Sidarata
+https://sidarata-banjarnegara.desa.id/	2025-12-02 20:28:57	5.653	Sudah Ada
+178	Kecamatan Punggelan	Desa Tanjungtirta
+https://tanjungtirta-banjarnegara.desa.id/	2025-12-02 20:28:57	4.791	Sudah Ada
+179	Kecamatan Punggelan	Desa Tlaga
+https://tlaga-banjarnegara.desa.id/	2025-12-02 20:28:57	5.144	Sudah Ada
+180	Kecamatan Punggelan	Desa Tribuana
+https://tribuana-banjarnegara.desa.id/	2025-12-02 20:28:57	3.933	Sudah Ada
+181	Kecamatan Purwanegara	Desa Danaraja
+5.515	Belum Ada
+182	Kecamatan Purwanegara	Desa Gumiwang
+8.052	Belum Ada
+183	Kecamatan Purwanegara	Desa Kaliajir
+5.801	Belum Ada
+184	Kecamatan Purwanegara	Desa Kalipelus
+4.732	Belum Ada
+185	Kecamatan Purwanegara	Desa Kalitengah
+4.981	Belum Ada
+186	Kecamatan Purwanegara	Desa Karanganyar
+7.314	Belum Ada
+187	Kecamatan Purwanegara	Desa Kutawuluh
+3.143	Belum Ada
+188	Kecamatan Purwanegara	Desa Merden
+https://merden-banjarnegara.desa.id/	2025-12-02 20:28:57	11.362	Sudah Ada
+189	Kecamatan Purwanegara	Desa Mertasari
+https://mertasari-banjarnegara.desa.id/	2025-12-02 20:28:57	4.107	Sudah Ada
+190	Kecamatan Purwanegara	Desa Parakan
+5.458	Belum Ada
+191	Kecamatan Purwanegara	Desa Petir
+8.299	Belum Ada
+192	Kecamatan Purwanegara	Desa Pucungbedug
+6.973	Belum Ada
+193	Kecamatan Purwanegara	Desa Purwanegara
+8.740	Belum Ada
+194	Kecamatan Purwareja Klampok	Desa Kalilandak
+https://kalilandak.layanandesa.cloud/	2025-12-02 20:28:57	3.761	Sudah Ada
+195	Kecamatan Purwareja Klampok	Desa Kalimandi
+https://kalimandi.layanandesa.cloud/	2025-12-02 20:28:57	6.382	Sudah Ada
+196	Kecamatan Purwareja Klampok	Desa Kaliwinasuh
+https://kaliwinasuh-banjarnegara.desa.id/	2025-12-02 20:28:57	5.679	Sudah Ada
+197	Kecamatan Purwareja Klampok	Desa Kecitran
+https://kecitran.layanandesa.cloud/	2025-12-02 20:28:57	97	Sudah Ada
+198	Kecamatan Purwareja Klampok	Desa Klampok
+https://klampok.layanandesa.cloud/	2025-12-02 20:28:57	7.652	Sudah Ada
+199	Kecamatan Purwareja Klampok	Desa Pagak
+https://pagak.layanandesa.cloud/	2025-12-02 20:28:57	3.573	Belum Ada
+200	Kecamatan Purwareja Klampok	Desa Purwareja
+https://purwareja.layanandesa.cloud/	2025-12-02 20:28:57	9.962	Sudah Ada
+201	Kecamatan Purwareja Klampok	Desa Sirkandi
+https://sirkandi.layanandesa.cloud/	2025-12-02 20:28:57	8.086	Sudah Ada
+202	Kecamatan Rakit	Rakit Adipasir
+https://www.adipasir-banjarnegara.desa.id/		3	Sudah Ada
+203	Kecamatan Rakit	Rakit Badamita
+https://badamita-banjarnegara.desa.id/index.php/first		2	Sudah Ada
+204	Kecamatan Rakit	Rakit Bandingan
+https://bandingan.desa.id/		4.411	Sudah Ada
+205	Kecamatan Rakit	Rakit Gelang
+https://gelang-banjarnegara.desa.id/		4.792	Belum Ada
+206	Kecamatan Rakit	Rakit Kincang
+4.505	Belum Ada
+207	Kecamatan Rakit	Rakit Lengkong
+https://lengkong-banjarnegara.desa.id/		6.038	Sudah Ada
+208	Kecamatan Rakit	Rakit Luwung
+https://www.luwung-banjarnegara.desa.id/		2.047	Sudah Ada
+209	Kecamatan Rakit	Rakit Pingit
+https://pingit-banjarnegara.desa.id/		6.372	Belum Ada
+210	Kecamatan Rakit	Rakit Rakit
+https://www.rakit-banjarnegara.desa.id/		4.551	Sudah Ada
+211	Kecamatan Rakit	Rakit Situwangi
+https://www.situwangi-banjarnegara.desa.id/		619	Sudah Ada
+212	Kecamatan Rakit	Rakit Tanjunganom
+https://www.tanjunganom-banjarnegara.desa.id/		3.613	Sudah Ada
+213	Kecamatan Sigaluh	Desa Bandingan
+https://bandingan-sigaluh.desa.id/		2.083	Sudah Ada
+214	Kecamatan Sigaluh	Desa Bojanegara
+https://desabojanegara.wordpress.com/		3.124	Belum Ada
+215	Kecamatan Sigaluh	Desa Gembongan
+https://gembongan-banjarnegara.desa.id/		3.163	Sudah Ada
+216	Kecamatan Sigaluh	Desa Kalibenda
+2.023	Belum Ada
+217	Kecamatan Sigaluh	Desa Karangmangu
+825	Belum Ada
+218	Kecamatan Sigaluh	Desa Kemiri
+https://kemiri-banjarnegara.desa.id/		1.008	Sudah Ada
+219	Kecamatan Sigaluh	Desa Panawaren
+https://www.panawaren.desa.id/		2.668	Sudah Ada
+220	Kecamatan Sigaluh	Desa Prigi
+https://prigi-banjarnegara.desa.id/first		2	Sudah Ada
+221	Kecamatan Sigaluh	Desa Pringamba
+https://www.pringamba-banjarnegara.desa.id/		1.867	Sudah Ada
+222	Kecamatan Sigaluh	Desa Randegan
+https://randegan-banjarnegara.desa.id/		1.192	Sudah Ada
+223	Kecamatan Sigaluh	Desa Sawal
+https://sawal-banjarnegara.desa.id/		2.818	Sudah Ada
+224	Kecamatan Sigaluh	Desa Sigaluh
+https://www.sigaluh-banjarnegara.desa.id/		1.380	Belum Ada
+225	Kecamatan Sigaluh	Desa Singomerto
+https://singamerta-banjarnegara.desa.id/		2.595	Sudah Ada
+226	Kecamatan Sigaluh	Desa Tunggoro
+https://www.tunggara-banjarnegara.desa.id/		2.003	Sudah Ada
+227	Kecamatan Sigaluh	Desa Wanacipta
+https://wanacipta-banjarnegara.desa.id/index.php/		497	Belum Ada
+228	Kecamatan Susukan	Desa Berta
+https://berta.layanandesa.cloud	2025-12-02 20:28:57	3	Sudah Ada
+229	Kecamatan Susukan	Desa Brengkok
+https://brengkok-banjarnegara.desa.id/	2025-12-02 20:28:57	583	Sudah Ada
+230	Kecamatan Susukan	Desa Derik
+https://derik.layanandesa.cloud	2025-12-02 20:28:57	8	Sudah Ada
+231	Kecamatan Susukan	Desa Dermasari
+https://dermasari.layanandesa.cloud	2025-12-02 20:28:57	3	Sudah Ada
+232	Kecamatan Susukan	Desa Gumelem kulon
+https://gumelemkulon.layanandesa.cloud	2025-12-02 20:28:57	16	Sudah Ada
+233	Kecamatan Susukan	Desa Gumelem wetan
+https://gumelemwetan.layanandesa.cloud	2025-12-02 20:28:57	3	Sudah Ada
+234	Kecamatan Susukan	Desa Karangjati
+https://karangjati-banjarnegara.desa.id	2025-12-02 20:28:57	4.874	Belum Ada
+235	Kecamatan Susukan	Desa Karangsalam
+https://karangsalam-banjarnegara.desa.id/	2025-12-02 20:28:57	1.871	Belum Ada
+236	Kecamatan Susukan	Desa Kedawung
+https://kedawung-banjarnegara.desa.id	2025-12-02 20:28:57	4.434	Belum Ada
+237	Kecamatan Susukan	Desa Kemranggon
+https://kemranggon-banjarnegara.desa.id/	2025-12-02 20:28:57	3.644	Sudah Ada
+238	Kecamatan Susukan	Desa Panerusan kulon
+https://panerusankulon-banjarnegara.desa.id/	2025-12-02 20:28:57	25	Sudah Ada
+239	Kecamatan Susukan	Desa Panerusan wetan
+https://panerusanwetan.layanandesa.cloud	2025-12-02 20:28:57	3	Sudah Ada
+240	Kecamatan Susukan	Desa Pekikiran
+https://pekikiran.layanandesa.cloud	2025-12-02 20:28:57	4	Sudah Ada
+241	Kecamatan Susukan	Desa Piasa wetan
+https://piasawetan.layanandesa.cloud/	2025-12-02 20:28:57	6	Sudah Ada
+242	Kecamatan Susukan	Desa Susukan
+https://susukan.layanandesa.cloud	2025-12-02 20:28:57	3	Sudah Ada
+243	Kecamatan Wanadadi	Desa Gumingsir
+https://gumingsir-wanadadi.desa.id	2025-12-02 20:28:57	1.736	Belum Ada
+244	Kecamatan Wanadadi	Desa Kandangwangi
+https://kandangwangi-wanadadi.sistemdata.id	2025-12-02 20:28:57	3.113	Sudah Ada
+245	Kecamatan Wanadadi	Desa Karangjambe
+https://karangjambe-banjarnegara.desa.id/	2025-12-02 20:28:57	2.138	Sudah Ada
+246	Kecamatan Wanadadi	Desa Karangkemiri
+https://karangkemiri-banjarnegara.desa.id/	2025-12-02 20:28:57	3.106	Sudah Ada
+247	Kecamatan Wanadadi	Desa Kasalib
+2.796	Belum Ada
+248	Kecamatan Wanadadi	Desa Lemahjaya
+https://lemahjaya-wanadadi.sistemdata.id/	2025-12-02 20:28:57	5.735	Belum Ada
+249	Kecamatan Wanadadi	Desa Linggasari
+3.018	Belum Ada
+250	Kecamatan Wanadadi	Desa Medayu
+https://medayu-banjarnegara.desa.id/	2025-12-02 20:28:57	3.118	Sudah Ada
+251	Kecamatan Wanadadi	Desa Tapen
+https://tapen-banjarnegara.desa.id/		97	Belum Ada
+252	Kecamatan Wanadadi	Desa Wanadadi
+https://wanadadi.desa.id/		49	Belum Ada
+253	Kecamatan Wanadadi	Desa Wanakarsa
+3.457	Belum Ada
+254	Kecamatan Wanayasa	Desa Balun
+https://balun-banjarnegara.desa.id/	2025-12-02 20:28:57	3.888	Sudah Ada
+255	Kecamatan Wanayasa	Desa Bantar
+https://bantar-banjarnegara.desa.id/	2025-12-02 20:28:57	2.656	Sudah Ada
+256	Kecamatan Wanayasa	Desa Dawuhan
+https://dawuhan-banjarnegara.desa.id/	2025-12-02 20:28:57	1.788	Sudah Ada
+257	Kecamatan Wanayasa	Desa Jatilawang
+https://jatilawang-banjarnegara.desa.id/	2025-12-02 20:28:57	3.130	Sudah Ada
+258	Kecamatan Wanayasa	Desa Karangtengah
+https://karangtengah-banjarnegara.desa.id/	2025-12-02 20:28:57	1.873	Sudah Ada
+259	Kecamatan Wanayasa	Desa Kasimpar
+https://kasimpar-banjarnegara.desa.id/	2025-12-02 20:28:57	1.877	Sudah Ada
+260	Kecamatan Wanayasa	Desa Kubang
+https://kubang-banjarnegara.desa.id/	2025-12-02 20:28:57	4.326	Sudah Ada
+261	Kecamatan Wanayasa	Desa Legoksayem
+https://legoksayem-banjarnegara.desa.id/	2025-12-02 20:28:57	1.024	Sudah Ada
+262	Kecamatan Wanayasa	Desa Pagergunung
+https://pagergunung-banjarnegara.desa.id/	2025-12-02 20:28:57	1.996	Sudah Ada
+263	Kecamatan Wanayasa	Desa Pandansari
+https://pandansari-banjarnegara.desa.id/	2025-12-02 20:28:57	4.012	Sudah Ada
+264	Kecamatan Wanayasa	Desa Penanggungan
+https://penanggungan-banjarnegara.desa.id/	2025-12-02 20:28:57	2.378	Sudah Ada
+265	Kecamatan Wanayasa	Desa Pesantren
+https://pesantren-banjarnegara.desa.id/	2025-12-02 20:28:57	3.261	Sudah Ada
+266	Kecamatan Wanayasa	Desa Susukan
+https://susukan-wanayasa.webdeva.io/	2025-12-02 20:28:57	2.516	Sudah Ada
+267	Kecamatan Wanayasa	Desa Suwidak
+https://suwidak-banjarnegara.desa.id/	2025-12-02 20:28:57	2.057	Sudah Ada
+268	Kecamatan Wanayasa	Desa Tempuran
+https://tempuran-banjarnegara.desa.id/	2025-12-02 20:28:57	2.917	Sudah Ada
+269	Kecamatan Wanayasa	Desa Wanaraja
+https://wanaraja-banjarnegara.desa.id/	2025-12-02 20:28:57	5.552	Sudah Ada
+270	Kecamatan Wanayasa	Desa Wanayasa
+https://wanayasa-banjarnegara.desa.id	2025-12-02 20:28:57	5.887	Sudah Ada
