@@ -420,7 +420,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                         // Pass the pkkData row along with the feature
                                                         const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
                                                         const dataRow = pkkData ? pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
-                                                        onFeatureClick({ ...feature, pkkData: dataRow });
+                                                        onFeatureClick({ ...feature, isKecamatanLayer: true, pkkData: dataRow });
                                                     }
                                                 });
                                             }

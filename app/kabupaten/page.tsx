@@ -50,13 +50,13 @@ export default function KabupatenDashboard() {
     ];
 
     const handleFeatureClick = (feature: any) => {
-        // Jika feature ini adalah feature PKK Kecamatan (memiliki pkkData yang kita selipkan di LeafletMap)
-        if (feature.pkkData !== undefined) {
+        // Jika feature ini berasal dari layer PKK (peta kecamatan)
+        if (feature.isKecamatanLayer) {
             setSelectedVillage({
                 isKecamatan: true,
-                name: feature?.properties?.Kecamatan || "Kecamatan Tidak Diketahui",
+                name: feature?.properties?.Kecamatan || feature?.properties?.Name || "Kecamatan Tidak Diketahui",
                 kec: "",
-                pkkData: feature.pkkData
+                pkkData: feature.pkkData || null
             });
             return;
         }
