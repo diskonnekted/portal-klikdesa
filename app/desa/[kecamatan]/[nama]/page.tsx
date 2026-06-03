@@ -220,9 +220,9 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
                         </div>
                     </div>
 
-                    {/* Middle Column: Mini Map */}
-                    <div className="lg:col-span-1 h-full">
-                        <div className="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden relative h-[400px] lg:h-full min-h-[400px]">
+                    {/* Middle Column: Mini Map & Quick Stats */}
+                    <div className="lg:col-span-1 space-y-6">
+                        <div className="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden relative h-[350px]">
                             <div className="absolute top-4 right-4 z-[400] bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg shadow-sm border border-slate-200 pointer-events-none">
                                 <span className="text-xs font-bold text-slate-600 flex items-center gap-1"><Home className="w-3 h-3"/> Wilayah Teritorial</span>
                             </div>
@@ -236,6 +236,49 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
                                 desaStuntingData={desaStuntingData}
                             />
                         </div>
+
+                        {/* Additional Village Components */}
+                        <Card className="border-0 shadow-md rounded-2xl overflow-hidden">
+                            <div className="bg-slate-50 border-b border-slate-100 px-5 py-4">
+                                <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2"><Users className="w-4 h-4 text-indigo-500"/> Ringkasan Penduduk</h3>
+                            </div>
+                            <CardContent className="p-5 space-y-4">
+                                {demographyLoading ? (
+                                    <div className="animate-pulse space-y-3">
+                                        <div className="h-4 bg-slate-200 rounded w-full"></div>
+                                        <div className="h-4 bg-slate-200 rounded w-full"></div>
+                                        <div className="h-4 bg-slate-200 rounded w-full"></div>
+                                    </div>
+                                ) : demographyData ? (
+                                    <>
+                                        <div className="flex justify-between items-center">
+                                            <div className="flex items-center gap-2 text-sm text-slate-500"><div className="w-2 h-2 rounded-full bg-blue-500"></div> Laki-laki</div>
+                                            <span className="font-bold text-slate-800">{demographyData.total.total_laki_laki} <span className="text-xs text-slate-400 font-normal">Jiwa</span></span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <div className="flex items-center gap-2 text-sm text-slate-500"><div className="w-2 h-2 rounded-full bg-pink-500"></div> Perempuan</div>
+                                            <span className="font-bold text-slate-800">{demographyData.total.total_perempuan} <span className="text-xs text-slate-400 font-normal">Jiwa</span></span>
+                                        </div>
+                                        <div className="h-px bg-slate-100 my-2"></div>
+                                        <div className="flex justify-between items-center">
+                                            <div className="flex items-center gap-2 text-sm text-slate-500"><div className="w-2 h-2 rounded-full bg-emerald-500"></div> Agama (Islam)</div>
+                                            <span className="font-bold text-slate-800">
+                                                {demographyData.agama.find((a: any) => a.nama.toLowerCase() === 'islam')?.total || 0} <span className="text-xs text-slate-400 font-normal">Jiwa</span>
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <div className="flex items-center gap-2 text-sm text-slate-500"><div className="w-2 h-2 rounded-full bg-orange-500"></div> Disabilitas</div>
+                                            <span className="font-bold text-slate-800">{demographyData.total.total_disabilitas} <span className="text-xs text-slate-400 font-normal">Jiwa</span></span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="text-sm text-slate-400 text-center py-2 flex flex-col items-center gap-2">
+                                        <ShieldCheck className="w-6 h-6 text-slate-300"/>
+                                        Belum ada data OpenSID
+                                    </div>
+                                )}
+                            </CardContent>
+                        </Card>
                     </div>
 
                     {/* Right Column: OpenData Stats & Trends */}
