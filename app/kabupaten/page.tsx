@@ -141,62 +141,35 @@ export default function KabupatenDashboard() {
                         <h2 className="text-sm font-bold text-white flex items-center gap-2"><Layers className="w-4 h-4 text-indigo-400" /> Kontrol Lapisan Data</h2>
                     </div>
                     {showInfoPanel && (
-                        <div className="p-4 space-y-5">
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-digital" className="flex flex-col gap-1 cursor-pointer">
-                                    <span className="font-bold text-slate-800 text-sm">Desa Digital (SID)</span>
-                                    <span className="text-xs text-slate-500 font-medium">Ketersediaan sistem database</span>
-                                </Label>
-                                <Checkbox id="layer-digital" checked={activeLayer === "digital"} onCheckedChange={(c) => c && setActiveLayer("digital")} className="w-5 h-5 rounded-md" />
-                            </div>
-                            
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-stunting" className="flex flex-col gap-1 cursor-pointer">
-                                    <span className="font-bold text-slate-800 text-sm">Risiko Stunting</span>
-                                    <span className="text-xs text-slate-500 font-medium">Pemetaan persentase balita</span>
-                                </Label>
-                                <Checkbox id="layer-stunting" checked={activeLayer === "stunting"} onCheckedChange={(c) => c && setActiveLayer("stunting")} className="w-5 h-5 rounded-md" />
-                            </div>
-
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-kemiskinan" className="flex flex-col gap-1 cursor-pointer">
-                                    <span className="font-bold text-slate-800 text-sm">Keluarga Rentan</span>
-                                    <span className="text-xs text-slate-500 font-medium">Berdasarkan data RTLH</span>
-                                </Label>
-                                <Checkbox id="layer-kemiskinan" checked={activeLayer === "kemiskinan"} onCheckedChange={(c) => c && setActiveLayer("kemiskinan")} className="w-5 h-5 rounded-md" />
-                            </div>
-
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-pkk" className="flex flex-col gap-1 cursor-pointer">
-                                    <div className="flex items-center gap-2">
-                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (PKK)</span>
-                                        {pkkLoading && <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" title="Memuat data API OpenData..."></span>}
+                            <div className="flex flex-col gap-3 p-4">
+                                {[
+                                    { id: "digital", title: "Desa Digital (SID)", desc: "Ketersediaan sistem database", icon: <Globe className="w-5 h-5" />, activeClass: "bg-blue-50 border-blue-200", iconColor: "text-blue-500", radioColor: "border-blue-500 bg-blue-500" },
+                                    { id: "stunting", title: "Peta Stunting", desc: "Pemetaan persentase balita", icon: <Activity className="w-5 h-5" />, activeClass: "bg-red-50 border-red-200", iconColor: "text-red-500", radioColor: "border-red-500 bg-red-500" },
+                                    { id: "kemiskinan", title: "Keluarga Rentan", desc: "Berdasarkan data RTLH", icon: <Heart className="w-5 h-5" />, activeClass: "bg-purple-50 border-purple-200", iconColor: "text-purple-500", radioColor: "border-purple-500 bg-purple-500" },
+                                    { id: "pkk", title: "Sebaran Home Industri", desc: "Percontohan Home Industri & Rumah Sehat (OpenData)", icon: <Building className="w-5 h-5" />, activeClass: "bg-indigo-50 border-indigo-200", iconColor: "text-indigo-500", radioColor: "border-indigo-500 bg-indigo-500", loading: pkkLoading, loadingColor: "bg-indigo-500" },
+                                    { id: "kb", title: "Peta Akseptor KB", desc: "Akseptor Aktif & Akseptor Baru (OpenData)", icon: <Users className="w-5 h-5" />, activeClass: "bg-pink-50 border-pink-200", iconColor: "text-pink-500", radioColor: "border-pink-500 bg-pink-500", loading: kbLoading, loadingColor: "bg-pink-500" },
+                                    { id: "kesejahteraan", title: "Peta Status Kesejahteraan", desc: "Status Kesejahteraan (Desil 1-4) (OpenData)", icon: <Award className="w-5 h-5" />, activeClass: "bg-orange-50 border-orange-200", iconColor: "text-orange-500", radioColor: "border-orange-500 bg-orange-500", loading: kesejahteraanLoading, loadingColor: "bg-orange-500" },
+                                ].map((layer) => (
+                                    <div 
+                                        key={layer.id}
+                                        onClick={() => setActiveLayer(layer.id as MapLayer)}
+                                        className={`group flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 cursor-pointer ${activeLayer === layer.id ? layer.activeClass + ' shadow-sm ring-1 ring-black/5 scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}
+                                    >
+                                        <div className={`p-2 rounded-lg transition-colors ${activeLayer === layer.id ? 'bg-white shadow-sm' : 'bg-slate-100 group-hover:bg-white'} ${layer.iconColor}`}>
+                                            {layer.icon}
+                                        </div>
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-2">
+                                                <h3 className={`font-bold text-sm transition-colors ${activeLayer === layer.id ? 'text-slate-900' : 'text-slate-700 group-hover:text-slate-900'}`}>{layer.title}</h3>
+                                                {layer.loading && <span className={`w-2 h-2 rounded-full animate-pulse ${layer.loadingColor}`} title="Memuat data API OpenData..."></span>}
+                                            </div>
+                                            <p className={`text-xs mt-0.5 line-clamp-1 transition-colors ${activeLayer === layer.id ? 'text-slate-600' : 'text-slate-500 group-hover:text-slate-600'}`}>{layer.desc}</p>
+                                        </div>
+                                        <div className={`w-5 h-5 shrink-0 rounded-full border-2 flex items-center justify-center transition-colors ${activeLayer === layer.id ? layer.radioColor : 'border-slate-300 group-hover:border-slate-400 bg-transparent'}`}>
+                                            {activeLayer === layer.id && <CheckCircle2 className="w-3 h-3 text-white" />}
+                                        </div>
                                     </div>
-                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Percontohan Home Industri & Rumah Sehat (OpenData)</span>
-                                </Label>
-                                <Checkbox id="layer-pkk" checked={activeLayer === "pkk"} onCheckedChange={(c) => c && setActiveLayer("pkk")} className="w-5 h-5 rounded-md border-indigo-500 text-indigo-600 focus-visible:ring-indigo-500" />
-                            </div>
-
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-kb" className="flex flex-col gap-1 cursor-pointer">
-                                    <div className="flex items-center gap-2">
-                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (KB)</span>
-                                        {kbLoading && <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" title="Memuat data API OpenData..."></span>}
-                                    </div>
-                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Akseptor Aktif & Akseptor Baru (OpenData)</span>
-                                </Label>
-                                <Checkbox id="layer-kb" checked={activeLayer === "kb"} onCheckedChange={(c) => c && setActiveLayer("kb")} className="w-5 h-5 rounded-md border-pink-500 text-pink-600 focus-visible:ring-pink-500" />
-                            </div>
-
-                            <div className="flex items-center justify-between gap-4">
-                                <Label htmlFor="layer-kesejahteraan" className="flex flex-col gap-1 cursor-pointer">
-                                    <div className="flex items-center gap-2">
-                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (Kesejahteraan)</span>
-                                        {kesejahteraanLoading && <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" title="Memuat data API OpenData..."></span>}
-                                    </div>
-                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Status Kesejahteraan (Desil 1-4) (OpenData)</span>
-                                </Label>
-                                <Checkbox id="layer-kesejahteraan" checked={activeLayer === "kesejahteraan"} onCheckedChange={(c) => c && setActiveLayer("kesejahteraan")} className="w-5 h-5 rounded-md border-orange-500 text-orange-600 focus-visible:ring-orange-500" />
+                                ))}
                             </div>
 
                             <div className="h-px bg-slate-200 my-2"></div>
