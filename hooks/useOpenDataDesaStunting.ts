@@ -12,6 +12,7 @@ export interface DesaStuntingRecord {
 
 export function useOpenDataDesaStunting(resourceId: string | null) {
     const [data, setData] = useState<DesaStuntingRecord[]>([]);
+    const [historicalData, setHistoricalData] = useState<Record<string, DesaStuntingRecord[]>>({});
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -19,6 +20,7 @@ export function useOpenDataDesaStunting(resourceId: string | null) {
         if (!resourceId) {
             setLoading(false);
             setData([]);
+            setHistoricalData({});
             return;
         }
 
@@ -60,6 +62,7 @@ export function useOpenDataDesaStunting(resourceId: string | null) {
                     }
                     
                     setData(Object.values(latestByDesa));
+                    setHistoricalData(recordsByDesa);
                 } else {
                     throw new Error("Invalid format from OpenData");
                 }
@@ -73,5 +76,10 @@ export function useOpenDataDesaStunting(resourceId: string | null) {
         fetchData();
     }, [resourceId]);
 
-    return { desaStuntingData: data, desaStuntingLoading: loading, desaStuntingError: error };
+    return { 
+        desaStuntingData: data, 
+        desaStuntingHistorical: historicalData, 
+        desaStuntingLoading: loading, 
+        desaStuntingError: error 
+    };
 }

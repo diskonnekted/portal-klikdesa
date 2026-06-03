@@ -196,8 +196,13 @@ export default function KecamatanDashboard({ params }: { params: Promise<{ nama:
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
+                                    <div className="mt-4 pt-4 border-t border-slate-100">
+                                        <Link href={`/desa/${kecamatanName.toLowerCase().replace(/kecamatan/g, '').replace(/kec\./g, '').trim().replace(/ /g, "-")}/${selectedVillage.name.toLowerCase().replace(/desa/g, '').replace(/kelurahan/g, '').trim().replace(/ /g, "-")}`} className="block w-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold py-3 px-4 rounded-xl text-center transition-colors">
+                                            Buka Profil Lengkap Desa
+                                        </Link>
+                                    </div>
+                                </div>
                                 ) : (
                                     <div className="py-8 text-center text-slate-400 font-medium italic">
                                         Data spesifik OpenData untuk desa ini belum tersedia.

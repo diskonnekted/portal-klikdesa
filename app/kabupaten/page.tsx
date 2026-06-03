@@ -444,7 +444,7 @@ export default function KabupatenDashboard() {
                                     </div>
                                     
                                     <div className="flex gap-2 pt-2">
-                                        <Link href={`/desa/${selectedVillage.name.toLowerCase().replace(/ /g, "-")}`} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl text-center transition-colors">
+                                        <Link href={`/desa/${selectedVillage.kec ? selectedVillage.kec.toLowerCase().replace(/kecamatan/g, '').replace(/kec\./g, '').trim().replace(/ /g, "-") : 'unknown'}/${selectedVillage.name.toLowerCase().replace(/desa/g, '').replace(/kelurahan/g, '').trim().replace(/ /g, "-")}`} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl text-center transition-colors">
                                             Profil Lengkap
                                         </Link>
                                     </div>
