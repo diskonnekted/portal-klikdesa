@@ -60,6 +60,14 @@ const loadLeaflet = async () => {
     return L;
 };
 
+// Helper for normalizing Kecamatan names to match different spelling standards
+const normalizeKecamatanName = (s: string) => {
+    if (!s) return "";
+    let n = s.replace(/kecamatan/i, '').replace(/kec\./i, '').replace(/[^a-z0-9]/gi, '').toUpperCase();
+    if (n === 'PURWOREJAKLAMPOK' || n === 'PURWAREJAKLAMPOK') return 'PURWAREJAKLAMPOK';
+    return n;
+};
+
 // Dynamically import Leaflet components with explicit types
 const MapContainer = dynamic(
     () =>
@@ -178,7 +186,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
         
         if (activeMapLayer === "pkk" && pkkData) {
             // Find data for this kecamatan
-            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const norm = normalizeKecamatanName;
             const dataRow = pkkData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
             
             if (dataRow) {
@@ -195,7 +203,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             }
         } else if (activeMapLayer === "kb" && kbData) {
             // Find data for this kecamatan
-            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const norm = normalizeKecamatanName;
             const dataRow = kbData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
             
             if (dataRow) {
@@ -212,7 +220,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             }
         } else if (activeMapLayer === "kesejahteraan" && kesejahteraanData) {
             // Find data for this kecamatan
-            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const norm = normalizeKecamatanName;
             const dataRow = kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
             
             if (dataRow) {
@@ -439,7 +447,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             let tooltipContent = `<b>Kecamatan ${kec}</b>`;
                                             
                                             if (pkkData) {
-                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const norm = normalizeKecamatanName;
                                                 const dataRow = pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec));
                                                 if (dataRow) {
                                                     tooltipContent += `<br/><span style="font-size:10px;">Home Industri: ${dataRow["Jumlah Percontohan Home Industri"]}</span>`;
@@ -453,7 +461,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                 layer.on({
                                                     click: () => {
                                                         // Pass the pkkData row along with the feature
-                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const norm = normalizeKecamatanName;
                                                         const dataRow = pkkData ? pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, pkkData: dataRow });
                                                     }
@@ -481,7 +489,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             let tooltipContent = `<b>Kecamatan ${kec}</b>`;
                                             
                                             if (kbData) {
-                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const norm = normalizeKecamatanName;
                                                 const dataRow = kbData.find((d: any) => norm(d.Kecamatan) === norm(kec));
                                                 if (dataRow) {
                                                     tooltipContent += `<br/><span style="font-size:10px;">Akseptor Baru: ${dataRow.Baru}</span>`;
@@ -494,7 +502,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             if (onFeatureClick) {
                                                 layer.on({
                                                     click: () => {
-                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const norm = normalizeKecamatanName;
                                                         const dataRow = kbData ? kbData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, kbData: dataRow });
                                                     }
@@ -522,7 +530,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             let tooltipContent = `<b>Kecamatan ${kec}</b>`;
                                             
                                             if (kesejahteraanData) {
-                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const norm = normalizeKecamatanName;
                                                 const dataRow = kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec));
                                                 if (dataRow) {
                                                     tooltipContent += `<br/><span style="font-size:10px;">Desil 1: ${dataRow["Status Kesejahteraan 1"]}</span>`;
@@ -535,7 +543,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             if (onFeatureClick) {
                                                 layer.on({
                                                     click: () => {
-                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const norm = normalizeKecamatanName;
                                                         const dataRow = kesejahteraanData ? kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, kesejahteraanData: dataRow });
                                                     }
