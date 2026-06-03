@@ -34,8 +34,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CustomButton } from "@/components/ui/custom/CustomButton";
 import { WeatherCard } from "@/components/ui/custom/WeatherCard";
-import { OpenSIDStatsDisplay } from "@/components/ui/custom/OpenSIDStatsDisplay";
 import { DecorativeSeparator } from "@/components/ui/custom/DecorativeSeparator";
+import { ClasnetStatistik } from '@/components/ui/custom/ClasnetStatistik';
+import { OpenSIDStatsDisplay } from "@/components/ui/custom/OpenSIDStatsDisplay";
 import { useExternalNews } from "@/hooks/useExternalNews";
 import { useTranslation } from "@/lib/useTranslation";
 import { EventDate } from "@/components/EventDate";
@@ -734,6 +735,11 @@ export function HomePageClient({ serverData }: { serverData: ServerData }) {
             </section>
 
             <DecorativeSeparator />
+
+            {/* Statistik Layanan Digital (Clasnet) */}
+            <section className="container mx-auto px-4 py-8">
+                <ClasnetStatistik />
+            </section>
 
             {/* Tata Kelola Pemerintahan Desa (OpenSID) */}
             <section className="idm-area container mx-auto px-4 py-8">
