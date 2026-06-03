@@ -23,7 +23,8 @@ export function useOpenDataPKK() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = "https://opendata.banjarnegarakab.go.id/api/3/action/datastore_search?resource_id=8de567d6-b51e-402f-9ff6-7fda822a72e9&limit=100";
+                // Use local Next.js proxy to bypass CORS
+                const url = "/api/opendata-pkk";
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error("Failed to fetch OpenData");
