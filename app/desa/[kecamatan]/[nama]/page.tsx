@@ -105,7 +105,10 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
     const currentDesaStunting = React.useMemo(() => {
         if (!desaStuntingData || !villageInfo) return null;
         const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
-        return desaStuntingData.find(d => norm(d["Desa/Kelurahan"]) === norm(villageInfo.name));
+        return desaStuntingData.find(d => {
+            const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+            return norm(rawName) === norm(villageInfo.name);
+        });
     }, [desaStuntingData, villageInfo]);
 
     const historicalTrend = React.useMemo(() => {

@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 
 export interface DesaStuntingRecord {
     _id: number;
-    "Desa/Kelurahan": string;
+    "Desa/Kelurahan"?: string;
+    "Desa"?: string;
+    "desa"?: string;
+    "Kelurahan"?: string;
     "Jumlah Seluruh Balita": string;
     "Jumlah Balita Stunting": string;
     "Persentase* (%)": string;
@@ -40,7 +43,8 @@ export function useOpenDataDesaStunting(resourceId: string | null) {
                     const recordsByDesa: Record<string, DesaStuntingRecord[]> = {};
                     records.forEach(record => {
                         // Normalize village name by removing 'Desa/Kelurahan' prefix if exists and trimming
-                        let desa = record["Desa/Kelurahan"]?.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
+                        let rawDesaName = record["Desa/Kelurahan"] || record["Desa"] || record["desa"] || record["Kelurahan"] || "";
+                        let desa = rawDesaName.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
                         if (!desa) return;
                         if (!recordsByDesa[desa]) recordsByDesa[desa] = [];
                         recordsByDesa[desa].push(record);
