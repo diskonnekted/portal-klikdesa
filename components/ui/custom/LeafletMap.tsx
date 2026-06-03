@@ -47,7 +47,9 @@ interface LeafletMapProps {
     onSensorClick: (sensor: IoTSensor) => void;
     onFeatureClick?: (feature: any) => void;
     digitalStatusMap?: Record<string, boolean>;
-    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk";
+    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk";
+    kecamatanGeoJsonData?: unknown;
+    pkkData?: any[];
 }
 
 // Dynamically import Leaflet
@@ -103,7 +105,7 @@ const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital" }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
@@ -164,6 +166,42 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             fillOpacity: 0.55,
         };
     }, [digitalStatusMap, activeMapLayer]);
+
+    // Style function for Kecamatan (PKK)
+    const getKecamatanStyle = React.useCallback((feature: any) => {
+        const kecName = feature?.properties?.Kecamatan || "";
+        
+        let fillColor = "#cbd5e1"; // default gray
+        let color = "#94a3b8";
+        
+        if (activeMapLayer === "pkk" && pkkData) {
+            // Find data for this kecamatan
+            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const dataRow = pkkData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
+            
+            if (dataRow) {
+                const totalHomeInd = parseInt(dataRow["Jumlah Percontohan Home Industri"] || "0");
+                const totalRumahSehat = parseInt(dataRow["Jumlah Percontohan Rumah Sehat"] || "0");
+                
+                // Color scale based on Home Industri (higher = darker blue/indigo)
+                if (totalHomeInd > 2000) fillColor = "#4f46e5"; // indigo-600
+                else if (totalHomeInd > 1500) fillColor = "#6366f1"; // indigo-500
+                else if (totalHomeInd > 1000) fillColor = "#818cf8"; // indigo-400
+                else if (totalHomeInd > 500) fillColor = "#a5b4fc"; // indigo-300
+                else fillColor = "#c7d2fe"; // indigo-200
+                
+                color = "#4338ca"; // border
+            }
+        }
+        
+        return {
+            color: color,
+            weight: 2,
+            opacity: 0.9,
+            fillColor: fillColor,
+            fillOpacity: 0.7,
+        };
+    }, [pkkData, activeMapLayer]);
 
     // Apply styles dynamically without unmounting the component
     React.useEffect(() => {
@@ -348,8 +386,49 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {/* Village Boundary from GeoJSON */}
-                    {geoJsonData != null && digitalStatusMap && Object.keys(digitalStatusMap).length > 0 ? (
+                    {/* Boundary layers conditionally rendered based on active map layer */}
+                    {activeMapLayer === "pkk" && kecamatanGeoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering Kecamatan GeoJSON:", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        data={kecamatanGeoJsonData as import("geojson").GeoJsonObject}
+                                        style={getKecamatanStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const kec = feature?.properties?.Kecamatan || "";
+                                            let tooltipContent = `<b>Kecamatan ${kec}</b>`;
+                                            
+                                            if (pkkData) {
+                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const dataRow = pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec));
+                                                if (dataRow) {
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Home Industri: ${dataRow["Jumlah Percontohan Home Industri"]}</span>`;
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Rumah Sehat: ${dataRow["Jumlah Percontohan Rumah Sehat"]}</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        // Pass the pkkData row along with the feature
+                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const dataRow = pkkData ? pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
+                                                        onFeatureClick({ ...feature, pkkData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : geoJsonData != null && digitalStatusMap && Object.keys(digitalStatusMap).length > 0 ? (
                         <ErrorBoundary
                             fallback={null}
                             onError={(error) => console.error("Error rendering GeoJSON:", error)}

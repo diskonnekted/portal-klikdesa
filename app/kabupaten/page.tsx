@@ -9,17 +9,22 @@ import { ExternalLink, FileText } from "lucide-react";
 import { LeafletMap } from "@/components/ui/custom/LeafletMap";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useOpenDataPKK } from "@/hooks/useOpenDataPKK";
 
-export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk";
+export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk";
 
 export default function KabupatenDashboard() {
     const [geoJsonData, setGeoJsonData] = useState<any>(null);
     const [selectedVillage, setSelectedVillage] = useState<any>(null);
     const [realData, setRealData] = useState<Record<string, any>>({});
+    const [kecamatanGeoJsonData, setKecamatanGeoJsonData] = useState<any>(null);
     
     // Controls which layer data is shown on map
     const [activeLayer, setActiveLayer] = useState<MapLayer>("digital");
     const [showInfoPanel, setShowInfoPanel] = useState(true);
+    
+    // Fetch OpenData
+    const { pkkData, loading: pkkLoading } = useOpenDataPKK();
 
     React.useEffect(() => {
         fetch('/peta_desa.geojson')
@@ -31,6 +36,11 @@ export default function KabupatenDashboard() {
             .then(res => res.json())
             .then(data => setRealData(data))
             .catch(err => console.error("Gagal memuat desa_data.json", err));
+            
+        fetch('/peta_kecamatan.geojson')
+            .then(res => res.json())
+            .then(data => setKecamatanGeoJsonData(data))
+            .catch(err => console.error("Gagal memuat peta_kecamatan.geojson", err));
     }, []);
 
     const mapMarkers: any[] = [
@@ -40,6 +50,17 @@ export default function KabupatenDashboard() {
     ];
 
     const handleFeatureClick = (feature: any) => {
+        // Jika feature ini adalah feature PKK Kecamatan (memiliki pkkData yang kita selipkan di LeafletMap)
+        if (feature.pkkData !== undefined) {
+            setSelectedVillage({
+                isKecamatan: true,
+                name: feature?.properties?.Kecamatan || "Kecamatan Tidak Diketahui",
+                kec: "",
+                pkkData: feature.pkkData
+            });
+            return;
+        }
+
         const name = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa Tidak Diketahui";
         const kec = feature?.properties?.Kecamatan || "Kecamatan";
         
@@ -85,6 +106,8 @@ export default function KabupatenDashboard() {
                     onFeatureClick={handleFeatureClick}
                     digitalStatusMap={Object.keys(realData).reduce((acc, key) => { acc[key] = realData[key].isDigital; return acc; }, {} as Record<string, boolean>)}
                     activeMapLayer={activeLayer}
+                    kecamatanGeoJsonData={kecamatanGeoJsonData}
+                    pkkData={pkkData}
                 />
             </div>
 
@@ -132,6 +155,17 @@ export default function KabupatenDashboard() {
                                     <span className="text-xs text-slate-500 font-medium">Berdasarkan data RTLH</span>
                                 </Label>
                                 <Checkbox id="layer-kemiskinan" checked={activeLayer === "kemiskinan"} onCheckedChange={(c) => c && setActiveLayer("kemiskinan")} className="w-5 h-5 rounded-md" />
+                            </div>
+
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-pkk" className="flex flex-col gap-1 cursor-pointer">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (PKK)</span>
+                                        {pkkLoading && <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" title="Memuat data API OpenData..."></span>}
+                                    </div>
+                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Percontohan Home Industri & Rumah Sehat (OpenData)</span>
+                                </Label>
+                                <Checkbox id="layer-pkk" checked={activeLayer === "pkk"} onCheckedChange={(c) => c && setActiveLayer("pkk")} className="w-5 h-5 rounded-md border-indigo-500 text-indigo-600 focus-visible:ring-indigo-500" />
                             </div>
 
                             <div className="h-px bg-slate-200 my-2"></div>
@@ -183,79 +217,139 @@ export default function KabupatenDashboard() {
                 </div>
             </div>
 
-            {/* 5. Village Detail Modal (Floating Card) */}
+            {/* 5. Floating Village/Kecamatan Details Modal */}
             {selectedVillage && (
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[500] w-full max-w-md pointer-events-auto">
-                    <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
-                        {/* Header */}
-                        <div className="bg-gradient-to-r from-slate-800 to-slate-900 px-5 py-4 flex justify-between items-center">
-                            <div className="flex items-center gap-2">
-                                <div className="bg-white/10 p-1.5 rounded-lg backdrop-blur text-white"><MapPin className="w-4 h-4"/></div>
-                                <div>
-                                    <h3 className="font-black text-white text-lg leading-tight">{selectedVillage.name}</h3>
-                                    <p className="text-slate-300 text-xs font-medium">{selectedVillage.kec}</p>
-                                </div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[500] w-[90vw] max-w-md pointer-events-auto">
+                    <Card className="shadow-2xl border-0 overflow-hidden bg-white/95 backdrop-blur-xl">
+                        {/* Modal Header */}
+                        <div className="bg-slate-900 px-5 py-4 flex justify-between items-start">
+                            <div>
+                                <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/20 border-0 mb-2">
+                                    {selectedVillage.isKecamatan ? "Data Wilayah" : selectedVillage.isDigital ? "Desa Digital" : "Desa Reguler"}
+                                </Badge>
+                                <h2 className="text-2xl font-black text-white leading-none mb-1">{selectedVillage.name}</h2>
+                                {!selectedVillage.isKecamatan && <p className="text-slate-400 text-sm">{selectedVillage.kec}</p>}
                             </div>
-                            <button onClick={() => setSelectedVillage(null)} className="h-8 w-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors">
-                                <X className="w-4 h-4" />
+                            <button onClick={() => setSelectedVillage(null)} className="text-slate-400 hover:text-white bg-white/10 rounded-full p-1 transition-colors">
+                                <X className="h-5 w-5" />
                             </button>
                         </div>
                         
-                        {/* Content */}
-                        <div className="p-5 space-y-5">
-                            {/* Status Pills */}
-                            <div className="flex gap-2">
-                                <Badge className={`px-2.5 py-1 ${selectedVillage.isDigital ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200'}`} variant="outline">
-                                    {selectedVillage.isDigital ? 'Desa Digital OpenSID' : 'Belum Digital'}
-                                </Badge>
-                                <Badge className="bg-slate-50 text-slate-600 border-slate-200 px-2.5 py-1" variant="outline">
-                                    <Users className="w-3 h-3 mr-1 inline"/> {selectedVillage.pop} Jiwa
-                                </Badge>
-                            </div>
+                        <CardContent className="p-0">
+                            {selectedVillage.isKecamatan ? (
+                                /* KECAMATAN (PKK) CONTENT */
+                                <div className="p-5">
+                                    <div className="bg-indigo-50 rounded-xl p-4 mb-5 border border-indigo-100 flex items-start gap-3">
+                                        <Info className="h-5 w-5 text-indigo-600 shrink-0 mt-0.5" />
+                                        <p className="text-sm text-indigo-900 font-medium">Data bersumber dari API OpenData Banjarnegara (TP-PKK Tahun {selectedVillage.pkkData?.Tahun || "-"}).</p>
+                                    </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Prevalensi Stunting</div>
-                                    <div className="text-xl font-black flex items-end gap-1">
-                                        <span className={selectedVillage.stunting > 15 ? 'text-red-600' : selectedVillage.stunting > 10 ? 'text-orange-500' : 'text-emerald-600'}>
-                                            {selectedVillage.stunting}%
-                                        </span>
-                                    </div>
-                                    <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
-                                        <div className={`h-full ${selectedVillage.stunting > 15 ? 'bg-red-500' : selectedVillage.stunting > 10 ? 'bg-orange-500' : 'bg-emerald-500'}`} style={{width: `${(selectedVillage.stunting/25)*100}%`}}></div>
-                                    </div>
-                                </div>
-                                <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Keluarga Rentan</div>
-                                    <div className="text-xl font-black flex items-end gap-1">
-                                        <span className={selectedVillage.kemiskinan > 30 ? 'text-purple-600' : selectedVillage.kemiskinan > 20 ? 'text-purple-400' : 'text-slate-600'}>
-                                            {selectedVillage.kemiskinan}%
-                                        </span>
-                                    </div>
-                                    <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
-                                        <div className={`h-full ${selectedVillage.kemiskinan > 30 ? 'bg-purple-600' : selectedVillage.kemiskinan > 20 ? 'bg-purple-400' : 'bg-slate-400'}`} style={{width: `${(selectedVillage.kemiskinan/40)*100}%`}}></div>
-                                    </div>
-                                </div>
-                            </div>
+                                    {selectedVillage.pkkData ? (
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Industri Rumahan (Pemberdayaan)</h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Pangan</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.pkkData.Pangan}</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Sandang/Konveksi</div>
+                                                        <div className="text-xl font-bold text-slate-800">{parseInt(selectedVillage.pkkData.Sandang || "0") + parseInt(selectedVillage.pkkData.Konveksi || "0")}</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Jasa</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.pkkData.Jasa}</div>
+                                                    </div>
+                                                    <div className="bg-indigo-600 rounded-xl p-3 shadow-sm text-white">
+                                                        <div className="text-xs text-indigo-100 mb-1">Total UMKM</div>
+                                                        <div className="text-xl font-bold">{selectedVillage.pkkData["Jumlah Percontohan Home Industri"]}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                            <div className="space-y-3 pt-2">
-                                <div className="flex items-center justify-between text-sm">
-                                    <span className="font-semibold text-slate-500 flex items-center gap-1.5"><Globe className="w-4 h-4"/> Website Portal</span>
-                                    {selectedVillage.isDigital && selectedVillage.website ? (
-                                        <a href={selectedVillage.website} target="_blank" rel="noreferrer" className="text-indigo-600 font-bold hover:underline flex items-center gap-1">
-                                            Kunjungi <ExternalLink className="w-3 h-3" />
-                                        </a>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Kualitas Lingkungan (Rumah Sehat)</h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3">
+                                                        <div className="text-xs text-emerald-600 mb-1">Rumah Sehat</div>
+                                                        <div className="text-xl font-bold text-emerald-700">{selectedVillage.pkkData["Rumah Sehat"]}</div>
+                                                    </div>
+                                                    <div className="bg-rose-50 border border-rose-100 rounded-xl p-3">
+                                                        <div className="text-xs text-rose-600 mb-1">Kurang Sehat</div>
+                                                        <div className="text-xl font-bold text-rose-700">{selectedVillage.pkkData["Rumah Kurang Sehat"]}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     ) : (
                                         <span className="text-slate-400 font-medium italic">Tidak Tersedia</span>
                                     )}
                                 </div>
-                                <div className="flex items-center justify-between text-sm">
-                                    <span className="font-semibold text-slate-500 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4"/> Provider Integrasi</span>
-                                    <span className="font-bold text-slate-800">{selectedVillage.provider}</span>
+                            ) : (
+                                /* REGULAR DESA CONTENT */
+                                <div className="p-5 space-y-5">
+                                    {/* Status Pills */}
+                                    <div className="flex gap-2">
+                                        <Badge className={`px-2.5 py-1 ${selectedVillage.isDigital ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-yellow-50 text-yellow-700 border-yellow-200'}`} variant="outline">
+                                            {selectedVillage.isDigital ? 'Desa Digital OpenSID' : 'Belum Digital'}
+                                        </Badge>
+                                        <Badge className="bg-slate-50 text-slate-600 border-slate-200 px-2.5 py-1" variant="outline">
+                                            <Users className="w-3 h-3 mr-1 inline"/> {selectedVillage.pop} Jiwa
+                                        </Badge>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                            <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Prevalensi Stunting</div>
+                                            <div className="text-xl font-black flex items-end gap-1">
+                                                <span className={selectedVillage.stunting > 15 ? 'text-red-600' : selectedVillage.stunting > 10 ? 'text-orange-500' : 'text-emerald-600'}>
+                                                    {selectedVillage.stunting}%
+                                                </span>
+                                            </div>
+                                            <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
+                                                <div className={`h-full ${selectedVillage.stunting > 15 ? 'bg-red-500' : selectedVillage.stunting > 10 ? 'bg-orange-500' : 'bg-emerald-500'}`} style={{width: `${(selectedVillage.stunting/25)*100}%`}}></div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                            <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Keluarga Rentan</div>
+                                            <div className="text-xl font-black flex items-end gap-1">
+                                                <span className={selectedVillage.kemiskinan > 30 ? 'text-purple-600' : selectedVillage.kemiskinan > 20 ? 'text-purple-400' : 'text-slate-600'}>
+                                                    {selectedVillage.kemiskinan}%
+                                                </span>
+                                            </div>
+                                            <div className="w-full bg-slate-200 h-1.5 mt-2 rounded-full overflow-hidden">
+                                                <div className={`h-full ${selectedVillage.kemiskinan > 30 ? 'bg-purple-600' : selectedVillage.kemiskinan > 20 ? 'bg-purple-400' : 'bg-slate-400'}`} style={{width: `${(selectedVillage.kemiskinan/40)*100}%`}}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 pt-2">
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="font-semibold text-slate-500 flex items-center gap-1.5"><Globe className="w-4 h-4"/> Website Portal</span>
+                                            {selectedVillage.isDigital && selectedVillage.website ? (
+                                                <a href={selectedVillage.website} target="_blank" rel="noreferrer" className="text-indigo-600 font-bold hover:underline flex items-center gap-1">
+                                                    Kunjungi <ExternalLink className="w-3 h-3" />
+                                                </a>
+                                            ) : (
+                                                <span className="text-slate-400 font-medium italic">Tidak Tersedia</span>
+                                            )}
+                                        </div>
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="font-semibold text-slate-500 flex items-center gap-1.5"><ShieldCheck className="w-4 h-4"/> Provider Integrasi</span>
+                                            <span className="font-bold text-slate-800">{selectedVillage.provider}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex gap-2 pt-2">
+                                        <Link href={`/desa/${selectedVillage.name.toLowerCase().replace(/ /g, "-")}`} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl text-center transition-colors">
+                                            Profil Lengkap
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            )}
+                        </CardContent>
+                    </Card>
                 </div>
             )}
         </div>
