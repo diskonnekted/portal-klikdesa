@@ -118,7 +118,7 @@ const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number
 export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
-    const [zoomLevel, setZoomLevel] = React.useState(14);
+    const [zoomLevel, setZoomLevel] = React.useState(11);
     
     // Add a ref to the GeoJSON layer to update styles without remounting
     const geoJsonRef = React.useRef<any>(null);
@@ -293,7 +293,8 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
         // Update zoom level based on screen size
         const updateZoom = () => {
             const isDesktop = window.innerWidth >= 1024; // lg breakpoint
-            setZoomLevel(isDesktop ? 15 : 14);
+            // Gunakan zoom level 11 untuk desktop dan 10 untuk mobile agar muat se-kabupaten
+            setZoomLevel(isDesktop ? 11 : 10);
         };
 
         // Set initial zoom
