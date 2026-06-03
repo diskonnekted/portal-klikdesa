@@ -10,8 +10,9 @@ import { useOpenDataDesaStunting } from "@/hooks/useOpenDataDesaStunting";
 import { opendataConfig } from "@/lib/opendata-config";
 import * as turf from "@turf/turf";
 
-export default function DesaProfileDashboard({ params }: { params: { nama: string } }) {
-    const rawDesaName = params.nama.replace(/-/g, " ").toLowerCase();
+export default function DesaProfileDashboard({ params }: { params: Promise<{ nama: string }> }) {
+    const { nama } = React.use(params);
+    const rawDesaName = nama.replace(/-/g, " ").toLowerCase();
     
     // We will extract proper names and metrics once geojson and local data are loaded
     const [villageInfo, setVillageInfo] = useState<any>(null);

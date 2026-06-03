@@ -12,8 +12,9 @@ import { useOpenDataDesaStunting } from "@/hooks/useOpenDataDesaStunting";
 import { opendataConfig } from "@/lib/opendata-config";
 import * as turf from "@turf/turf";
 
-export default function KecamatanDashboard({ params }: { params: { nama: string } }) {
-    const kecamatanName = params.nama.replace(/-/g, " ");
+export default function KecamatanDashboard({ params }: { params: Promise<{ nama: string }> }) {
+    const { nama } = React.use(params);
+    const kecamatanName = nama.replace(/-/g, " ");
     
     // Auto-detect Resource ID based on Kecamatan name
     const resourceId = opendataConfig.getStuntingResourceIdByKecamatan(kecamatanName);
