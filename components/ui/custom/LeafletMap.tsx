@@ -47,11 +47,13 @@ interface LeafletMapProps {
     onSensorClick: (sensor: IoTSensor) => void;
     onFeatureClick?: (feature: any) => void;
     digitalStatusMap?: Record<string, boolean>;
-    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb" | "kesejahteraan";
+    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb" | "kesejahteraan" | "stunting-desa";
     kecamatanGeoJsonData?: unknown;
     pkkData?: any[];
     kbData?: any[];
     kesejahteraanData?: any[];
+    desaStuntingData?: any[];
+    bounds?: [[number, number], [number, number]] | null;
 }
 
 // Dynamically import Leaflet
@@ -101,21 +103,25 @@ const Popup = dynamic(
     { ssr: false }
 );
 
-const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number, number]; zoom: number }) => {
+const RecenterHelper = ({ useMap, center, zoom, bounds }: { useMap: any; center: [number, number]; zoom: number; bounds?: [[number, number], [number, number]] | null }) => {
     const map = useMap();
     React.useEffect(() => {
         if (map) {
             try {
-                map.setView(center, zoom);
+                if (bounds) {
+                    map.fitBounds(bounds, { padding: [20, 20] });
+                } else {
+                    map.setView(center, zoom);
+                }
             } catch (error) {
                 console.warn("Leaflet map setView skipped during unmount/remount");
             }
         }
-    }, [center, zoom, map]);
+    }, [center, zoom, bounds, map]);
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData, desaStuntingData, bounds }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(11);
@@ -238,13 +244,46 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
         }
         
         return {
-            color: color,
+            fillColor,
             weight: 2,
-            opacity: 0.9,
-            fillColor: fillColor,
-            fillOpacity: 0.7,
+            opacity: 1,
+            color,
+            fillOpacity: 0.8
         };
-    }, [pkkData, activeMapLayer]);
+    }, [pkkData, kbData, kesejahteraanData, activeMapLayer]);
+
+    const getDesaStyle = React.useCallback((feature: any) => {
+        let fillColor = "#cccccc";
+        let color = "#ffffff";
+
+        if (activeMapLayer === "stunting-desa" && desaStuntingData) {
+            const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "";
+            const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
+            const dataRow = desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName));
+
+            if (dataRow) {
+                // Parse percentage, handling strings like "25%"
+                const pctStr = dataRow["Persentase* (%)"] || "0";
+                const pct = parseFloat(pctStr.toString().replace(/[^0-9.]/g, ''));
+                
+                // Color scale for stunting percentage
+                if (pct > 20) fillColor = "#dc2626"; // red-600 (Sangat Tinggi)
+                else if (pct > 15) fillColor = "#ef4444"; // red-500 (Tinggi)
+                else if (pct > 10) fillColor = "#f97316"; // orange-500 (Sedang)
+                else fillColor = "#10b981"; // emerald-500 (Rendah)
+                
+                color = "#7f1d1d"; // dark red border
+            }
+        }
+
+        return {
+            fillColor,
+            weight: 1.5,
+            opacity: 1,
+            color,
+            fillOpacity: 0.8
+        };
+    }, [activeMapLayer, desaStuntingData]);
 
     // Apply styles dynamically without unmounting the component
     React.useEffect(() => {
@@ -424,7 +463,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                     zoomControl={true}
                     className="leaflet-map-container"
                 >
-                    {useMapHook && <RecenterHelper useMap={useMapHook} center={center} zoom={zoomLevel} />}
+                    {useMapHook && <RecenterHelper useMap={useMapHook} center={center} zoom={zoomLevel} bounds={bounds} />}
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -547,6 +586,46 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                         const norm = normalizeKecamatanName;
                                                         const dataRow = kesejahteraanData ? kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, kesejahteraanData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : activeMapLayer === "stunting-desa" && geoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering GeoJSON (Stunting Desa):", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        key="stunting-desa-layer"
+                                        data={geoJsonData as import("geojson").GeoJsonObject}
+                                        style={getDesaStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
+                                            let tooltipContent = `<b>${villageName}</b>`;
+                                            
+                                            if (desaStuntingData) {
+                                                const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
+                                                const dataRow = desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName));
+                                                if (dataRow) {
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Stunting: ${dataRow["Jumlah Balita Stunting"]} Balita (${dataRow["Persentase* (%)"]})</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
+                                                        const dataRow = desaStuntingData ? desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName)) : null;
+                                                        onFeatureClick({ ...feature, isDesaStuntingLayer: true, desaStuntingData: dataRow });
                                                     }
                                                 });
                                             }
