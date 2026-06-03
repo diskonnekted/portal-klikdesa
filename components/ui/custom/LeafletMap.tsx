@@ -47,10 +47,11 @@ interface LeafletMapProps {
     onSensorClick: (sensor: IoTSensor) => void;
     onFeatureClick?: (feature: any) => void;
     digitalStatusMap?: Record<string, boolean>;
-    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb";
+    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb" | "kesejahteraan";
     kecamatanGeoJsonData?: unknown;
     pkkData?: any[];
     kbData?: any[];
+    kesejahteraanData?: any[];
 }
 
 // Dynamically import Leaflet
@@ -106,7 +107,7 @@ const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
@@ -208,6 +209,23 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                 else fillColor = "#fbcfe8"; // pink-200
                 
                 color = "#be185d"; // border
+            }
+        } else if (activeMapLayer === "kesejahteraan" && kesejahteraanData) {
+            // Find data for this kecamatan
+            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const dataRow = kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
+            
+            if (dataRow) {
+                const totalSangatMiskin = parseInt(dataRow["Status Kesejahteraan 1"] || "0");
+                
+                // Color scale based on Desil 1 (higher = darker orange)
+                if (totalSangatMiskin > 15000) fillColor = "#c2410c"; // orange-700
+                else if (totalSangatMiskin > 10000) fillColor = "#ea580c"; // orange-600
+                else if (totalSangatMiskin > 8000) fillColor = "#f97316"; // orange-500
+                else if (totalSangatMiskin > 5000) fillColor = "#fb923c"; // orange-400
+                else fillColor = "#fdba74"; // orange-300
+                
+                color = "#9a3412"; // border
             }
         }
         
@@ -479,6 +497,47 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                         const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
                                                         const dataRow = kbData ? kbData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, kbData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : activeMapLayer === "kesejahteraan" && kecamatanGeoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering Kecamatan GeoJSON (Kesejahteraan):", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        key="kesejahteraan-layer"
+                                        data={kecamatanGeoJsonData as import("geojson").GeoJsonObject}
+                                        style={getKecamatanStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const kec = feature?.properties?.Kecamatan || "";
+                                            let tooltipContent = `<b>Kecamatan ${kec}</b>`;
+                                            
+                                            if (kesejahteraanData) {
+                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const dataRow = kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec));
+                                                if (dataRow) {
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Desil 1: ${dataRow["Status Kesejahteraan 1"]}</span>`;
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Desil 2: ${dataRow["Status Kesejahteraan 2"]}</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const dataRow = kesejahteraanData ? kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
+                                                        onFeatureClick({ ...feature, isKecamatanLayer: true, kesejahteraanData: dataRow });
                                                     }
                                                 });
                                             }

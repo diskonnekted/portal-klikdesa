@@ -12,7 +12,9 @@ import { Label } from "@/components/ui/label";
 import { useOpenDataPKK } from "@/hooks/useOpenDataPKK";
 import { useOpenDataKB } from "@/hooks/useOpenDataKB";
 
-export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb";
+import { useOpenDataKesejahteraan } from "@/hooks/useOpenDataKesejahteraan";
+
+export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb" | "kesejahteraan";
 
 export default function KabupatenDashboard() {
     const [geoJsonData, setGeoJsonData] = useState<any>(null);
@@ -27,6 +29,7 @@ export default function KabupatenDashboard() {
     // Fetch OpenData
     const { pkkData, loading: pkkLoading } = useOpenDataPKK();
     const { kbData, kbLoading } = useOpenDataKB();
+    const { kesejahteraanData, kesejahteraanLoading } = useOpenDataKesejahteraan();
 
     React.useEffect(() => {
         fetch('/peta_desa.geojson')
@@ -59,7 +62,8 @@ export default function KabupatenDashboard() {
                 name: feature?.properties?.Kecamatan || feature?.properties?.Name || "Kecamatan Tidak Diketahui",
                 kec: "",
                 pkkData: feature.pkkData || null,
-                kbData: feature.kbData || null
+                kbData: feature.kbData || null,
+                kesejahteraanData: feature.kesejahteraanData || null
             });
             return;
         }
@@ -112,6 +116,7 @@ export default function KabupatenDashboard() {
                     kecamatanGeoJsonData={kecamatanGeoJsonData}
                     pkkData={pkkData}
                     kbData={kbData}
+                    kesejahteraanData={kesejahteraanData}
                 />
             </div>
 
@@ -183,6 +188,17 @@ export default function KabupatenDashboard() {
                                 <Checkbox id="layer-kb" checked={activeLayer === "kb"} onCheckedChange={(c) => c && setActiveLayer("kb")} className="w-5 h-5 rounded-md border-pink-500 text-pink-600 focus-visible:ring-pink-500" />
                             </div>
 
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-kesejahteraan" className="flex flex-col gap-1 cursor-pointer">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (Kesejahteraan)</span>
+                                        {kesejahteraanLoading && <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" title="Memuat data API OpenData..."></span>}
+                                    </div>
+                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Status Kesejahteraan (Desil 1-4) (OpenData)</span>
+                                </Label>
+                                <Checkbox id="layer-kesejahteraan" checked={activeLayer === "kesejahteraan"} onCheckedChange={(c) => c && setActiveLayer("kesejahteraan")} className="w-5 h-5 rounded-md border-orange-500 text-orange-600 focus-visible:ring-orange-500" />
+                            </div>
+
                             <div className="h-px bg-slate-200 my-2"></div>
 
                             {/* Legend Display based on Active Layer */}
@@ -220,6 +236,13 @@ export default function KabupatenDashboard() {
                                         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-600 opacity-70"></span> Akseptor Aktif Tinggi (&gt;5000)</div>
                                         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-400 opacity-70"></span> Menengah (3000-5000)</div>
                                         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-200 opacity-70"></span> Rendah (&lt;3000)</div>
+                                    </div>
+                                )}
+                                {activeLayer === "kesejahteraan" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-orange-600 opacity-70"></span> Desil 1 (Sangat Miskin) &gt;10000</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-orange-400 opacity-70"></span> Menengah (5000-10000)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-orange-200 opacity-70"></span> Rendah (&lt;5000)</div>
                                     </div>
                                 )}
                             </div>
@@ -329,6 +352,34 @@ export default function KabupatenDashboard() {
                                                     <div className="bg-pink-600 rounded-xl p-3 shadow-sm text-white">
                                                         <div className="text-xs text-pink-100 mb-1">Akseptor Aktif</div>
                                                         <div className="text-xl font-bold">{selectedVillage.kbData.Aktif}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : selectedVillage.kesejahteraanData ? (
+                                        <div className="space-y-6">
+                                            <div className="bg-orange-50 rounded-xl p-4 mb-2 border border-orange-100 flex items-start gap-3">
+                                                <Info className="h-5 w-5 text-orange-600 shrink-0 mt-0.5" />
+                                                <p className="text-sm text-orange-900 font-medium">Data bersumber dari API OpenData Banjarnegara (Kesejahteraan Tahun {selectedVillage.kesejahteraanData.Tahun || "-"}).</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Status Kesejahteraan Individu</h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="bg-orange-600 rounded-xl p-3 shadow-sm text-white">
+                                                        <div className="text-xs text-orange-100 mb-1">Desil 1 (Sangat Miskin)</div>
+                                                        <div className="text-xl font-bold">{selectedVillage.kesejahteraanData["Status Kesejahteraan 1"]}</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 2 (Miskin)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.kesejahteraanData["Status Kesejahteraan 2"]}</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 3 (Rentan Miskin)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.kesejahteraanData["Status Kesejahteraan 3"]}</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 4 (Hampir Miskin)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.kesejahteraanData["Status Kesejahteraan 4"]}</div>
                                                     </div>
                                                 </div>
                                             </div>
