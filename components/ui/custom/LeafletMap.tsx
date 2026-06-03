@@ -396,6 +396,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                 const AnyGeoJSON = GeoJSON as any;
                                 return (
                                     <AnyGeoJSON
+                                        key="pkk-layer"
                                         data={kecamatanGeoJsonData as import("geojson").GeoJsonObject}
                                         style={getKecamatanStyle}
                                         onEachFeature={(feature: any, layer: any) => {
@@ -438,6 +439,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                 const AnyGeoJSON = GeoJSON as any;
                                 return (
                                     <AnyGeoJSON
+                                        key="desa-layer"
                                         ref={geoJsonRef}
                                         data={geoJsonData as import("geojson").GeoJsonObject}
                                         style={getFeatureStyle}
