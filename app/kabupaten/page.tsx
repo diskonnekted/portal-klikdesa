@@ -208,6 +208,20 @@ export default function KabupatenDashboard() {
                                         <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-slate-300 opacity-70"></span> Terkendali (&lt;20%)</div>
                                     </div>
                                 )}
+                                {activeLayer === "pkk" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-indigo-600 opacity-70"></span> Home Industri Tinggi (&gt;2000)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-indigo-400 opacity-70"></span> Menengah (1000-2000)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-indigo-200 opacity-70"></span> Rendah (&lt;1000)</div>
+                                    </div>
+                                )}
+                                {activeLayer === "kb" && (
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-600 opacity-70"></span> Akseptor Aktif Tinggi (&gt;5000)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-400 opacity-70"></span> Menengah (3000-5000)</div>
+                                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-700"><span className="w-3 h-3 rounded bg-pink-200 opacity-70"></span> Rendah (&lt;3000)</div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}
