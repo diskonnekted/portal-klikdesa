@@ -298,7 +298,6 @@ export default function KabupatenDashboard() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
                                     ) : selectedVillage.kbData ? (
                                         <div className="space-y-6">
