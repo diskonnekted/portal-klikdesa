@@ -48,11 +48,7 @@ export default function KabupatenDashboard() {
             .catch(err => console.error("Gagal memuat peta_kecamatan.geojson", err));
     }, []);
 
-    const mapMarkers: any[] = [
-        { id: "ST-01", name: "Zona Stunting Tinggi", type: "seismic", lat: -7.3820, lng: 109.6500, status: "critical", value: 24, unit: "%", lastUpdate: "Baru saja", location: "Kecamatan Bawang", battery: 100, description: "Area dengan prevalensi stunting tinggi" },
-        { id: "KM-01", name: "Konsentrasi RTLH", type: "power", lat: -7.4100, lng: 109.6800, status: "warning", value: 450, unit: "KK", lastUpdate: "Baru saja", location: "Kecamatan Banjarnegara", battery: 100, description: "Titik konsentrasi keluarga rentan" },
-        { id: "DG-01", name: "Desa Digital Terbaik", type: "energy", lat: -7.2100, lng: 109.8300, status: "active", value: 100, unit: "Skor", lastUpdate: "Baru saja", location: "Desa Batur", battery: 100, description: "Desa dengan integrasi SID penuh" },
-    ];
+    const mapMarkers: any[] = [];
 
     const handleFeatureClick = (feature: any) => {
         // Jika feature ini berasal dari layer PKK (peta kecamatan)
