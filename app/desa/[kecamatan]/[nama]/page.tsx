@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LeafletMap } from "@/components/ui/custom/LeafletMap";
 import { useOpenDataDesaStunting } from "@/hooks/useOpenDataDesaStunting";
+import { useOpenDataKependudukan } from "@/hooks/useOpenDataKependudukan";
 import { opendataConfig } from "@/lib/opendata-config";
 import * as turf from "@turf/turf";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
@@ -23,6 +24,7 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
     
     // Fetch OpenData
     const { desaStuntingData, desaStuntingHistorical, desaStuntingLoading } = useOpenDataDesaStunting(resourceId);
+    const { demographyData, demographyLoading, noOpenSID } = useOpenDataKependudukan(villageInfo?.kec || null, villageInfo?.name || null);
 
     useEffect(() => {
         const loadData = async () => {
@@ -309,6 +311,89 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
                                         <p className="text-slate-400 text-sm max-w-sm mx-auto">Sistem belum menemukan data stunting spesifik desa ini dari portal OpenData.</p>
                                     </div>
                                 )}
+                            </CardContent>
+                        </Card>
+
+                        {/* OpenSID Demography Section */}
+                        <Card className="border-0 shadow-md rounded-2xl overflow-hidden mt-6">
+                            <div className="bg-slate-800 px-5 py-4 flex justify-between items-center">
+                                <h2 className="text-white font-bold flex items-center gap-2"><Users className="w-4 h-4 text-blue-400"/> Demografi Penduduk (OpenSID)</h2>
+                                {demographyLoading && <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse text-xs text-white" title="Loading..."></span>}
+                            </div>
+                            <CardContent className="p-0">
+                                {demographyData ? (
+                                    <div className="p-6">
+                                        <div className="bg-blue-50 rounded-xl p-4 mb-6 border border-blue-100 flex justify-between items-center gap-3">
+                                            <div className="flex items-start gap-3">
+                                                <Info className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                                                <div>
+                                                    <p className="text-sm text-blue-900 font-medium">Data Kependudukan Tersinkronisasi secara Real-Time dengan <strong>OpenSID Desa</strong>.</p>
+                                                    <p className="text-xs text-blue-700 mt-1">Total Penduduk Tercatat: <strong>{demographyData.total.total_penduduk} Jiwa</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2"><TrendingUp className="w-4 h-4 text-emerald-500"/> Komposisi Umur</h3>
+                                                <div className="h-[250px] w-full">
+                                                    <ResponsiveContainer width="100%" height="100%">
+                                                        <BarChart data={demographyData.umur} margin={{ top: 5, right: 0, bottom: 5, left: -20 }} layout="vertical">
+                                                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" horizontal={true} vertical={false} />
+                                                            <XAxis type="number" tick={{fontSize: 11, fill: '#64748b'}} tickLine={false} axisLine={false} />
+                                                            <YAxis dataKey="nama" type="category" width={80} tick={{fontSize: 10, fill: '#64748b'}} tickLine={false} axisLine={false} />
+                                                            <Tooltip cursor={{fill: '#f8fafc'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                                            <Bar dataKey="total" fill="#10b981" radius={[0, 4, 4, 0]} />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2"><BookOpen className="w-4 h-4 text-purple-500"/> Tingkat Pendidikan</h3>
+                                                <div className="h-[250px] w-full">
+                                                    <ResponsiveContainer width="100%" height="100%">
+                                                        <BarChart data={demographyData.pendidikan.slice(0, 6)} margin={{ top: 5, right: 0, bottom: 5, left: -20 }} layout="vertical">
+                                                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" horizontal={true} vertical={false} />
+                                                            <XAxis type="number" tick={{fontSize: 11, fill: '#64748b'}} tickLine={false} axisLine={false} />
+                                                            <YAxis dataKey="nama" type="category" width={90} tick={{fontSize: 9, fill: '#64748b'}} tickLine={false} axisLine={false} />
+                                                            <Tooltip cursor={{fill: '#f8fafc'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                                            <Bar dataKey="total" fill="#a855f7" radius={[0, 4, 4, 0]} />
+                                                        </BarChart>
+                                                    </ResponsiveContainer>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-8">
+                                            <h3 className="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2"><Users className="w-4 h-4 text-orange-500"/> Mata Pencaharian (Top 10)</h3>
+                                            <div className="h-[250px] w-full">
+                                                <ResponsiveContainer width="100%" height="100%">
+                                                    <BarChart data={demographyData.pekerjaan.slice(0, 10)} margin={{ top: 5, right: 0, bottom: 30, left: 0 }}>
+                                                        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                                                        <XAxis dataKey="nama" tick={{fontSize: 9, fill: '#64748b'}} tickLine={false} axisLine={false} angle={-45} textAnchor="end" height={60} />
+                                                        <YAxis tick={{fontSize: 11, fill: '#64748b'}} tickLine={false} axisLine={false} />
+                                                        <Tooltip cursor={{fill: '#f8fafc'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                                        <Bar dataKey="total" fill="#f97316" radius={[4, 4, 0, 0]} />
+                                                    </BarChart>
+                                                </ResponsiveContainer>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                ) : noOpenSID ? (
+                                    <div className="p-12 text-center space-y-3">
+                                        <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-2 text-slate-300">
+                                            <ShieldCheck className="w-8 h-8"/>
+                                        </div>
+                                        <p className="text-slate-500 font-medium text-lg">Belum Terhubung dengan OpenSID</p>
+                                        <p className="text-slate-400 text-sm max-w-sm mx-auto">Pemerintah desa ini belum menggunakan sistem informasi desa digital (OpenSID) yang terintegrasi dengan portal pusat Banjarnegara.</p>
+                                    </div>
+                                ) : demographyLoading ? (
+                                    <div className="p-12 text-center text-slate-400 font-medium animate-pulse">
+                                        Menyinkronkan data kependudukan...
+                                    </div>
+                                ) : null}
                             </CardContent>
                         </Card>
 
