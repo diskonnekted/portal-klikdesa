@@ -10,8 +10,9 @@ import { LeafletMap } from "@/components/ui/custom/LeafletMap";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useOpenDataPKK } from "@/hooks/useOpenDataPKK";
+import { useOpenDataKB } from "@/hooks/useOpenDataKB";
 
-export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk";
+export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb";
 
 export default function KabupatenDashboard() {
     const [geoJsonData, setGeoJsonData] = useState<any>(null);
@@ -25,6 +26,7 @@ export default function KabupatenDashboard() {
     
     // Fetch OpenData
     const { pkkData, loading: pkkLoading } = useOpenDataPKK();
+    const { kbData, kbLoading } = useOpenDataKB();
 
     React.useEffect(() => {
         fetch('/peta_desa.geojson')
@@ -56,7 +58,8 @@ export default function KabupatenDashboard() {
                 isKecamatan: true,
                 name: feature?.properties?.Kecamatan || feature?.properties?.Name || "Kecamatan Tidak Diketahui",
                 kec: "",
-                pkkData: feature.pkkData || null
+                pkkData: feature.pkkData || null,
+                kbData: feature.kbData || null
             });
             return;
         }
@@ -108,6 +111,7 @@ export default function KabupatenDashboard() {
                     activeMapLayer={activeLayer}
                     kecamatanGeoJsonData={kecamatanGeoJsonData}
                     pkkData={pkkData}
+                    kbData={kbData}
                 />
             </div>
 
@@ -166,6 +170,17 @@ export default function KabupatenDashboard() {
                                     <span className="text-xs text-slate-500 font-medium line-clamp-2">Percontohan Home Industri & Rumah Sehat (OpenData)</span>
                                 </Label>
                                 <Checkbox id="layer-pkk" checked={activeLayer === "pkk"} onCheckedChange={(c) => c && setActiveLayer("pkk")} className="w-5 h-5 rounded-md border-indigo-500 text-indigo-600 focus-visible:ring-indigo-500" />
+                            </div>
+
+                            <div className="flex items-center justify-between gap-4">
+                                <Label htmlFor="layer-kb" className="flex flex-col gap-1 cursor-pointer">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-bold text-slate-800 text-sm">Batas Kecamatan (KB)</span>
+                                        {kbLoading && <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" title="Memuat data API OpenData..."></span>}
+                                    </div>
+                                    <span className="text-xs text-slate-500 font-medium line-clamp-2">Akseptor Aktif & Akseptor Baru (OpenData)</span>
+                                </Label>
+                                <Checkbox id="layer-kb" checked={activeLayer === "kb"} onCheckedChange={(c) => c && setActiveLayer("kb")} className="w-5 h-5 rounded-md border-pink-500 text-pink-600 focus-visible:ring-pink-500" />
                             </div>
 
                             <div className="h-px bg-slate-200 my-2"></div>
@@ -239,10 +254,12 @@ export default function KabupatenDashboard() {
                             {selectedVillage.isKecamatan ? (
                                 /* KECAMATAN (PKK) CONTENT */
                                 <div className="p-5">
-                                    <div className="bg-indigo-50 rounded-xl p-4 mb-5 border border-indigo-100 flex items-start gap-3">
-                                        <Info className="h-5 w-5 text-indigo-600 shrink-0 mt-0.5" />
-                                        <p className="text-sm text-indigo-900 font-medium">Data bersumber dari API OpenData Banjarnegara (TP-PKK Tahun {selectedVillage.pkkData?.Tahun || "-"}).</p>
-                                    </div>
+                                    {selectedVillage.pkkData && (
+                                        <div className="bg-indigo-50 rounded-xl p-4 mb-5 border border-indigo-100 flex items-start gap-3">
+                                            <Info className="h-5 w-5 text-indigo-600 shrink-0 mt-0.5" />
+                                            <p className="text-sm text-indigo-900 font-medium">Data bersumber dari API OpenData Banjarnegara (TP-PKK Tahun {selectedVillage.pkkData.Tahun || "-"}).</p>
+                                        </div>
+                                    )}
 
                                     {selectedVillage.pkkData ? (
                                         <div className="space-y-6">
@@ -281,9 +298,30 @@ export default function KabupatenDashboard() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            </div>
+                                        </div>
+                                    ) : selectedVillage.kbData ? (
+                                        <div className="space-y-6">
+                                            <div className="bg-pink-50 rounded-xl p-4 mb-2 border border-pink-100 flex items-start gap-3">
+                                                <Info className="h-5 w-5 text-pink-600 shrink-0 mt-0.5" />
+                                                <p className="text-sm text-pink-900 font-medium">Data bersumber dari API OpenData Banjarnegara (KB Tahun {selectedVillage.kbData.Tahun || "-"}).</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Akseptor Keluarga Berencana</h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Akseptor Baru</div>
+                                                        <div className="text-xl font-bold text-slate-800">{selectedVillage.kbData.Baru}</div>
+                                                    </div>
+                                                    <div className="bg-pink-600 rounded-xl p-3 shadow-sm text-white">
+                                                        <div className="text-xs text-pink-100 mb-1">Akseptor Aktif</div>
+                                                        <div className="text-xl font-bold">{selectedVillage.kbData.Aktif}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     ) : (
-                                        <span className="text-slate-400 font-medium italic">Tidak Tersedia</span>
+                                        <span className="text-slate-400 font-medium italic">Data Tidak Tersedia</span>
                                     )}
                                 </div>
                             ) : (

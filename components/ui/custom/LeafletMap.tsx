@@ -47,9 +47,10 @@ interface LeafletMapProps {
     onSensorClick: (sensor: IoTSensor) => void;
     onFeatureClick?: (feature: any) => void;
     digitalStatusMap?: Record<string, boolean>;
-    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk";
+    activeMapLayer?: "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb";
     kecamatanGeoJsonData?: unknown;
     pkkData?: any[];
+    kbData?: any[];
 }
 
 // Dynamically import Leaflet
@@ -105,7 +106,7 @@ const RecenterHelper = ({ useMap, center, zoom }: { useMap: any; center: [number
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(14);
@@ -181,7 +182,6 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             
             if (dataRow) {
                 const totalHomeInd = parseInt(dataRow["Jumlah Percontohan Home Industri"] || "0");
-                const totalRumahSehat = parseInt(dataRow["Jumlah Percontohan Rumah Sehat"] || "0");
                 
                 // Color scale based on Home Industri (higher = darker blue/indigo)
                 if (totalHomeInd > 2000) fillColor = "#4f46e5"; // indigo-600
@@ -191,6 +191,23 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                 else fillColor = "#c7d2fe"; // indigo-200
                 
                 color = "#4338ca"; // border
+            }
+        } else if (activeMapLayer === "kb" && kbData) {
+            // Find data for this kecamatan
+            const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+            const dataRow = kbData.find((d: any) => norm(d.Kecamatan) === norm(kecName));
+            
+            if (dataRow) {
+                const totalAktif = parseInt(dataRow.Aktif || "0");
+                
+                // Color scale based on KB Aktif (higher = darker pink)
+                if (totalAktif > 8000) fillColor = "#db2777"; // pink-600
+                else if (totalAktif > 5000) fillColor = "#ec4899"; // pink-500
+                else if (totalAktif > 3000) fillColor = "#f472b6"; // pink-400
+                else if (totalAktif > 1000) fillColor = "#f9a8d4"; // pink-300
+                else fillColor = "#fbcfe8"; // pink-200
+                
+                color = "#be185d"; // border
             }
         }
         
@@ -421,6 +438,47 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                         const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
                                                         const dataRow = pkkData ? pkkData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, pkkData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : activeMapLayer === "kb" && kecamatanGeoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering Kecamatan GeoJSON (KB):", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        key="kb-layer"
+                                        data={kecamatanGeoJsonData as import("geojson").GeoJsonObject}
+                                        style={getKecamatanStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const kec = feature?.properties?.Kecamatan || "";
+                                            let tooltipContent = `<b>Kecamatan ${kec}</b>`;
+                                            
+                                            if (kbData) {
+                                                const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                const dataRow = kbData.find((d: any) => norm(d.Kecamatan) === norm(kec));
+                                                if (dataRow) {
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Akseptor Baru: ${dataRow.Baru}</span>`;
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Akseptor Aktif: ${dataRow.Aktif}</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        const norm = (s: string) => s.replace(/kecamatan/i, '').replace(/kec\./i, '').trim().toUpperCase();
+                                                        const dataRow = kbData ? kbData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
+                                                        onFeatureClick({ ...feature, isKecamatanLayer: true, kbData: dataRow });
                                                     }
                                                 });
                                             }
