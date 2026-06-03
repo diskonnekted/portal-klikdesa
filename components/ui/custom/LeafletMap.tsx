@@ -258,8 +258,11 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
 
         if (activeMapLayer === "stunting-desa" && desaStuntingData) {
             const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "";
-            const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
-            const dataRow = desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName));
+            const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
+            const dataRow = desaStuntingData.find((d: any) => {
+                const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+                return norm(rawName) === norm(villageName);
+            });
 
             if (dataRow) {
                 // Parse percentage, handling strings like "25%"
@@ -611,8 +614,11 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             let tooltipContent = `<b>${villageName}</b>`;
                                             
                                             if (desaStuntingData) {
-                                                const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
-                                                const dataRow = desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName));
+                                                const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
+                                                const dataRow = desaStuntingData.find((d: any) => {
+                                                    const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+                                                    return norm(rawName) === norm(villageName);
+                                                });
                                                 if (dataRow) {
                                                     tooltipContent += `<br/><span style="font-size:10px;">Stunting: ${dataRow["Jumlah Balita Stunting"]} Balita (${dataRow["Persentase* (%)"]})</span>`;
                                                 }
@@ -623,8 +629,11 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                             if (onFeatureClick) {
                                                 layer.on({
                                                     click: () => {
-                                                        const norm = (s: string) => s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase();
-                                                        const dataRow = desaStuntingData ? desaStuntingData.find((d: any) => norm(d["Desa/Kelurahan"]) === norm(villageName)) : null;
+                                                        const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
+                                                        const dataRow = desaStuntingData ? desaStuntingData.find((d: any) => {
+                                                            const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+                                                            return norm(rawName) === norm(villageName);
+                                                        }) : null;
                                                         onFeatureClick({ ...feature, isDesaStuntingLayer: true, desaStuntingData: dataRow });
                                                     }
                                                 });
