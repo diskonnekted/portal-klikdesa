@@ -28,7 +28,7 @@ export default function DesaProfileDashboard({ params }: { params: Promise<{ kec
         const loadData = async () => {
             try {
                 const [geoRes, realRes] = await Promise.all([
-                    fetch('/peta_desa.geojson?v=2'),
+                    fetch('/peta_desa_v3.geojson'),
                     fetch('/desa_data.json')
                 ]);
                 
