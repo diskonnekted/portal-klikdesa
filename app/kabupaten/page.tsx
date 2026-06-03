@@ -141,7 +141,8 @@ export default function KabupatenDashboard() {
                         <h2 className="text-sm font-bold text-white flex items-center gap-2"><Layers className="w-4 h-4 text-indigo-400" /> Kontrol Lapisan Data</h2>
                     </div>
                     {showInfoPanel && (
-                            <div className="flex flex-col gap-3 p-4">
+                        <div className="p-2 space-y-2">
+                            <div className="flex flex-col gap-2 p-2">
                                 {[
                                     { id: "digital", title: "Desa Digital (SID)", desc: "Ketersediaan sistem database", icon: <Globe className="w-5 h-5" />, activeClass: "bg-blue-50 border-blue-200", iconColor: "text-blue-500", radioColor: "border-blue-500 bg-blue-500" },
                                     { id: "stunting", title: "Peta Stunting", desc: "Pemetaan persentase balita", icon: <Activity className="w-5 h-5" />, activeClass: "bg-red-50 border-red-200", iconColor: "text-red-500", radioColor: "border-red-500 bg-red-500" },
@@ -153,7 +154,7 @@ export default function KabupatenDashboard() {
                                     <div 
                                         key={layer.id}
                                         onClick={() => setActiveLayer(layer.id as MapLayer)}
-                                        className={`group flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 cursor-pointer ${activeLayer === layer.id ? layer.activeClass + ' shadow-sm ring-1 ring-black/5 scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}
+                                        className={`group flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 cursor-pointer ${activeLayer === layer.id ? layer.activeClass + ' shadow-sm ring-1 ring-black/5 scale-[1.02]' : 'bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm'}`}
                                     >
                                         <div className={`p-2 rounded-lg transition-colors ${activeLayer === layer.id ? 'bg-white shadow-sm' : 'bg-slate-100 group-hover:bg-white'} ${layer.iconColor}`}>
                                             {layer.icon}
@@ -172,10 +173,10 @@ export default function KabupatenDashboard() {
                                 ))}
                             </div>
 
-                            <div className="h-px bg-slate-200 my-2"></div>
+                            <div className="h-px bg-slate-200 mx-4"></div>
 
                             {/* Legend Display based on Active Layer */}
-                            <div>
+                            <div className="px-4 pb-4 pt-2">
                                 <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Legenda Peta</h3>
                                 {activeLayer === "digital" && (
                                     <div className="space-y-1.5">
