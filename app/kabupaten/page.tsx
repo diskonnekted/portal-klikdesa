@@ -42,7 +42,7 @@ export default function KabupatenDashboard() {
             .then(data => setRealData(data))
             .catch(err => console.error("Gagal memuat desa_data.json", err));
             
-        fetch('/peta_kecamatan.geojson')
+        fetch('/peta_kecamatan.geojson?v=3')
             .then(res => res.json())
             .then(data => setKecamatanGeoJsonData(data))
             .catch(err => console.error("Gagal memuat peta_kecamatan.geojson", err));
