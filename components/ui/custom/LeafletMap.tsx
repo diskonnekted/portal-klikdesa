@@ -125,6 +125,7 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(11);
+    const [basemap, setBasemap] = React.useState<"osm" | "satellite" | "dark">("osm");
     
     // Add a ref to the GeoJSON layer to update styles without remounting
     const geoJsonRef = React.useRef<any>(null);
@@ -468,9 +469,39 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                 >
                     {useMapHook && <RecenterHelper useMap={useMapHook} center={center} zoom={zoomLevel} bounds={bounds} />}
                     <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution={
+                            basemap === "osm" ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' :
+                            basemap === "satellite" ? 'Tiles &copy; Esri' :
+                            '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+                        }
+                        url={
+                            basemap === "osm" ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" :
+                            basemap === "satellite" ? "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" :
+                            "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                        }
                     />
+
+                    {/* Custom Basemap Switcher */}
+                    <div className="absolute bottom-4 left-4 z-[400] bg-white/90 backdrop-blur p-1.5 rounded-xl shadow-md border border-slate-200 flex flex-col gap-1">
+                        <button 
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBasemap("osm"); }}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${basemap === "osm" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"}`}
+                        >
+                            Standar
+                        </button>
+                        <button 
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBasemap("satellite"); }}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${basemap === "satellite" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"}`}
+                        >
+                            Satelit
+                        </button>
+                        <button 
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBasemap("dark"); }}
+                            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${basemap === "dark" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"}`}
+                        >
+                            Gelap
+                        </button>
+                    </div>
 
                     {/* Boundary layers conditionally rendered based on active map layer */}
                     {activeMapLayer === "pkk" && kecamatanGeoJsonData ? (
