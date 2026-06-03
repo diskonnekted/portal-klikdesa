@@ -354,24 +354,30 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                             fallback={null}
                             onError={(error) => console.error("Error rendering GeoJSON:", error)}
                         >
-                            <GeoJSON
-                                ref={geoJsonRef}
-                                data={geoJsonData as import("geojson").GeoJsonObject}
-                                style={getFeatureStyle}
-                                onEachFeature={(feature, layer) => {
-                                    const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
-                                    const kec = feature?.properties?.Kecamatan || "";
-                                    layer.bindTooltip(`<b>${villageName}</b><br/><span style="font-size:10px;color:gray;">${kec}</span>`);
-                                    
-                                    if (onFeatureClick) {
-                                        layer.on({
-                                            click: () => {
-                                                onFeatureClick(feature);
+                            {/* Use a casted component to bypass TypeScript error about 'ref' not existing on GeoJSONProps */}
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        ref={geoJsonRef}
+                                        data={geoJsonData as import("geojson").GeoJsonObject}
+                                        style={getFeatureStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
+                                            const kec = feature?.properties?.Kecamatan || "";
+                                            layer.bindTooltip(`<b>${villageName}</b><br/><span style="font-size:10px;color:gray;">${kec}</span>`);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        onFeatureClick(feature);
+                                                    }
+                                                });
                                             }
-                                        });
-                                    }
-                                }}
-                            />
+                                        }}
+                                    />
+                                );
+                            })()}
                         </ErrorBoundary>
                     ) : null}
 
