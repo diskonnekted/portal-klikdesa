@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { fetchWeatherApi } from "openmeteo";
 
 // Sijenggung coordinates
-const LATITUDE = -7.6654545;
-const LONGITUDE = 110.3073412;
+const LATITUDE = -7.2929;
+const LONGITUDE = 109.668;
 
 export interface WeatherAnimationData {
     weatherCode: number;

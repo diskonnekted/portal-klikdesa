@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import NewsSidebar from "@/components/berita/NewsSidebar";
+import { sanitizeHtml } from "@/lib/utils";
 
 type Post = {
     id: string | number;
@@ -473,7 +474,7 @@ function NewsDetailContent() {
                             <div className="prose prose-gray max-w-none mt-6">
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: post.content,
+                                        __html: sanitizeHtml(post.content),
                                     }}
                                     className="article-content"
                                 />

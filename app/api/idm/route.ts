@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     const response = await fetchIDMData(year);
 
     return NextResponse.json(response.success ? response.data : response, {
+        status: response.success ? 200 : (response.status || 500),
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET",

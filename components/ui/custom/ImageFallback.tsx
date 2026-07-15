@@ -27,7 +27,11 @@ export default function ImageFallback({
             if (
                 host !== "sijenggung-banjarnegara.desa.id" &&
                 host !== "dispermadesppkb.banjarnegarakab.go.id" &&
-                host !== "localhost"
+                host !== "localhost" &&
+                !host.endsWith(".webdeva.io") &&
+                !host.endsWith(".sistemdata.id") &&
+                !host.endsWith(".layanandesa.cloud") &&
+                !host.endsWith(".desa.id")
             ) {
                 return null;
             }

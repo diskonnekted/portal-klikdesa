@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
         });
         
         if (!response.ok) {
-            throw new Error(`OpenData API responded with status: ${response.status}`);
+            console.warn(`OpenData API responded with status ${response.status} for kecamatan ${kecamatan}. Returning empty array fallback.`);
+            return NextResponse.json([]);
         }
         
         const data = await response.json();
@@ -24,6 +25,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json(data);
     } catch (error: any) {
         console.error("Error fetching OpenData Desa List:", error);
-        return NextResponse.json({ error: error.message || "Failed to fetch data" }, { status: 500 });
+        // Return empty array on failure so client hooks can handle it gracefully without console errors
+        return NextResponse.json([]);
     }
 }

@@ -2,6 +2,35 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { openSidData } from "@/lib/regionsData";
 
+interface Article {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    featuredImage: string | null;
+    author: {
+        name: string;
+        avatar: string;
+    };
+    category: string;
+    categories: Array<{ id: number; name: string; slug: string }>;
+    tags: Array<{ id: number; name: string; slug: string }>;
+    publishedAt: string;
+    updatedAt: string;
+    link: string;
+    readTime: number;
+    isBreaking: boolean;
+    isFeatured: boolean;
+    isPinned: boolean;
+    viewCount: number;
+    likeCount: number;
+    readingTime?: number;
+    commentCount?: number;
+    shareCount?: number;
+    isBookmarked?: boolean;
+}
+
 // Decode HTML entities like &nbsp;, &amp;, &hellip;, etc.
 function decodeHtmlEntities(text: string): string {
     const entityMap: { [key: string]: string } = {
@@ -82,98 +111,144 @@ function normalizeImageUrl(gambar: string, baseUrl: string): string {
     return `${baseUrl}/desa/upload/artikel/sedang_${urlStr}`;
 }
 
-async function fetchWordPressFallback(limit: number): Promise<any[]> {
-    try {
-        const wpApiUrl = `https://dispermadesppkb.banjarnegarakab.go.id/wp-json/wp/v2/posts?per_page=${limit}&_embed`;
-        const res = await fetch(wpApiUrl, {
-            method: "GET",
-            headers: { Accept: "application/json" },
-            next: { revalidate: 3600, tags: ["dispermades-berita"] },
-            signal: AbortSignal.timeout(10000),
-        });
-
-        if (!res.ok) return [];
-        const posts = await res.json();
-        if (!Array.isArray(posts)) return [];
-
-        return posts.map((item: any) => {
-            const rawTitle = item.title?.rendered || "";
-            const title = decodeHtmlEntities(rawTitle).trim();
-
-            const rawExcerpt = item.excerpt?.rendered || item.content?.rendered || "";
-            const excerptClean = stripHtml(rawExcerpt);
-            const excerpt = excerptClean ? `${excerptClean.substring(0, 200)}...` : "";
-
-            const publishedAt = item.date ? new Date(item.date).toISOString() : new Date().toISOString();
-
-            let featuredImage = null;
-            if (item._embedded?.["wp:featuredmedia"]?.[0]?.source_url) {
-                featuredImage = item._embedded["wp:featuredmedia"][0].source_url;
-            }
-
-            return {
-                id: item.id ? String(item.id) : item.slug,
-                title,
-                slug: item.slug,
-                excerpt,
-                content: item.content?.rendered || "",
-                featuredImage,
-                readingTime: Math.max(1, Math.ceil((excerpt.split(/\s+/).filter(Boolean).length || 1) / 220)),
-                author: {
-                    name: "Admin Dispermades",
-                    avatar: "/images/default-avatar.png",
-                },
-                category: "Berita Dispermades",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Berita Dispermades",
-                        slug: "berita-dispermades",
-                    },
-                ],
-                tags: [],
-                publishedAt,
-                updatedAt: publishedAt,
-                link: item.link || `https://dispermadesppkb.banjarnegarakab.go.id/${item.slug}/`,
-                readTime: Math.max(1, Math.ceil((excerpt.split(/\s+/).filter(Boolean).length || 1) / 220)),
-                isBreaking: false,
-                isFeatured: false,
-                isPinned: false,
-                viewCount: 0,
-                likeCount: 0,
-                commentCount: 0,
-                shareCount: 0,
-                isBookmarked: false,
-            };
-        });
-    } catch {
-        return [];
-    }
-}
-
 export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
         const limitParam = searchParams.get("limit");
         const limit = Math.max(1, Math.min(100, limitParam ? Number(limitParam) : 10));
 
-        // 1. Gather all online desas
-        const onlineDesas = Object.values(openSidData)
-            .flat()
-            .filter((desa) => desa.status === "Online" && desa.web && desa.web.trim() !== "")
-            .map((desa) => ({
-                name: desa.name.replace(/^Desa\s+/, ""),
-                web: desa.web.replace(/\/$/, ""),
-            }));
+        // Static list of known working desas that bypass Cloudflare and have active news
+        const STATIC_WORKING_DESAS = [
+            { name: "Prendengan", web: "https://prendengan-banjarmangu.sistemdata.id" },
+            { name: "Clapar", web: "https://clapar-madukara.webdeva.io" },
+            { name: "Karekan", web: "https://karekan-banjarnegara.desa.id" },
+            { name: "Pagentan", web: "https://pagentan-banjarnegara.desa.id" },
+            { name: "Pingit Lor", web: "https://pingitlor-pandanarum.webdeva.io" },
+            { name: "Pringamba", web: "https://pringamba-pandanarum.webdeva.io" },
+            { name: "Susukan", web: "https://susukan-wanayasa.webdeva.io" },
+            { name: "Pagak", web: "https://pagak.layanandesa.cloud" }
+        ];
 
-        if (onlineDesas.length === 0) {
-            const fallback = await fetchWordPressFallback(limit);
-            return NextResponse.json({ success: true, data: fallback, total: fallback.length });
+        // 1. Gather all online desas (fetch dynamically from Clasnet portal pages 1 and 2 in parallel)
+        let onlineDesas: Array<{ name: string; web: string }> = [];
+
+        try {
+            const pages = [1, 2];
+            const listResponses = await Promise.all(
+                pages.map(p =>
+                    fetch(`https://sid.clasnet.co.id/desa.php?page=${p}&q=&kec=&sid=&berita=&db=&dev=&per=200`, {
+                        headers: {
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36",
+                        },
+                        signal: AbortSignal.timeout(8000),
+                    })
+                )
+            );
+
+            for (const listRes of listResponses) {
+                if (listRes.ok) {
+                    const html = await listRes.text();
+                    // Tag-bounded regex to prevent cross-row mismatching
+                    const regex = /data-desa="([^"]+)"[^>]*?data-website="([^"]+)"/g;
+                    let match;
+                    while ((match = regex.exec(html)) !== null) {
+                        const name = match[1].replace(/^Desa\s+/, "").trim();
+                        const web = match[2].trim();
+                        if (web.startsWith("http")) {
+                            onlineDesas.push({
+                                name,
+                                web: web.replace(/\/$/, ""),
+                            });
+                        }
+                    }
+                }
+            }
+        } catch (err) {
+            console.error("Failed to fetch dynamic online desas, using fallback:", err);
         }
 
-        // 2. Select target desas to query (Increased variety)
-        const shuffled = [...onlineDesas].sort(() => 0.5 - Math.random());
-        const targetDesas = shuffled.slice(0, 15);
+        // Fallback to local regionsData if dynamic fetch failed or returned empty
+        if (onlineDesas.length === 0) {
+            onlineDesas = Object.values(openSidData)
+                .flat()
+                .filter((desa) => desa.status === "Online" && desa.web && desa.web.trim() !== "")
+                .map((desa) => ({
+                    name: desa.name.replace(/^Desa\s+/, ""),
+                    web: desa.web.replace(/\/$/, ""),
+                }));
+        }
+
+        // Explicitly allowed .desa.id domains that bypass Cloudflare and work
+        const allowedDesaIdHosts = [
+            "sijenggung-banjarnegara.desa.id",
+            "karekan-banjarnegara.desa.id",
+            "pagentan-banjarnegara.desa.id"
+        ];
+
+        // Filter out desas that are behind Cloudflare (which ends in .desa.id except our allowed hosts)
+        const nonCfDesas = onlineDesas.filter((desa) => {
+            try {
+                const hostname = new URL(desa.web).hostname;
+                if (allowedDesaIdHosts.includes(hostname)) return true;
+                if (hostname.endsWith("desa.id")) return false;
+                return true;
+            } catch {
+                return false;
+            }
+        });
+
+        // Merge with our STATIC_WORKING_DESAS to guarantee they are included and have correct names
+        const desaMap = new Map<string, { name: string; web: string }>();
+        for (const d of nonCfDesas) {
+            try {
+                const hostname = new URL(d.web).hostname;
+                desaMap.set(hostname, d);
+            } catch {}
+        }
+        for (const d of STATIC_WORKING_DESAS) {
+            try {
+                const hostname = new URL(d.web).hostname;
+                desaMap.set(hostname, d);
+            } catch {}
+        }
+
+        const finalDesasList = Array.from(desaMap.values());
+
+        if (finalDesasList.length === 0) {
+            return NextResponse.json({ success: true, data: [], total: 0 });
+        }
+
+        // 2. Select target desas to query (always include priority/active desas, fill up to 25 with others)
+        const priorityHostnames = new Set(STATIC_WORKING_DESAS.map(d => {
+            try { return new URL(d.web).hostname; } catch { return ""; }
+        }).filter(Boolean));
+
+        const priorityDesas: Array<{ name: string; web: string }> = [];
+        const otherDesas: Array<{ name: string; web: string }> = [];
+
+        for (const d of finalDesasList) {
+            try {
+                const hostname = new URL(d.web).hostname;
+                if (priorityHostnames.has(hostname)) {
+                    priorityDesas.push(d);
+                } else {
+                    otherDesas.push(d);
+                }
+            } catch {
+                otherDesas.push(d);
+            }
+        }
+
+        const shuffledOthers = [...otherDesas];
+        for (let i = shuffledOthers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledOthers[i], shuffledOthers[j]] = [shuffledOthers[j], shuffledOthers[i]];
+        }
+
+        const targetDesas = [
+            ...priorityDesas,
+            ...shuffledOthers.slice(0, Math.max(0, 25 - priorityDesas.length))
+        ];
 
         // 3. Query desas in parallel
         const fetchResults = await Promise.allSettled(
@@ -187,11 +262,17 @@ export async function GET(request: NextRequest) {
                         "Accept-Language": "id-ID,id;q=0.9,en;q=0.8",
                     },
                     next: { revalidate: 3600 },
-                    signal: AbortSignal.timeout(4000), // Slightly longer timeout for more parallel requests
+                    signal: AbortSignal.timeout(4000),
                 });
 
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
+                }
+
+                // Protect against Cloudflare challenge responses
+                const serverHeader = res.headers.get("server") || "";
+                if (serverHeader.toLowerCase().includes("cloudflare")) {
+                    throw new Error("Cloudflare blocked");
                 }
 
                 const data = await res.json();
@@ -200,7 +281,7 @@ export async function GET(request: NextRequest) {
         );
 
         // 4. Map and Aggregate articles
-        const allArticles: any[] = [];
+        const allArticles: Article[] = [];
 
         for (const result of fetchResults) {
             if (result.status === "fulfilled" && result.value?.data?.data) {
@@ -208,8 +289,8 @@ export async function GET(request: NextRequest) {
                 const articles = data.data;
 
                 if (Array.isArray(articles)) {
-                    // Limit to 2 latest articles per village to ensure variety across the feed
-                    const villageArticles = articles.slice(0, 2);
+                    // Limit to 10 latest articles per village to ensure rich content across the feed
+                    const villageArticles = articles.slice(0, 10);
                     
                     for (const article of villageArticles) {
                         if (!article.attributes) continue;
@@ -218,6 +299,51 @@ export async function GET(request: NextRequest) {
                         const rawTitle = attr.judul || "";
                         const title = decodeHtmlEntities(rawTitle).trim();
                         if (!title) continue;
+
+                        // Filter out default OpenSID placeholder articles to keep the feed fresh and dynamic
+                        const cleanTitle = title.toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
+                        const isPlaceholder = [
+                            "pembangunan desa menuju kemajuan dan kemandirian",
+                            "kegiatan warga desa",
+                            "mata pencaharian masyarakat desa",
+                            "penduduk desa",
+                            "potensi alam desa",
+                            "potensi wilayah",
+                            "potensi wilayah desa",
+                            "visi dan misi",
+                            "sejarah desa",
+                            "profil wilayah desa",
+                            "pemerintah desa",
+                            "awal mula sid",
+                            "profil desa",
+                            "profil masyarakat desa",
+                            "profil wilayah",
+                            "kontak kami",
+                            "badan permusyawaratan desa",
+                            "lembaga kemasyarakatan",
+                            "undang undang",
+                            "peraturan pemerintah",
+                            "peraturan desa",
+                            "peraturan kepala desa",
+                            "keputusan kepala desa",
+                            "panduan",
+                            "pengaduan",
+                            "profil potensi desa",
+                            "lkmd",
+                            "karang taruna",
+                            "rt rw",
+                            "lpmd",
+                            "pemberdayaan kesejahteraan keluarga",
+                            "posyandu",
+                            "informasi publik",
+                            "struktur organisasi",
+                            "wilayah administratif",
+                            "peta desa",
+                            "dusun"
+                        ].map(p => p.toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim())
+                         .includes(cleanTitle);
+
+                        if (isPlaceholder) continue;
 
                         const rawExcerpt = attr.isi || "";
                         const excerptClean = stripHtml(rawExcerpt);
@@ -238,7 +364,6 @@ export async function GET(request: NextRequest) {
                             excerpt,
                             content: attr.isi || "",
                             featuredImage: featuredImage || null,
-                            readingTime: Math.max(1, Math.ceil((excerpt.split(/\s+/).filter(Boolean).length || 1) / 220)),
                             author: {
                                 name: authorName,
                                 avatar: attr.author?.foto
@@ -275,12 +400,6 @@ export async function GET(request: NextRequest) {
         // 5. Sort by published date descending
         allArticles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-        // 6. If no articles aggregated, fallback to WordPress
-        if (allArticles.length === 0) {
-            const fallback = await fetchWordPressFallback(limit);
-            return NextResponse.json({ success: true, data: fallback, total: fallback.length });
-        }
-
         const slicedArticles = allArticles.slice(0, limit);
 
         return NextResponse.json({
@@ -288,24 +407,16 @@ export async function GET(request: NextRequest) {
             data: slicedArticles,
             total: slicedArticles.length,
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error("Error aggregating OpenSID news:", error);
-        // On error, try WordPress fallback
-        try {
-            const { searchParams: errorSearchParams } = new URL(request.url);
-            const limitParam = errorSearchParams.get("limit");
-            const limit = Math.max(1, Math.min(100, limitParam ? Number(limitParam) : 10));
-            const fallback = await fetchWordPressFallback(limit);
-            return NextResponse.json({ success: true, data: fallback, total: fallback.length });
-        } catch {
-            return NextResponse.json(
-                {
-                    success: false,
-                    error: error.message || "Failed to aggregate news",
-                    data: [],
-                },
-                { status: 500 }
-            );
-        }
+        const errorMessage = error instanceof Error ? error.message : "Failed to aggregate news";
+        return NextResponse.json(
+            {
+                success: false,
+                error: errorMessage,
+                data: [],
+            },
+            { status: 500 }
+        );
     }
 }

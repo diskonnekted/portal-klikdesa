@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 
     return new Promise<Response>((resolve) => {
         const options = {
-            rejectUnauthorized: false, // Ignore expired certificate error
+            rejectUnauthorized: true, // Enable certificate verification
             headers: {
                 "User-Agent":
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36",

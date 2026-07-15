@@ -6,10 +6,12 @@ const activeConnections: Set<ReadableStreamDefaultController> = new Set();
 
 export async function GET() {
     const encoder = new TextEncoder();
+    let currentController: ReadableStreamDefaultController | null = null;
 
     // Create a ReadableStream for Server-Sent Events
     const stream = new ReadableStream({
         start(controller) {
+            currentController = controller;
             activeConnections.add(controller);
 
             // Send initial connection message
@@ -27,18 +29,14 @@ export async function GET() {
 
         cancel() {
             // Cleanup when client disconnects
-            for (const controller of activeConnections) {
-                if (controller.desiredSize === 0) {
-                    activeConnections.delete(controller);
-                }
+            if (currentController) {
+                activeConnections.delete(currentController);
+            }
+            if (activeConnections.size === 0) {
+                stopPolling();
             }
         },
     });
-
-    // Stop polling when the last client disconnects
-    if (activeConnections.size === 0) {
-        stopPolling();
-    }
 
     return new Response(stream, {
         headers: {
@@ -82,6 +80,10 @@ function startPolling(controller: ReadableStreamDefaultController, encoder: Text
                     console.error("Error sending to client:", error);
                     activeConnections.delete(conn);
                 }
+            }
+
+            if (activeConnections.size === 0) {
+                stopPolling();
             }
         } catch (error) {
             console.error("Error polling IoT data:", error);

@@ -82,7 +82,7 @@ export default function NewsCard({
                     <div className="flex flex-wrap gap-1 mb-2">
                         {post.categories.slice(0, 3).map((category) => (
                             <Link
-                                key={category.id}
+                                key={category.slug}
                                 href={`/berita?category=${category.slug}`}
                                 className="cursor-pointer"
                             >

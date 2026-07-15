@@ -43,6 +43,7 @@ function NewsContent({
 }) {
     const { t } = useTranslation();
     const [posts, setPosts] = useState<Post[]>([]);
+    const [allPosts, setAllPosts] = useState<Post[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [archives, setArchives] = useState<Array<{ key: string; displayText: string; count: number }>>([]);
     const [loading, setLoading] = useState(true);
@@ -196,9 +197,9 @@ function NewsContent({
                         featuredImageAlt: n.title,
                         categories: [
                             {
-                                id: 1,
-                                name: "Berita Desa",
-                                slug: "berita-desa",
+                                id: n.categories?.[0]?.id || 1,
+                                name: n.category || "Berita Desa",
+                                slug: n.categories?.[0]?.slug || "berita-desa",
                             },
                         ],
                         tags: [],
@@ -207,6 +208,29 @@ function NewsContent({
                 });
 
                 allPosts = postsFromNews;
+                setAllPosts(postsFromNews);
+
+                // Extract unique categories dynamically from postsFromNews
+                const categoryCounts = new Map<string, Category>();
+                for (const p of postsFromNews) {
+                    const cat = p.categories[0];
+                    if (cat) {
+                        const existing = categoryCounts.get(cat.slug);
+                        if (existing) {
+                            existing.count++;
+                        } else {
+                            categoryCounts.set(cat.slug, {
+                                id: cat.id,
+                                name: cat.name,
+                                slug: cat.slug,
+                                description: "",
+                                count: 1,
+                            });
+                        }
+                    }
+                }
+                const uniqueCategories = Array.from(categoryCounts.values()).sort((a, b) => b.count - a.count);
+                setCategories(uniqueCategories);
 
                 const archiveCounts = new Map<string, number>();
                 for (const p of allPosts) {
@@ -251,7 +275,7 @@ function NewsContent({
                             );
                         } else {
                             filteredPosts = filteredPosts.filter((post) =>
-                                post.categories.some((cat) => cat.id === category.id)
+                                post.categories.some((cat) => cat.slug === category.slug)
                             );
                         }
                     }
@@ -466,7 +490,7 @@ function NewsContent({
                                 <SelectContent>
                                     <SelectItem value="all">Semua Kategori</SelectItem>
                                     {categories.map((category) => (
-                                        <SelectItem key={category.id} value={category.slug}>
+                                        <SelectItem key={category.slug} value={category.slug}>
                                             {category.name} ({category.count})
                                         </SelectItem>
                                     ))}
@@ -739,7 +763,7 @@ function NewsContent({
 
                 {/* Sidebar */}
                 <div className="w-full lg:w-80 shrink-0 mt-8 lg:mt-0">
-                    <NewsSidebar currentCategory={currentCategoryId} />
+                    <NewsSidebar currentCategory={currentCategoryId} posts={allPosts} loading={loading} />
                 </div>
             </div>
         </div>

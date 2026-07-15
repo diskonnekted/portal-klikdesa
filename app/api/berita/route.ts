@@ -4,55 +4,7 @@ import { NextResponse } from "next/server";
 import type { ApiResponse } from "@/lib/api-response";
 import { createSuccessResponse, createErrorResponse, createValidationErrorResponse } from "@/lib/api-response";
 
-// Mock data for berita (will be replaced with database queries)
-const mockBerita = [
-    {
-        id: 1,
-        judul: "Peluncuran Portal Web Desa Sijenggung",
-        slug: "peluncuran-portal-web-Desa-sijenggung",
-        ringkasan: "Portal web resmi Desa Sijenggung telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
-        konten: "Portal web resmi Desa Sijenggung telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
-        gambar: "/images/berita/portal-launch.jpg",
-        kategori: "Teknologi",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-24T10:00:00Z",
-        createdAt: "2025-10-24T09:30:00Z",
-        updatedAt: "2025-10-24T10:00:00Z",
-        penulis: "Admin Desa",
-        views: 150,
-    },
-    {
-        id: 2,
-        judul: "Program Pembangunan Infrastruktur Tahun 2025",
-        slug: "program-pembangunan-infrastruktur-tahun-2025",
-        ringkasan:
-            "Pemerintah Desa Sijenggung mengalokasikan dana untuk pembangunan infrastruktur jalan dan drainase.",
-        konten: "Pemerintah Desa Sijenggung dalam tahun anggaran 2025 mengalokasikan dana pembangunan sebesar Rp 2.5 Miliar...",
-        gambar: "/images/berita/infrastruktur.jpg",
-        kategori: "Pembangunan",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-23T14:30:00Z",
-        createdAt: "2025-10-23T13:00:00Z",
-        updatedAt: "2025-10-23T14:30:00Z",
-        penulis: "Bagian Pembangunan",
-        views: 89,
-    },
-    {
-        id: 3,
-        judul: "Vaksinasi COVID-19 Tahap Lanjutan",
-        slug: "vaksinasi-covid-19-tahap-lanjutan",
-        ringkasan: "Puskesmas Pembantu Desa Sijenggung menyelenggarakan vaksinasi COVID-19 tahap lanjutan.",
-        konten: "Puskesmas Pembantu Desa Sijenggung kembali menyelenggarakan vaksinasi COVID-19 tahap lanjutan untuk dosis ketiga...",
-        gambar: "/images/berita/vaksinasi.jpg",
-        kategori: "Kesehatan",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-22T08:00:00Z",
-        createdAt: "2025-10-21T16:00:00Z",
-        updatedAt: "2025-10-22T08:00:00Z",
-        penulis: "Bidang Kesehatan",
-        views: 234,
-    },
-];
+import { mockBerita } from "@/lib/mockData";
 
 export async function GET(request: NextRequest): Promise<NextResponse<ApiResponse>> {
     try {
@@ -132,6 +84,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
             penulis: body.penulis ?? "Admin",
             views: 0,
         };
+
+        mockBerita.push(newBerita);
 
         return NextResponse.json(createSuccessResponse(newBerita, "Berita berhasil dibuat"), { status: 201 });
     } catch {

@@ -13,14 +13,24 @@ interface NewsSidebarProps {
     currentCategory?: number;
     currentTag?: number;
     className?: string;
+    posts?: Post[];
+    loading?: boolean;
 }
 
-export default function NewsSidebar({ currentCategory, currentTag, className = "" }: NewsSidebarProps) {
+export default function NewsSidebar({ 
+    currentCategory, 
+    currentTag, 
+    className = "", 
+    posts, 
+    loading: externalLoading 
+}: NewsSidebarProps) {
     const [popularPosts, setPopularPosts] = useState<Post[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [tags, setTags] = useState<TagType[]>([]);
     const [archives, setArchives] = useState<ArchiveDate[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [internalLoading, setInternalLoading] = useState(true);
+
+    const loading = posts ? (externalLoading ?? false) : internalLoading;
 
     // Collapsible sections for mobile
     const [expandedSections, setExpandedSections] = useState({
@@ -37,37 +47,186 @@ export default function NewsSidebar({ currentCategory, currentTag, className = "
         }));
     };
 
+    // Calculate sidebar data when posts are passed directly
     useEffect(() => {
+        if (posts) {
+            // 1. Popular posts sorted by views descending
+            const popular = [...posts]
+                .sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0))
+                .slice(0, 7);
+
+            // 2. Aggregate categories
+            const categoryCounts = new Map<string, Category>();
+            for (const p of posts) {
+                const cat = p.categories[0];
+                if (cat) {
+                    const existing = categoryCounts.get(cat.slug);
+                    if (existing) {
+                        existing.count++;
+                    } else {
+                        categoryCounts.set(cat.slug, {
+                            id: cat.id,
+                            name: cat.name,
+                            slug: cat.slug,
+                            description: "",
+                            count: 1,
+                        });
+                    }
+                }
+            }
+
+            // 3. Aggregate archive months
+            const archiveCounts = new Map<string, number>();
+            for (const p of posts) {
+                const d = new Date(p.date);
+                const y = d.getFullYear();
+                const m = d.getMonth() + 1;
+                const key = `${y}-${String(m).padStart(2, "0")}`;
+                archiveCounts.set(key, (archiveCounts.get(key) ?? 0) + 1);
+            }
+
+            const monthNames = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+            const archiveList: ArchiveDate[] = Array.from(archiveCounts.entries())
+                .map(([key, count]) => {
+                    const [yearStr, monthStr] = key.split("-");
+                    const y = Number(yearStr);
+                    const m = Number(monthStr);
+                    return {
+                        key,
+                        year: y,
+                        month: m,
+                        monthName: monthNames[m - 1] ?? "",
+                        count,
+                        displayText: `${monthNames[m - 1] ?? ""} ${y}`,
+                    };
+                })
+                .sort((a, b) => b.key.localeCompare(a.key))
+                .slice(0, 12);
+
+            setPopularPosts(popular);
+            setCategories(Array.from(categoryCounts.values()).sort((a, b) => b.count - a.count));
+            setArchives(archiveList);
+            setTags([]);
+        }
+    }, [posts]);
+
+    // Fallback fetch if posts are not provided (e.g. single article details page)
+    useEffect(() => {
+        if (posts) return;
+
         async function loadSidebarData() {
             try {
-                setLoading(true);
+                setInternalLoading(true);
+                const res = await fetch("/api/external-news?limit=100");
+                const json = await res.json();
+                
+                if (json.success && Array.isArray(json.data)) {
+                    const articles = json.data;
+                    
+                    // Map to Post structure
+                    const mappedPosts: Post[] = articles.map((n: any, index: number) => {
+                        const date = new Date(n.publishedAt);
+                        const numericId = Math.floor(date.getTime() / 1000) + index;
+                        return {
+                            id: numericId,
+                            title: n.title,
+                            content: n.content,
+                            excerpt: n.excerpt,
+                            slug: n.slug,
+                            date: n.publishedAt,
+                            modified: n.updatedAt,
+                            link: `/berita/${n.slug}`,
+                            status: "publish",
+                            readingTime: n.readTime || 1,
+                            author: {
+                                id: 0,
+                                name: n.author?.name ?? "Admin Desa",
+                                avatar: n.author?.avatar ?? "/images/default-avatar.png",
+                            },
+                            featuredImage: n.featuredImage ?? "",
+                            featuredImageAlt: n.title,
+                            categories: [
+                                {
+                                    id: n.categories?.[0]?.id || 1,
+                                    name: n.category || "Berita Desa",
+                                    slug: n.categories?.[0]?.slug || "berita-desa",
+                                },
+                            ],
+                            tags: [],
+                            viewCount: n.viewCount ?? 0,
+                        };
+                    });
 
-                // Import OpenSID library
-                const opensid = await import("@/lib/opensid");
-                const [popularData, categoriesData, tagsData, archivesData] = await Promise.all([
-                    opensid.getPopularPosts(10),
-                    opensid.getCategories(),
-                    opensid.getTags(),
-                    opensid.getArchiveDates(),
-                ]);
+                    const popular = [...mappedPosts]
+                        .sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0))
+                        .slice(0, 7);
 
-                setPopularPosts((popularData as Post[]) ?? []);
-                setCategories((categoriesData as Category[]) ?? []);
-                setTags((tagsData as TagType[])?.slice(0, 10) ?? []); // Hanya 10 tags pertama
-                setArchives((archivesData as Array<ArchiveDate>)?.slice(0, 12) ?? []); // Hanya 12 bulan terakhir
-            } catch {
-                // Set empty arrays when API is not available
-                setPopularPosts([]);
-                setCategories([]);
-                setTags([]);
-                setArchives([]);
+                    const categoryCounts = new Map<string, Category>();
+                    for (const p of mappedPosts) {
+                        const cat = p.categories[0];
+                        if (cat) {
+                            const existing = categoryCounts.get(cat.slug);
+                            if (existing) {
+                                existing.count++;
+                            } else {
+                                categoryCounts.set(cat.slug, {
+                                    id: cat.id,
+                                    name: cat.name,
+                                    slug: cat.slug,
+                                    description: "",
+                                    count: 1,
+                                });
+                            }
+                        }
+                    }
+
+                    const archiveCounts = new Map<string, number>();
+                    for (const p of mappedPosts) {
+                        const d = new Date(p.date);
+                        const y = d.getFullYear();
+                        const m = d.getMonth() + 1;
+                        const key = `${y}-${String(m).padStart(2, "0")}`;
+                        archiveCounts.set(key, (archiveCounts.get(key) ?? 0) + 1);
+                    }
+
+                    const monthNames = [
+                        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ];
+                    const archiveList: ArchiveDate[] = Array.from(archiveCounts.entries())
+                        .map(([key, count]) => {
+                            const [yearStr, monthStr] = key.split("-");
+                            const y = Number(yearStr);
+                            const m = Number(monthStr);
+                            return {
+                                key,
+                                year: y,
+                                month: m,
+                                monthName: monthNames[m - 1] ?? "",
+                                count,
+                                displayText: `${monthNames[m - 1] ?? ""} ${y}`,
+                            };
+                        })
+                        .sort((a, b) => b.key.localeCompare(a.key))
+                        .slice(0, 12);
+
+                    setPopularPosts(popular);
+                    setCategories(Array.from(categoryCounts.values()).sort((a, b) => b.count - a.count));
+                    setArchives(archiveList);
+                    setTags([]);
+                }
+            } catch (err) {
+                console.error("Failed to load news sidebar data:", err);
             } finally {
-                setLoading(false);
+                setInternalLoading(false);
             }
         }
 
         loadSidebarData();
-    }, []);
+    }, [posts]);
 
     // Format date untuk popular posts
     function formatDate(dateString: string) {
@@ -171,7 +330,7 @@ export default function NewsSidebar({ currentCategory, currentTag, className = "
                         <div className="flex flex-wrap gap-2">
                             {categories.map((category) => (
                                 <Link
-                                    key={category.id}
+                                    key={category.slug}
                                     href={`/berita?category=${category.slug}`}
                                     className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
                                         currentCategory === category.id
@@ -193,7 +352,7 @@ export default function NewsSidebar({ currentCategory, currentTag, className = "
             </Card>
 
             {/* Tags */}
-            {loading ? (
+            {!loading && tags.length > 0 && (
                 <Card>
                     <CardHeader className="cursor-pointer sm:cursor-default" onClick={() => toggleSection("tags")}>
                         <CardTitle className="flex items-center justify-between text-lg">
@@ -211,78 +370,22 @@ export default function NewsSidebar({ currentCategory, currentTag, className = "
                         </CardTitle>
                     </CardHeader>
                     <CardContent className={expandedSections.tags ? "block" : "hidden sm:block"}>
-                        <div className="space-y-2">
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <Skeleton key={i} className="h-6 w-16" />
+                        <div className="flex flex-wrap gap-2">
+                            {tags.map((tag) => (
+                                <Link
+                                    key={tag.id}
+                                    href={`/berita?tag=${tag.slug}`}
+                                    className={`inline-flex items-center px-2 py-1 rounded-md text-xs border transition-colors ${
+                                        currentTag === tag.id
+                                            ? "border-primary bg-primary/10 text-primary"
+                                            : "border-border hover:border-primary hover:bg-primary/5"
+                                    }`}
+                                >
+                                    #{tag.name}
+                                    <span className="ml-1 text-muted-foreground">({tag.count})</span>
+                                </Link>
                             ))}
                         </div>
-                    </CardContent>
-                </Card>
-            ) : tags.length > 0 ? (
-                <Card>
-                    <CardHeader className="cursor-pointer sm:cursor-default" onClick={() => toggleSection("tags")}>
-                        <CardTitle className="flex items-center justify-between text-lg">
-                            <div className="flex items-center gap-2">
-                                <Tag className="h-5 w-5 text-primary" />
-                                Tags
-                            </div>
-                            <div className="sm:hidden">
-                                {expandedSections.tags ? (
-                                    <ChevronUp className="h-4 w-4" />
-                                ) : (
-                                    <ChevronDown className="h-4 w-4" />
-                                )}
-                            </div>
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className={expandedSections.tags ? "block" : "hidden sm:block"}>
-                        {loading ? (
-                            <div className="space-y-2">
-                                {[1, 2, 3, 4, 5, 6].map((i) => (
-                                    <Skeleton key={i} className="h-6 w-16" />
-                                ))}
-                            </div>
-                        ) : tags.length > 0 ? (
-                            <div className="flex flex-wrap gap-2">
-                                {tags.map((tag) => (
-                                    <Link
-                                        key={tag.id}
-                                        href={`/berita?tag=${tag.slug}`}
-                                        className={`inline-flex items-center px-2 py-1 rounded-md text-xs border transition-colors ${
-                                            currentTag === tag.id
-                                                ? "border-primary bg-primary/10 text-primary"
-                                                : "border-border hover:border-primary hover:bg-primary/5"
-                                        }`}
-                                    >
-                                        #{tag.name}
-                                        <span className="ml-1 text-muted-foreground">({tag.count})</span>
-                                    </Link>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-sm text-muted-foreground">Belum ada tag</p>
-                        )}
-                    </CardContent>
-                </Card>
-            ) : (
-                <Card>
-                    <CardHeader className="cursor-pointer sm:cursor-default" onClick={() => toggleSection("tags")}>
-                        <CardTitle className="flex items-center justify-between text-lg">
-                            <div className="flex items-center gap-2">
-                                <Tag className="h-5 w-5 text-primary" />
-                                Tags
-                            </div>
-                            <div className="sm:hidden">
-                                {expandedSections.tags ? (
-                                    <ChevronUp className="h-4 w-4" />
-                                ) : (
-                                    <ChevronDown className="h-4 w-4" />
-                                )}
-                            </div>
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className={expandedSections.tags ? "block" : "hidden sm:block"}>
-                        <p className="text-sm text-muted-foreground">Belum ada tag</p>
                     </CardContent>
                 </Card>
             )}

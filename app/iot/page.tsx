@@ -13,6 +13,9 @@ import {
     BarChart3,
     TrendingUp,
     ChevronUp,
+    Zap,
+    Coins,
+    Gauge,
 } from "lucide-react";
 import { LeafletMap } from "@/components/ui/custom/LeafletMap";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
@@ -139,12 +142,16 @@ const getSensorIcon = (type: IoTSensor["type"]) => {
             return <CloudRain className="h-5 w-5" />;
         case "weather":
         case "temperature":
-        case "voltage":
-        case "current":
-        case "power":
-        case "energy":
-        case "cost":
             return <Thermometer className="h-5 w-5" />;
+        case "voltage":
+        case "power":
+            return <Zap className="h-5 w-5" />;
+        case "current":
+            return <Activity className="h-5 w-5" />;
+        case "energy":
+            return <Gauge className="h-5 w-5" />;
+        case "cost":
+            return <Coins className="h-5 w-5" />;
         case "air-quality":
             return <Shield className="h-5 w-5" />;
         case "ground-tilt":

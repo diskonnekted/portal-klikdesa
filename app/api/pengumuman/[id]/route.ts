@@ -4,54 +4,7 @@ import { NextResponse } from "next/server";
 import type { ApiResponse } from "@/lib/api-response";
 import { createSuccessResponse, createNotFoundResponse, createErrorResponse } from "@/lib/api-response";
 
-// Mock data (should be in a shared file or database)
-const mockPengumuman = [
-    {
-        id: 1,
-        judul: "Libur Nasional dan Cuti Bersama Tahun 2025",
-        konten: `Berdasarkan Surat Keputusan Bersama (SKB) Menteri Agama, Menteri Ketenagakerjaan, dan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 812 Tahun 2024, Nomor 1 Tahun 2024, dan Nomor 3 Tahun 2024 tentang Hari Libur Nasional dan Cuti Bersama Tahun 2025, dengan hormat mengundang seluruh masyarakat Desa Sijenggung untuk memperhatikan jadwal libur nasional dan cuti bersama.
-
-Daftar libur nasional yang akan datang:
-- 25 Desember 2025: Hari Raya Natal
-- 1 Januari 2026: Tahun Baru 2026
-
-Masyarakat diharapkan memperhatikan jadwal layanan kantor desa yang disesuaikan dengan hari libur nasional.`,
-        prioritas: "TINGGI",
-        kategori: "Pemerintahan",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-24T08:00:00Z",
-        expiresAt: "2025-12-31T23:59:59Z",
-        createdAt: "2025-10-23T16:00:00Z",
-        updatedAt: "2025-10-24T08:00:00Z",
-        penulis: "Sekretariat Desa",
-        lampiran: ["/pdf/kalender-2025.pdf"],
-        views: 45,
-    },
-    {
-        id: 2,
-        judul: "Pembayaran PBB dan Retribusi Sampah Triwulan IV",
-        konten: `Bersama ini kami sampaikan kepada seluruh wajib Pajak Bumi dan Bangunan (PBB) dan pengguna layanan sampah di Desa Sijenggung bahwa pembayaran PBB dan retribusi sampah untuk Triwulan IV (Oktober-Desember 2025) sudah dapat dilaksanakan.
-
-Pembayaran dapat dilakukan melalui:
-1. Kantor Kas Desa Sijenggung (Senin-Jumat, 08:00-14:00 WIB)
-2. Mobile Payment (QRIS yang tersedia di kantor desa)
-3. Transfer Bank BPD DIY (No. Rekening: 1234567890)
-
-Batas waktu pembayaran: 20 Desember 2025
-
-Mohon kerjasama dari seluruh warga untuk menyelesaikan kewajiban pembayaran tepat waktu. Terima kasih atas perhatian dan kerjasamanya.`,
-        prioritas: "NORMAL",
-        kategori: "Keuangan",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-23T10:00:00Z",
-        expiresAt: "2025-12-20T23:59:59Z",
-        createdAt: "2025-10-22T15:30:00Z",
-        updatedAt: "2025-10-23T10:00:00Z",
-        penulis: "Bagian Keuangan",
-        lampiran: [],
-        views: 28,
-    },
-];
+import { mockPengumuman } from "@/lib/mockData";
 
 export async function GET(
     request: NextRequest,
@@ -73,12 +26,10 @@ export async function GET(
             return NextResponse.json(createNotFoundResponse("Pengumuman tidak ditemukan"), { status: 404 });
         }
 
-        // Increment view count
-        pengumuman.views += 1;
-
-        // Add status information
+        // Return pengumuman with temporary incremented views without mutating the shared in-memory object permanently
         const response = {
             ...pengumuman,
+            views: pengumuman.views + 1,
             isExpired: new Date() > new Date(pengumuman.expiresAt),
             daysUntilExpiry: Math.ceil(
                 (new Date(pengumuman.expiresAt).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Phone, MapPin, Clock, Heart, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { siFacebook, siWhatsapp, siInstagram, siYoutube, type SimpleIcon } from "simple-icons";
 
 import { useTranslation } from "@/lib/useTranslation";
@@ -118,9 +118,8 @@ export function Footer() {
                                     ) : (
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-white hover:text-primary transition-colors flex items-center"
+                                            className="text-sm text-white hover:text-primary transition-colors"
                                         >
-                                            <ExternalLink className="h-3 w-3 mr-2" />
                                             {link.label}
                                         </Link>
                                     )}

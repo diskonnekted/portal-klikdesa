@@ -22,6 +22,7 @@ import {
     Clock,
     Newspaper,
     Eye,
+    FileChartPie,
     NotebookPen,
     BriefcaseBusiness,
     Lightbulb,
@@ -83,6 +84,7 @@ const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?:
     ChartNoAxesColumnDecreasing,
     Phone,
     Download,
+    FileChartPie,
 };
 
 export function HomePageClient({ serverData }: { serverData: ServerData }) {

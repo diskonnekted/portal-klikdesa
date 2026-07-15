@@ -107,6 +107,30 @@ const nextConfig: NextConfig = {
                 port: '',
                 pathname: '/uploads/**',
             },
+            {
+                protocol: 'https',
+                hostname: '*.webdeva.io',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.sistemdata.id',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.layanandesa.cloud',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.desa.id',
+                port: '',
+                pathname: '/**',
+            },
         ],
 
         dangerouslyAllowSVG: false,

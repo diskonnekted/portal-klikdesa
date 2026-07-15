@@ -4,40 +4,7 @@ import { NextResponse } from "next/server";
 import type { ApiResponse } from "@/lib/api-response";
 import { createSuccessResponse, createNotFoundResponse, createErrorResponse } from "@/lib/api-response";
 
-// Mock data (should be in a shared file or database)
-const mockBerita = [
-    {
-        id: 1,
-        judul: "Peluncuran Portal Web Desa Sijenggung",
-        slug: "peluncuran-portal-web-desa-sijenggung",
-        ringkasan: "Portal web resmi Desa Sijenggung telah diluncurkan untuk meningkatkan pelayanan masyarakat.",
-        konten: "Portal web resmi Desa Sijenggung telah diluncurkan dengan berbagai fitur canggih untuk meningkatkan pelayanan masyarakat...",
-        gambar: "/images/berita/portal-launch.jpg",
-        kategori: "Teknologi",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-24T10:00:00Z",
-        createdAt: "2025-10-24T09:30:00Z",
-        updatedAt: "2025-10-24T10:00:00Z",
-        penulis: "Admin Desa",
-        views: 150,
-    },
-    {
-        id: 2,
-        judul: "Program Pembangunan Infrastruktur Tahun 2025",
-        slug: "program-pembangunan-infrastruktur-tahun-2025",
-        ringkasan:
-            "Pemerintah Desa Sijenggung mengalokasikan dana untuk pembangunan infrastruktur jalan dan drainase.",
-        konten: "Pemerintah Desa Sijenggung dalam tahun anggaran 2025 mengalokasikan dana pembangunan sebesar Rp 2.5 Miliar...",
-        gambar: "/images/berita/infrastruktur.jpg",
-        kategori: "Pembangunan",
-        status: "PUBLISHED",
-        publishedAt: "2025-10-23T14:30:00Z",
-        createdAt: "2025-10-23T13:00:00Z",
-        updatedAt: "2025-10-23T14:30:00Z",
-        penulis: "Bagian Pembangunan",
-        views: 89,
-    },
-];
+import { mockBerita } from "@/lib/mockData";
 
 export async function GET(
     request: NextRequest,
@@ -57,10 +24,13 @@ export async function GET(
             return NextResponse.json(createNotFoundResponse("Berita tidak ditemukan"), { status: 404 });
         }
 
-        // Increment view count (in a real implementation, this would update the database)
-        berita.views += 1;
+        // Return berita with temporary incremented views without mutating the shared in-memory object permanently
+        const responseData = {
+            ...berita,
+            views: berita.views + 1,
+        };
 
-        return NextResponse.json(createSuccessResponse(berita, "Berita berhasil dimuat"));
+        return NextResponse.json(createSuccessResponse(responseData, "Berita berhasil dimuat"));
     } catch {
         return NextResponse.json(createErrorResponse("INTERNAL_SERVER_ERROR", "Terjadi kesalahan saat memuat berita"), {
             status: 500,

@@ -198,20 +198,41 @@ function transformArticle(article: OpenSIDArticle) {
 
     // Convert OpenSID date format (DD-MM-YYYY HH:mm:ss) to ISO
     function parseOpenSIDDate(dateStr: string) {
-        // Split date and time
-        const [datePart, timePart] = dateStr.split(" ");
-        const [day, month, year] = datePart.split("-");
-        const [hour, minute, second] = (timePart || "00:00:00").split(":");
-
-        // Create ISO date string
-        return new Date(
-            parseInt(year),
-            parseInt(month) - 1,
-            parseInt(day),
-            parseInt(hour),
-            parseInt(minute),
-            parseInt(second)
-        ).toISOString();
+        if (!dateStr || typeof dateStr !== "string") {
+            return new Date().toISOString();
+        }
+        try {
+            const parts = dateStr.trim().split(" ");
+            const datePart = parts[0] || "";
+            const timePart = parts[1] || "00:00:00";
+            
+            const dateSegments = datePart.split("-");
+            if (dateSegments.length !== 3) {
+                return new Date().toISOString();
+            }
+            
+            const [dayStr, monthStr, yearStr] = dateSegments;
+            const day = parseInt(dayStr, 10);
+            const month = parseInt(monthStr, 10);
+            const year = parseInt(yearStr, 10);
+            
+            const [hourStr, minuteStr, secondStr] = timePart.split(":");
+            const hour = parseInt(hourStr || "0", 10);
+            const minute = parseInt(minuteStr || "0", 10);
+            const second = parseInt(secondStr || "0", 10);
+            
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                return new Date().toISOString();
+            }
+            
+            const d = new Date(year, month - 1, day, hour, minute, second);
+            if (isNaN(d.getTime())) {
+                return new Date().toISOString();
+            }
+            return d.toISOString();
+        } catch {
+            return new Date().toISOString();
+        }
     }
 
     return {
