@@ -2,25 +2,64 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, MapPin, Users, Building, Heart, Server, Activity, ArrowUpRight, Award, ShieldCheck, CheckCircle2, Globe, Layers, X, Info } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { ChevronLeft, Users, Building, Heart, Server, Activity, Award, ShieldCheck, CheckCircle2, Globe, Layers, X, Info, ExternalLink } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, FileText } from "lucide-react";
-import { LeafletMap } from "@/components/ui/custom/LeafletMap";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { useOpenDataPKK } from "@/hooks/useOpenDataPKK";
-import { useOpenDataKB } from "@/hooks/useOpenDataKB";
-
-import { useOpenDataKesejahteraan } from "@/hooks/useOpenDataKesejahteraan";
+import { LeafletMap, type IoTSensor } from "@/components/ui/custom/LeafletMap";
+import { useOpenDataPKK, type PkkDataRecord } from "@/hooks/useOpenDataPKK";
+import { useOpenDataKB, type KbDataRecord } from "@/hooks/useOpenDataKB";
+import { useOpenDataKesejahteraan, type KesejahteraanDataRecord } from "@/hooks/useOpenDataKesejahteraan";
+import { useOpenDataKemiskinan, type KemiskinanDataRecord } from "@/hooks/useOpenDataKemiskinan";
+import { useOpenDataStuntingAll, type StuntingAllRecord } from "@/hooks/useOpenDataStuntingAll";
 
 export type MapLayer = "digital" | "stunting" | "kemiskinan" | "penduduk" | "pkk" | "kb" | "kesejahteraan";
 
+interface SelectedVillage {
+    name: string;
+    kec: string;
+    isKecamatan?: boolean;
+    isDigital?: boolean;
+    pop?: string;
+    website?: string | null;
+    provider?: string;
+    stunting?: number;
+    kemiskinan?: number;
+    pkkData?: PkkDataRecord | null;
+    kbData?: KbDataRecord | null;
+    kesejahteraanData?: KesejahteraanDataRecord | null;
+    kemiskinanData?: KemiskinanDataRecord | null;
+    desaStuntingData?: StuntingAllRecord | null;
+    news?: { id: number; date: string; title: string; source: string }[];
+}
+
+interface FeatureProps {
+    properties?: {
+        Kecamatan?: string;
+        Name?: string;
+        Nama_Desa_?: string;
+        name?: string;
+    };
+    isKecamatanLayer?: boolean;
+    isDesaStuntingLayer?: boolean;
+    pkkData?: PkkDataRecord | null;
+    kbData?: KbDataRecord | null;
+    kesejahteraanData?: KesejahteraanDataRecord | null;
+    kemiskinanData?: KemiskinanDataRecord | null;
+    desaStuntingData?: StuntingAllRecord | null;
+}
+
+interface VillageData {
+    isDigital: boolean;
+    pop: string;
+    website: string | null;
+    provider: string;
+}
+
 export default function KabupatenDashboard() {
-    const [geoJsonData, setGeoJsonData] = useState<any>(null);
-    const [selectedVillage, setSelectedVillage] = useState<any>(null);
-    const [realData, setRealData] = useState<Record<string, any>>({});
-    const [kecamatanGeoJsonData, setKecamatanGeoJsonData] = useState<any>(null);
+    const [geoJsonData, setGeoJsonData] = useState<unknown>(null);
+    const [selectedVillage, setSelectedVillage] = useState<SelectedVillage | null>(null);
+    const [realData, setRealData] = useState<Record<string, VillageData>>({});
+    const [kecamatanGeoJsonData, setKecamatanGeoJsonData] = useState<unknown>(null);
     
     // Controls which layer data is shown on map
     const [activeLayer, setActiveLayer] = useState<MapLayer>("digital");
@@ -30,6 +69,8 @@ export default function KabupatenDashboard() {
     const { pkkData, loading: pkkLoading } = useOpenDataPKK();
     const { kbData, kbLoading } = useOpenDataKB();
     const { kesejahteraanData, kesejahteraanLoading } = useOpenDataKesejahteraan();
+    const { kemiskinanData } = useOpenDataKemiskinan();
+    const { stuntingAllData } = useOpenDataStuntingAll();
 
     React.useEffect(() => {
         fetch('/peta_desa.geojson')
@@ -48,9 +89,9 @@ export default function KabupatenDashboard() {
             .catch(err => console.error("Gagal memuat peta_kecamatan.geojson", err));
     }, []);
 
-    const mapMarkers: any[] = [];
+    const mapMarkers: IoTSensor[] = [];
 
-    const handleFeatureClick = (feature: any) => {
+    const handleFeatureClick = (feature: FeatureProps) => {
         // Jika feature ini berasal dari layer PKK (peta kecamatan)
         if (feature.isKecamatanLayer) {
             setSelectedVillage({
@@ -59,7 +100,27 @@ export default function KabupatenDashboard() {
                 kec: "",
                 pkkData: feature.pkkData || null,
                 kbData: feature.kbData || null,
-                kesejahteraanData: feature.kesejahteraanData || null
+                kesejahteraanData: feature.kesejahteraanData || null,
+                kemiskinanData: feature.kemiskinanData || null
+            });
+            return;
+        }
+
+        // Jika feature berasal dari layer stunting desa
+        if (feature.isDesaStuntingLayer) {
+            const name = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa Tidak Diketahui";
+            const kec = feature?.properties?.Kecamatan || "Kecamatan";
+            setSelectedVillage({
+                name,
+                kec,
+                isDigital: false,
+                pop: "0",
+                website: null,
+                provider: "OpenData",
+                stunting: 0,
+                kemiskinan: 0,
+                desaStuntingData: feature.desaStuntingData || null,
+                news: []
             });
             return;
         }
@@ -113,6 +174,8 @@ export default function KabupatenDashboard() {
                     pkkData={pkkData}
                     kbData={kbData}
                     kesejahteraanData={kesejahteraanData}
+                    kemiskinanData={kemiskinanData}
+                    desaStuntingData={stuntingAllData}
                 />
             </div>
 
@@ -354,9 +417,67 @@ export default function KabupatenDashboard() {
                                                 </div>
                                             </div>
                                         </div>
+                                    ) : selectedVillage.kemiskinanData ? (
+                                        <div className="space-y-6">
+                                            <div className="bg-purple-50 rounded-xl p-4 mb-2 border border-purple-100 flex items-start gap-3">
+                                                <Info className="h-5 w-5 text-purple-600 shrink-0 mt-0.5" />
+                                                <p className="text-sm text-purple-900 font-medium">Data bersumber dari API OpenData Banjarnegara (Kemiskinan Tahun {selectedVillage.kemiskinanData.Tahun || "-"}).</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Kemiskinan & Kelayakan Hunian</h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="bg-purple-600 rounded-xl p-3 shadow-sm text-white">
+                                                        <div className="text-xs text-purple-100 mb-1">Desil 1 (Sangat Miskin)</div>
+                                                        <div className="text-xl font-bold">{parseInt(selectedVillage.kemiskinanData["Rumah tangga Desil 1"] || "0").toLocaleString('id-ID')} KK</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 2 (Miskin)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{parseInt(selectedVillage.kemiskinanData["Rumah tangga Desil 2"] || "0").toLocaleString('id-ID')} KK</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 3 (Hampir Miskin)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{parseInt(selectedVillage.kemiskinanData["Rumah tangga Desil 3"] || "0").toLocaleString('id-ID')} KK</div>
+                                                    </div>
+                                                    <div className="bg-white border rounded-xl p-3 shadow-sm">
+                                                        <div className="text-xs text-slate-500 mb-1">Desil 4 (Rentan)</div>
+                                                        <div className="text-xl font-bold text-slate-800">{parseInt(selectedVillage.kemiskinanData["Rumah tangga Desil 4"] || "0").toLocaleString('id-ID')} KK</div>
+                                                    </div>
+                                                    <div className="bg-rose-50 border border-rose-100 rounded-xl p-3">
+                                                        <div className="text-xs text-rose-600 mb-1">RTLH (Tidak Layak Huni)</div>
+                                                        <div className="text-xl font-bold text-rose-700">{parseInt(selectedVillage.kemiskinanData["Bangunan Tempat Tinggal Tidak Layak Huni"] || "0").toLocaleString('id-ID')} Unit</div>
+                                                    </div>
+                                                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3">
+                                                        <div className="text-xs text-emerald-600 mb-1">Penerima Bansos</div>
+                                                        <div className="text-xl font-bold text-emerald-700">{parseInt(selectedVillage.kemiskinanData["Penerima Bantuan (Kepala Keluarga)"] || "0").toLocaleString('id-ID')} KK</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     ) : (
                                         <span className="text-slate-400 font-medium italic">Data Tidak Tersedia</span>
                                     )}
+                                </div>
+                            ) : selectedVillage.desaStuntingData ? (
+                                /* DESA STUNTING CONTENT */
+                                <div className="p-5 space-y-5">
+                                    <div className="bg-red-50 rounded-xl p-4 border border-red-100 flex items-start gap-3">
+                                        <Info className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+                                        <p className="text-sm text-red-900 font-medium">Data bersumber dari API OpenData Banjarnegara (Stunting Tahun {selectedVillage.desaStuntingData.Tahun || "-"}).</p>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="bg-red-50 rounded-xl p-3 border border-red-100">
+                                            <div className="text-[10px] font-bold text-red-500 uppercase mb-1">Jumlah Balita Stunting</div>
+                                            <div className="text-xl font-black text-red-700">{selectedVillage.desaStuntingData["Jumlah Balita Stunting"] || "0"} Balita</div>
+                                        </div>
+                                        <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                            <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Jumlah Seluruh Balita</div>
+                                            <div className="text-xl font-black text-slate-800">{selectedVillage.desaStuntingData["Jumlah Seluruh Balita"] || "0"} Balita</div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white rounded-xl p-4 border border-slate-100">
+                                        <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">Prevalensi Stunting</div>
+                                        <div className="text-3xl font-black text-red-600">{selectedVillage.desaStuntingData["Persentase* (%)"] || "0"}</div>
+                                    </div>
                                 </div>
                             ) : (
                                 /* REGULAR DESA CONTENT */

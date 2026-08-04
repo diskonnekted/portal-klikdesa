@@ -8,7 +8,7 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 import type { GeoJSONProps, MapContainerProps, MarkerProps, PopupProps, TileLayerProps } from "react-leaflet";
 
-interface IoTSensor {
+export interface IoTSensor {
     id: string;
     name: string;
     type:
@@ -52,6 +52,7 @@ interface LeafletMapProps {
     pkkData?: any[];
     kbData?: any[];
     kesejahteraanData?: any[];
+    kemiskinanData?: any[];
     desaStuntingData?: any[];
     bounds?: [[number, number], [number, number]] | null;
 }
@@ -65,7 +66,7 @@ const loadLeaflet = async () => {
 // Helper for normalizing Kecamatan names to match different spelling standards
 const normalizeKecamatanName = (s: string) => {
     if (!s) return "";
-    let n = s.replace(/kecamatan/i, '').replace(/kec\./i, '').replace(/[^a-z0-9]/gi, '').toUpperCase();
+    const n = s.replace(/kecamatan/i, '').replace(/kec\./i, '').replace(/[^a-z0-9]/gi, '').toUpperCase();
     if (n === 'PURWOREJAKLAMPOK' || n === 'PURWAREJAKLAMPOK') return 'PURWAREJAKLAMPOK';
     return n;
 };
@@ -121,7 +122,7 @@ const RecenterHelper = ({ useMap, center, zoom, bounds }: { useMap: any; center:
     return null;
 };
 
-export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData, desaStuntingData, bounds }: LeafletMapProps) {
+export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeatureClick, digitalStatusMap, activeMapLayer = "digital", kecamatanGeoJsonData, pkkData, kbData, kesejahteraanData, kemiskinanData, desaStuntingData, bounds }: LeafletMapProps) {
     const [leafletLoaded, setLeafletLoaded] = React.useState(false);
     const [leaflet, setLeaflet] = React.useState<typeof import("leaflet") | null>(null);
     const [zoomLevel, setZoomLevel] = React.useState(11);
@@ -242,6 +243,29 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                 
                 color = "#9a3412"; // border
             }
+        } else if (activeMapLayer === "kemiskinan" && kemiskinanData) {
+            // Find data for this kecamatan (latest year)
+            const norm = normalizeKecamatanName;
+            const dataRows = kemiskinanData.filter((d: any) => norm(d.Kecamatan) === norm(kecName));
+            
+            if (dataRows.length > 0) {
+                // Use the latest year record
+                const dataRow = dataRows.sort((a: any, b: any) => parseInt(b.Tahun) - parseInt(a.Tahun))[0];
+                const totalKK = parseInt(dataRow["Rumah tangga Desil 1"] || "0") 
+                    + parseInt(dataRow["Rumah tangga Desil 2"] || "0")
+                    + parseInt(dataRow["Rumah tangga Desil 3"] || "0")
+                    + parseInt(dataRow["Rumah tangga Desil 4"] || "0");
+                const rtlh = parseInt(dataRow["Bangunan Tempat Tinggal Tidak Layak Huni"] || "0");
+                
+                // Color scale based on RTLH (higher = darker purple)
+                if (rtlh > 3000) fillColor = "#6b21a8"; // purple-800
+                else if (rtlh > 2000) fillColor = "#7e22ce"; // purple-700
+                else if (rtlh > 1000) fillColor = "#9333ea"; // purple-600
+                else if (rtlh > 500) fillColor = "#a855f7"; // purple-500
+                else fillColor = "#c084fc"; // purple-400
+                
+                color = "#581c87"; // border
+            }
         }
         
         return {
@@ -251,13 +275,13 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             color,
             fillOpacity: 0.5
         };
-    }, [pkkData, kbData, kesejahteraanData, activeMapLayer]);
+    }, [pkkData, kbData, kesejahteraanData, kemiskinanData, activeMapLayer]);
 
     const getDesaStyle = React.useCallback((feature: any) => {
         let fillColor = "#cccccc";
         let color = "#ffffff";
 
-        if (activeMapLayer === "stunting-desa" && desaStuntingData) {
+        if ((activeMapLayer === "stunting" || activeMapLayer === "stunting-desa") && desaStuntingData) {
             const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "";
             const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
             const dataRow = desaStuntingData.find((d: any) => {
@@ -266,9 +290,10 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
             });
 
             if (dataRow) {
-                // Parse percentage, handling strings like "25%"
+                // Parse percentage, handling strings like "25%" or "18,1" (comma decimal)
                 const pctStr = dataRow["Persentase* (%)"] || "0";
-                const pct = parseFloat(pctStr.toString().replace(/[^0-9.]/g, ''));
+                const normalized = pctStr.toString().replace(/%/g, '').replace(/,/g, '.').trim();
+                const pct = parseFloat(normalized) || 0;
                 
                 // Color scale for stunting percentage
                 if (pct > 20) fillColor = "#dc2626"; // red-600 (Sangat Tinggi)
@@ -620,6 +645,103 @@ export function LeafletMap({ sensors, geoJsonData, center, onSensorClick, onFeat
                                                         const norm = normalizeKecamatanName;
                                                         const dataRow = kesejahteraanData ? kesejahteraanData.find((d: any) => norm(d.Kecamatan) === norm(kec)) : null;
                                                         onFeatureClick({ ...feature, isKecamatanLayer: true, kesejahteraanData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : activeMapLayer === "kemiskinan" && kecamatanGeoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering Kecamatan GeoJSON (Kemiskinan):", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        key="kemiskinan-layer"
+                                        data={kecamatanGeoJsonData as import("geojson").GeoJsonObject}
+                                        style={getKecamatanStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const kec = feature?.properties?.Kecamatan || "";
+                                            let tooltipContent = `<b>Kecamatan ${kec}</b>`;
+                                            
+                                            if (kemiskinanData) {
+                                                const norm = normalizeKecamatanName;
+                                                const dataRows = kemiskinanData.filter((d: any) => norm(d.Kecamatan) === norm(kec));
+                                                if (dataRows.length > 0) {
+                                                    const dataRow = dataRows.sort((a: any, b: any) => parseInt(b.Tahun) - parseInt(a.Tahun))[0];
+                                                    const d1 = parseInt(dataRow["Rumah tangga Desil 1"] || "0");
+                                                    const d2 = parseInt(dataRow["Rumah tangga Desil 2"] || "0");
+                                                    const d3 = parseInt(dataRow["Rumah tangga Desil 3"] || "0");
+                                                    const d4 = parseInt(dataRow["Rumah tangga Desil 4"] || "0");
+                                                    const rtlh = parseInt(dataRow["Bangunan Tempat Tinggal Tidak Layak Huni"] || "0");
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Total KK (Desil 1-4): ${(d1+d2+d3+d4).toLocaleString('id-ID')}</span>`;
+                                                    tooltipContent += `<br/><span style="font-size:10px;">RTLH: ${rtlh.toLocaleString('id-ID')} unit</span>`;
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Tahun: ${dataRow.Tahun}</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        const norm = normalizeKecamatanName;
+                                                        const dataRows = kemiskinanData ? kemiskinanData.filter((d: any) => norm(d.Kecamatan) === norm(kec)) : [];
+                                                        const dataRow = dataRows.length > 0 ? dataRows.sort((a: any, b: any) => parseInt(b.Tahun) - parseInt(a.Tahun))[0] : null;
+                                                        onFeatureClick({ ...feature, isKecamatanLayer: true, kemiskinanData: dataRow });
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                );
+                            })()}
+                        </ErrorBoundary>
+                    ) : activeMapLayer === "stunting" && geoJsonData ? (
+                        <ErrorBoundary
+                            fallback={null}
+                            onError={(error) => console.error("Error rendering GeoJSON (Stunting):", error)}
+                        >
+                            {(() => {
+                                const AnyGeoJSON = GeoJSON as any;
+                                return (
+                                    <AnyGeoJSON
+                                        key="stunting-layer"
+                                        data={geoJsonData as import("geojson").GeoJsonObject}
+                                        style={getDesaStyle}
+                                        onEachFeature={(feature: any, layer: any) => {
+                                            const villageName = feature?.properties?.Nama_Desa_ || feature?.properties?.name || "Desa";
+                                            let tooltipContent = `<b>${villageName}</b>`;
+                                            
+                                            if (desaStuntingData) {
+                                                const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
+                                                const dataRow = desaStuntingData.find((d: any) => {
+                                                    const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+                                                    return norm(rawName) === norm(villageName);
+                                                });
+                                                if (dataRow) {
+                                                    tooltipContent += `<br/><span style="font-size:10px;">Stunting: ${dataRow["Jumlah Balita Stunting"]} Balita (${dataRow["Persentase* (%)"]})</span>`;
+                                                } else {
+                                                    tooltipContent += `<br/><span style="font-size:10px;color:gray;">Data belum diupload</span>`;
+                                                }
+                                            }
+                                            
+                                            layer.bindTooltip(tooltipContent);
+                                            
+                                            if (onFeatureClick) {
+                                                layer.on({
+                                                    click: () => {
+                                                        const norm = (s: string | undefined) => s ? s.replace(/desa/i, '').replace(/kelurahan/i, '').trim().toUpperCase() : "";
+                                                        const dataRow = desaStuntingData ? desaStuntingData.find((d: any) => {
+                                                            const rawName = d["Desa/Kelurahan"] || d["Desa"] || d["desa"] || d["Kelurahan"] || "";
+                                                            return norm(rawName) === norm(villageName);
+                                                        }) : null;
+                                                        onFeatureClick({ ...feature, isDesaStuntingLayer: true, desaStuntingData: dataRow });
                                                     }
                                                 });
                                             }
